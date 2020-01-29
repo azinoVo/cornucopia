@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class GameTabs extends Component {
+export default class GameTabs extends Component {
     render() {
         return (
             <>
@@ -17,5 +17,3 @@ class GameTabs extends Component {
         );
     }
 }
-
-export default GameTabs;
