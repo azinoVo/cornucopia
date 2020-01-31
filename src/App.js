@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom';
 import GameTabs from './components/GameTabs';
 import Home from './components/Home';
 import Orchard from './components/Orchard';
+import Feeder from './components/Feeder';
+import GeneralShop from './components/GeneralShop';
 
 function App() {
   return (
