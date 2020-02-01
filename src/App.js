@@ -7,6 +7,7 @@ import Orchard from './components/Orchard';
 import Feeder from './components/Feeder';
 import GeneralShop from './components/GeneralShop';
 
+
 function App() {
   return (
     // allow dynamic rendering depending on name
