@@ -4,3 +4,12 @@
   flex-direction: row;
   justify-content: space-evenly;
 }
+
+.main-content {
+  width: 95vw;
+  height: 80vh;
+}
+
+header, footer {
+  text-align: center;
+}

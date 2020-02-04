@@ -17,6 +17,7 @@ function App() {
   return (
     // allow dynamic rendering depending on name
     <div className="App">
+      <header>Cornucopia, Land of Excess</header>
       <GameTabs />
 
       <Route exact path="/" component={Home} />
@@ -29,6 +30,8 @@ function App() {
       <Route path="/inventory" component={Inventory} />
       <Route path="/main" component={MainGarden} />
       <Route path="/orchard" component={Orchard} />
+
+      <footer>Nguyen Vo 2020</footer>
     </div>
   );
 }

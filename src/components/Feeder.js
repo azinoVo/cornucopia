@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 export default class Feeder extends Component {
     render() {
         return (
-            <div className='feeder'>
-                FEEDER
-            </div>
+            <section className='main-content'>
+                <div className='feeder'>
+                    FEEDER
+                </div>
+            </section>
         );
     }
 }
