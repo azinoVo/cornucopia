@@ -6,10 +6,34 @@
 }
 
 .main-content {
-  width: 95vw;
+  width: 100vw;
   height: 80vh;
+  display: flex;
+  justify-content: center;
 }
 
 header, footer {
   text-align: center;
 }
+
+.orchard {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2%;
+}
+
+.orchard .plot {
+  width: 33%;
+  height: 33%;
+  display: flex;
+  justify-content: center;
+  padding: 1% 0;
+}
+
+.orchard .plot img {
+  width: 50%;
+  /* height: 50%; */
+}
+
