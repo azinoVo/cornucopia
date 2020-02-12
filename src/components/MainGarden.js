@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import adult_tree from '../assets/plants/Green Tree with Flowers.png';
+import empty_plot from '../assets/plants/Empty Plot.png'
 
 export default class MainGarden extends Component {
     constructor() {
         super();
         this.state = {
-            plot: [adult_tree, adult_tree, undefined, undefined, undefined, undefined]
+            plot: [adult_tree, adult_tree, empty_plot, empty_plot, empty_plot, empty_plot]
         };
     }
 

@@ -16,7 +16,7 @@ header, footer {
   text-align: center;
 }
 
-.orchard {
+.orchard, .main {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -24,7 +24,15 @@ header, footer {
   padding: 2%;
 }
 
-.orchard .plot {
+/* .orchard .plot {
+  width: 33%;
+  height: 33%;
+  display: flex;
+  justify-content: center;
+  padding: 1% 0;
+} */
+
+.plot {
   width: 33%;
   height: 33%;
   display: flex;
@@ -32,8 +40,12 @@ header, footer {
   padding: 1% 0;
 }
 
-.orchard .plot img {
+.plot img {
   width: 50%;
   /* height: 50%; */
 }
+
+/* .orchard .plot img {
+  width: 50%;
+} */
 
