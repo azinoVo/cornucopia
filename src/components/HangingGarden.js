@@ -5,7 +5,7 @@ export default class HangingGarden extends Component {
         return (
             <section className='main-content'>
                 <div className='hanging'>
-                    HangingGarden
+                    Hanging Garden
                 </div>
             </section>
         );
