@@ -15,9 +15,10 @@ export default class MainGarden extends Component {
         return (
             <section className='main-content'>
                 <div className='main'>
-                    {this.state.plot.map(plot => {
+                    {this.state.plot.map((plot, index) => {
                         if(plot) {
-                            return <div className='plot'><img src={plot} alt="plot"/></div>
+                            console.log("index", index)
+                            return <div key={index} className='plot'><img src={plot} alt="plot"/></div>
                         } else {
                             return <div className='plot'>Makeshift Plot</div>
                         }
