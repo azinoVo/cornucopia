@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class GoSculptures extends Component {
-    render() {
+const GoSculptures = () => {
         return (
             <section className='main-content'>
                 <div className='sculpture'>
@@ -9,5 +8,6 @@ export default class GoSculptures extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default GoSculptures;

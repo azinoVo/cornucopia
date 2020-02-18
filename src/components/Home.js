@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Home extends Component {
-    render() {
+const Home = () => {
         return (
             <section className='main-content'>
                 <div className='home'>
@@ -9,5 +8,6 @@ export default class Home extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default Home;

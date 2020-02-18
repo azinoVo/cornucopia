@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default class GameTabs extends Component {
-    render() {
-        return (
+const GameTabs = () => {
+         return (
             <>
             <ul className='mainTab'>
                 <li><NavLink to="/">Home</NavLink></li>
@@ -17,5 +16,6 @@ export default class GameTabs extends Component {
             </ul>
             </>
         );
-    }
 }
+
+export default GameTabs;

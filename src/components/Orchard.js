@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import adult_tree from '../assets/plants/Green Tree with Flowers.png';
 
-export default class Orchard extends Component {
-    constructor() {
-        super();
-        this.state = {
-            orchard: [adult_tree, adult_tree, adult_tree, adult_tree, adult_tree, adult_tree]
-        };
-    }
+const Orchard = () => {
+    const [orchard, setOrchard] = useState([adult_tree, adult_tree, adult_tree, adult_tree, adult_tree, adult_tree])
 
-    render() {
         return (
             <section className='main-content'>
                 <div className='orchard'>
                     {
-                        this.state.orchard.map(plot => {
+                        orchard.map(plot => {
                             return (
                                 <div className='plot'><img src={plot} alt="plot"/></div>
                             )
@@ -23,5 +17,6 @@ export default class Orchard extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default Orchard;

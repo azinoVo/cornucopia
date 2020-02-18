@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class HangingGarden extends Component {
-    render() {
+const HangingGarden = () => {
+
         return (
             <section className='main-content'>
                 <div className='hanging'>
@@ -9,5 +9,6 @@ export default class HangingGarden extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default HangingGarden;

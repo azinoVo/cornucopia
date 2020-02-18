@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Inventory extends Component {
-    render() {
+const Inventory = () => {
+
         return (
             <section className='main-content'>
                 <div className='inventory'>
@@ -9,5 +9,6 @@ export default class Inventory extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default Inventory;

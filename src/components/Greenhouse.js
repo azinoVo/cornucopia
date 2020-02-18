@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Greenhouse extends Component {
-    render() {
+const Greenhouse = () => {
+
         return (
             <section className='main-content'>
                 <div className='greenhouse'>
@@ -9,5 +9,6 @@ export default class Greenhouse extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default Greenhouse;

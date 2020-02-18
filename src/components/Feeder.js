@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Feeder extends Component {
-    render() {
+const Feeder = () => {
+    
         return (
             <section className='main-content'>
                 <div className='feeder'>
@@ -9,5 +9,6 @@ export default class Feeder extends Component {
                 </div>
             </section>
         );
-    }
 }
+
+export default Feeder;
