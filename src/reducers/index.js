@@ -3,7 +3,8 @@ import {
 } from "../actions";
 
 const initialState = {
-    orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"]
+    orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"],
+    mainGarden: ["adult_tree.png", "empty_plot.png", "seed_down.gif", "watered.gif", "watered_seed.png", "watered.gif"]
 };
 
 // Switch statements that handle action creators to set the state
@@ -13,7 +14,7 @@ const rootReducer = (state = initialState, action) => {
         case NAME_ACTION:
             return {
                 ...state,
-                foodEntries: [...state.foodEntries, action.payload]
+                orchard: [...state.orchard, action.payload]
             };
 
         default:

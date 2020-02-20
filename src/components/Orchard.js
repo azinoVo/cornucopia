@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import adult_tree from '../assets/plants/Green Tree with Flowers.png';
-// import empty_plot from '../assets/plants/Empty Plot.png';
 
 const Orchard = ({ orchard }) => {
-    // const [orchard, setOrchard] = useState([adult_tree, adult_tree, adult_tree, adult_tree, adult_tree, adult_tree])
     const [orchardList, setOrchard] = useState([])
 
     useEffect(() => {
@@ -19,7 +16,7 @@ const Orchard = ({ orchard }) => {
                     orchardList.map((plot, index) => {
                         if (plot) {
                             return (
-                                <div key={`${plot}${index}`} className='plot'><img src={require(`../assets/plants/${plot}`)} alt="plot" /></div>
+                                <div key={`orchard${plot}${index}`} className='plot'><img src={require(`../assets/plants/${plot}`)} alt="plot" /></div>
                             )
                         } else {
                             return <div className='plot'><img src={require('../assets/plants/empty_plot.png')} alt="plot" /></div>
