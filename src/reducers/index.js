@@ -3,7 +3,7 @@ import {
 } from "../actions";
 
 const initialState = {
-    orchard: ["adult_tree", "adult_tree", "adult_tree", "adult_tree", "adult_tree", "adult_tree"]
+    orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"]
 };
 
 // Switch statements that handle action creators to set the state
