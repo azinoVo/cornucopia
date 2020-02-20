@@ -6,7 +6,7 @@ import watered from '../assets/plants/Watered Seed.png';
 import watering from '../assets/plants/Watering.gif';
 
 const MainGarden = () => {
-    const [plot, setPlot] = useState([adult_tree, empty_plot, seed_down, watered, watering, watered])
+    const [plot] = useState([adult_tree, empty_plot, seed_down, watered, watering, watered])
 
         return (
             <section className='main-content'>
