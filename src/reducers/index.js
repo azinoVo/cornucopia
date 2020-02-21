@@ -8,7 +8,15 @@ const initialState = {
         inventory: []
     },
     game: {
-        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot"]
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot"],
+        shopPrices: {
+            spring_seed: 20,
+            summer_seed: 25,
+            fall_seed: 30,
+            winter_seed: 30,
+            main_garden_plot: 100,
+            orchard_plot: 100
+        }
     },
     orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"],
     mainGarden: ["adult_tree.png", "empty_plot.png", "seed_down.gif", "watered.gif", "watered_seed.png", "watered.gif"],

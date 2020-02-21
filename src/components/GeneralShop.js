@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 
-const GeneralShop = ({ shop, user }) => {
+const GeneralShop = ({ shop, user, prices }) => {
     const [gameShop, setShop] = useState([])
     const [userInfo, setUser] = useState({})
+    const [shopPrices, setPrices] = useState({})
+
 
     useEffect(() => {
         console.log("shop", shop)
@@ -15,6 +17,11 @@ const GeneralShop = ({ shop, user }) => {
         console.log("user", user)
         setUser(user)
     }, [user])
+
+    useEffect(() => {
+        console.log("prices", prices)
+        setPrices(prices)
+    }, [prices])
 
 
     return (
@@ -28,6 +35,7 @@ const GeneralShop = ({ shop, user }) => {
                     <li style={{"text-decoration": "underline"}}>
                         <span>Item</span>
                         <span>Inventory Amount</span>
+                        <span>Price</span>
                         <span>Buy Item</span>
                         <span>Sell Item</span>
                     </li>
@@ -36,6 +44,7 @@ const GeneralShop = ({ shop, user }) => {
                             return <li className='shop-item' key={`shopItem${index}`}>
                                 <span>itemIcon {item}</span>
                                 <span>x Inventory Amount</span>
+                                <span>{shopPrices[item]}</span>
                                 <button>Buy</button>
                                 <button>Sell</button>
                             </li>
@@ -49,6 +58,7 @@ const GeneralShop = ({ shop, user }) => {
 
 const mapStateToProps = state => ({
     shop: state.game.shop,
+    prices: state.game.shopPrices,
     user: state.user
 });
 
