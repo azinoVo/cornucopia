@@ -15,10 +15,21 @@ const GeneralShop = ({ shop }) => {
         <section className='main-content'>
             <div className='shop-header'>Welcome to the Shop</div>
             <div className='general'>
-                <ul>
+                <ul className='shop-list'>
+                    <li>
+                        <span>Item</span>
+                        <span>Inventory Amount</span>
+                        <span>Buy Item</span>
+                        <span>Sell Item</span>
+                    </li>
                     {
                         gameShop.map((item, index) => {
-                            return <li key={`shopItem${index}`}>{item}</li>
+                            return <li key={`shopItem${index}`}>
+                                <span>itemicon {item}</span>
+                                <span>x Inventory Amount</span>
+                                <button>Buy</button>
+                                <button>Sell</button>
+                            </li>
                         })
                     }
                 </ul>
