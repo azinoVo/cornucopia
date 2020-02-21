@@ -4,6 +4,7 @@ import {
 
 const initialState = {
     user: {
+        currency: 50,
         inventory: []
     },
     game: {
