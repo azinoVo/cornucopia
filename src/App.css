@@ -8,8 +8,8 @@
 .main-content {
   width: 100%;
   height: 80vh;
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 }
 
 header, footer {
@@ -50,3 +50,16 @@ header, footer {
   width: 50%;
 } */
 
+.active {
+  background-color: lightblue;
+}
+
+.shop-header {
+  width:98%;
+  margin: 0 auto;
+  color: white;
+  background-color: black;
+  height: 5%;
+  text-align:center;
+  padding:1% 0%;
+}

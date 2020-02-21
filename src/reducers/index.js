@@ -3,8 +3,15 @@ import {
 } from "../actions";
 
 const initialState = {
+    user: {
+        inventory: []
+    },
+    game: {
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot"]
+    },
     orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"],
-    mainGarden: ["adult_tree.png", "empty_plot.png", "seed_down.gif", "watered.gif", "watered_seed.png", "watered.gif"]
+    mainGarden: ["adult_tree.png", "empty_plot.png", "seed_down.gif", "watered.gif", "watered_seed.png", "watered.gif"],
+    
 };
 
 // Switch statements that handle action creators to set the state

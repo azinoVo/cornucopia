@@ -5,7 +5,7 @@ const GameTabs = () => {
          return (
             <>
             <ul className='mainTab'>
-                <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink exact to="/">Home</NavLink></li>
                 <li><NavLink to="/inventory">Inventory</NavLink></li>
                 <li><NavLink to="/shop">Shop</NavLink></li>
                 <li><NavLink to="/main">Main Garden</NavLink></li>
