@@ -15,7 +15,7 @@ const initialState = {
             fall_seed: 30,
             winter_seed: 30,
             main_garden_plot: 100,
-            orchard_plot: 100
+            orchard_plot: 200
         }
     },
     orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"],

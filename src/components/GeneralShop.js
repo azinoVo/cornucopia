@@ -29,7 +29,7 @@ const GeneralShop = ({ shop, user, prices }) => {
             <div className='shop-header'>Welcome to the Shop</div>
             <div className='general'>
                 <div className='user-info'>
-                    <span>Mana Essence Amount: {userInfo.currency}</span>
+                    <span>Mana Essences: {userInfo.currency}</span>
                 </div>
                 <ul className='shop-list'>
                     <li style={{"text-decoration": "underline"}}>
@@ -44,7 +44,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                             return <li className='shop-item' key={`shopItem${index}`}>
                                 <span>itemIcon {item}</span>
                                 <span>x Inventory Amount</span>
-                                <span>{shopPrices[item]}</span>
+                                <span>{shopPrices[item]} Essences</span>
                                 <button>Buy</button>
                                 <button>Sell</button>
                             </li>
