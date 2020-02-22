@@ -41,9 +41,10 @@ const GeneralShop = ({ shop, user, prices }) => {
                     </li>
                     {
                         gameShop.map((item, index) => {
+                            console.log("gameshop", shop[userInfo.inventory[item]])
                             return <li className='shop-item' key={`shopItem${index}`}>
                                 <span>itemIcon {item}</span>
-                                <span>x Inventory Amount</span>
+                                {shop[userInfo.inventory[item]] ? <span>{userInfo.inventory[item]}</span> : <span>0</span>}
                                 <span>{shopPrices[item]} Essences</span>
                                 <button>Buy</button>
                                 <button>Sell</button>

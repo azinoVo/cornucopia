@@ -5,7 +5,15 @@ import {
 const initialState = {
     user: {
         currency: 50,
-        inventory: []
+        inventory:
+            {
+                "spring_seed": 3,
+                "summer_seed": 1,
+                "fall_seed": 4,
+                "winter_seed": 2,
+                "main_garden_plot": 2,
+                "orchard_plot": 2
+            }
     },
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot"],
