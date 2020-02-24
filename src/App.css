@@ -73,3 +73,23 @@ header, footer {
   justify-content: space-around;
   padding: 0.5% 0%;
 }
+
+/* CSS for table within Shop */
+
+table {
+  width: 85%;
+  margin: 0 auto;
+}
+
+tbody th {
+  font-weight: normal;
+}
+
+thead {
+  text-decoration: underline;
+}
+
+.user-info  {
+  text-align:center;
+  padding: 1% 0;
+}

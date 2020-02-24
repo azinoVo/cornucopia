@@ -32,7 +32,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                 <div className='user-info'>
                     <span>Mana Essences: {userInfo.currency}</span>
                 </div>
-                <ul className='shop-list'>
+                {/* <ul className='shop-list'>
                     <li style={{ "text-decoration": "underline" }}>
                         <span>Item</span>
                         <span>Inventory Amount</span>
@@ -52,9 +52,9 @@ const GeneralShop = ({ shop, user, prices }) => {
                             </li>
                         })
                     }
-                </ul>
+                </ul> */}
 
-                <Table bordered style={{"width": "85%"}}>
+                <Table bordered>
                     <thead>
                         <tr>
                             <th>Item</th>
@@ -65,12 +65,6 @@ const GeneralShop = ({ shop, user, prices }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr> */}
                         {
                         gameShop.map((item, index) => {
                             console.log("gameshop", shop[userInfo.inventory[item]])
