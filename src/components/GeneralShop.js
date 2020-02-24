@@ -26,7 +26,7 @@ const GeneralShop = ({ shop, user, prices }) => {
 
     return (
         <section className='main-content'>
-            <div className='shop-header'>Welcome to the Shop</div>
+            <h1 className='shop-header'>Welcome to the Shop!</h1>
             <div className='general'>
                 <div className='user-info'>
                     <span>Mana Essences: {userInfo.currency}</span>
@@ -46,7 +46,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                                 <span>itemIcon {item}</span>
                                 {shop[userInfo.inventory[item]] ? <span>{userInfo.inventory[item]}</span> : <span>0</span>}
                                 <span>{shopPrices[item]} Essences</span>
-                                <button>Buy</button>
+                                {(userInfo.currency >= shopPrices[item]) ? <button>Buy</button> : <span>Not enough Essences</span> }
                                 <button>Sell</button>
                             </li>
                         })
