@@ -9,8 +9,8 @@ const initialState = {
             {
                 "spring_seed": 3,
                 "summer_seed": 1,
-                "fall_seed": 4,
-                "winter_seed": 2,
+                "fall_seed": null,
+                "winter_seed": null,
                 "main_garden_plot": 2,
                 "orchard_plot": 2
             }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Table } from 'reactstrap';
 
 
 const GeneralShop = ({ shop, user, prices }) => {
@@ -32,7 +33,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                     <span>Mana Essences: {userInfo.currency}</span>
                 </div>
                 <ul className='shop-list'>
-                    <li style={{"text-decoration": "underline"}}>
+                    <li style={{ "text-decoration": "underline" }}>
                         <span>Item</span>
                         <span>Inventory Amount</span>
                         <span>Price</span>
@@ -46,12 +47,45 @@ const GeneralShop = ({ shop, user, prices }) => {
                                 <span>itemIcon {item}</span>
                                 {shop[userInfo.inventory[item]] ? <span>{userInfo.inventory[item]}</span> : <span>0</span>}
                                 <span>{shopPrices[item]} Essences</span>
-                                {(userInfo.currency >= shopPrices[item]) ? <button>Buy</button> : <span>Not enough Essences</span> }
-                                <button>Sell</button>
+                                {(userInfo.currency >= shopPrices[item]) ? <button>Buy</button> : <span>Not enough Essences</span>}
+                                {shop[userInfo.inventory[item]] ? <button>Sell</button> : <span>None to Sell</span>}
                             </li>
                         })
                     }
                 </ul>
+
+                <Table bordered style={{"width": "85%"}}>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Inventory</th>
+                            <th>Price</th>
+                            <th>Buy</th>
+                            <th>Sell</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr> */}
+                        {
+                        gameShop.map((item, index) => {
+                            console.log("gameshop", shop[userInfo.inventory[item]])
+                            return <tr className='shop-item' key={`shopItem${index}`}>
+                                <th>itemIcon {item}</th>
+                                {shop[userInfo.inventory[item]] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
+                                <th>{shopPrices[item]} Essences</th>
+                                {(userInfo.currency >= shopPrices[item]) ? <th><button>Buy</button></th> : <th>Not enough Essences</th>}
+                                {shop[userInfo.inventory[item]] ? <th><button>Sell</button></th> : <th>None to Sell</th>}
+                            </tr>
+                        })
+                    }
+                        
+                    </tbody>
+                </Table>
             </div>
         </section>
     );
