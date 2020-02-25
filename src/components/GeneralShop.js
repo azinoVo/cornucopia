@@ -26,7 +26,7 @@ const GeneralShop = ({ shop, user, prices }) => {
 
     return (
         <section className='main-content'>
-            <h1 className='shop-header'>Welcome to the Shop!</h1>
+            <h1 className='tab-header'>Welcome to the Shop!</h1>
             <div className='general'>
                 <div className='user-info'>
                     <span>Mana Essences: {userInfo.currency}</span>
