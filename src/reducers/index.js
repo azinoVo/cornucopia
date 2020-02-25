@@ -27,8 +27,8 @@ const initialState = {
             orchard_plot: 200
         }
     },
-    orchard: ["adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png", "adult_tree.png"],
-    mainGarden: ["adult_tree.png", "empty_plot.png", "seed_down.gif", "watered.gif", "watered_seed.png", "watered.gif"],
+    orchard: ["empty_plot.png", "empty_plot.png"],
+    mainGarden: ["empty_plot.png", "empty_plot.png"],
     
 };
 

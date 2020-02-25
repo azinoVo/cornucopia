@@ -54,8 +54,8 @@ const GeneralShop = ({ shop, user, prices }) => {
                             return <tr className='shop-item' key={`shopItem${index}`}>
                                 <th>itemIcon {item}</th>
                                 {shop[userInfo.inventory[item]] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
-                                <th>{shopPrices[item]} Essences</th>
-                                {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy</button></th> : <th>Not enough Essences</th>}
+                                <th>{shopPrices[item]} Mana Essences</th>
+                                {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy</button></th> : <th>Not enough Mana Essences</th>}
                                 {shop[userInfo.inventory[item]] ? <th><button onClick={() => dispatch(sellItem(set))}>Sell</button></th> : <th>None to Sell</th>}
                             </tr>
                         })

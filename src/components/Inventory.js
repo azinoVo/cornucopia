@@ -24,6 +24,9 @@ const Inventory = ({ shop, user, prices }) => {
         <section className='main-content'>
             <h1 className='tab-header'>Personal Inventory</h1>
             <div className='inventory'>
+                <div className='user-info'>
+                    <span>Mana Essences: {userCurrency}</span>
+                </div>
                 <Table bordered>
                     <thead>
                         <tr>
@@ -39,7 +42,7 @@ const Inventory = ({ shop, user, prices }) => {
                                     return <tr className='shop-item' key={`inventoryItem${index}`}>
                                         <th>{entry[0]}</th>
                                         {<th>{entry[1]}</th>}
-                                        <th>{shopPrices[entry[0]]}</th>
+                                        <th>{shopPrices[entry[0]]} Mana Essences</th>
                                     </tr>
                                 }
 

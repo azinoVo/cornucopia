@@ -14,9 +14,13 @@ const MainGarden = ({ mainGarden }) => {
             <div className='main'>
                 {plot.map((plot, index) => {
                     if (plot) {
-                        return <div key={`mainGarden${plot}${index}`} className='plot'><img src={require(`../assets/plants/${plot}`)} alt="plot" /></div>
+                        return <div key={`mainGarden${plot}${index}`} className='plot'>
+                            <img src={require(`../assets/plants/${plot}`)} alt="plot" />
+                        </div>
                     } else {
-                        return <div className='plot'><img src={require('../assets/plants/empty_plot.png')} alt="plot" /></div>
+                        return <div className='plot'>
+                            <img src={require('../assets/plants/empty_plot.png')} alt="plot" />
+                        </div>
                     }
                 })}
             </div>
