@@ -4,6 +4,12 @@ header {
   font-size: 32px;
 }
 
+#icon {
+  width: 22px;
+  height: 22px;
+  padding: 0 1%;
+}
+
 .mainTab {
   list-style-type: none;
   display: flex;
@@ -32,14 +38,6 @@ header, footer {
   padding: 2%;
 }
 
-/* .orchard .plot {
-  width: 33%;
-  height: 33%;
-  display: flex;
-  justify-content: center;
-  padding: 1% 0;
-} */
-
 .plot {
   width: 33%;
   height: 33%;
@@ -54,12 +52,16 @@ header, footer {
   pointer-events: none;
 }
 
-/* .orchard .plot img {
-  width: 50%;
-} */
-
 .active {
   background-color: lightblue;
+}
+
+
+/* CSS for General Shop */
+
+.general {
+  width: 100%;
+  height: 100%;
 }
 
 .shop-header {
@@ -72,10 +74,15 @@ header, footer {
   padding:1% 0%;
 }
 
+.user-info {
+  font-size: 1.25em;
+}
+
 /* CSS for table within Shop */
 
 table {
   width: 85%;
+  height: 50%;
   margin: 0 auto;
 }
 
@@ -91,3 +98,5 @@ thead {
   text-align:center;
   padding: 1% 0;
 }
+
+

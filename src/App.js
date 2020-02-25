@@ -11,13 +11,17 @@ import Home from './components/Home';
 import Inventory from './components/Inventory';
 import MainGarden from './components/MainGarden';
 import Orchard from './components/Orchard';
+import apple from './assets/plants/apple.png';
 
 
 function App() {
   return (
     // allow dynamic rendering depending on name
     <div className="App">
-      <header>Cornucopia, Land of Excess</header>
+      <header>
+        <img id='icon' src={apple} alt="apple"/>
+        <span>Cornucopia, Land of Excess</span>
+      </header>
       <GameTabs />
 
       <Route exact path="/" component={Home} />
