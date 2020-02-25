@@ -59,19 +59,11 @@ header, footer {
 .shop-header {
   width:98%;
   margin: 0 auto;
-  color: white;
+  color: #5cc37F;
   background-color: black;
   height: 5%;
   text-align:center;
   padding:1% 0%;
-}
-
-.shop-list li {
-  display:flex;
-  flex-direction: row;
-  flex-wrap: none;
-  justify-content: space-around;
-  padding: 0.5% 0%;
 }
 
 /* CSS for table within Shop */

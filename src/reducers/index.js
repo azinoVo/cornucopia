@@ -1,18 +1,18 @@
 import {
-    NAME_ACTION
-} from "../actions";
+    BUY_ITEM,
+} from '../actions';
 
 const initialState = {
     user: {
-        currency: 50,
+        currency: 75,
         inventory:
             {
-                "spring_seed": 3,
-                "summer_seed": 1,
-                "fall_seed": null,
-                "winter_seed": null,
-                "main_garden_plot": 2,
-                "orchard_plot": 2
+                spring_seed: 3,
+                summer_seed: 1,
+                fall_seed: null,
+                winter_seed: null,
+                main_garden_plot: 2,
+                orchard_plot: 2
             }
     },
     game: {
@@ -33,12 +33,20 @@ const initialState = {
 
 // Switch statements that handle action creators to set the state
 const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
 
-        case NAME_ACTION:
+    switch (action.type) {
+        
+        case BUY_ITEM:
+            console.log("BUY ITEM in reducer", action.payload)
             return {
                 ...state,
-                orchard: [...state.orchard, action.payload]
+                user: {
+                    currency: state.user.currency - action.payload.price,
+                    inventory: {
+                        ...state.user.inventory,
+                    }
+                }
+
             };
 
         default:

@@ -22,11 +22,14 @@
 // };
 
 // General action 
-export const NAME_ACTION = "NAME_ACTION";
 
-export const setPupStatus = thing => {
+export const BUY_ITEM = "BUY_ITEM";
+
+// The set will be the item and the price
+export const buyItem = set => {
+    console.log("set in actions", set)
     return {
-        type: NAME_ACTION,
-        payload: thing
+        type: BUY_ITEM,
+        payload: set
     }
 }
