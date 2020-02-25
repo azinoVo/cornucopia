@@ -22,7 +22,7 @@ const initialState = {
             spring_seed: 20,
             summer_seed: 25,
             fall_seed: 30,
-            winter_seed: 30,
+            winter_seed: 35,
             main_garden_plot: 100,
             orchard_plot: 200
         }

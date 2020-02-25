@@ -23,7 +23,7 @@ const Home = () => {
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
                         </li>
-                    <li>Add Animals into the game and change name of Feeder to Field where animals are raised and harvested</li>
+                    <li>Add Animals into the game and change name of Feeder to Barnyard where animals are raised and harvested</li>
                     <li>Add the Sculpture Garden</li>
                     <li>Add bonuses to users when certain sculptures are restored.</li>
                 </ul>
