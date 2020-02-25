@@ -2,6 +2,8 @@ header {
   font-family: 'Indie Flower', sans-serif;
   font-weight: 700;
   font-size: 32px;
+  background-color: black;
+  color: white;
 }
 
 #icon {
@@ -65,7 +67,7 @@ header, footer {
 }
 
 .shop-header {
-  width:98%;
+  width: 100%;
   margin: 0 auto;
   color: #5cc37F;
   background-color: black;

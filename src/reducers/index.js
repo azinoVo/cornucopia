@@ -44,6 +44,7 @@ const rootReducer = (state = initialState, action) => {
                     currency: state.user.currency - action.payload.price,
                     inventory: {
                         ...state.user.inventory,
+                        [action.payload.item]: state.user.inventory[action.payload.item] + 1
                     }
                 }
 
