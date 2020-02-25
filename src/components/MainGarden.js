@@ -10,6 +10,7 @@ const MainGarden = ({ mainGarden }) => {
 
     return (
         <section className='main-content'>
+            <h1 className='tab-header'>Main Garden</h1>
             <div className='main'>
                 {plot.map((plot, index) => {
                     if (plot) {

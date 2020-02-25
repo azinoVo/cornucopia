@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import GameTabs from './components/GameTabs';
-import Feeder from './components/Feeder';
+import Barnyard from './components/Barnyard';
 import GeneralShop from './components/GeneralShop';
 import GoSculptures from './components/GoSculptures';
 import Greenhouse from './components/Greenhouse';
@@ -25,7 +25,7 @@ function App() {
       <GameTabs />
 
       <Route exact path="/" component={Home} />
-      <Route path="/feeder" component={Feeder} />
+      <Route path="/barnyard" component={Barnyard} />
       <Route path="/shop" component={GeneralShop} />
       <Route path="/sculpture" component={GoSculptures} />
       <Route path="/greenhouse" component={Greenhouse} />

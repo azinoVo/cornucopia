@@ -11,6 +11,7 @@ const Orchard = ({ orchard }) => {
 
     return (
         <section className='main-content'>
+            <h1 className='tab-header'>Tree Orchard</h1>
             <div className='orchard'>
                 {
                     orchardList.map((plot, index) => {

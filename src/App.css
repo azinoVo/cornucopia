@@ -23,6 +23,8 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  margin: 0;
+  padding: 0.25% 0;
 }
 
 .mainTab li a {
@@ -32,6 +34,7 @@ footer {
 .main-content {
   width: 100%;
   height: 80vh;
+  background-color: #FAF3EB;
 }
 
 header, footer {
@@ -77,9 +80,9 @@ header, footer {
   margin: 0 auto;
   color: #5cc37F;
   background-color: black;
-  height: 3%;
+  height: 4%;
   text-align:center;
-  padding:1% 0%;
+  padding: 0.5% 0%;
 }
 
 .user-info {
