@@ -33,3 +33,14 @@ export const buyItem = set => {
         payload: set
     }
 }
+
+export const SELL_ITEM = "SELL_ITEM";
+
+// The set will be the item and the price
+export const sellItem = set => {
+    console.log("set in actions", set)
+    return {
+        type: SELL_ITEM,
+        payload: set
+    }
+}

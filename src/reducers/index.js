@@ -1,5 +1,6 @@
 import {
     BUY_ITEM,
+    SELL_ITEM,
 } from '../actions';
 
 const initialState = {
@@ -49,6 +50,20 @@ const rootReducer = (state = initialState, action) => {
                 }
 
             };
+
+            case SELL_ITEM:
+                console.log("SELL ITEM in reducer", action.payload)
+                return {
+                    ...state,
+                    user: {
+                        currency: state.user.currency + Math.ceil(action.payload.price*0.75),
+                        inventory: {
+                            ...state.user.inventory,
+                            [action.payload.item]: state.user.inventory[action.payload.item] - 1
+                        }
+                    }
+    
+                };
 
         default:
             return state;

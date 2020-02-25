@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
-import { buyItem } from '../actions';
+import { buyItem, sellItem } from '../actions';
 import { useDispatch } from 'react-redux'
 
 const GeneralShop = ({ shop, user, prices }) => {
@@ -39,7 +39,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                             <th>Inventory</th>
                             <th>Price</th>
                             <th>Buy</th>
-                            <th>Sell</th>
+                            <th>Sell for 75% Base</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                                 {shop[userInfo.inventory[item]] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                 <th>{shopPrices[item]} Essences</th>
                                 {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy</button></th> : <th>Not enough Essences</th>}
-                                {shop[userInfo.inventory[item]] ? <th><button>Sell</button></th> : <th>None to Sell</th>}
+                                {shop[userInfo.inventory[item]] ? <th><button onClick={() => dispatch(sellItem(set))}>Sell</button></th> : <th>None to Sell</th>}
                             </tr>
                         })
                     }
@@ -74,4 +74,4 @@ const mapStateToProps = state => ({
     user: state.user
 });
 
-export default connect(mapStateToProps, {buyItem})(GeneralShop);
+export default connect(mapStateToProps, {buyItem, sellItem})(GeneralShop);
