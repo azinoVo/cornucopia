@@ -36,7 +36,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                     <thead>
                         <tr>
                             <th>Item</th>
-                            {/* <th>Inventory</th> */}
+                            <th>Inventory</th>
                             <th>Price</th>
                             <th>Buy</th>
                             <th>Sell for 75% Base</th>
