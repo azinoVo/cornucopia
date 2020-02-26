@@ -103,8 +103,9 @@ button {
 
 table {
   width: 85%;
-  height: 50%;
+  height: 60%;
   margin: 0 auto;
+  padding-bottom: 2%;
 }
 
 tbody th {

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { buyItem, sellItem } from '../actions';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import GameLog from './GameLog';
 
 const GeneralShop = ({ shop, user, prices }) => {
     const [gameShop, setShop] = useState([])
@@ -44,27 +45,30 @@ const GeneralShop = ({ shop, user, prices }) => {
                     </thead>
                     <tbody>
                         {
-                        gameShop.map((item, index) => {
+                            gameShop.map((item, index) => {
 
-                            const set = {
-                                item: item,
-                                price: shopPrices[item]
-                            }
+                                const set = {
+                                    item: item,
+                                    price: shopPrices[item]
+                                }
 
-                            return <tr className='shop-item' key={`shopItem${index}`}>
-                                <th>itemIcon {item}</th>
-                                {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
-                                <th>{shopPrices[item]} Mana Essences</th>
-                                {(userInfo.essence >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
-                                {(userInfo.inventory[item] && !item.includes('plot')) ? <th><button onClick={() => dispatch(sellItem(set))}>Sell for {Math.ceil(shopPrices[item]*0.75)} Mana Essences</button></th> : <th>Cannot Sell</th>}
-                            </tr>
-                        })
-                    }
-                        
+                                return <tr className='shop-item' key={`shopItem${index}`}>
+                                    <th>itemIcon {item}</th>
+                                    {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
+                                    <th>{shopPrices[item]} Mana Essences</th>
+                                    {(userInfo.essence >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
+                                    {(userInfo.inventory[item] && !item.includes('plot')) ? <th><button onClick={() => dispatch(sellItem(set))}>Sell for {Math.ceil(shopPrices[item] * 0.75)} Mana Essences</button></th> : <th>Cannot Sell</th>}
+                                </tr>
+                            })
+                        }
+
                     </tbody>
                 </Table>
+                <GameLog />
+
             </div>
         </section>
+
     );
 }
 
@@ -74,4 +78,4 @@ const mapStateToProps = state => ({
     user: state.user
 });
 
-export default connect(mapStateToProps, {buyItem, sellItem})(GeneralShop);
+export default connect(mapStateToProps, { buyItem, sellItem })(GeneralShop);

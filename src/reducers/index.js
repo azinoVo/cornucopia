@@ -28,7 +28,8 @@ const initialState = {
             main_garden_plot: 100,
             orchard_plot: 200,
             hanging_plot: 500,
-        }
+        },
+        log: ["Initial Log"]
     },
     orchard: ["empty_plot.png", "empty_plot.png"],
     mainGarden: ["empty_plot.png", "empty_plot.png"],
