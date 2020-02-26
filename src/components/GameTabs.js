@@ -9,8 +9,8 @@ const GameTabs = () => {
                 <li><NavLink to="/inventory">Inventory</NavLink></li>
                 <li><NavLink to="/shop">Shop</NavLink></li>
                 <li><NavLink to="/main">Main Garden</NavLink></li>
-                <li><NavLink to="/hanging">Hanging Garden</NavLink></li>
                 <li><NavLink to="/orchard">Orchard</NavLink></li>
+                <li><NavLink to="/hanging">Hanging Garden</NavLink></li>
                 <li><NavLink to="/barnyard">Barnyard</NavLink></li>
                 <li><NavLink to="/sculpture">Sculpture Garden</NavLink></li>
             </ul>

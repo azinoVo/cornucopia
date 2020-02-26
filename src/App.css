@@ -47,7 +47,7 @@ button {
 
 /* Orchard CSS */
 
-.orchard, .main {
+.orchard, .main, .hanging {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -13,22 +13,25 @@ const initialState = {
                 fall_seed: null,
                 winter_seed: null,
                 main_garden_plot: 2,
-                orchard_plot: 2
+                orchard_plot: 2,
+                hanging_plot: 1
             }
     },
     game: {
-        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot"],
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot", "hanging_plot"],
         shopPrices: {
             spring_seed: 20,
             summer_seed: 25,
             fall_seed: 30,
             winter_seed: 35,
             main_garden_plot: 100,
-            orchard_plot: 200
+            orchard_plot: 200,
+            hanging_plot: 500,
         }
     },
     orchard: ["empty_plot.png", "empty_plot.png"],
     mainGarden: ["empty_plot.png", "empty_plot.png"],
+    hangingGarden: ["trellis_bare.png", "trellis_bare.png"]
     
 };
 

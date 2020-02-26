@@ -56,7 +56,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                                 {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                 <th>{shopPrices[item]} Mana Essences</th>
                                 {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
-                                {userInfo.inventory[item] ? <th><button onClick={() => dispatch(sellItem(set))}>Sell for {Math.ceil(shopPrices[item]*0.75)} Mana Essences</button></th> : <th>None to Sell</th>}
+                                {(userInfo.inventory[item] && !item.includes('plot')) ? <th><button onClick={() => dispatch(sellItem(set))}>Sell for {Math.ceil(shopPrices[item]*0.75)} Mana Essences</button></th> : <th>Cannot Sell</th>}
                             </tr>
                         })
                     }

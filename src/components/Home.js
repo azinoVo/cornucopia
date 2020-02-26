@@ -13,8 +13,7 @@ const Home = () => {
                 <h2>To-Do List</h2>
                 <ul>
                     <li>Add in Inventory <strong>DONE 2/25</strong></li>
-                    <li>Separate the Plot Expansions into a Different Table
-                        and remove the ability to sell plot
+                    <li>Remove the ability to sell plots <strong>DONE 2/26</strong>
                         </li>
                     <li>Add the Hanging Garden</li>
                     <li>Add the Sculpture Garden and Favor currency</li>
