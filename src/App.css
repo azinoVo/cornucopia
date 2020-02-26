@@ -95,6 +95,10 @@ button {
   font-size: 1.25em;
 }
 
+.user-info ul {
+  list-style-type: none;
+}
+
 /* CSS for table within Shop */
 
 table {

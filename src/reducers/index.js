@@ -5,7 +5,8 @@ import {
 
 const initialState = {
     user: {
-        currency: 1000,
+        essence: 1000,
+        favor: 5,
         inventory:
             {
                 spring_seed: 3,
@@ -47,7 +48,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    currency: state.user.currency - action.payload.price,
+                    essence: state.user.essence - action.payload.price,
                     inventory: {
                         ...state.user.inventory,
                         [action.payload.item]: state.user.inventory[action.payload.item] + 1
@@ -62,7 +63,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     user: {
                         ...state.user,
-                        currency: state.user.currency + Math.ceil(action.payload.price*0.75),
+                        essence: state.user.essence + Math.ceil(action.payload.price*0.75),
                         inventory: {
                             ...state.user.inventory,
                             [action.payload.item]: state.user.inventory[action.payload.item] - 1

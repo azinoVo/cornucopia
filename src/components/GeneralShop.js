@@ -29,7 +29,7 @@ const GeneralShop = ({ shop, user, prices }) => {
             <h1 className='tab-header'>Welcome to the Shop!</h1>
             <div className='general'>
                 <div className='user-info'>
-                    <span>Mana Essences: {userInfo.currency}</span>
+                    <span>Mana Essences: {userInfo.essence}</span>
                 </div>
 
                 <Table bordered>
@@ -55,7 +55,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                                 <th>itemIcon {item}</th>
                                 {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                 <th>{shopPrices[item]} Mana Essences</th>
-                                {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
+                                {(userInfo.essence >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
                                 {(userInfo.inventory[item] && !item.includes('plot')) ? <th><button onClick={() => dispatch(sellItem(set))}>Sell for {Math.ceil(shopPrices[item]*0.75)} Mana Essences</button></th> : <th>Cannot Sell</th>}
                             </tr>
                         })

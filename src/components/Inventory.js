@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 
-const Inventory = ({ shop, user, prices }) => {
-    const [userCurrency, setCurrency] = useState(0)
+const Inventory = ({ user, prices }) => {
+    const [userInfo, setUserInfo] = useState({})
     const [userInventory, setInventory] = useState({})
     const [shopPrices, setPrices] = useState({})
 
     useEffect(() => {
-        setCurrency(user.currency)
+        setUserInfo(user)
     }, [user])
 
     useEffect(() => {
@@ -19,13 +19,15 @@ const Inventory = ({ shop, user, prices }) => {
         setPrices(prices)
     }, [prices])
 
-    console.log(userCurrency, userInventory, shopPrices)
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Personal Inventory</h1>
             <div className='inventory'>
                 <div className='user-info'>
-                    <span>Mana Essences: {userCurrency}</span>
+                    <ul>
+                        <li>Mana Essences: {userInfo.essence}</li>
+                        <li>Favor: {userInfo.favor} </li>
+                    </ul>
                 </div>
                 <Table bordered>
                     <thead>
@@ -58,7 +60,6 @@ const Inventory = ({ shop, user, prices }) => {
 }
 
 const mapStateToProps = state => ({
-    shop: state.game.shop,
     prices: state.game.shopPrices,
     user: state.user
 });
