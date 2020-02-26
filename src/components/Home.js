@@ -12,25 +12,29 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
-                    <li>Add in Inventory</li>
+                    <li>Add in Inventory <strong>DONE 2/25</strong></li>
                     <li>Separate the Plot Expansions into a Different Table
                         and remove the ability to sell plot
                         </li>
                     <li>Add the Hanging Garden</li>
+                    <li>Add the Sculpture Garden and Favor currency</li>
                     <li>Update the Main Garden, Orchard, and Hanging Garden to display the correct
                         number of plots
                         </li>
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
                         </li>
-                    <li>Add Animals into the game and change name of Feeder to Barnyard where animals are raised and harvested</li>
-                    <li>Add the Sculpture Garden</li>
+                    <li>Add Animals to Barnyard where animals are raised and animal products are harvested</li>
                     <li>Add bonuses to users when certain sculptures are restored</li>
+                    <li>Add concept of Seasons where crops gain bonuses</li>
+                    <li>Possible addition of Male/Female animals and Breeding</li>
+                    <li>Adding a possible Forest Stage that has specific trees/animals/items depending on Season</li>
+                    <li>Alternate Endings Depending on your choices when playing the game</li>
                 </ul>
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>Rendering of buy/sell is inconsistent. Plots can go negative amounts because of inconsistencies in rendering</li>
+                    <li>TBA</li>
                 </ul>
             </div>
         </section>
