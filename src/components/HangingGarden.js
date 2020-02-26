@@ -13,7 +13,7 @@ const HangingGarden = ({ hanging }) => {
             <h1 className='tab-header'>Hanging Garden</h1>
 
             <div className='hanging'>
-            {plot.map((plot, index) => {
+                {plot.map((plot, index) => {
                     if (plot) {
                         return <div key={`hanging${plot}${index}`} className='plot'>
                             <img src={require(`../assets/plants/${plot}`)} alt="plot" />
@@ -24,7 +24,7 @@ const HangingGarden = ({ hanging }) => {
                         </div>
                     }
                 })}
-                </div>
+            </div>
         </section>
     );
 }

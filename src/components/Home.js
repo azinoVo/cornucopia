@@ -15,7 +15,7 @@ const Home = () => {
                     <li>Add in Inventory <strong>DONE 2/25</strong></li>
                     <li>Remove the ability to sell plots <strong>DONE 2/26</strong>
                         </li>
-                    <li>Add the Hanging Garden</li>
+                    <li>Add the Hanging Garden <strong>DONE 2/26</strong></li>
                     <li>Add the Sculpture Garden and Favor currency</li>
                     <li>Update the Main Garden, Orchard, and Hanging Garden to display the correct
                         number of plots

@@ -47,7 +47,7 @@ button {
 
 /* Orchard CSS */
 
-.orchard, .main, .hanging {
+.orchard, .main, .hanging, .sculpture {
   display:flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -115,5 +115,7 @@ thead {
   text-align:center;
   padding: 1% 0;
 }
+
+
 
 

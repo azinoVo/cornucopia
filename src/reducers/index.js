@@ -31,7 +31,8 @@ const initialState = {
     },
     orchard: ["empty_plot.png", "empty_plot.png"],
     mainGarden: ["empty_plot.png", "empty_plot.png"],
-    hangingGarden: ["trellis_bare.png", "trellis_bare.png"]
+    hangingGarden: ["trellis_bare.png", "trellis_bare.png"],
+    sculpture: ["idol_bird.png"]
     
 };
 
