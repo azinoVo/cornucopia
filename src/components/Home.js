@@ -30,7 +30,6 @@ const Home = () => {
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>Surpassing 6 items in inventory for an item crashes the application.</li>
                     <li>Rendering of buy/sell is inconsistent. Plots can go negative amounts because of inconsistencies in rendering</li>
                 </ul>
             </div>
