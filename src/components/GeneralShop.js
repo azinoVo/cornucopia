@@ -36,7 +36,7 @@ const GeneralShop = ({ shop, user, prices }) => {
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Inventory</th>
+                            {/* <th>Inventory</th> */}
                             <th>Price</th>
                             <th>Buy</th>
                             <th>Sell for 75% Base</th>
@@ -53,10 +53,10 @@ const GeneralShop = ({ shop, user, prices }) => {
 
                             return <tr className='shop-item' key={`shopItem${index}`}>
                                 <th>itemIcon {item}</th>
-                                {shop[userInfo.inventory[item]] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
+                                {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                 <th>{shopPrices[item]} Mana Essences</th>
-                                {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy</button></th> : <th>Not enough Mana Essences</th>}
-                                {shop[userInfo.inventory[item]] ? <th><button onClick={() => dispatch(sellItem(set))}>Sell</button></th> : <th>None to Sell</th>}
+                                {(userInfo.currency >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
+                                {shop[userInfo.inventory[item]] ? <th><button onClick={() => dispatch(sellItem(set))}>Sell for {Math.ceil(shopPrices[item]*0.75)} Mana Essences</button></th> : <th>None to Sell</th>}
                             </tr>
                         })
                     }

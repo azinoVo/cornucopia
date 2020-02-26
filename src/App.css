@@ -41,6 +41,12 @@ header, footer {
   text-align: center;
 }
 
+button {
+  cursor: pointer;
+}
+
+/* Orchard CSS */
+
 .orchard, .main {
   display:flex;
   flex-direction: row;

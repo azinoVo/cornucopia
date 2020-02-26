@@ -25,7 +25,13 @@ const Home = () => {
                         </li>
                     <li>Add Animals into the game and change name of Feeder to Barnyard where animals are raised and harvested</li>
                     <li>Add the Sculpture Garden</li>
-                    <li>Add bonuses to users when certain sculptures are restored.</li>
+                    <li>Add bonuses to users when certain sculptures are restored</li>
+                </ul>
+
+                <h2>Known Bugs to Fix</h2>
+                <ul>
+                    <li>Surpassing 6 items in inventory for an item crashes the application.</li>
+                    <li>Rendering of buy/sell is inconsistent. Plots can go negative amounts because of inconsistencies in rendering</li>
                 </ul>
             </div>
         </section>
