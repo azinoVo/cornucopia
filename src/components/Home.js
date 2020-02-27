@@ -17,7 +17,7 @@ const Home = () => {
                         </li>
                     <li>Add the Hanging Garden <strong>DONE 2/26</strong></li>
                     <li>Add the Sculpture Garden and Favor currency <strong>DONE 2/26</strong></li>
-                    <li>Add a game window that displays the action that was just done so users can have a log of it</li>
+                    <li>Add a game window that displays the action that was just done so users can have a log of it <strong>DONE 2/26</strong></li>
                     <li>Update the Main Garden, Orchard, and Hanging Garden to display the correct
                         number of plots
                         </li>

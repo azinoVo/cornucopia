@@ -54,6 +54,10 @@ const rootReducer = (state = initialState, action) => {
                         ...state.user.inventory,
                         [action.payload.item]: state.user.inventory[action.payload.item] + 1
                     }
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User bought ${action.payload.item} for ${action.payload.price} Mana Essences at ${Date(Date.now()).toString()}`]
                 }
 
             };
@@ -69,6 +73,10 @@ const rootReducer = (state = initialState, action) => {
                             ...state.user.inventory,
                             [action.payload.item]: state.user.inventory[action.payload.item] - 1
                         }
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `User sold ${action.payload.item} for ${Math.ceil(action.payload.price*0.75)} Mana Essences at ${Date(Date.now()).toString()}`]
                     }
     
                 };
