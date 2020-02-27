@@ -1,52 +1,28 @@
 import React, { useState, useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
-const MainGarden = ({ mainGarden, user }) => {
+const MainGarden = ({ mainGarden }) => {
+    const [ gardenPlot, setGardenPlot ] = useState([])
 
-    const [userInfo, setUserInfo] = useState({})
-    const [userInventory, setInventory] = useState({})
-    const [limits, setLimits] = useState({})
-    const [plot, setPlot] = useState([])
-
+    // const dispatch = useDispatch()
 
     useEffect(() => {
-        setUserInfo(user)
-    }, [user])
-
-    useEffect(() => {
-        setInventory(user.inventory)
-    }, [user])
-
-    useEffect(() => {
-        setLimits(user.limits)
-    }, [user])
-
-    useEffect(() => {
-
-        let plots = []
-        for (let index = 0; index < 6; index++) {
-            if( index < userInventory.main_garden_plot) {
-                plots.push("empty_plot.png")
-            } else {
-                plots.push("empty_plot_lock.png")
-            }
-        }
-
-        console.log("plots", plots)
-        setPlot(plots)
-    }, [userInventory.main_garden_plot])
-
-
+        setGardenPlot(mainGarden)
+        console.log("mainGarden", mainGarden[0]['plotType'])
+    }, [mainGarden])
 
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
             <div className='main'>
                 {
-                    plot.map((plot, index) => {
+                    gardenPlot.map((plot, index) => {
                         if (plot) {
-                            return <div key={`mainGarden${plot}${index}`} className='plot'>
-                                <img src={require(`../assets/plants/${plot}`)} alt="plot" />
+                            return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
+                                <img src={require(`../assets/plants/${plot["plotType"]}`)} alt="plot" />
+                                {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
+                                {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
                             </div>
                         } else {
                             return <div className='plot'>
@@ -54,7 +30,6 @@ const MainGarden = ({ mainGarden, user }) => {
                             </div>
                         }
                     })
-
                 }
             </div>
         </section>
@@ -62,8 +37,8 @@ const MainGarden = ({ mainGarden, user }) => {
 }
 
 const mapStateToProps = state => ({
-    mainGarden: state.mainGarden,
-    user: state.user,
+    // user: state.user,
+    mainGarden: state.user.main_garden_plot,
 });
 
-export default connect(mapStateToProps, {})(MainGarden);
+export default connect(mapStateToProps, { })(MainGarden);

@@ -34,6 +34,17 @@ export const buyItem = set => {
     }
 }
 
+export const BUY_PLOT = "BUY_PLOT";
+
+// The set will be the item and the price
+export const buyPlot = plotSet => {
+    console.log("plotSet in actions", plotSet)
+    return {
+        type: BUY_PLOT,
+        payload: plotSet
+    }
+}
+
 export const SELL_ITEM = "SELL_ITEM";
 
 // The set will be the item and the price
@@ -47,7 +58,6 @@ export const sellItem = set => {
 
 export const REFILL_WATER = "REFILL_WATER";
 
-// The set will be the item and the price
 export const fillWater = (water_limit) => {
     console.log("refilling water")
     return {
@@ -55,3 +65,5 @@ export const fillWater = (water_limit) => {
         payload: water_limit
     }
 }
+
+

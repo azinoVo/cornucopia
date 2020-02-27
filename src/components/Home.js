@@ -12,10 +12,6 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
-                    <li><strike>Add in Inventory</strike> <strong>DONE 2/25</strong></li>
-                    <li><strike>Remove the ability to sell plots</strike> <strong>DONE 2/26</strong>
-                        </li>
-                    <li><strike>Add the Hanging Garden</strike> <strong>DONE 2/26</strong></li>
                     <li><strike>Add the Sculpture Garden and Favor currency</strike> <strong>DONE 2/26</strong></li>
                     <li><strike>Add a game window that displays the action that was just done so users can have a log of it</strike> <strong>DONE 2/26</strong></li>
                     <li>Update the Main Garden, Orchard, and Hanging Garden to display the correct
@@ -38,7 +34,7 @@ const Home = () => {
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>TBA</li>
+                    <li>Refactoring the store to separate the plot expansions since they require special actions.</li>
                 </ul>
             </div>
         </section>

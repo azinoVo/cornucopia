@@ -8,7 +8,6 @@ const Barnyard = ({ user }) => {
     const [userInfo, setUserInfo] = useState({})
     const [limits, setLimits] = useState({})
 
-
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -40,7 +39,7 @@ const Barnyard = ({ user }) => {
                         }
                         <div>Water: {userInfo.water}% Full</div>
                     </div>
-                    
+
                     <GameLog />
                 </div>
             </div>
