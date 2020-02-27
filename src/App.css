@@ -121,6 +121,13 @@ thead {
   padding: 1% 0;
 }
 
+/* Barnyard CSS */
+
+.barnyard img {
+  position: absolute;
+  right: 5%;
+  bottom: 20%;
+}
 
 
 

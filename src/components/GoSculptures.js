@@ -16,7 +16,7 @@ const GoSculptures = ({ sculpture }) => {
                 {statue.map((plot, index) => {
                     if (plot) {
                         return <div key={`statue${plot}${index}`} className='plot'>
-                            <img src={require(`../assets/plants/${plot}`)} alt="plot" />
+                            <img src={require(`../assets/sculpture/${plot}`)} alt="plot" />
                         </div>
                     } else {
                         return <div className='plot'>

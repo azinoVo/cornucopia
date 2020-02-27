@@ -17,7 +17,9 @@ const Orchard = ({ orchard }) => {
                     orchardList.map((plot, index) => {
                         if (plot) {
                             return (
-                                <div key={`orchard${plot}${index}`} className='plot'><img src={require(`../assets/plants/${plot}`)} alt="plot" /></div>
+                                <div key={`orchard${plot}${index}`} className='plot'>
+                                    <img src={require(`../assets/plants/${plot}`)} alt="plot" />
+                                </div>
                             )
                         } else {
                             return <div className='plot'><img src={require('../assets/plants/empty_plot.png')} alt="plot" /></div>

@@ -16,7 +16,7 @@ const HangingGarden = ({ hanging }) => {
                 {plot.map((plot, index) => {
                     if (plot) {
                         return <div key={`hanging${plot}${index}`} className='plot'>
-                            <img src={require(`../assets/plants/${plot}`)} alt="plot" />
+                            <img src={require(`../assets/hanging/${plot}`)} alt="plot" />
                         </div>
                     } else {
                         return <div className='plot'>

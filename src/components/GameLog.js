@@ -19,8 +19,8 @@ const GameLog = ({ log }) => {
             <div className='log'>
                 <ul>
                     {
-                        gameLog.map(entry => {
-                            return <li>{entry}</li>
+                        gameLog.map((entry, index) => {
+                            return <li key={`logEntry${index}`}>{entry}</li>
                         })
                     }
                 </ul>
