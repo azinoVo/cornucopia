@@ -29,7 +29,7 @@ const initialState = {
             orchard_plot: 200,
             hanging_plot: 500,
         },
-        log: ["Initial Log", "Testing2", "Testing3", "Testing4", "Testing5", "Testing6", "Testing7", "Testing8"]
+        log: ["Welcome to Cornucopia, the Land of Excess!"]
     },
     orchard: ["empty_plot.png", "empty_plot.png"],
     mainGarden: ["empty_plot.png", "empty_plot.png"],
