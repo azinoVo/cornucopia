@@ -22,10 +22,10 @@ const MainGarden = ({ mainGarden, user }) => {
     }, [user])
 
     useEffect(() => {
-        console.log("limit", limits.main_garden_plot_limit)
+
         let plots = []
         for (let index = 0; index < 6; index++) {
-            if( index < limits.main_garden_plot_limit) {
+            if( index < userInventory.main_garden_plot) {
                 plots.push("empty_plot.png")
             } else {
                 plots.push("empty_plot_lock.png")
@@ -34,7 +34,7 @@ const MainGarden = ({ mainGarden, user }) => {
 
         console.log("plots", plots)
         setPlot(plots)
-    }, [limits.main_garden_plot_limit])
+    }, [userInventory.main_garden_plot])
 
 
 
