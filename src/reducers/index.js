@@ -30,12 +30,12 @@ const initialState = {
             barnyard_plot_limit: 3,
         },
         main_garden_plot: [
-            {plotType: "empty_plot.png", water: 1, quality: 2, health: 3},
-            {plotType: "empty_plot.png", water: 4, quality: 5, health: 6},
-            {plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9},
-            {plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12},
-            {plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15},
-            {plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18}],
+            {id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3},
+            {id: 1, plotType: "empty_plot.png", water: 4, quality: 5, health: 6},
+            {id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9},
+            {Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12},
+            {id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15},
+            {id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18}],
         orchard_plot: ["empty_plot.png", "empty_plot.png", "empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png"],
         barnyard_plot: ["empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png"],
         hanging_plot: ["empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png"]
@@ -95,7 +95,10 @@ const rootReducer = (state = initialState, action) => {
                     inventory: {
                         ...state.user.inventory,
                         [action.payload.item]: state.user.inventory[action.payload.item] + 1
-                    }
+                    },
+                    main_garden_plot: state.user.main_garden_plot.map((content, i) => {
+                        return (i === action.payload.index) ? {...content, plotType: "empty_plot.png"} : content
+                    })
                 },
                 game: {
                     ...state.game,
