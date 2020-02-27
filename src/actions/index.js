@@ -44,3 +44,14 @@ export const sellItem = set => {
         payload: set
     }
 }
+
+export const REFILL_WATER = "REFILL_WATER";
+
+// The set will be the item and the price
+export const fillWater = (water_limit) => {
+    console.log("refilling water")
+    return {
+        type: REFILL_WATER,
+        payload: water_limit
+    }
+}

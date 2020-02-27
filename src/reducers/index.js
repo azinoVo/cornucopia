@@ -1,12 +1,14 @@
 import {
     BUY_ITEM,
     SELL_ITEM,
+    REFILL_WATER
 } from '../actions';
 
 const initialState = {
     user: {
         essence: 1000,
         favor: 5,
+        water: 10,
         inventory:
             {
                 spring_seed: 3,
@@ -16,7 +18,14 @@ const initialState = {
                 main_garden_plot: 2,
                 orchard_plot: 2,
                 hanging_plot: 1
-            }
+            },
+        limits: {
+            water_limit: 100,
+            main_garden_plot_limit: 2,
+            orchard_plot_limit: 1,
+            hanging_plot_limit: 1,
+            barnyard_plot_limit: 1,
+        }
     },
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot", "hanging_plot"],
@@ -80,6 +89,16 @@ const rootReducer = (state = initialState, action) => {
                     }
     
                 };
+
+            case REFILL_WATER:
+                console.log("REFILL WATER")
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        water: action.payload,
+                    }
+                }
 
         default:
             return state;
