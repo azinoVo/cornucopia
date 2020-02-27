@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fillWater } from '../actions';
+import GameLog from './GameLog';
 
 const Barnyard = ({ user }) => {
     const [userInfo, setUserInfo] = useState({})
@@ -39,6 +40,8 @@ const Barnyard = ({ user }) => {
                         }
                         <div>Water: {userInfo.water}% Full</div>
                     </div>
+                    
+                    <GameLog />
                 </div>
             </div>
         </section>

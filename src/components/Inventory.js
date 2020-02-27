@@ -26,6 +26,7 @@ const Inventory = ({ user, prices }) => {
             <div className='inventory'>
                 <div className='user-info'>
                     <ul>
+                        <li>Water Capacity: {userInfo.water}</li>
                         <li>Mana Essences: {userInfo.essence}</li>
                         <li>Favor: {userInfo.favor} </li>
                     </ul>

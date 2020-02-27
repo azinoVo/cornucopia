@@ -17,18 +17,19 @@ const initialState = {
                 winter_seed: null,
                 main_garden_plot: 2,
                 orchard_plot: 2,
+                barnyard_plot: 0,
                 hanging_plot: 1
             },
         limits: {
             water_limit: 100,
             main_garden_plot_limit: 2,
             orchard_plot_limit: 1,
-            hanging_plot_limit: 1,
+            hanging_plot_limit: 2,
             barnyard_plot_limit: 1,
         }
     },
     game: {
-        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot", "hanging_plot"],
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
         shopPrices: {
             spring_seed: 20,
             summer_seed: 25,
@@ -36,6 +37,7 @@ const initialState = {
             winter_seed: 35,
             main_garden_plot: 100,
             orchard_plot: 200,
+            barnyard_plot: 350,
             hanging_plot: 500,
         },
         log: ["Welcome to Cornucopia, the Land of Excess!"]
@@ -97,6 +99,10 @@ const rootReducer = (state = initialState, action) => {
                     user: {
                         ...state.user,
                         water: action.payload,
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `User refill the bucket to ${action.payload} capacity.`]
                     }
                 }
 

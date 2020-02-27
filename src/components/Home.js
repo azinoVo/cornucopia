@@ -24,7 +24,7 @@ const Home = () => {
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
                         </li>
-                        <li>Watering will require water refilling using the well within the Barnyard</li>
+                        <li><strike>Watering will require water refilling using the well within the Barnyard</strike> <strong>DONE 2/27</strong></li>
                         <li>Add ability to upgrade water bucket to store more water. Add a limit user object.</li>
                     <li>Add Animals to Barnyard where animals are raised and animal products are harvested</li>
                     <li>Add bonuses to users when certain sculptures are restored</li>
