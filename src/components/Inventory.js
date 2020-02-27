@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import GameLog from './GameLog';
 
 const Inventory = ({ user, prices }) => {
     const [userInfo, setUserInfo] = useState({})
@@ -54,6 +55,7 @@ const Inventory = ({ user, prices }) => {
 
                     </tbody>
                 </Table>
+                <GameLog />
             </div>
         </section>
     );
