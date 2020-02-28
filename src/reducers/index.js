@@ -64,7 +64,7 @@ const initialState = {
             barnyard_plot: 350,
             hanging_plot: 500,
         },
-        log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Have fun!"]
+        log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
     },
     orchard: ["empty_plot.png", "empty_plot.png"],
     hangingGarden: ["trellis_bare.png", "trellis_bare.png"],
