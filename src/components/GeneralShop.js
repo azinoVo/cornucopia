@@ -85,8 +85,12 @@ const GeneralShop = ({ shop, user, prices, plot_shop, limits }) => {
                                     <th>itemIcon {item}</th>
                                     {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                     <th>{shopPrices[item]} Mana Essences</th>
-                                    {(userInfo.essence >= shopPrices[item] && storeLimit[item] > userInfo.inventory[item]) ? <th><button onClick={() => dispatch(buyPlot(plotSet))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Insufficient Essences or Maximum {storeLimit[item]} Reached</th>}
-                                    {(userInfo.inventory[item] && !item.includes('plot')) ? <th><button onClick={() => dispatch(sellItem(plotSet))}>Sell for {Math.ceil(shopPrices[item] * 0.75)} Mana Essences</button></th> : <th>Cannot Sell</th>}
+                                    {(userInfo.essence >= shopPrices[item] && storeLimit[item] > userInfo.inventory[item]) ?
+                                        <th><button onClick={() => dispatch(buyPlot(plotSet))}>Buy using {shopPrices[item]} Mana Essences</button></th> :
+                                        <th>Insufficient Essences or Maximum {storeLimit[item]} Reached</th>}
+                                    {(userInfo.inventory[item] && !item.includes('plot')) ?
+                                        <th><button onClick={() => dispatch(sellItem(plotSet))}>Sell for {Math.ceil(shopPrices[item] * 0.75)} Mana Essences</button></th> :
+                                        <th>Cannot Sell</th>}
                                 </tr>
                             })
                         }

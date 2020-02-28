@@ -17,9 +17,9 @@ const initialState = {
             fall_seed: null,
             winter_seed: null,
             main_garden_plot: 2,
-            orchard_plot: 2,
+            orchard_plot: 1,
             barnyard_plot: 0,
-            hanging_plot: 1
+            hanging_plot: 0
         },
         limits: {
             water_limit: 100,
@@ -30,15 +30,26 @@ const initialState = {
             barnyard_plot: 3,
         },
         main_garden_plot: [
-            {id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3},
-            {id: 1, plotType: "empty_plot.png", water: 4, quality: 5, health: 6},
-            {id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9},
-            {Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12},
-            {id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15},
-            {id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18}],
-        orchard_plot: ["empty_plot.png", "empty_plot.png", "empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png"],
-        barnyard_plot: ["empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png"],
-        hanging_plot: ["empty_plot_lock.png", "empty_plot_lock.png", "empty_plot_lock.png"]
+            { id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3 },
+            { id: 1, plotType: "empty_plot.png", water: 4, quality: 5, health: 6 },
+            { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 },
+            { Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12 },
+            { id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15 },
+            { id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18 }],
+        orchard_plot: [
+            { id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3 },
+            { id: 1, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 },
+            { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 },
+            { Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12 },
+            { id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15 },
+            { id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18 }],
+        barnyard_plot: [
+            { id: 0, trellis: false, plotType: "empty_plot_lock.png", water: 1, quality: 2, health: 3 },
+            { id: 1, trellis: false, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 }],
+        hanging_plot: [
+            { id: 0, pen: false, plotType: "empty_plot_lock.png", water: 1, quality: 2, health: 3 },
+            { id: 1, pen: false, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 },
+            { id: 2, pen: false,  plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 }]
     },
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed"],
@@ -53,7 +64,7 @@ const initialState = {
             barnyard_plot: 350,
             hanging_plot: 500,
         },
-        log: ["Welcome to Cornucopia, the Land of Excess!"]
+        log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Have fun!"]
     },
     orchard: ["empty_plot.png", "empty_plot.png"],
     hangingGarden: ["trellis_bare.png", "trellis_bare.png"],
@@ -96,8 +107,8 @@ const rootReducer = (state = initialState, action) => {
                         ...state.user.inventory,
                         [action.payload.item]: state.user.inventory[action.payload.item] + 1
                     },
-                    main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload.index) ? {...content, plotType: "empty_plot.png"} : content
+                    [action.payload.item]: state.user[action.payload.item].map((content, i) => {
+                        return (i === action.payload.index) ? { ...content, plotType: "empty_plot.png" } : content
                     })
                 },
                 game: {
@@ -136,7 +147,7 @@ const rootReducer = (state = initialState, action) => {
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User refill the bucket to ${action.payload} capacity.`]
+                    log: [...state.game.log, `User refill the bucket to ${action.payload} capacity at ${Date(Date.now()).toString()}.`]
                 }
             }
 

@@ -1,36 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-const HangingGarden = ({ hanging }) => {
-    const [plot, setPlot] = useState([])
+const HangingGarden = ({ hanging_plot }) => {
+    const [hangingPlot, setPlot] = useState([])
 
     useEffect(() => {
-        setPlot(hanging)
-    }, [hanging])
+        setPlot(hanging_plot)
+    }, [hanging_plot])
 
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Hanging Garden</h1>
 
             <div className='hanging'>
-                {plot.map((plot, index) => {
-                    if (plot) {
-                        return <div key={`hanging${plot}${index}`} className='plot'>
-                            <img src={require(`../assets/hanging/${plot}`)} alt="plot" />
-                        </div>
-                    } else {
-                        return <div className='plot'>
-                            <img src={require('../assets/plants/empty_plot.png')} alt="plot" />
-                        </div>
-                    }
-                })}
+                {
+                    hangingPlot.map((plot, index) => {
+                        if (plot) {
+                            return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
+                                <img src={require(`../assets/plants/${plot["plotType"]}`)} alt="plot" />
+                                {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
+                                {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
+                            </div>
+                        } else {
+                            return <div className='plot'>
+                                <img src={require('../assets/plants/empty_plot.png')} alt="plot" />
+                            </div>
+                        }
+                    })
+                }
             </div>
         </section>
     );
 }
 
 const mapStateToProps = state => ({
-    hanging: state.hangingGarden,
+    hanging_plot: state.user.hanging_plot,
 });
 
 export default connect(mapStateToProps, {})(HangingGarden);

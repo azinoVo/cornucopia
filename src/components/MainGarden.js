@@ -9,7 +9,6 @@ const MainGarden = ({ mainGarden }) => {
 
     useEffect(() => {
         setGardenPlot(mainGarden)
-        console.log("mainGarden", mainGarden[0]['plotType'])
     }, [mainGarden])
 
     return (
@@ -37,7 +36,6 @@ const MainGarden = ({ mainGarden }) => {
 }
 
 const mapStateToProps = state => ({
-    // user: state.user,
     mainGarden: state.user.main_garden_plot,
 });
 
