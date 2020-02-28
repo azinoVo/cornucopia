@@ -7,7 +7,7 @@ import {
 
 const initialState = {
     user: {
-        essence: 1000,
+        essence: 5000,
         favor: 5,
         water: 10,
         inventory:
@@ -24,10 +24,10 @@ const initialState = {
         limits: {
             water_limit: 100,
             favor_limit: 100,
-            main_garden_plot_limit: 6,
-            orchard_plot_limit: 6,
-            hanging_plot_limit: 3,
-            barnyard_plot_limit: 3,
+            main_garden_plot: 6,
+            orchard_plot: 6,
+            hanging_plot: 3,
+            barnyard_plot: 3,
         },
         main_garden_plot: [
             {id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3},
