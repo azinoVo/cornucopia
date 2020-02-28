@@ -69,11 +69,11 @@ export const fillWater = (water_limit) => {
 
 export const PLANT_SEED = "PLANT_SEED";
 
-export const plantSeed = (seedSet) => {
+export const plantSeed = (seedSet, index) => {
     console.log("planting seed", seedSet)
     return {
         type: PLANT_SEED,
-        payload: seedSet
+        payload: {...seedSet, index}
     }
 }
 

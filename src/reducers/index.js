@@ -159,12 +159,12 @@ const rootReducer = (state = initialState, action) => {
                 user: {
                     ...state.user,
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload.index) ? { ...content, plotType: `${action.payload.item}.png` } : content
+                        return (i === action.payload["index"]) ? { ...content, plotType: `${action.payload["value"]}.gif` } : content
                     })
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User bought ${action.payload.item} for ${action.payload.price} Mana Essences at ${Date(Date.now()).toString()}`]
+                    log: [...state.game.log, `User planted ${action.payload["value"]} within plot ${action.payload["index"]} at ${Date(Date.now()).toString()}.`]
                 }
 
             };

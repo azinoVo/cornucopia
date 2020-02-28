@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { plantSeed } from '../actions';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 const MainGarden = ({ mainGarden, user }) => {
     const [gardenPlot, setGardenPlot] = useState([])
-    const [userInventory, setInventory] = useState({})
-    // const [seedSelect, setSeedSelect] = useState("")
+    // const [userInventory, setInventory] = useState({})
+    const [seedSelect, setSeedSelect] = useState([])
+    const [availableSeeds, setAvailableSeeds] = useState({})
 
 
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setGardenPlot(mainGarden)
     }, [mainGarden])
 
     useEffect(() => {
-        setInventory(user.inventory)
+        // setInventory(user.inventory)
+
+        const seedList = Object.entries(user.inventory).map(entry => {
+            if(!entry[0].includes("plot") && entry[1] >= 1 ) {
+                return {value: entry[0]}
+            } else {
+                return ""
+            }
+        }).filter(item => item !== "")
+
+        console.log("SeedList", seedList)
+        setSeedSelect(seedList)
     }, [user])
 
-    // const changeHandler = (ev) => {
-    //     console.log(seedSelect)
-    //     setSeedSelect(ev.target.value)
-    // }
-
-    // const SubmitHandler = (event, set) => {
-    //     event.preventDefault();
-    //     console.log("set", set)
-    //     dispatch(plantSeed(set))
-    // }
+    console.log("availableSeeds", availableSeeds)
 
     return (
         <section className='main-content'>
@@ -42,30 +47,22 @@ const MainGarden = ({ mainGarden, user }) => {
                                 <img src={require(`../assets/plants/${plot["plotType"]}`)} alt="plot" />
                                 {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
                                 {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
-                                {/* {
-                                    (plot['plotType'] !== "empty_plot_lock.png") &&
+                                {
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
+                                    <Select
+                                        placeholder={"Select Seed"}
+                                        options={seedSelect}
+                                        onChange={setAvailableSeeds}
+                                        noOptionsMessage={() => "No Seeds Available. Please buy some."}
+                                        autoFocus
+                                    />
 
-                                    <form>
-                                        <div className='seed-form'>
-                                            <select
-                                                value={seedSelect}
-                                                onChange={changeHandler}
-                                            >
-                                                {
-                                                    Object.entries(userInventory).map((entry, index) => {
-                                                        if (!entry[0].includes('plot')) {
-                                                            return <option key={`seedEntry${index}`} value={entry[0]}>{entry[0]}</option>
-                                                        } else {
-                                                            return ""
-                                                        }
-                                                    })
-                                                }
-                                            </select>
-                                            <button type='submit' onClick={(event) => SubmitHandler((event))}>Plant</button>
-                                        </div>
-                                    </form>
-                                } */}
+                                }
+                                {
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
+                                    <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant Selected</button>
 
+                                }
                             </div>
                         } else {
                             return <div className='plot'>
