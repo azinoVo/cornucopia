@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { plantSeed } from '../actions';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
 
 const MainGarden = ({ mainGarden, user }) => {
     const [gardenPlot, setGardenPlot] = useState([])
@@ -22,8 +24,8 @@ const MainGarden = ({ mainGarden, user }) => {
         // setInventory(user.inventory)
 
         const seedList = Object.entries(user.inventory).map(entry => {
-            if(!entry[0].includes("plot") && entry[1] >= 1 ) {
-                return {value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`}
+            if (!entry[0].includes("plot") && entry[1] >= 1) {
+                return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory` }
             } else {
                 return ""
             }
@@ -46,10 +48,77 @@ const MainGarden = ({ mainGarden, user }) => {
                             return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
                                 <img src={require(`../assets/plants/${plot["plotType"]}`)} alt="plot" />
                                 {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
-                                {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
+                                {
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <span>Water: {plot.water} | Health: {plot.health} | Quality: {plot.quality} </span>
+                                }
+
+                                {
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <Progress
+                                        percent={100}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍💙',
+                                                color: '#009DFF'
+                                            },
+                                            active: {
+                                                symbol: '💦',
+                                                color: '#59BFFF'
+                                            },
+                                            default: {
+                                                symbol: '💧',
+                                                color: '#BFE6FF'
+                                            }
+                                        }} />
+                                }
+
+                                {
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <Progress
+                                        percent={100}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍💚',
+                                                color: '#009F4E'
+                                            },
+                                            active: {
+                                                symbol: '🐛',
+                                                color: 'rgb(19, 140, 228)'
+                                            },
+                                            default: {
+                                                symbol: '🐛🐛',
+                                                color: '##EE320C'
+                                            }
+                                        }} />
+                                }
+
+                                {
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <Progress
+                                        percent={100}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍💲💲💲',
+                                                color: '#0F9200'
+                                            },
+                                            active: {
+                                                symbol: '💲💲',
+                                                color: '#30CB00'
+                                            },
+                                            default: {
+                                                symbol: '💲',
+                                                color: '#4AE54A'
+                                            }
+                                        }}
+                                    />
+                                }
+
+
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
                                     <Select
+                                        components={makeAnimated()}
                                         placeholder={"Select Seed"}
                                         options={seedSelect}
                                         onChange={setAvailableSeeds}
