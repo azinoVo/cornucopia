@@ -49,6 +49,7 @@ button {
 
 .orchard, .main, .hanging, .sculpture {
   display:flex;
+  height: auto;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
@@ -132,6 +133,10 @@ thead {
 
 .water-commands {
   padding-bottom: 10%;
+}
+
+.css-2b097c-container {
+  width: 30%;
 }
 
 

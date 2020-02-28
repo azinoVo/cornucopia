@@ -148,7 +148,7 @@ const rootReducer = (state = initialState, action) => {
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User refill the bucket to ${action.payload} capacity at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User refilled the bucket to ${action.payload} capacity at ${Date(Date.now()).toString()}.`]
                 }
             }
 

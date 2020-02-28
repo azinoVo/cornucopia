@@ -23,7 +23,7 @@ const MainGarden = ({ mainGarden, user }) => {
 
         const seedList = Object.entries(user.inventory).map(entry => {
             if(!entry[0].includes("plot") && entry[1] >= 1 ) {
-                return {value: entry[0]}
+                return {value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`}
             } else {
                 return ""
             }
@@ -60,7 +60,7 @@ const MainGarden = ({ mainGarden, user }) => {
                                 }
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
-                                    <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant Selected</button>
+                                    <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant</button>
 
                                 }
                             </div>
