@@ -34,7 +34,7 @@ const Home = () => {
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>Refactoring the store to separate the plot expansions since they require special actions.</li>
+                    <li>From barnyard, one cannot access the hanging garden and orchard. The Watering well possible in the way.</li>
                 </ul>
             </div>
         </section>

@@ -2,7 +2,8 @@ import {
     BUY_ITEM,
     BUY_PLOT,
     SELL_ITEM,
-    REFILL_WATER
+    REFILL_WATER,
+    PLANT_SEED
 } from '../actions';
 
 const initialState = {
@@ -14,8 +15,8 @@ const initialState = {
         {
             spring_seed: 3,
             summer_seed: 1,
-            fall_seed: null,
-            winter_seed: null,
+            fall_seed: 0,
+            winter_seed: 0,
             main_garden_plot: 2,
             orchard_plot: 1,
             barnyard_plot: 0,
@@ -150,6 +151,23 @@ const rootReducer = (state = initialState, action) => {
                     log: [...state.game.log, `User refill the bucket to ${action.payload} capacity at ${Date(Date.now()).toString()}.`]
                 }
             }
+
+        case PLANT_SEED:
+            console.log("Plant Seed in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    main_garden_plot: state.user.main_garden_plot.map((content, i) => {
+                        return (i === action.payload.index) ? { ...content, plotType: `${action.payload.item}.png` } : content
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User bought ${action.payload.item} for ${action.payload.price} Mana Essences at ${Date(Date.now()).toString()}`]
+                }
+
+            };
 
         default:
             return state;
