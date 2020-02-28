@@ -66,11 +66,11 @@ button {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1% 0;
+  padding: 3% 0;
 }
 
 .plot img {
-  width: 50%;
+  width: 45%;
   /* height: 50%; */
   pointer-events: none;
 }
@@ -139,9 +139,12 @@ thead {
   padding-bottom: 10%;
 }
 
+/* Style for react-select */
 .css-2b097c-container {
   width: 30%;
 }
 
-
+.react-sweet-progress {
+  width: 75% !important
+}
 

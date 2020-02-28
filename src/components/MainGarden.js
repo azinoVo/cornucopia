@@ -56,7 +56,7 @@ const MainGarden = ({ mainGarden, user }) => {
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
                                     <Progress
-                                        percent={100}
+                                        percent={plot.water}
                                         theme={{
                                             success: {
                                                 symbol: '‍💙',
@@ -70,13 +70,15 @@ const MainGarden = ({ mainGarden, user }) => {
                                                 symbol: '💧',
                                                 color: '#BFE6FF'
                                             }
-                                        }} />
+                                        }}
+
+                                    />
                                 }
 
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
                                     <Progress
-                                        percent={100}
+                                        percent={plot.health}
                                         theme={{
                                             success: {
                                                 symbol: '‍💚',
@@ -87,7 +89,7 @@ const MainGarden = ({ mainGarden, user }) => {
                                                 color: 'rgb(19, 140, 228)'
                                             },
                                             default: {
-                                                symbol: '🐛🐛',
+                                                symbol: '💉',
                                                 color: '##EE320C'
                                             }
                                         }} />
@@ -96,7 +98,7 @@ const MainGarden = ({ mainGarden, user }) => {
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
                                     <Progress
-                                        percent={100}
+                                        percent={plot.quality}
                                         theme={{
                                             success: {
                                                 symbol: '‍💲💲💲',

@@ -31,7 +31,7 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, plotType: "empty_plot.png", water: 50, quality: 100, health: 50 },
+            { id: 0, plotType: "empty_plot.png", water: 10, quality: 10, health: 10 },
             { id: 1, plotType: "empty_plot.png", water: 4, quality: 5, health: 6 },
             { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 },
             { Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12 },
