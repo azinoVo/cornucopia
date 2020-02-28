@@ -28,7 +28,7 @@ const initialState = {
             main_garden_plot: 6,
             orchard_plot: 6,
             hanging_plot: 3,
-            barnyard_plot: 3,
+            barnyard_plot: 2,
         },
         main_garden_plot: [
             { id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3 },
