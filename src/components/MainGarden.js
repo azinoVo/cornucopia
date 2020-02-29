@@ -36,13 +36,8 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
             }
         }).filter(item => item !== "")
 
-        console.log("SeedList", seedList)
         setSeedSelect(seedList)
     }, [user])
-
-
-    console.log("availableSeeds", availableSeeds)
-    console.log("plantInteraction", plantInteraction)
 
     return (
         <section className='main-content'>
@@ -73,7 +68,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
 
                         let newInteractOptions = [...interactList]
 
-                        if ((userInfo.water - [100 - plot.water]) > 0) {
+                        if ((userInfo.water - [100 - plot.water]) > 0 && plot.water !== 100) {
                             newInteractOptions = [...newInteractOptions, { value: "water", label: "Water" }]
                         } else {
                             newInteractOptions = [...interactList]
@@ -98,11 +93,11 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                                 color: '#009DFF'
                                             },
                                             active: {
-                                                symbol: '💦',
+                                                symbol: '💧',
                                                 color: '#59BFFF'
                                             },
                                             default: {
-                                                symbol: '💧',
+                                                symbol: '🐪',
                                                 color: '#BFE6FF'
                                             }
                                         }}

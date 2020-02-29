@@ -35,14 +35,14 @@ const initialState = {
             { id: 0, plotType: "empty_plot.png", water: 25, quality: 0, health: 45, harvest: 5},
             { id: 1, plotType: "empty_plot.png", water: 10, quality: 0, health: 25, harvest: 5},
             { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9, harvest: 5 },
-            { Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12, harvest: 5 },
+            { id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12, harvest: 5 },
             { id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15, harvest: 5 },
             { id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18, harvest: 5 }],
         orchard_plot: [
             { id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3 },
             { id: 1, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 },
             { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 },
-            { Id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12 },
+            { id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12 },
             { id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15 },
             { id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18 }],
         barnyard_plot: [

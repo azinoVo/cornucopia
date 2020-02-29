@@ -12,15 +12,9 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
-                    <li><strike>Add the Sculpture Garden and Favor currency</strike> <strong>DONE 2/26</strong></li>
-                    <li><strike>Add a game window that displays the action that was just done so users can have a log of it</strike> <strong>DONE 2/26</strong></li>
-                    <li>Update the Main Garden, Orchard, and Hanging Garden to display the correct
-                        number of plots
-                        </li>
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
                         </li>
-                        <li><strike>Watering will require water refilling using the well within the Barnyard</strike> <strong>DONE 2/27</strong></li>
                         <li>Add ability to upgrade water bucket to store more water. Add a limit user object.</li>
                     <li>Add Animals to Barnyard where animals are raised and animal products are harvested</li>
                     <li>Add bonuses to users when certain sculptures are restored</li>
