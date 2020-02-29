@@ -39,6 +39,7 @@ footer {
   width: 100%;
   height: 100vh;
   background-color: #FAF3EB;
+  padding-bottom: 10%;
 }
 
 header, footer {
@@ -60,17 +61,22 @@ button {
   padding: 2%;
 }
 
+.barnyard {
+  padding-top: 1.5%;
+}
+
 .plot {
   width: 33%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 3% 0;
+  padding-bottom: 5%;
 }
 
 .plot img {
   width: 45%;
+  height:50%;
   /* height: 50%; */
   pointer-events: none;
 }
@@ -141,10 +147,22 @@ thead {
 
 /* Style for react-select */
 .css-2b097c-container {
-  width: 30%;
+  width: 50%;
+  padding: 1.75% 0;
 }
 
 .react-sweet-progress {
   width: 75% !important
 }
 
+/* main Garden CSS */
+
+.mainGarden-status {
+  text-align: center;
+  padding-top: 1%;
+}
+
+.mainGarden-status .react-sweet-progress {
+  text-align: center;
+  margin: 0 auto;
+}

@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { plantSeed } from '../actions';
+import { plantSeed, interact } from '../actions';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 
-const MainGarden = ({ mainGarden, user }) => {
+const MainGarden = ({ mainGarden, user, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
-    // const [userInventory, setInventory] = useState({})
+    const [userInfo, setUserInfo] = useState({})
     const [seedSelect, setSeedSelect] = useState([])
     const [availableSeeds, setAvailableSeeds] = useState({})
-
+    const [plantInteraction, setPlantInteraction] = useState({})
 
     const dispatch = useDispatch()
+
 
     useEffect(() => {
         setGardenPlot(mainGarden)
     }, [mainGarden])
+
+    useEffect(() => {
+        setUserInfo(user)
+    }, [user])
 
     useEffect(() => {
         // setInventory(user.inventory)
@@ -35,14 +40,44 @@ const MainGarden = ({ mainGarden, user }) => {
         setSeedSelect(seedList)
     }, [user])
 
+
     console.log("availableSeeds", availableSeeds)
+    console.log("plantInteraction", plantInteraction)
 
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
+            <div className='mainGarden-status'>
+                Available Water: {userInfo.water}%
+                <Progress
+                    percent={userInfo.water}
+                    theme={{
+                        success: {
+                            symbol: '‍💦',
+                            color: '#009DFF'
+                        },
+                        active: {
+                            symbol: '💧',
+                            color: '#59BFFF'
+                        },
+                        default: {
+                            symbol: '💧',
+                            color: '#BFE6FF'
+                        }
+                    }} />
+            </div>
+
             <div className='main'>
                 {
                     gardenPlot.map((plot, index) => {
+
+                        let newInteractOptions = [...interactList]
+
+                        if ((userInfo.water - [100 - plot.water]) > 0) {
+                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water" }]
+                        } else {
+                            newInteractOptions = [...interactList]
+                        }
 
                         if (plot) {
                             return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
@@ -50,7 +85,7 @@ const MainGarden = ({ mainGarden, user }) => {
                                 {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
-                                    <span>Water: {plot.water} | Health: {plot.health} | Quality: {plot.quality} </span>
+                                    <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>
                                 }
 
                                 {
@@ -82,15 +117,15 @@ const MainGarden = ({ mainGarden, user }) => {
                                         theme={{
                                             success: {
                                                 symbol: '‍💚',
-                                                color: '#009F4E'
+                                                color: '#16C60C'
                                             },
                                             active: {
-                                                symbol: '🐛',
-                                                color: 'rgb(19, 140, 228)'
+                                                symbol: '💛',
+                                                color: '#FCE100'
                                             },
                                             default: {
-                                                symbol: '💉',
-                                                color: '##EE320C'
+                                                symbol: '❤️',
+                                                color: '#E81224'
                                             }
                                         }} />
                                 }
@@ -101,21 +136,20 @@ const MainGarden = ({ mainGarden, user }) => {
                                         percent={plot.quality}
                                         theme={{
                                             success: {
-                                                symbol: '‍💲💲💲',
-                                                color: '#0F9200'
+                                                symbol: '‍👑',
+                                                color: '#F8BA00'
                                             },
                                             active: {
-                                                symbol: '💲💲',
-                                                color: '#30CB00'
+                                                symbol: '💰',
+                                                color: '#F8D670'
                                             },
                                             default: {
-                                                symbol: '💲',
-                                                color: '#4AE54A'
+                                                symbol: '🤡',
+                                                color: '#FFFFFF'
                                             }
                                         }}
                                     />
                                 }
-
 
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
@@ -129,19 +163,70 @@ const MainGarden = ({ mainGarden, user }) => {
                                     />
 
                                 }
+
+                                {/* Planting Seeds button */}
                                 {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
                                     <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant</button>
 
                                 }
+
+                                {/* Interact with the Seeds */}
+
+                                {
+
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <Select
+                                        components={makeAnimated()}
+                                        placeholder={"Interact"}
+                                        options={newInteractOptions}
+                                        onChange={setPlantInteraction}
+                                        autoFocus
+
+                                    />
+                                }
+
+                                {
+
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <button onClick={() => dispatch(interact({ ...plantInteraction, plot }))}>Interact</button>
+
+                                }
+
+                                {/* Progress Bar before Harvest */}
+                                {
+
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <Progress
+                                        percent={plot.harvest}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍🌻',
+                                                color: '#0F9200'
+                                            },
+                                            active: {
+                                                symbol: '🌱',
+                                                color: '#30CB00'
+                                            },
+                                            default: {
+                                                symbol: '🌰',
+                                                color: '#4AE54A'
+                                            }
+                                        }}
+                                    />
+
+                                }
+
                             </div>
+
+
                         } else {
                             return <div className='plot'>
-                                <img src={require('../assets/plants/empty_plot.png')} alt="plot" />
-                            </div>
+                                <img src={require('../assets/plants/empty_plot.png')} alt="plot" /></div>
                         }
                     })
                 }
+
             </div>
         </section>
     );
@@ -150,6 +235,7 @@ const MainGarden = ({ mainGarden, user }) => {
 const mapStateToProps = state => ({
     mainGarden: state.user.main_garden_plot,
     user: state.user,
+    interactList: state.game.interact_list
 });
 
-export default connect(mapStateToProps, { plantSeed })(MainGarden);
+export default connect(mapStateToProps, { plantSeed, interact })(MainGarden);

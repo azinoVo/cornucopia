@@ -77,5 +77,16 @@ export const plantSeed = (seedSet, index) => {
     }
 }
 
+export const INTERACT_WATER = "INTERACT_WATER";
+
+export const interact = (actionSet) => dispatch => {
+    console.log("interact in actions", actionSet)
+
+    if(actionSet['value'] === "water") {
+        dispatch({ type: INTERACT_WATER, payload: actionSet })
+    }
+
+}
+
 
 
