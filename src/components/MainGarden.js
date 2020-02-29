@@ -24,19 +24,6 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
         setUserInfo(user)
     }, [user])
 
-    // useEffect(() => {
-
-    //     const seedList = Object.entries(user.inventory).map(entry => {
-    //         if (!entry[0].includes("plot") && entry[1] >= 1) {
-    //             return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory` }
-    //         } else {
-    //             return ""
-    //         }
-    //     }).filter(item => item !== "")
-
-    //     setSeedSelect(seedList)
-    // }, [user])
-
     const interactFunction = (set) => {
         console.log("set within function", set)
         dispatch(interact(set))
@@ -48,7 +35,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
             <div className='mainGarden-status'>
-                Available Water: {userInfo.water}%
+                <div>Available Water: {userInfo.water}%</div>
                 <Progress
                     percent={userInfo.water}
                     theme={{

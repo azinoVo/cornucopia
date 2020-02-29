@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import { Progress } from 'react-sweet-progress';
 import GameLog from './GameLog';
 
-const Inventory = ({ user, prices }) => {
+const Inventory = ({ user, prices, main_garden_plot }) => {
     const [userInfo, setUserInfo] = useState({})
     const [userInventory, setInventory] = useState({})
     const [shopPrices, setPrices] = useState({})
+    const [mainGarden, setMainGarden] = useState([])
+
 
     useEffect(() => {
         setUserInfo(user)
@@ -19,6 +22,10 @@ const Inventory = ({ user, prices }) => {
     useEffect(() => {
         setPrices(prices)
     }, [prices])
+
+    useEffect(() => {
+        setMainGarden(main_garden_plot)
+    }, [main_garden_plot])
 
     return (
         <section className='main-content'>
@@ -54,6 +61,37 @@ const Inventory = ({ user, prices }) => {
                         }
                     </tbody>
                 </Table>
+                <div className='plot-status'>
+                    <h2 className='tab-header'>Main Garden Progress</h2>
+                    {
+                        mainGarden.map((plot, index) => {
+                            return <div style={{"padding": "0.3% 0"}}>
+                                <span style={{"padding-right": "0.5%"}}>Plot # {index}</span>
+                                {
+                                    (plot.plotType !== "empty_plot.png" && plot.plotType !== "empty_plot_lock.png") ?
+                                    <Progress
+                                        percent={plot.harvest}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍🌻',
+                                                color: '#0F9200'
+                                            },
+                                            active: {
+                                                symbol: '🌱',
+                                                color: '#30CB00'
+                                            },
+                                            default: {
+                                                symbol: '🌰',
+                                                color: '#4AE54A'
+                                            }
+                                        }}
+                                    /> : <span> Please purchase the plot or plant a seed to track progress.</span>
+                                }
+
+                            </div>
+                        })
+                    }
+                </div>
                 <GameLog />
             </div>
         </section>
@@ -62,6 +100,7 @@ const Inventory = ({ user, prices }) => {
 
 const mapStateToProps = state => ({
     prices: state.game.shopPrices,
+    main_garden_plot: state.user.main_garden_plot,
     user: state.user
 });
 

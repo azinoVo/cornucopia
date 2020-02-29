@@ -152,7 +152,7 @@ thead {
 }
 
 .react-sweet-progress {
-  width: 75% !important
+  width: 75% !important;
 }
 
 /* main Garden CSS */
@@ -163,6 +163,25 @@ thead {
 }
 
 .mainGarden-status .react-sweet-progress {
-  text-align: center;
-  margin: 0 auto;
+  margin: 0 auto !important;
 }
+
+.plot-status {
+  text-align: center;
+  padding: 2% 0;
+}
+
+.plot-status .react-sweet-progress {
+  display: inline-flex  !important;
+}
+
+.main button {
+  border: none;
+  background-color: #5cc37F;
+  color: white;
+  padding: 1%;
+  width: 20%;
+  border-radius: 5px;
+}
+
+
