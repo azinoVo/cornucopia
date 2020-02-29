@@ -39,6 +39,15 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
         setSeedSelect(seedList)
     }, [user])
 
+    console.log("plantInteractions", plantInteraction)
+
+    const interactFunction = (set) => {
+        console.log("set within function", set)
+        dispatch(interact(set))
+
+        setPlantInteraction({})
+    }
+
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
@@ -69,7 +78,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                         let newInteractOptions = [...interactList]
 
                         if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100) {
-                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water" }]
+                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water", id: plot.id}]
                         } else {
                             newInteractOptions = [...interactList]
                         }
@@ -164,6 +173,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                     (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
                                     <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant</button>
 
+
                                 }
 
                                 {/* Interact with the Seeds */}
@@ -183,10 +193,13 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
 
                                 {
 
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
-                                    <button onClick={() => dispatch(interact({ ...plantInteraction, plot }))}>Interact</button>
+                                    (plantInteraction['id'] === plot.id && plantInteraction['value'] !== undefined && plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    <button onClick={() => interactFunction({ ...plantInteraction, plot })}>Interact</button>
 
                                 }
+
+                                {/* <button onClick={() => dispatch(interact({ ...plantInteraction, plot }))}>Interact</button> */}
+
 
                                 {/* Progress Bar before Harvest */}
                                 {
@@ -213,7 +226,6 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                 }
 
                             </div>
-
 
                         } else {
                             return <div className='plot'>
