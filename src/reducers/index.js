@@ -190,7 +190,7 @@ const rootReducer = (state = initialState, action) => {
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User watered plot ${[action.payload.plot.id+1]} by ${[state.user.water - [state.user.water - [100 - action.payload.plot.water]]]} at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User watered plot #${[action.payload.plot.id+1]} by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
                 }
 
                 
