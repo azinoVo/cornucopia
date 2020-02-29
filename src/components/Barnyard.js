@@ -55,9 +55,9 @@ const Barnyard = ({ barnyard_plot, user }) => {
 
                     <div className='water-commands'>
                         {
-                            (userInfo.water < limits.water_limit) ? <button onClick={() => dispatch(fillWater(user.limits.water_limit))}>Refill to Full</button> : <div>Bucket is Full</div>
+                            (userInfo.water < limits.water_limit) ? <button onClick={() => dispatch(fillWater(user.limits.water_limit))}>Refill to Full</button> : <div>Bucket is 100% Full</div>
                         }
-                        <div>Water: {userInfo.water}% Full</div>
+                        <div>Water Capacity: {userInfo.water}</div>
                     </div>
 
                     <GameLog />

@@ -32,12 +32,12 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, plotType: "empty_plot.png", water: 25, quality: 0, health: 45, harvest: 5},
-            { id: 1, plotType: "empty_plot.png", water: 10, quality: 0, health: 25, harvest: 5},
-            { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9, harvest: 5 },
-            { id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12, harvest: 5 },
-            { id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15, harvest: 5 },
-            { id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18, harvest: 5 }],
+            { id: 0, plotType: "empty_plot.png", water: 0, quality: 0, health: 0, harvest: 0},
+            { id: 1, plotType: "empty_plot.png", water: 0, quality: 0, health: 0, harvest: 0},
+            { id: 2, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 3, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 4, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 5, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 }],
         orchard_plot: [
             { id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3 },
             { id: 1, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 },
@@ -185,7 +185,14 @@ const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     water: state.user.water - [100 - action.payload.plot.water],
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload.plot.id) ? { ...content, plotType: `${action.payload.plot.plotType.replace(/.gif/, '')}_watered.gif`, water: 100, harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 25} : content
+                        return (i === action.payload.plot.id) ? 
+                        { ...content, 
+                        plotType: `${action.payload.plot.plotType.replace(/.gif/, '')}_watered.gif`, 
+                        water: 100,
+                        quality: state.user.main_garden_plot[action.payload.plot.id].quality + 5,
+                        health: state.user.main_garden_plot[action.payload.plot.id].health + 10,
+                        harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 10
+                    } : content
                     })
                 },
                 game: {

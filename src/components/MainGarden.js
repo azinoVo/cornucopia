@@ -68,7 +68,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
 
                         let newInteractOptions = [...interactList]
 
-                        if ((userInfo.water - [100 - plot.water]) > 0 && plot.water !== 100) {
+                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100) {
                             newInteractOptions = [...newInteractOptions, { value: "water", label: "Water" }]
                         } else {
                             newInteractOptions = [...interactList]
@@ -119,7 +119,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                                 color: '#FCE100'
                                             },
                                             default: {
-                                                symbol: '❤️',
+                                                symbol: '💔',
                                                 color: '#E81224'
                                             }
                                         }} />
@@ -139,7 +139,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                                 color: '#F8D670'
                                             },
                                             default: {
-                                                symbol: '🤡',
+                                                symbol: '💩',
                                                 color: '#FFFFFF'
                                             }
                                         }}
