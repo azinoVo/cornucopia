@@ -49,11 +49,9 @@ const Inventory = ({ user, prices }) => {
                                         <th>{shopPrices[entry[0]]} Mana Essences</th>
                                     </tr>
                                 }
-
                                 return ""
                             })
                         }
-
                     </tbody>
                 </Table>
                 <GameLog />

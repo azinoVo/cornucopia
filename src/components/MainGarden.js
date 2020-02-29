@@ -10,7 +10,6 @@ import "react-sweet-progress/lib/style.css";
 const MainGarden = ({ mainGarden, user, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
     const [userInfo, setUserInfo] = useState({})
-    const [seedSelect, setSeedSelect] = useState([])
     const [availableSeeds, setAvailableSeeds] = useState({})
     const [plantInteraction, setPlantInteraction] = useState({})
 
@@ -25,21 +24,18 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
         setUserInfo(user)
     }, [user])
 
-    useEffect(() => {
-        // setInventory(user.inventory)
+    // useEffect(() => {
 
-        const seedList = Object.entries(user.inventory).map(entry => {
-            if (!entry[0].includes("plot") && entry[1] >= 1) {
-                return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory` }
-            } else {
-                return ""
-            }
-        }).filter(item => item !== "")
+    //     const seedList = Object.entries(user.inventory).map(entry => {
+    //         if (!entry[0].includes("plot") && entry[1] >= 1) {
+    //             return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory` }
+    //         } else {
+    //             return ""
+    //         }
+    //     }).filter(item => item !== "")
 
-        setSeedSelect(seedList)
-    }, [user])
-
-    console.log("plantInteractions", plantInteraction)
+    //     setSeedSelect(seedList)
+    // }, [user])
 
     const interactFunction = (set) => {
         console.log("set within function", set)
@@ -78,10 +74,20 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                         let newInteractOptions = [...interactList]
 
                         if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100) {
-                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water", id: plot.id}]
+                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water", id: plot.id }]
                         } else {
                             newInteractOptions = [...interactList]
                         }
+
+                        const seedList = Object.entries(user.inventory).map(entry => {
+                            if (!entry[0].includes("plot") && entry[1] >= 1) {
+                                return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`, id: plot.id }
+                            } else {
+                                return ""
+                            }
+                        }).filter(item => item !== "")
+
+                        console.log("seedList, availableSeeds", seedList, availableSeeds)
 
                         if (plot) {
                             return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
@@ -160,7 +166,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                     <Select
                                         components={makeAnimated()}
                                         placeholder={"Select Seed"}
-                                        options={seedSelect}
+                                        options={seedList}
                                         onChange={setAvailableSeeds}
                                         noOptionsMessage={() => "No Seeds Available. Please buy some."}
                                         autoFocus
@@ -170,7 +176,7 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
 
                                 {/* Planting Seeds button */}
                                 {
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
+                                    (availableSeeds['id'] === plot.id && availableSeeds['value'] !== undefined && plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
                                     <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant</button>
 
 
@@ -197,9 +203,6 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
                                     <button onClick={() => interactFunction({ ...plantInteraction, plot })}>Interact</button>
 
                                 }
-
-                                {/* <button onClick={() => dispatch(interact({ ...plantInteraction, plot }))}>Interact</button> */}
-
 
                                 {/* Progress Bar before Harvest */}
                                 {
