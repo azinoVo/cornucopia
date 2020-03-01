@@ -5,12 +5,13 @@ import {
     REFILL_WATER,
     PLANT_SEED,
     INTERACT_WATER,
+    INTERACT_NOURISH,
     EXPAND_WATER,
 } from '../actions';
 
 const initialState = {
     user: {
-        energy: 20,
+        energy: 200,
         essence: 5000,
         favor: 5,
         water: 10,
@@ -20,7 +21,6 @@ const initialState = {
             summer_seed: 1,
             fall_seed: 0,
             winter_seed: 0,
-            basic_fertilizer: 0,
             main_garden_plot: 2,
             orchard_plot: 1,
             barnyard_plot: 0,
@@ -28,7 +28,7 @@ const initialState = {
         },
         limits: {
             water_limit: 100,
-            energy_limit: 100,
+            energy_limit: 200,
             favor_limit: 100,
             main_garden_plot: 6,
             orchard_plot: 6,
@@ -58,24 +58,22 @@ const initialState = {
             { id: 2, pen: false,  plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 }]
     },
     game: {
-        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "basic_fertilizer"],
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed"],
         plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
         interact_list: [
-            {value: "fertilize", label: "Fertilize"},
-            {value: "nourish", label: "Nourish"},
+            {value: "placeholder", label: "Placeholder"},
         ],
         energyReq: {
             plant_seed: 5,
             water: 5,
             fertilize: 10,
-            nourish: 15
+            nourish: 10
         },
         shopPrices: {
             spring_seed: 20,
             summer_seed: 25,
             fall_seed: 30,
             winter_seed: 35,
-            basic_fertilizer: 5,
             main_garden_plot: 100,
             orchard_plot: 200,
             barnyard_plot: 350,
@@ -212,6 +210,31 @@ const rootReducer = (state = initialState, action) => {
                 }
 
             };
+
+            case INTERACT_NOURISH:
+                console.log("INTERACT nourish in reducer", action.payload)
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        energy: state.user.energy - 10,
+                        favor: state.user.favor + 5,
+                        main_garden_plot: state.user.main_garden_plot.map((content, i) => {
+                            return (i === action.payload.plot.id) ? 
+                            { ...content, 
+                            water: state.user.main_garden_plot[action.payload.plot.id].water - 15,
+                            quality: state.user.main_garden_plot[action.payload.plot.id].quality + 5,
+                            health: state.user.main_garden_plot[action.payload.plot.id].health + 10,
+                            harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 15
+                        } : content
+                        })
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `User nourished plot #${[action.payload.plot.id+1]} at ${Date(Date.now()).toString()}.`]
+                    }
+    
+                };
 
             case EXPAND_WATER:
             console.log("EXPAND WATER CAPACITY")

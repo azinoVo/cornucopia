@@ -87,12 +87,16 @@ export const expandWater = () => {
 }
 
 export const INTERACT_WATER = "INTERACT_WATER";
+export const INTERACT_NOURISH = "INTERACT_NOURISH";
+
 
 export const interact = (actionSet) => dispatch => {
     console.log("interact in actions", actionSet)
 
     if(actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER, payload: actionSet })
+    } else if(actionSet['value'] === "nourish") {
+        dispatch({ type: INTERACT_NOURISH, payload: actionSet })
     }
 
 }

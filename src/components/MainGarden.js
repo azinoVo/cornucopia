@@ -84,8 +84,15 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                             newInteractOptions = [...newInteractOptions]
                         }
 
+                        // Nourish requires a seed, 10 energy, and 15 water. It increase the overall stats of the plant by a little and triggers premature growth
+                        if(userInfo.energy >= energyReq.nourish && plot.water >= 15) {
+                            newInteractOptions = [...newInteractOptions, { value: "nourish", label: "Nourish 10⚡", id: plot.id }]
+                        } else {
+                            newInteractOptions = [...newInteractOptions]
+                        }
+
                         // Condition for harvest is 100% on harvest of plot
-                        if(plot.harvest === 100) {
+                        if(plot.harvest >= 100) {
                             newInteractOptions = [...newInteractOptions, { value: "harvest", label: "Harvest", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]

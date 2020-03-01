@@ -34,7 +34,7 @@ const Home = () => {
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>TBA</li>
+                    <li>Have the animations be displayed as conditional within component instead of controlled by plot within state.</li>
                 </ul>
             </div>
         </section>
