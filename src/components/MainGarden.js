@@ -77,12 +77,21 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                         let newInteractOptions = [...interactList]
 
-                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100) {
-                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water", id: plot.id }]
+                        // If water conditions not met, Water will not be an option within Interact
+                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && userInfo.energy >= energyReq.water) {
+                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water 5⚡", id: plot.id }]
                         } else {
-                            newInteractOptions = [...interactList]
+                            newInteractOptions = [...newInteractOptions]
                         }
 
+                        // Condition for harvest is 100% on harvest of plot
+                        if(plot.harvest === 100) {
+                            newInteractOptions = [...newInteractOptions, { value: "harvest", label: "Harvest", id: plot.id }]
+                        } else {
+                            newInteractOptions = [...newInteractOptions]
+                        }
+
+                        // Filters the seed List from inventory for ones that are above 1
                         const seedList = Object.entries(user.inventory).map(entry => {
                             if (!entry[0].includes("plot") && entry[1] >= 1) {
                                 return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`, id: plot.id }
@@ -90,8 +99,6 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 return ""
                             }
                         }).filter(item => item !== "")
-
-                        console.log("seedList, availableSeeds", seedList, availableSeeds)
 
                         if (plot) {
                             return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
@@ -219,7 +226,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                         plantInteraction['value'] !== undefined &&
                                         plot['plotType'] !== "empty_plot_lock.png" &&
                                         plot['plotType'] !== "empty_plot.png") &&
-                                    <button onClick={() => interactFunction({ ...plantInteraction, plot })}>Interact</button>
+                                    <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button>
 
                                 }
 

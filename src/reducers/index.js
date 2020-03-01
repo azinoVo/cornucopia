@@ -10,7 +10,7 @@ import {
 
 const initialState = {
     user: {
-        energy: 10,
+        energy: 20,
         essence: 5000,
         favor: 5,
         water: 10,
@@ -20,6 +20,7 @@ const initialState = {
             summer_seed: 1,
             fall_seed: 0,
             winter_seed: 0,
+            basic_fertilizer: 0,
             main_garden_plot: 2,
             orchard_plot: 1,
             barnyard_plot: 0,
@@ -57,7 +58,7 @@ const initialState = {
             { id: 2, pen: false,  plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 }]
     },
     game: {
-        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed"],
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "basic_fertilizer"],
         plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
         interact_list: [
             {value: "fertilize", label: "Fertilize"},
@@ -74,6 +75,7 @@ const initialState = {
             summer_seed: 25,
             fall_seed: 30,
             winter_seed: 35,
+            basic_fertilizer: 5,
             main_garden_plot: 100,
             orchard_plot: 200,
             barnyard_plot: 350,
@@ -190,6 +192,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
+                    energy: state.user.energy - 5,
                     water: state.user.water - [100 - action.payload.plot.water],
                     favor: state.user.favor + parseInt([100-action.payload.plot.water]*0.05),
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
