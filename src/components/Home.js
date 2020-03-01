@@ -12,13 +12,14 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
+                    <li>Add Energy as a way to manage user progress.</li>
+                    <li>Add way to move to next day - this will progress all plants by certain amount.</li>
+                    <li>Seasonal bonuses</li>
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
                         </li>
-                    <li>Add ability to upgrade water bucket to store more water. Add a limit user object.</li>
                     <li>Add Animals to Barnyard where animals are raised and animal products are harvested</li>
                     <li>Add bonuses to users when certain sculptures are restored</li>
-                    <li>Add concept of Seasons where crops gain bonuses</li>
                     <li>Possible addition of Male/Female animals and Breeding</li>
                     <li>Adding a possible Forest Stage that has specific trees/animals/items depending on Season</li>
                     <li>Add the ability to battle: Need Character creation, stats, abilities, and weapons.</li>
@@ -31,12 +32,9 @@ const Home = () => {
                     <li>Seed Maker that generates higher quality seeds: Require additional field called seed quality that has multiplier.</li>
                 </ul>
 
-
-
-
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>From barnyard, one cannot access the hanging garden and orchard. The Watering well possible in the way.</li>
+                    <li>TBA</li>
                 </ul>
             </div>
         </section>

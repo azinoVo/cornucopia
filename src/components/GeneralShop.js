@@ -64,7 +64,7 @@ const GeneralShop = ({ shop, user, prices, plot_shop, limits }) => {
                                 }
 
                                 return <tr className='shop-item' key={`shopItem${index}`}>
-                                    <th>itemIcon {item}</th>
+                                    <th>{item}</th>
                                     {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                     <th>{shopPrices[item]} Mana Essences</th>
                                     {(userInfo.essence >= shopPrices[item]) ? <th><button onClick={() => dispatch(buyItem(set))}>Buy using {shopPrices[item]} Mana Essences</button></th> : <th>Not enough Mana Essences</th>}
@@ -82,7 +82,7 @@ const GeneralShop = ({ shop, user, prices, plot_shop, limits }) => {
                                 }
 
                                 return <tr className='shop-item' key={`shopItem${index}`}>
-                                    <th>itemIcon {item}</th>
+                                    <th>{item}</th>
                                     {userInfo.inventory[item] ? <th>{userInfo.inventory[item]}</th> : <th>0</th>}
                                     <th>{shopPrices[item]} Mana Essences</th>
                                     {(userInfo.essence >= shopPrices[item] && storeLimit[item] > userInfo.inventory[item]) ?
@@ -96,10 +96,10 @@ const GeneralShop = ({ shop, user, prices, plot_shop, limits }) => {
                         }
 
                         <tr className='shop-item' key="water-limit-1">
-                            <th>Water +100</th>
+                            <th>Water Capacity +100</th>
                             <th>{storeLimit.water_limit}</th>
                             <th>500 Mana Essences</th>
-                            {userInfo.essence >= 500 && <th><button onClick={() => dispatch(expandWater())}>Buy using 500 Mana Essences</button></th>}
+                            {userInfo.essence >= 500 ? <th><button onClick={() => dispatch(expandWater())}>Buy using 500 Mana Essences</button></th> : <th>Insufficient Essences</th>}
                             <th>Cannot Sell</th>
                         </tr>
                     </tbody>

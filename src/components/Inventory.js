@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import { Progress } from 'react-sweet-progress';
 import GameLog from './GameLog';
 
-const Inventory = ({ user, prices, main_garden_plot }) => {
+const Inventory = ({ user, prices, limits, main_garden_plot }) => {
     const [userInfo, setUserInfo] = useState({})
     const [userInventory, setInventory] = useState({})
     const [shopPrices, setPrices] = useState({})
@@ -33,6 +33,7 @@ const Inventory = ({ user, prices, main_garden_plot }) => {
             <div className='inventory'>
                 <div className='user-info'>
                     <ul>
+                        <li>Energy: {userInfo.energy}/{limits.energy_limit}</li>
                         <li>Water Capacity: {userInfo.water}</li>
                         <li>Mana Essences: {userInfo.essence}</li>
                         <li>Favor: {userInfo.favor} </li>
@@ -65,8 +66,8 @@ const Inventory = ({ user, prices, main_garden_plot }) => {
                     <h2 className='tab-header'>Main Garden Progress</h2>
                     {
                         mainGarden.map((plot, index) => {
-                            return <div style={{"padding": "0.3% 0"}}>
-                                <span style={{"padding-right": "0.5%"}}>Plot # {index}</span>
+                            return <div style={{"padding": "0.3% 0"}} key={`mainProgress${index}`}>
+                                <span style={{"paddingRight": "0.5%"}}>Plot # {index}</span>
                                 {
                                     (plot.plotType !== "empty_plot.png" && plot.plotType !== "empty_plot_lock.png") ?
                                     <Progress
@@ -101,6 +102,7 @@ const Inventory = ({ user, prices, main_garden_plot }) => {
 const mapStateToProps = state => ({
     prices: state.game.shopPrices,
     main_garden_plot: state.user.main_garden_plot,
+    limits: state.user.limits,
     user: state.user
 });
 

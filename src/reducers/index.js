@@ -10,6 +10,7 @@ import {
 
 const initialState = {
     user: {
+        energy: 0,
         essence: 5000,
         favor: 5,
         water: 10,
@@ -26,6 +27,7 @@ const initialState = {
         },
         limits: {
             water_limit: 100,
+            energy_limit: 100,
             favor_limit: 100,
             main_garden_plot: 6,
             orchard_plot: 6,
@@ -186,6 +188,7 @@ const rootReducer = (state = initialState, action) => {
                 user: {
                     ...state.user,
                     water: state.user.water - [100 - action.payload.plot.water],
+                    favor: state.user.favor + parseInt([100-action.payload.plot.water]*0.05),
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
                         return (i === action.payload.plot.id) ? 
                         { ...content, 

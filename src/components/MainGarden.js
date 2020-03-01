@@ -7,7 +7,7 @@ import makeAnimated from 'react-select/animated';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 
-const MainGarden = ({ mainGarden, user, interactList }) => {
+const MainGarden = ({ mainGarden, user, limits, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
@@ -35,6 +35,23 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
             <div className='mainGarden-status'>
+                <div>Energy: {userInfo.energy}/{limits.energy_limit}</div>
+                <Progress
+                    percent={userInfo.energy}
+                    theme={{
+                        success: {
+                            symbol: '‍🔋',
+                            color: '#16C60C'
+                        },
+                        active: {
+                            symbol: '⚡',
+                            color: '#FCE100'
+                        },
+                        default: {
+                            symbol: '🛏️',
+                            color: '#E81224'
+                        }
+                    }} />
                 <div>Available Water: {userInfo.water}%</div>
                 <Progress
                     percent={userInfo.water}
@@ -232,7 +249,8 @@ const MainGarden = ({ mainGarden, user, interactList }) => {
 const mapStateToProps = state => ({
     mainGarden: state.user.main_garden_plot,
     user: state.user,
-    interactList: state.game.interact_list
+    interactList: state.game.interact_list,
+    limits: state.user.limits
 });
 
 export default connect(mapStateToProps, { plantSeed, interact })(MainGarden);
