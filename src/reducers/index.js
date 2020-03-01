@@ -5,6 +5,7 @@ import {
     REFILL_WATER,
     PLANT_SEED,
     INTERACT_WATER,
+    EXPAND_WATER,
 } from '../actions';
 
 const initialState = {
@@ -150,12 +151,13 @@ const rootReducer = (state = initialState, action) => {
                 user: {
                     ...state.user,
                     water: action.payload,
+                    favor: state.user.favor + 1
                 },
                 game: {
                     ...state.game,
                     log: [...state.game.log, `User refilled the bucket to ${action.payload} capacity at ${Date(Date.now()).toString()}.`]
                 }
-            }
+            };
 
         case PLANT_SEED:
             console.log("Plant Seed in reducer", action.payload)
@@ -200,9 +202,27 @@ const rootReducer = (state = initialState, action) => {
                     log: [...state.game.log, `User watered plot #${[action.payload.plot.id+1]} by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
                 }
 
-                
-
             };
+
+            case EXPAND_WATER:
+            console.log("EXPAND WATER CAPACITY")
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence - 500,
+                    favor: state.user.favor + 2,
+                    limits: {
+                        ...state.user.limits,
+                        water_limit: state.user.limits.water_limit+100,
+                        
+                    },
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User expanded the bucket by 100 units at ${Date(Date.now()).toString()}.`]
+                }
+            }
 
         default:
             return state;

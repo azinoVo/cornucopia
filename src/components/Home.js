@@ -15,7 +15,7 @@ const Home = () => {
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
                         </li>
-                        <li>Add ability to upgrade water bucket to store more water. Add a limit user object.</li>
+                    <li>Add ability to upgrade water bucket to store more water. Add a limit user object.</li>
                     <li>Add Animals to Barnyard where animals are raised and animal products are harvested</li>
                     <li>Add bonuses to users when certain sculptures are restored</li>
                     <li>Add concept of Seasons where crops gain bonuses</li>
@@ -25,6 +25,14 @@ const Home = () => {
                     <li>Past the Forest is a dungeon where you can battle monsters for loot.</li>
                     <li>Alternate Endings Depending on your choices when playing the game</li>
                 </ul>
+
+                <h2> Additional Ideas</h2>
+                <ul>
+                    <li>Seed Maker that generates higher quality seeds: Require additional field called seed quality that has multiplier.</li>
+                </ul>
+
+
+
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>

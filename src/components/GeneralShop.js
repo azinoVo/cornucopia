@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
-import { buyItem, sellItem, buyPlot } from '../actions';
+import { buyItem, sellItem, buyPlot, expandWater } from '../actions';
 import { useDispatch } from 'react-redux';
 import GameLog from './GameLog';
 
@@ -94,6 +94,14 @@ const GeneralShop = ({ shop, user, prices, plot_shop, limits }) => {
                                 </tr>
                             })
                         }
+
+                        <tr className='shop-item' key="water-limit-1">
+                            <th>Water +100</th>
+                            <th>{storeLimit.water_limit}</th>
+                            <th>500 Mana Essences</th>
+                            {userInfo.essence >= 500 && <th><button onClick={() => dispatch(expandWater())}>Buy using 500 Mana Essences</button></th>}
+                            <th>Cannot Sell</th>
+                        </tr>
                     </tbody>
 
                 </Table>
@@ -113,4 +121,4 @@ const mapStateToProps = state => ({
     user: state.user
 });
 
-export default connect(mapStateToProps, { buyItem, sellItem, buyPlot })(GeneralShop);
+export default connect(mapStateToProps, { buyItem, sellItem, buyPlot, expandWater })(GeneralShop);

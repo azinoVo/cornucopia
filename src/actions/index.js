@@ -77,6 +77,15 @@ export const plantSeed = (seedSet, index) => {
     }
 }
 
+export const EXPAND_WATER = "EXPAND_WATER";
+
+export const expandWater = () => {
+    console.log("expand water")
+    return {
+        type: EXPAND_WATER
+    }
+}
+
 export const INTERACT_WATER = "INTERACT_WATER";
 
 export const interact = (actionSet) => dispatch => {

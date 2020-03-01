@@ -175,6 +175,10 @@ thead {
   display: inline-flex  !important;
 }
 
+.mainGarden-status .react-sweet-progress-line-inner {
+  max-width: 100% !important;
+}
+
 .main button {
   border: none;
   background-color: #5cc37F;
