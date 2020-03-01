@@ -10,7 +10,7 @@ import {
 
 const initialState = {
     user: {
-        energy: 75,
+        energy: 10,
         essence: 5000,
         favor: 5,
         water: 10,
@@ -63,6 +63,12 @@ const initialState = {
             {value: "fertilize", label: "Fertilize"},
             {value: "nourish", label: "Nourish"},
         ],
+        energyReq: {
+            plant_seed: 5,
+            water: 5,
+            fertilize: 10,
+            nourish: 15
+        },
         shopPrices: {
             spring_seed: 20,
             summer_seed: 25,
@@ -163,6 +169,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
+                    energy: state.user.energy - state.game.energyReq.plant_seed,
                     inventory: {
                         ...state.user.inventory,
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1

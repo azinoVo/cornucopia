@@ -7,7 +7,7 @@ import makeAnimated from 'react-select/animated';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 
-const MainGarden = ({ mainGarden, user, limits, interactList }) => {
+const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
@@ -35,9 +35,9 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
             <div className='mainGarden-status'>
-                <div>Energy: {Math.floor([userInfo.energy/limits.energy_limit]*100)}%</div>
+                <div>Energy: {Math.floor([userInfo.energy / limits.energy_limit] * 100)}%</div>
                 <Progress
-                    percent={Math.floor([userInfo.energy/limits.energy_limit]*100)}
+                    percent={Math.floor([userInfo.energy / limits.energy_limit] * 100)}
                     theme={{
                         success: {
                             symbol: '‍🔋',
@@ -52,9 +52,9 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
                             color: '#E81224'
                         }
                     }} />
-                <div>Available Water: {Math.floor([userInfo.water/limits.water_limit]*100)}%</div>
+                <div>Available Water: {Math.floor([userInfo.water / limits.water_limit] * 100)}%</div>
                 <Progress
-                    percent={Math.floor([userInfo.water/limits.water_limit]*100)}
+                    percent={Math.floor([userInfo.water / limits.water_limit] * 100)}
                     theme={{
                         success: {
                             symbol: '‍💦',
@@ -164,9 +164,13 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
                                         }}
                                     />
                                 }
-
+ 
                                 {
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
+                                        (userInfo.energy >= energyReq.plant_seed) ?
+
+                                    (
+                                    plot['plotType'] !== "empty_plot_lock.png" && 
+                                    plot['plotType'] === "empty_plot.png") &&
                                     <Select
                                         components={makeAnimated()}
                                         placeholder={"Select Seed"}
@@ -174,14 +178,18 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
                                         onChange={setAvailableSeeds}
                                         noOptionsMessage={() => "No Seeds Available. Please buy some."}
                                         autoFocus
-                                    />
+                                    /> : plot['plotType'] === "empty_plot.png" && <span>Please recover more energy.</span>
 
                                 }
 
                                 {/* Planting Seeds button */}
                                 {
-                                    (availableSeeds['id'] === plot.id && availableSeeds['value'] !== undefined && plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] === "empty_plot.png") &&
-                                    <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant</button>
+                                    (
+                                        availableSeeds['id'] === plot.id &&
+                                        availableSeeds['value'] !== undefined &&
+                                        plot['plotType'] !== "empty_plot_lock.png" &&
+                                        plot['plotType'] === "empty_plot.png") &&
+                                    <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button>
 
 
                                 }
@@ -202,8 +210,15 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
                                 }
 
                                 {
+                                    console.log("energyLogic energyUser and energyPlanting", userInfo.energy, energyReq.plant_seed)
+                                }
 
-                                    (plantInteraction['id'] === plot.id && plantInteraction['value'] !== undefined && plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                {
+
+                                    (plantInteraction['id'] === plot.id &&
+                                        plantInteraction['value'] !== undefined &&
+                                        plot['plotType'] !== "empty_plot_lock.png" &&
+                                        plot['plotType'] !== "empty_plot.png") &&
                                     <button onClick={() => interactFunction({ ...plantInteraction, plot })}>Interact</button>
 
                                 }
@@ -250,7 +265,8 @@ const mapStateToProps = state => ({
     mainGarden: state.user.main_garden_plot,
     user: state.user,
     interactList: state.game.interact_list,
-    limits: state.user.limits
+    limits: state.user.limits,
+    energyReq: state.game.energyReq
 });
 
 export default connect(mapStateToProps, { plantSeed, interact })(MainGarden);
