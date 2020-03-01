@@ -86,7 +86,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot }) => {
                                                 color: '#4AE54A'
                                             }
                                         }}
-                                    /> : <span> Please purchase the plot or plant a seed to track progress.</span>
+                                    /> : <span> Please purchase the plot and plant a seed to track progress.</span>
                                 }
 
                             </div>

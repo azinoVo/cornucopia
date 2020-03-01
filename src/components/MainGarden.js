@@ -35,9 +35,9 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
             <div className='mainGarden-status'>
-                <div>Energy: {userInfo.energy}/{limits.energy_limit}</div>
+                <div>Energy: {Math.floor([userInfo.energy/limits.energy_limit]*100)}%</div>
                 <Progress
-                    percent={userInfo.energy}
+                    percent={Math.floor([userInfo.energy/limits.energy_limit]*100)}
                     theme={{
                         success: {
                             symbol: '‍🔋',
@@ -52,9 +52,9 @@ const MainGarden = ({ mainGarden, user, limits, interactList }) => {
                             color: '#E81224'
                         }
                     }} />
-                <div>Available Water: {userInfo.water}%</div>
+                <div>Available Water: {Math.floor([userInfo.water/limits.water_limit]*100)}%</div>
                 <Progress
-                    percent={userInfo.water}
+                    percent={Math.floor([userInfo.water/limits.water_limit]*100)}
                     theme={{
                         success: {
                             symbol: '‍💦',
