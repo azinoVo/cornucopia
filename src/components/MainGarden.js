@@ -109,15 +109,16 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                         if (plot) {
                             return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
-                                <img src={require(`../assets/plants/${plot["plotType"]}`)} alt="plot" />
-                                {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
+                                <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
+
+                                {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"]}</span>}
                                 {
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot") &&
                                     <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>
                                 }
 
                                 {
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
                                         percent={plot.water}
                                         theme={{
@@ -139,7 +140,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 }
 
                                 {
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
                                         percent={plot.health}
                                         theme={{
@@ -159,7 +160,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 }
 
                                 {
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
                                         percent={plot.quality}
                                         theme={{
@@ -184,7 +185,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                                     (
                                     plot['plotType'] !== "empty_plot_lock.png" && 
-                                    plot['plotType'] === "empty_plot.png") &&
+                                    plot['plotType'] === "empty_plot") &&
                                     <Select
                                         components={makeAnimated()}
                                         placeholder={"Select Seed"}
@@ -192,7 +193,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                         onChange={setAvailableSeeds}
                                         noOptionsMessage={() => "No Seeds Available. Please buy some."}
                                         autoFocus
-                                    /> : plot['plotType'] === "empty_plot.png" && <span>Please recover more energy.</span>
+                                    /> : plot['plotType'] === "empty_plot" && <span>Please recover more energy.</span>
 
                                 }
 
@@ -202,7 +203,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                         availableSeeds['id'] === plot.id &&
                                         availableSeeds['value'] !== undefined &&
                                         plot['plotType'] !== "empty_plot_lock.png" &&
-                                        plot['plotType'] === "empty_plot.png") &&
+                                        plot['plotType'] === "empty_plot") &&
                                     <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button>
 
 
@@ -212,7 +213,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                                 {
 
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot") &&
                                     <Select
                                         components={makeAnimated()}
                                         placeholder={"Interact"}
@@ -232,7 +233,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                     (plantInteraction['id'] === plot.id &&
                                         plantInteraction['value'] !== undefined &&
                                         plot['plotType'] !== "empty_plot_lock.png" &&
-                                        plot['plotType'] !== "empty_plot.png") &&
+                                        plot['plotType'] !== "empty_plot") &&
                                     <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button>
 
                                 }
@@ -240,7 +241,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 {/* Progress Bar before Harvest */}
                                 {
 
-                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") &&
+                                    (plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
                                         percent={plot.harvest}
                                         theme={{
@@ -265,7 +266,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                         } else {
                             return <div className='plot'>
-                                <img src={require('../assets/plants/empty_plot.png')} alt="plot" /></div>
+                                <img src={require('../assets/plants/empty_plot_regular.png')} alt="plot" /></div>
                         }
                     })
                 }

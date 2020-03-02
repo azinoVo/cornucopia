@@ -20,7 +20,7 @@ const GoSculptures = ({ sculpture }) => {
                         </div>
                     } else {
                         return <div className='plot'>
-                            <img src={require('../assets/plants/empty_plot.png')} alt="plot" />
+                            <img src={require('../assets/plants/empty_plot_regular.png')} alt="plot" />
                         </div>
                     }
                 })}

@@ -36,26 +36,26 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, plotType: "empty_plot.png", water: 0, quality: 0, health: 0, harvest: 0},
-            { id: 1, plotType: "empty_plot.png", water: 0, quality: 0, health: 0, harvest: 0},
-            { id: 2, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 3, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 4, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 5, plotType: "empty_plot_lock.png", water: 0, quality: 0, health: 0, harvest: 0 }],
+            { id: 0, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
+            { id: 1, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
+            { id: 2, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 3, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 4, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 5, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 }],
         orchard_plot: [
-            { id: 0, plotType: "empty_plot.png", water: 1, quality: 2, health: 3 },
-            { id: 1, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 },
-            { id: 2, plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 },
-            { id: 3, plotType: "empty_plot_lock.png", water: 10, quality: 11, health: 12 },
-            { id: 4, plotType: "empty_plot_lock.png", water: 13, quality: 14, health: 15 },
-            { id: 5, plotType: "empty_plot_lock.png", water: 16, quality: 17, health: 18 }],
+            { id: 0, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3 },
+            { id: 1, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 },
+            { id: 2, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 },
+            { id: 3, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 10, quality: 11, health: 12 },
+            { id: 4, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 13, quality: 14, health: 15 },
+            { id: 5, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18 }],
         barnyard_plot: [
-            { id: 0, trellis: false, plotType: "empty_plot_lock.png", water: 1, quality: 2, health: 3 },
-            { id: 1, trellis: false, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 }],
+            { id: 0, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
+            { id: 1, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 }],
         hanging_plot: [
-            { id: 0, pen: false, plotType: "empty_plot_lock.png", water: 1, quality: 2, health: 3 },
-            { id: 1, pen: false, plotType: "empty_plot_lock.png", water: 4, quality: 5, health: 6 },
-            { id: 2, pen: false,  plotType: "empty_plot_lock.png", water: 7, quality: 8, health: 9 }]
+            { id: 0, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
+            { id: 1, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 },
+            { id: 2, pen: false,  plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 }]
     },
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed"],
@@ -80,7 +80,8 @@ const initialState = {
             hanging_plot: 500,
         },
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
-    }
+    },
+    sculpture: ["idol_bird.png"]
 };
 
 // Switch statements that handle action creators to set the state
@@ -119,7 +120,7 @@ const rootReducer = (state = initialState, action) => {
                         [action.payload.item]: state.user.inventory[action.payload.item] + 1
                     },
                     [action.payload.item]: state.user[action.payload.item].map((content, i) => {
-                        return (i === action.payload.index) ? { ...content, plotType: "empty_plot.png" } : content
+                        return (i === action.payload.index) ? { ...content, plotType: "empty_plot", plotStatus: "_regular", fileType: "png" } : content
                     })
                 },
                 game: {
@@ -175,7 +176,7 @@ const rootReducer = (state = initialState, action) => {
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
                     },
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload["index"]) ? { ...content, plotType: `${action.payload["value"]}.gif` } : content
+                        return (i === action.payload["index"]) ? { ...content, plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
                     })
                 },
                 game: {
@@ -196,7 +197,9 @@ const rootReducer = (state = initialState, action) => {
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
                         return (i === action.payload.plot.id) ? 
                         { ...content, 
-                        plotType: `${action.payload.plot.plotType.replace(/.gif/, '')}_watered.gif`, 
+                        plotType: `${action.payload.plot.plotType}`,
+                        plotStatus: "_watered",
+                        fileType: "gif", 
                         water: 100,
                         quality: state.user.main_garden_plot[action.payload.plot.id].quality + 5,
                         health: state.user.main_garden_plot[action.payload.plot.id].health + 10,

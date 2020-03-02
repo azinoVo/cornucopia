@@ -33,13 +33,13 @@ const Barnyard = ({ barnyard_plot, user }) => {
                         barnPlot.map((plot, index) => {
                             if (plot) {
                                 return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
-                                    <img src={require(`../assets/plants/${plot["plotType"]}`)} alt="plot" />
-                                    {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"].substring(0, plot["plotType"].length - 4)}</span>}
+                                    <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
+                                    {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"]}</span>}
                                     {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
                                 </div>
                             } else {
                                 return <div className='plot'>
-                                    <img src={require('../assets/plants/empty_plot.png')} alt="plot" />
+                                    <img src={require('../assets/plants/empty_plot_regular.png')} alt="plot" />
                                 </div>
                             }
                         })
