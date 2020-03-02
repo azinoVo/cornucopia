@@ -34,7 +34,8 @@ const Home = () => {
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>Have the animations be displayed as conditional within component instead of controlled by plot within state.</li>
+                    <li>Nourish can make plant go above 100% for some stats. Have limits to these stats.</li>
+                    <li>User can plant seeds in locked plots.</li>
                 </ul>
             </div>
         </section>
