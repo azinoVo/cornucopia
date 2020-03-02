@@ -30,12 +30,12 @@ const Home = () => {
                 <h2> Additional Ideas</h2>
                 <ul>
                     <li>Seed Maker that generates higher quality seeds: Require additional field called seed quality that has multiplier.</li>
+                    <li>Alchemy Station where one can craft certain items such as generate higher level seeds, high quality fertilizer, etc.</li>
                 </ul>
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
                     <li>Nourish can make plant go above 100% for some stats. Have limits to these stats.</li>
-                    <li>User can plant seeds in locked plots.</li>
                 </ul>
             </div>
         </section>

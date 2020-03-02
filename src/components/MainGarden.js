@@ -78,14 +78,14 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                         let newInteractOptions = [...interactList]
 
                         // If water conditions not met, Water will not be an option within Interact
-                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && userInfo.energy >= energyReq.water) {
+                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && plot.harvest < 100 && userInfo.energy >= energyReq.water) {
                             newInteractOptions = [...newInteractOptions, { value: "water", label: "Water 5⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
 
                         // Nourish requires a seed, 10 energy, and 15 water. It increase the overall stats of the plant by a little and triggers premature growth
-                        if(userInfo.energy >= energyReq.nourish && plot.water >= 15) {
+                        if(userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 15) {
                             newInteractOptions = [...newInteractOptions, { value: "nourish", label: "Nourish 10⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
@@ -120,7 +120,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
-                                        percent={plot.water}
+                                        percent={plot.water >= 100 ? 100 : plot.water}
                                         theme={{
                                             success: {
                                                 symbol: '‍💙',
@@ -162,7 +162,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
-                                        percent={plot.quality}
+                                        percent={plot.quality >= 100 ? 100 : plot.quality}
                                         theme={{
                                             success: {
                                                 symbol: '‍👑',
@@ -243,7 +243,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
-                                        percent={plot.harvest}
+                                        percent={plot.harvest >= 100 ? 100 : plot.harvest}
                                         theme={{
                                             success: {
                                                 symbol: '‍🌻',

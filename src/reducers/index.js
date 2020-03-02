@@ -61,7 +61,7 @@ const initialState = {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed"],
         plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
         interact_list: [
-            {value: "placeholder", label: "Placeholder"},
+            // {value: "", label: ""},
         ],
         energyReq: {
             plant_seed: 5,
