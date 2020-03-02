@@ -14,7 +14,7 @@ const initialState = {
         energy: 200,
         essence: 5000,
         favor: 5,
-        water: 10,
+        water: 2000,
         inventory:
         {
             spring_seed: 3,

@@ -85,15 +85,8 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                         }
 
                         // Nourish requires a seed, 10 energy, and 15 water. It increase the overall stats of the plant by a little and triggers premature growth
-                        if(userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 15) {
+                        if (userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 15) {
                             newInteractOptions = [...newInteractOptions, { value: "nourish", label: "Nourish 10⚡", id: plot.id }]
-                        } else {
-                            newInteractOptions = [...newInteractOptions]
-                        }
-
-                        // Condition for harvest is 100% on harvest of plot
-                        if(plot.harvest >= 100) {
-                            newInteractOptions = [...newInteractOptions, { value: "harvest", label: "Harvest", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
@@ -179,21 +172,21 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                         }}
                                     />
                                 }
- 
-                                {
-                                        (userInfo.energy >= energyReq.plant_seed) ?
 
-                                    (
-                                    plot['plotStatus'] !== "_lock" && 
-                                    plot['plotType'] === "empty_plot") &&
-                                    <Select
-                                        components={makeAnimated()}
-                                        placeholder={"Select Seed"}
-                                        options={seedList}
-                                        onChange={setAvailableSeeds}
-                                        noOptionsMessage={() => "No Seeds Available. Please buy some."}
-                                        autoFocus
-                                    /> : plot['plotType'] === "empty_plot" && <span>Please recover more energy.</span>
+                                {
+                                    (userInfo.energy >= energyReq.plant_seed) ?
+
+                                        (
+                                            plot['plotStatus'] !== "_lock" &&
+                                            plot['plotType'] === "empty_plot") &&
+                                        <Select
+                                            components={makeAnimated()}
+                                            placeholder={"Select Seed"}
+                                            options={seedList}
+                                            onChange={setAvailableSeeds}
+                                            noOptionsMessage={() => "No Seeds Available. Please buy some."}
+                                            autoFocus
+                                        /> : plot['plotType'] === "empty_plot" && <span>Please recover more energy.</span>
 
                                 }
 
@@ -213,7 +206,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
 
                                 {
 
-                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot" && plot.harvest < 100) &&
                                     <Select
                                         components={makeAnimated()}
                                         placeholder={"Interact"}
@@ -225,18 +218,16 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 }
 
                                 {
-                                    console.log("energyLogic energyUser and energyPlanting", userInfo.energy, energyReq.plant_seed)
-                                }
-
-                                {
 
                                     (plantInteraction['id'] === plot.id &&
                                         plantInteraction['value'] !== undefined &&
                                         plot['plotStatus'] !== "_lock" &&
-                                        plot['plotType'] !== "empty_plot") &&
-                                    <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button>
+                                        plot['plotType'] !== "empty_plot" && plot.harvest < 100) ?
+                                    <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
+                                    plot.harvest >= 100 && <span>Ready to Harvest</span>
 
                                 }
+
 
                                 {/* Progress Bar before Harvest */}
                                 {
