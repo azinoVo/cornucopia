@@ -8,7 +8,7 @@ import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import HarvestModal from './HarvestModal';
 
-const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, interactList }) => {
+const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
@@ -26,8 +26,6 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, interactLis
     }, [user])
 
     const plantSeedHandler = (set) => {
-        console.log("props in plantSeed handler", set)
-
         let seed = ""
         let randomNumber = Math.floor((Math.random() * 100) + 1);
         if(randomNumber < 60) {
@@ -52,7 +50,6 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, interactLis
     }
 
     const interactFunction = (set) => {
-        console.log("set within function", set)
         dispatch(interact(set))
 
         setPlantInteraction({})
@@ -256,7 +253,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, interactLis
                                         plot['plotStatus'] !== "_lock" &&
                                         plot['plotType'] !== "empty_plot" && plot.harvest < 100) ?
                                         <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
-                                        plot.harvest >= 100 && <HarvestModal plotInfo={plot} />
+                                        plot.harvest >= 100 && <HarvestModal plotInfo={plot} cropPrices={cropPrices} />
                                 }
 
                                 {/* Progress Bar before Harvest */}
@@ -303,7 +300,8 @@ const mapStateToProps = state => ({
     interactList: state.game.interact_list,
     limits: state.user.limits,
     energyReq: state.game.energyReq,
-    cropList: state.game.cropList
+    cropList: state.game.cropList,
+    cropPrices: state.game.cropPrices
 });
 
 export default connect(mapStateToProps, { plantSeed, interact })(MainGarden);

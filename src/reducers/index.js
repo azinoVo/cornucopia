@@ -36,7 +36,7 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 75},
             { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
             { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
             { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
@@ -80,10 +80,34 @@ const initialState = {
             hanging_plot: 500,
         },
         cropList: {
-            spring_seed: ["carrot", "radish", "potato", "Heart of Spring"],
-            summer_seed: ["corn", "tomato", "okra", "Heart of Summer" ],
-            fall_seed: ["broccoli", "asparagus", "scallions", "Heart of Fall"],
-            winter_seed: ["lettuce", "lettuce", "lettuce", "Heart of Winter"]
+            spring_seed: ["carrot", "radish", "potato", "Heart_of_Spring"],
+            summer_seed: ["corn", "tomato", "okra", "Heart_of_Summer" ],
+            fall_seed: ["broccoli", "asparagus", "scallions", "Heart_of_Fall"],
+            winter_seed: ["lettuce", "lettuce", "lettuce", "Heart_of_Winter"]
+        },
+        cropPrices: {
+            spring_seed: {
+                carrot: 100,
+                radish: 125,
+                potato: 150,
+                Heart_of_Spring: 500 
+            },
+            summer_seed: {
+                corn: 125,
+                tomato: 175,
+                okra: 200,
+                Heart_of_Summer: 750,
+            },
+            fall_seed: {
+                broccoli: 180,
+                asparagus: 200,
+                scallions: 225,
+                Heart_of_Fall: 1000
+            },
+            winter_seed: {
+                lettuce: 200,
+                Heart_of_Winter: 2500
+            }
         },
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
     },
