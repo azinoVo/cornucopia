@@ -101,5 +101,27 @@ export const interact = (actionSet) => dispatch => {
 
 }
 
+export const STORE_CROP = "STORE_CROP";
+
+export const storeCrop = (crop, index) => {
+    console.log("STORE_CROP", crop, index)
+    return {
+        type: STORE_CROP,
+        payload: {crop, index}
+    }
+}
+
+export const SELL_CROP = "SELL_CROP";
+
+export const sellCrop = (crop, index) => {
+    console.log("SELL_CROP", crop, index)
+    return {
+        type: SELL_CROP,
+        payload: {crop, index}
+    }
+}
+
+
+
 
 

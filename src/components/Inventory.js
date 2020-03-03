@@ -4,16 +4,21 @@ import { Table } from 'reactstrap';
 import { Progress } from 'react-sweet-progress';
 import GameLog from './GameLog';
 
-const Inventory = ({ user, prices, limits, main_garden_plot }) => {
+const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
     const [userInfo, setUserInfo] = useState({})
     const [userInventory, setInventory] = useState({})
     const [shopPrices, setPrices] = useState({})
     const [mainGarden, setMainGarden] = useState([])
+    const [cropsList, setCrops] = useState([])
 
 
     useEffect(() => {
         setUserInfo(user)
     }, [user])
+
+    useEffect(() => {
+        setCrops(crops)
+    }, [crops])
 
     useEffect(() => {
         setInventory(user.inventory)
@@ -60,6 +65,16 @@ const Inventory = ({ user, prices, limits, main_garden_plot }) => {
                                 return ""
                             })
                         }
+
+                        {
+                            cropsList.map((crop, index) => {
+                                return <tr className='shop-item' key={`inventoryCrop${index}`}>
+                                    <th>{crop.name}</th>
+                                    <th>{crop.amount}</th>
+                                    <th>{crop.value} Mana Essences</th>
+                                </tr>
+                            })
+                        }
                     </tbody>
                 </Table>
                 <div className='plot-status'>
@@ -103,6 +118,7 @@ const mapStateToProps = state => ({
     prices: state.game.shopPrices,
     main_garden_plot: state.user.main_garden_plot,
     limits: state.user.limits,
+    crops: state.user.crops,
     user: state.user
 });
 

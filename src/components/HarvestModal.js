@@ -2,12 +2,12 @@ import React from "react";
 import Popup from "reactjs-popup";
 import { Table } from 'reactstrap';
 
-export default ({ plotInfo, cropPrices }) => (
+export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => (
     <Popup trigger={<button className="button">Harvest</button>} modal>
         {close => (
             <div className="harvest-modal">
                 <img src={require(`../assets/plants/${plotInfo['plotType']}${plotInfo['plotStatus']}.${plotInfo['fileType']}`)} alt="modal plot" />
-                
+
                 <div className="content">
                     <h2>{plotInfo.product}</h2>
 
@@ -62,6 +62,14 @@ export default ({ plotInfo, cropPrices }) => (
                         className="button"
                         onClick={() => {
                             console.log("store in inventory then close");
+                            storeCropHandler({
+                                name: plotInfo.product, 
+                                amount: 1, 
+                                value: Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100]))
+                            }, plotInfo.id)
                             close();
                         }}
                     >
@@ -72,6 +80,14 @@ export default ({ plotInfo, cropPrices }) => (
                         className="button"
                         onClick={() => {
                             console.log("sell then close");
+                            sellCropHandler({
+                                name: plotInfo.product,
+                                amount: 1, 
+                                value: Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100]))
+                            }, plotInfo.id)
                             close();
                         }}
                     >

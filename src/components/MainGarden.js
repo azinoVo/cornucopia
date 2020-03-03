@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
-import { plantSeed, interact } from '../actions';
+import { plantSeed, interact, storeCrop, sellCrop } from '../actions';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Progress } from 'react-sweet-progress';
@@ -28,7 +28,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
     const plantSeedHandler = (set) => {
         let seed = ""
         let randomNumber = Math.floor((Math.random() * 100) + 1);
-        if(randomNumber < 60) {
+        if (randomNumber < 60) {
             seed = cropList[set.value][0]
 
         } else if (randomNumber > 60 && randomNumber < 80) {
@@ -46,13 +46,21 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
             return seed
         }
 
-        dispatch(plantSeed({...set, product: seed})) 
+        dispatch(plantSeed({ ...set, product: seed }))
     }
 
     const interactFunction = (set) => {
         dispatch(interact(set))
 
         setPlantInteraction({})
+    }
+
+    const storeCropHandler = (crop, index) => {
+        dispatch(storeCrop(crop, index))
+    }
+
+    const sellCropHandler = (crop, index) => {
+        dispatch(sellCrop(crop, index))
     }
 
     return (
@@ -253,7 +261,12 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                         plot['plotStatus'] !== "_lock" &&
                                         plot['plotType'] !== "empty_plot" && plot.harvest < 100) ?
                                         <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
-                                        plot.harvest >= 100 && <HarvestModal plotInfo={plot} cropPrices={cropPrices} />
+                                        plot.harvest >= 100 &&
+                                        <HarvestModal
+                                            plotInfo={plot}
+                                            cropPrices={cropPrices}
+                                            storeCropHandler={storeCropHandler}
+                                            sellCropHandler={sellCropHandler} />
                                 }
 
                                 {/* Progress Bar before Harvest */}
@@ -304,4 +317,4 @@ const mapStateToProps = state => ({
     cropPrices: state.game.cropPrices
 });
 
-export default connect(mapStateToProps, { plantSeed, interact })(MainGarden);
+export default connect(mapStateToProps, { plantSeed, interact, storeCrop, sellCrop })(MainGarden);

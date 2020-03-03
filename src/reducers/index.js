@@ -7,6 +7,8 @@ import {
     INTERACT_WATER,
     INTERACT_NOURISH,
     EXPAND_WATER,
+    STORE_CROP,
+    SELL_CROP
 } from '../actions';
 
 const initialState = {
@@ -26,6 +28,10 @@ const initialState = {
             barnyard_plot: 0,
             hanging_plot: 0
         },
+        crops: [
+            {name: "Test Value", amount: 1, value: 100},
+            {name: "Test Value II", amount: 1, value: 150}
+        ],
         limits: {
             water_limit: 100,
             energy_limit: 200,
@@ -286,6 +292,65 @@ const rootReducer = (state = initialState, action) => {
                 game: {
                     ...state.game,
                     log: [...state.game.log, `User expanded the bucket by 100 units at ${Date(Date.now()).toString()}.`]
+                }
+            }
+
+            case STORE_CROP:
+            console.log("STORE CROP in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    main_garden_plot: state.user.main_garden_plot.map((content, i) => {
+                        return (i === action.payload.index) ? 
+                        { ...content,
+                        product: "", 
+                        plotType: "empty_plot",
+                        plotStatus: "_regular",
+                        fileType: "png", 
+                        water: 0,
+                        quality: 0,
+                        health: 0,
+                        harvest: 0
+                    } : content
+                    }),
+                    crops: [
+                        ...state.user.crops,
+                        action.payload.crop
+                    ]
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User stored ${action.payload.crop.name} worth ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
+                }
+            }
+
+            case SELL_CROP:
+            console.log("SELL CROP in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence + action.payload.crop.value,
+                    favor: state.user.favor + 10,
+                    main_garden_plot: state.user.main_garden_plot.map((content, i) => {
+                        return (i === action.payload.index) ? 
+                        { ...content,
+                        product: "", 
+                        plotType: "empty_plot",
+                        plotStatus: "_regular",
+                        fileType: "png", 
+                        water: 0,
+                        quality: 0,
+                        health: 0,
+                        harvest: 0
+                    } : content
+                    }),
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User sold ${action.payload.crop.name} for ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
                 }
             }
 
