@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Progress } from 'react-sweet-progress';
+import { useDispatch } from 'react-redux';
+import { sellCropInventory } from '../actions';
 import GameLog from './GameLog';
 
 const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
@@ -11,6 +13,8 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
     const [mainGarden, setMainGarden] = useState([])
     const [cropsList, setCrops] = useState([])
 
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         setUserInfo(user)
@@ -50,6 +54,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
                             <th>Item</th>
                             <th>Quantity</th>
                             <th>Value</th>
+                            <th>Sell</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +65,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
                                         <th>{entry[0]}</th>
                                         {<th>{entry[1]}</th>}
                                         <th>{shopPrices[entry[0]]} Mana Essences</th>
+                                        {!entry[0].includes('plot') ? <th><button>Sell</button></th> : <th>Cannot Sell</th>}
                                     </tr>
                                 }
                                 return ""
@@ -72,6 +78,8 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
                                     <th>{crop.name}</th>
                                     <th>{crop.amount}</th>
                                     <th>{crop.value} Mana Essences</th>
+                                    {!crop.name.includes('plot') ? <th><button onClick={() => dispatch(sellCropInventory(crop))}>Sell</button></th> : <th>Cannot Sell</th>}
+  
                                 </tr>
                             })
                         }
@@ -122,5 +130,5 @@ const mapStateToProps = state => ({
     user: state.user
 });
 
-export default connect(mapStateToProps, {})(Inventory);
+export default connect(mapStateToProps, { sellCropInventory })(Inventory);
 

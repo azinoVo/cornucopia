@@ -82,6 +82,7 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => 
                             console.log("sell then close");
                             sellCropHandler({
                                 name: plotInfo.product,
+                                id: Date.now(),
                                 amount: 1, 
                                 value: Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +

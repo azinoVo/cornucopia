@@ -8,7 +8,8 @@ import {
     INTERACT_NOURISH,
     EXPAND_WATER,
     STORE_CROP,
-    SELL_CROP
+    SELL_CROP,
+    SELL_CROP_INVENTORY,
 } from '../actions';
 
 const initialState = {
@@ -28,10 +29,7 @@ const initialState = {
             barnyard_plot: 0,
             hanging_plot: 0
         },
-        crops: [
-            {name: "Test Value", amount: 1, value: 100},
-            {name: "Test Value II", amount: 1, value: 150}
-        ],
+        crops: [],
         limits: {
             water_limit: 100,
             energy_limit: 200,
@@ -316,7 +314,12 @@ const rootReducer = (state = initialState, action) => {
                     }),
                     crops: [
                         ...state.user.crops,
-                        action.payload.crop
+                        {
+                            name: action.payload.crop.name,
+                            id: Date.now(),
+                            amount: 1,
+                            value: action.payload.crop.value
+                        }
                     ]
 
                 },
@@ -351,6 +354,24 @@ const rootReducer = (state = initialState, action) => {
                 game: {
                     ...state.game,
                     log: [...state.game.log, `User sold ${action.payload.crop.name} for ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
+                }
+            }
+
+            case SELL_CROP_INVENTORY:
+            console.log("SELL CROP from inventory in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence + action.payload.value,
+                    favor: state.user.favor + 10,
+                    crops: state.user.crops.filter((content) => {
+                        return (content.id !== action.payload.id)
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User sold ${action.payload.name} for ${action.payload.value} Mana Essences at ${Date(Date.now()).toString()}.`]
                 }
             }
 

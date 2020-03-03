@@ -121,6 +121,16 @@ export const sellCrop = (crop, index) => {
     }
 }
 
+export const SELL_CROP_INVENTORY = "SELL_CROP_INVENT";
+
+export const sellCropInventory = (crop) => {
+    console.log("SELL_CROP_INVENTORY", crop)
+    return {
+        type: SELL_CROP_INVENTORY,
+        payload: crop
+    }
+}
+
 
 
 
