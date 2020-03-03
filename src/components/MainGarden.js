@@ -134,7 +134,17 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
 
                         if (plot) {
                             return <div key={`mainGarden${plot['plotType']}${index}`} className='plot'>
-                                <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
+                                {
+                                    (plot.harvest >= 15 && plot.harvest < 50) &&
+                                    <img src={require(`../assets/plants/${plot['plotType']}_sprout.gif`)} alt="plot" />
+                                        
+                                }
+
+                                {
+                                    (plot.harvest < 15) &&
+                                    <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
+
+                                }
 
                                 {plot['plotStatus'] !== "_lock" && <span>Plot: {plot["plotType"]}</span>}
                                 {

@@ -12,8 +12,8 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
-                    <li>Add Energy as a way to manage user progress.</li>
                     <li>Add way to move to next day - this will progress all plants by certain amount.</li>
+                    <li>Have a property tax that is collected the first or last day of the month as you progress in days. Buy plots sparingly.</li>
                     <li>Seasonal bonuses</li>
                     <li>
                         Update the Main Garden, Orchard, and Hanging Garden to progress: plant, water, nurture, and harvest
@@ -40,8 +40,9 @@ const Home = () => {
 
                 <h2>Design and Quality Assurance Team</h2>
                 <ul>
-                    <li>Alec Castillo</li>
                     <li>D'Michael Watson</li>
+                    <li>Alec Castillo</li>
+                    <li>Will Berlin</li>
                 </ul>
             </div>
         </section>
