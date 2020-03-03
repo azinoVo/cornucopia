@@ -36,12 +36,12 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
-            { id: 1, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
-            { id: 2, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 3, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 4, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 5, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 }],
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 100},
+            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
+            { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
+            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 }],
         orchard_plot: [
             { id: 0, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3 },
             { id: 1, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 },
@@ -78,6 +78,12 @@ const initialState = {
             orchard_plot: 200,
             barnyard_plot: 350,
             hanging_plot: 500,
+        },
+        cropList: {
+            spring_seed: ["carrot", "radish", "potato", "Heart of Spring"],
+            summer_seed: ["corn", "tomato", "okra", "Heart of Summer" ],
+            fall_seed: ["broccoli", "asparagus", "scallions", "Heart of Fall"],
+            winter_seed: ["lettuce", "lettuce", "lettuce", "Heart of Winter"]
         },
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
     },

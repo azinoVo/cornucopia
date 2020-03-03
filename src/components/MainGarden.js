@@ -6,6 +6,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
+import HarvestModal from './HarvestModal';
 
 const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
@@ -223,11 +224,9 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                         plantInteraction['value'] !== undefined &&
                                         plot['plotStatus'] !== "_lock" &&
                                         plot['plotType'] !== "empty_plot" && plot.harvest < 100) ?
-                                    <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
-                                    plot.harvest >= 100 && <span>Ready to Harvest</span>
-
+                                        <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
+                                        plot.harvest >= 100 && <HarvestModal plotInfo={plot} />
                                 }
-
 
                                 {/* Progress Bar before Harvest */}
                                 {

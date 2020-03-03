@@ -189,3 +189,22 @@ thead {
 }
 
 
+/* Harvest Modal Styles */
+
+.harvest-modal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.harvest-modal button {
+  width: 20%;
+  margin: 2.5%;
+}
+
+.harvest-modal img {
+  width: 30%;
+  margin: 0 auto;
+}
+
+
