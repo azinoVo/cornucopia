@@ -7,7 +7,7 @@ export default ({ plotInfo, cropPrices }) => (
         {close => (
             <div className="harvest-modal">
                 <img src={require(`../assets/plants/${plotInfo['plotType']}${plotInfo['plotStatus']}.${plotInfo['fileType']}`)} alt="modal plot" />
-                <h1>Harvest Breakdown</h1>
+                
                 <div className="content">
                     <h2>{plotInfo.product}</h2>
 
