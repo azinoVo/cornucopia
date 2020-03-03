@@ -65,7 +65,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
                                         <th>{entry[0]}</th>
                                         {<th>{entry[1]}</th>}
                                         <th>{shopPrices[entry[0]]} Mana Essences</th>
-                                        {!entry[0].includes('plot') ? <th><button>Sell</button></th> : <th>Cannot Sell</th>}
+                                        {!entry[0].includes('plot') ? <th>Sell within Shop</th> : <th>Cannot Sell</th>}
                                     </tr>
                                 }
                                 return ""

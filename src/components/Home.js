@@ -37,6 +37,12 @@ const Home = () => {
                 <ul>
                     <li>Nourish can make plant go above 100% for some stats. Have limits to these stats.</li>
                 </ul>
+
+                <h2>Design and Quality Assurance Team</h2>
+                <ul>
+                    <li>Alec Castillo</li>
+                    <li>D'Michael Watson</li>
+                </ul>
             </div>
         </section>
     );
