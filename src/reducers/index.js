@@ -36,7 +36,7 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 100},
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
             { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
             { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
             { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
@@ -182,7 +182,7 @@ const rootReducer = (state = initialState, action) => {
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
                     },
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload["index"]) ? { ...content, plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
+                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
                     })
                 },
                 game: {

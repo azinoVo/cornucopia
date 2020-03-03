@@ -8,7 +8,7 @@ import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import HarvestModal from './HarvestModal';
 
-const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
+const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, interactList }) => {
     const [gardenPlot, setGardenPlot] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
@@ -24,6 +24,32 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
     useEffect(() => {
         setUserInfo(user)
     }, [user])
+
+    const plantSeedHandler = (set) => {
+        console.log("props in plantSeed handler", set)
+
+        let seed = ""
+        let randomNumber = Math.floor((Math.random() * 100) + 1);
+        if(randomNumber < 60) {
+            seed = cropList[set.value][0]
+
+        } else if (randomNumber > 60 && randomNumber < 80) {
+            seed = cropList[set.value][1]
+
+
+        } else if (randomNumber > 80 && randomNumber < 95) {
+            seed = cropList[set.value][2]
+
+
+        } else if (randomNumber >= 95) {
+            seed = cropList[set.value][3]
+
+        } else {
+            return seed
+        }
+
+        dispatch(plantSeed({...set, product: seed})) 
+    }
 
     const interactFunction = (set) => {
         console.log("set within function", set)
@@ -134,6 +160,10 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                 }
 
                                 {
+                                    console.log("plot", plot)
+                                }
+
+                                {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
                                         percent={plot.health}
@@ -198,10 +228,11 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, interactList }) => {
                                         availableSeeds['value'] !== undefined &&
                                         plot['plotStatus'] !== "_lock" &&
                                         plot['plotType'] === "empty_plot") &&
-                                    <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button>
-
-
+                                    <button onClick={() => plantSeedHandler(availableSeeds, index)}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button>
                                 }
+
+                                {/* <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button> */}
+
 
                                 {/* Interact with the Seeds */}
 
@@ -271,7 +302,8 @@ const mapStateToProps = state => ({
     user: state.user,
     interactList: state.game.interact_list,
     limits: state.user.limits,
-    energyReq: state.game.energyReq
+    energyReq: state.game.energyReq,
+    cropList: state.game.cropList
 });
 
 export default connect(mapStateToProps, { plantSeed, interact })(MainGarden);
