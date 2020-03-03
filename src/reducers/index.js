@@ -14,16 +14,16 @@ import {
 
 const initialState = {
     user: {
-        energy: 200,
+        energy: 2000,
         essence: 5000,
         favor: 5,
         water: 2000,
         inventory:
         {
-            spring_seed: 3,
-            summer_seed: 1,
-            fall_seed: 0,
-            winter_seed: 0,
+            spring_seed: 2,
+            summer_seed: 2,
+            fall_seed: 2,
+            winter_seed: 2,
             main_garden_plot: 2,
             orchard_plot: 1,
             barnyard_plot: 0,
