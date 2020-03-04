@@ -53,6 +53,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
 
     const interactFunction = (set) => {
         dispatch(interact(set))
+        setPlantInteraction({})
     }
 
     const storeCropHandler = (crop, index) => {
@@ -277,7 +278,8 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                     (plantInteraction['id'] === plot.id &&
                                         plantInteraction['value'] !== undefined &&
                                         plot['plotStatus'] !== "_lock" &&
-                                        plot['plotType'] !== "empty_plot" && plot.harvest < 100) ?
+                                        plot['plotType'] !== "empty_plot" && 
+                                        plot.harvest < 100) ?
                                         <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
                                         plot.harvest >= 100 &&
                                         <HarvestModal
