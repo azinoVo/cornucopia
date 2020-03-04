@@ -7,7 +7,7 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => 
         {close => (
             <div className="harvest-modal">
                 {!plotInfo.product.includes('Heart') ? <img src={require(`../assets/plants/${plotInfo['plotType']}_harvest.gif`)} alt="modal plot" /> :
-                    <span>Special Heart Animations</span>
+                <img src={require(`../assets/plants/${plotInfo['plotType']}_heart.gif`)} alt="modal plot" />
                 }
 
                 <div className="content">
