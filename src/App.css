@@ -38,7 +38,7 @@ footer {
 
 .main-content {
   width: 100%;
-  height: 100vh;
+  height: 85vh;
   background-color: #FAF3EB;
   padding-bottom: 20%;
 }
@@ -196,6 +196,7 @@ thead {
   display: flex;
   flex-direction: column;
   text-align: center;
+  background-color: #FAF3EB;
 }
 
 .harvest-modal button {

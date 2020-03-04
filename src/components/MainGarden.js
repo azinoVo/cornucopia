@@ -47,20 +47,22 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
         }
 
         dispatch(plantSeed({ ...set, product: seed }))
+        setAvailableSeeds({})
+
     }
 
     const interactFunction = (set) => {
         dispatch(interact(set))
-
-        setPlantInteraction({})
     }
 
     const storeCropHandler = (crop, index) => {
         dispatch(storeCrop(crop, index))
+
     }
 
     const sellCropHandler = (crop, index) => {
         dispatch(sellCrop(crop, index))
+
     }
 
     return (
