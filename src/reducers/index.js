@@ -86,7 +86,7 @@ const initialState = {
         cropList: {
             spring_seed: ["Carrot", "Radish", "Potato", "Heart_of_Spring"],
             summer_seed: ["Corn", "Tomato", "Okra", "Heart_of_Summer" ],
-            fall_seed: ["Broccoli", "Asparagus", "Scallions", "Heart_of_Fall"],
+            fall_seed: ["Broccoli", "Asparagus", "Pumpkin", "Heart_of_Fall"],
             winter_seed: ["Lettuce", "Lettuce", "Lettuce", "Heart_of_Winter"]
         },
         cropPrices: {
@@ -105,7 +105,7 @@ const initialState = {
             fall_seed: {
                 Broccoli: 180,
                 Asparagus: 200,
-                Scallions: 225,
+                Pumpkin: 225,
                 Heart_of_Fall: 1000
             },
             winter_seed: {

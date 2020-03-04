@@ -31,6 +31,7 @@ const Home = () => {
                 <ul>
                     <li>Seed Maker that generates higher quality seeds: Require additional field called seed quality that has multiplier.</li>
                     <li>Alchemy Station where one can craft certain items such as generate higher level seeds, high quality fertilizer, etc.</li>
+                    <li>Starting a new day will automatically save the game if the user has created an account.</li>
                 </ul>
 
                 <h2>Known Bugs to Fix</h2>

@@ -6,7 +6,9 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => 
     <Popup trigger={<button className="button">Harvest</button>} modal>
         {close => (
             <div className="harvest-modal">
-                <img src={require(`../assets/plants/${plotInfo['plotType']}${plotInfo['plotStatus']}.${plotInfo['fileType']}`)} alt="modal plot" />
+                {!plotInfo.product.includes('Heart') ? <img src={require(`../assets/plants/${plotInfo['plotType']}_harvest.gif`)} alt="modal plot" /> :
+                    <span>Special Heart Animations</span>
+                }
 
                 <div className="content">
                     <h2>{plotInfo.product}</h2>
