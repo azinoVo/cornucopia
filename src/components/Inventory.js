@@ -6,12 +6,15 @@ import { useDispatch } from 'react-redux';
 import { sellCropInventory } from '../actions';
 import GameLog from './GameLog';
 
-const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
+const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops }) => {
     const [userInfo, setUserInfo] = useState({})
     const [userInventory, setInventory] = useState({})
     const [shopPrices, setPrices] = useState({})
     const [mainGarden, setMainGarden] = useState([])
+    const [orchardPlots, setOrchardPlots] = useState([])
     const [cropsList, setCrops] = useState([])
+
+    
 
 
     const dispatch = useDispatch()
@@ -35,6 +38,10 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
     useEffect(() => {
         setMainGarden(main_garden_plot)
     }, [main_garden_plot])
+
+    useEffect(() => {
+        setOrchardPlots(orchard_plot)
+    }, [orchard_plot])
 
     return (
         <section className='main-content'>
@@ -116,6 +123,39 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
                         })
                     }
                 </div>
+
+                <div className='plot-status'>
+                    <h2 className='tab-header'>Orchard Progress</h2>
+                    {
+                        orchardPlots.map((plot, index) => {
+                            return <div style={{"padding": "0.3% 0"}} key={`mainProgress${index}`}>
+                                <span style={{"paddingRight": "0.5%"}}>Plot # {index}</span>
+                                {
+                                    (plot.plotType !== "empty_plot.png" && plot.plotType !== "empty_plot_lock.png") ?
+                                    <Progress
+                                        percent={plot.harvest >= 100 ? 100 : plot.harvest}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍🌸',
+                                                color: '#0F9200'
+                                            },
+                                            active: {
+                                                symbol: '🌳',
+                                                color: '#30CB00'
+                                            },
+                                            default: {
+                                                symbol: '🌱',
+                                                color: '#4AE54A'
+                                            }
+                                        }}
+                                    /> : <span> Please purchase the plot and plant a seed to track progress.</span>
+                                }
+
+                            </div>
+                        })
+                    }
+                </div>
+
                 <GameLog />
             </div>
         </section>
@@ -127,7 +167,8 @@ const mapStateToProps = state => ({
     main_garden_plot: state.user.main_garden_plot,
     limits: state.user.limits,
     crops: state.user.crops,
-    user: state.user
+    user: state.user,
+    orchard_plot: state.user.orchard_plot
 });
 
 export default connect(mapStateToProps, { sellCropInventory })(Inventory);

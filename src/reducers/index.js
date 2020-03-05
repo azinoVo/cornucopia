@@ -73,7 +73,7 @@ const initialState = {
         ],
         energyReq: {
             plant_seed: 5,
-            plant_sapling: 10,
+            plant_sapling: 25,
             water: 5,
             fertilize: 10,
             nourish: 10
