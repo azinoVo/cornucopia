@@ -34,10 +34,8 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
         } else if (randomNumber > 60 && randomNumber < 80) {
             seed = cropList[set.value][1]
 
-
         } else if (randomNumber > 80 && randomNumber < 95) {
             seed = cropList[set.value][2]
-
 
         } else if (randomNumber >= 95) {
             seed = cropList[set.value][3]
@@ -69,7 +67,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Main Garden</h1>
-            <div className='mainGarden-status'>
+            <div className='reuseGarden-status'>
                 <div>Energy: {Math.floor([userInfo.energy / limits.energy_limit] * 100)}%</div>
                 <Progress
                     percent={Math.floor([userInfo.energy / limits.energy_limit] * 100)}
@@ -128,7 +126,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
 
                         // Filters the seed List from inventory for ones that are above 1
                         const seedList = Object.entries(user.inventory).map(entry => {
-                            if (!entry[0].includes("plot") && entry[1] >= 1) {
+                            if (entry[0].includes("seed") && entry[1] >= 1) {
                                 return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`, id: plot.id }
                             } else {
                                 return ""
@@ -190,7 +188,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
-                                        percent={plot.health}
+                                        percent={plot.health >= 100 ? 100 : plot.health}
                                         theme={{
                                             success: {
                                                 symbol: '‍💚',
@@ -226,6 +224,29 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                             }
                                         }}
                                     />
+                                }
+
+                                {
+
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    <Progress
+                                        percent={plot.harvest >= 100 ? 100 : plot.harvest}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍🌻',
+                                                color: '#0F9200'
+                                            },
+                                            active: {
+                                                symbol: '🌱',
+                                                color: '#30CB00'
+                                            },
+                                            default: {
+                                                symbol: '🌰',
+                                                color: '#4AE54A'
+                                            }
+                                        }}
+                                    />
+
                                 }
 
                                 {
@@ -278,7 +299,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                     (plantInteraction['id'] === plot.id &&
                                         plantInteraction['value'] !== undefined &&
                                         plot['plotStatus'] !== "_lock" &&
-                                        plot['plotType'] !== "empty_plot" && 
+                                        plot['plotType'] !== "empty_plot" &&
                                         plot.harvest < 100) ?
                                         <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
                                         plot.harvest >= 100 &&
@@ -287,30 +308,6 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                             cropPrices={cropPrices}
                                             storeCropHandler={storeCropHandler}
                                             sellCropHandler={sellCropHandler} />
-                                }
-
-                                {/* Progress Bar before Harvest */}
-                                {
-
-                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot" && plot.harvest < 100) &&
-                                    <Progress
-                                        percent={plot.harvest >= 100 ? 100 : plot.harvest}
-                                        theme={{
-                                            success: {
-                                                symbol: '‍🌻',
-                                                color: '#0F9200'
-                                            },
-                                            active: {
-                                                symbol: '🌱',
-                                                color: '#30CB00'
-                                            },
-                                            default: {
-                                                symbol: '🌰',
-                                                color: '#4AE54A'
-                                            }
-                                        }}
-                                    />
-
                                 }
 
                             </div>

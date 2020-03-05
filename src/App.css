@@ -158,12 +158,12 @@ thead {
 
 /* main Garden CSS */
 
-.mainGarden-status {
+.reuseGarden-status, .orchard-status {
   text-align: center;
   padding-top: 1%;
 }
 
-.mainGarden-status .react-sweet-progress {
+.reuseGarden-status .react-sweet-progress {
   margin: 0 auto !important;
 }
 
@@ -176,7 +176,7 @@ thead {
   display: inline-flex  !important;
 }
 
-.mainGarden-status .react-sweet-progress-line-inner {
+.reuseGarden-status .react-sweet-progress-line-inner {
   max-width: 100% !important;
 }
 

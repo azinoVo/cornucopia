@@ -24,6 +24,7 @@ const initialState = {
             summer_seed: 2,
             fall_seed: 2,
             winter_seed: 2,
+            tree_sapling: 1,
             main_garden_plot: 2,
             orchard_plot: 1,
             barnyard_plot: 0,
@@ -47,12 +48,12 @@ const initialState = {
             { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
             { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 }],
         orchard_plot: [
-            { id: 0, plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3 },
-            { id: 1, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 },
-            { id: 2, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 },
-            { id: 3, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 10, quality: 11, health: 12 },
-            { id: 4, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 13, quality: 14, health: 15 },
-            { id: 5, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18 }],
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3, harvest: 0 },
+            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6, harvest: 0 },
+            { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9, harvest: 0 },
+            { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 10, quality: 11, health: 12, harvest: 0 },
+            { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 13, quality: 14, health: 15, harvest: 0 },
+            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18, harvest: 0 }],
         barnyard_plot: [
             { id: 0, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
             { id: 1, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 }],
@@ -62,7 +63,7 @@ const initialState = {
             { id: 2, pen: false,  plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 }]
     },
     game: {
-        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed"],
+        shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "tree_sapling"],
         plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
         interact_list: [
             // {value: "", label: ""},
@@ -78,6 +79,7 @@ const initialState = {
             summer_seed: 25,
             fall_seed: 30,
             winter_seed: 35,
+            tree_sapling: 200,
             main_garden_plot: 100,
             orchard_plot: 200,
             barnyard_plot: 350,
