@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 
-const Orchard = ({ orchard, user, limits, interactList, energyReq }) => {
+const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cropPrices }) => {
     const [orchardPlot, setOrchard] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
 
+
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -21,6 +24,35 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq }) => {
     useEffect(() => {
         setUserInfo(user)
     }, [user])
+
+    const plantSeedHandler = (set) => {
+
+        let sapling = ""
+        let randomNumber = Math.floor((Math.random() * 10) + 1);
+        if (randomNumber <= 4) {
+            sapling = cropList['trees'][0]
+
+        } else if (randomNumber > 4 && randomNumber <= 6) {
+            sapling = cropList['trees'][1]
+
+        } else if (randomNumber > 6 && randomNumber < 8) {
+            sapling = cropList['trees'][2]
+
+        } else if (randomNumber >= 8 && randomNumber < 9) {
+            sapling = cropList['trees'][3]
+
+        } else if (randomNumber >= 9) {
+            sapling = cropList['trees'][4]
+
+        } else {
+            return sapling
+        }
+
+        console.log(set, randomNumber, sapling)
+
+        setAvailableSeeds({})
+
+    }
 
     return (
         <section className='main-content'>
@@ -194,6 +226,15 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq }) => {
 
                                 }
 
+                                {
+                                    (
+                                        availableSeeds['id'] === plot.id &&
+                                        availableSeeds['value'] !== undefined &&
+                                        plot['plotStatus'] !== "_lock" &&
+                                        plot['plotType'] === "empty_plot") &&
+                                    <button onClick={() => plantSeedHandler(availableSeeds, index)}>Plant uses <span role='img' aria-label='energyReqWater'>25⚡</span></button>
+                                }
+
                             </div>
                         } else {
                             return <div className='plot'>
@@ -213,6 +254,8 @@ const mapStateToProps = state => ({
     limits: state.user.limits,
     interactList: state.game.interact_list,
     energyReq: state.game.energyReq,
+    cropList: state.game.cropList,
+    cropPrices: state.game.cropPrices
 
 });
 

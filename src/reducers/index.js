@@ -90,7 +90,8 @@ const initialState = {
             spring_seed: ["Carrot", "Radish", "Potato", "Heart_of_Spring"],
             summer_seed: ["Corn", "Tomato", "Okra", "Heart_of_Summer" ],
             fall_seed: ["Broccoli", "Asparagus", "Pumpkin", "Heart_of_Fall"],
-            winter_seed: ["Lettuce", "Lettuce", "Lettuce", "Heart_of_Winter"]
+            winter_seed: ["Lettuce", "Lettuce", "Lettuce", "Heart_of_Winter"],
+            trees: ["Apple", "Cherry", "Coconut", "Plum", "Essence of the One"]
         },
         cropPrices: {
             spring_seed: {
