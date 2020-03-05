@@ -292,7 +292,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                 {/* Progress Bar before Harvest */}
                                 {
 
-                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot" && plot.harvest < 100) &&
                                     <Progress
                                         percent={plot.harvest >= 100 ? 100 : plot.harvest}
                                         theme={{

@@ -94,7 +94,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, crops }) => {
                                 {
                                     (plot.plotType !== "empty_plot.png" && plot.plotType !== "empty_plot_lock.png") ?
                                     <Progress
-                                        percent={plot.harvest}
+                                        percent={plot.harvest >= 100 ? 100 : plot.harvest}
                                         theme={{
                                             success: {
                                                 symbol: '‍🌻',
