@@ -10,6 +10,7 @@ import {
     STORE_CROP,
     SELL_CROP,
     SELL_CROP_INVENTORY,
+    PLANT_SAPLING,
 } from '../actions';
 
 const initialState = {
@@ -378,6 +379,27 @@ const rootReducer = (state = initialState, action) => {
                     log: [...state.game.log, `User sold ${action.payload.name} for ${action.payload.value} Mana Essences at ${Date(Date.now()).toString()}.`]
                 }
             }
+
+            case PLANT_SAPLING:
+            console.log("Plant sapling in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy - state.game.energyReq.plant_sapling,
+                    inventory: {
+                        ...state.user.inventory,
+                        [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
+                    },
+                    orchard_plot: state.user.main_garden_plot.map((content, i) => {
+                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User planted ${action.payload["value"]} within plot ${action.payload["index"]} at ${Date(Date.now()).toString()}.`]
+                }
+            };
 
         default:
             return state;

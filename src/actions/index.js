@@ -77,6 +77,16 @@ export const plantSeed = (seedSet) => {
     }
 }
 
+export const PLANT_SAPLING = "PLANT_SAPLING";
+
+export const plantSapling = (seedSet) => {
+    console.log("planting sapling", seedSet)
+    return {
+        type: PLANT_SAPLING,
+        payload: {...seedSet}
+    }
+}
+
 export const EXPAND_WATER = "EXPAND_WATER";
 
 export const expandWater = () => {

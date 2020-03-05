@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { plantSapling } from '../actions';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import Select from 'react-select';
@@ -49,7 +50,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
         }
 
         console.log(set, randomNumber, sapling)
-
+        dispatch(plantSapling({ ...set, product: sapling }))
         setAvailableSeeds({})
 
     }
