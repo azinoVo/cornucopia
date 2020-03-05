@@ -99,7 +99,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                             return <div style={{"padding": "0.3% 0"}} key={`mainProgress${index}`}>
                                 <span style={{"paddingRight": "0.5%"}}>Plot # {index}</span>
                                 {
-                                    (plot.plotType !== "empty_plot.png" && plot.plotType !== "empty_plot_lock.png") ?
+                                    (plot.plotType !== "empty_plot.png" && plot.plotStatus !== "_lock") ?
                                     <Progress
                                         percent={plot.harvest >= 100 ? 100 : plot.harvest}
                                         theme={{
@@ -131,7 +131,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                             return <div style={{"padding": "0.3% 0"}} key={`mainProgress${index}`}>
                                 <span style={{"paddingRight": "0.5%"}}>Plot # {index}</span>
                                 {
-                                    (plot.plotType !== "empty_plot.png" && plot.plotType !== "empty_plot_lock.png") ?
+                                    (plot.plotType !== "empty_plot.png" && plot.plotStatus !== "_lock") ?
                                     <Progress
                                         percent={plot.harvest >= 100 ? 100 : plot.harvest}
                                         theme={{
@@ -148,7 +148,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                                                 color: '#4AE54A'
                                             }
                                         }}
-                                    /> : <span> Please purchase the plot and plant a seed to track progress.</span>
+                                    /> : <span> Please purchase the plot and plant a sapling to track progress.</span>
                                 }
 
                             </div>
