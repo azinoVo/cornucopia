@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { plantSapling } from '../actions';
+import { plantSapling, interactOrchard } from '../actions';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import Select from 'react-select';
@@ -12,6 +12,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
     const [orchardPlot, setOrchard] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
+    const [plantInteraction, setPlantInteraction] = useState({})
 
 
     const dispatch = useDispatch()
@@ -25,6 +26,11 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
     useEffect(() => {
         setUserInfo(user)
     }, [user])
+
+    const interactFunction = (set) => {
+        dispatch(interactOrchard(set))
+        setPlantInteraction({})
+    }
 
     const plantSeedHandler = (set) => {
 
@@ -107,7 +113,13 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                             newInteractOptions = [...newInteractOptions]
                         }
 
-                        const seedList = Object.entries(user.inventory).map(entry => {
+                        if (userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 35) {
+                            newInteractOptions = [...newInteractOptions, { value: "nourish", label: "Nourish 10⚡", id: plot.id }]
+                        } else {
+                            newInteractOptions = [...newInteractOptions]
+                        }
+
+                        const saplingList = Object.entries(user.inventory).map(entry => {
                             if (entry[0].includes("sapling") && entry[1] >= 1) {
                                 return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`, id: plot.id }
                             } else {
@@ -194,15 +206,15 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                         percent={plot.harvest >= 100 ? 100 : plot.harvest}
                                         theme={{
                                             success: {
-                                                symbol: '‍🌻',
+                                                symbol: '‍🌸',
                                                 color: '#0F9200'
                                             },
                                             active: {
-                                                symbol: '🌱',
+                                                symbol: '🌳',
                                                 color: '#30CB00'
                                             },
                                             default: {
-                                                symbol: '🌰',
+                                                symbol: '🌱',
                                                 color: '#4AE54A'
                                             }
                                         }}
@@ -219,7 +231,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                         <Select
                                             components={makeAnimated()}
                                             placeholder={"Select Seed"}
-                                            options={seedList}
+                                            options={saplingList}
                                             onChange={setAvailableSeeds}
                                             noOptionsMessage={() => "No Seeds Available. Please buy some."}
                                             autoFocus
@@ -234,6 +246,31 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                         plot['plotStatus'] !== "_lock" &&
                                         plot['plotType'] === "empty_plot") &&
                                     <button onClick={() => plantSeedHandler(availableSeeds, index)}>Plant uses <span role='img' aria-label='energyReqWater'>25⚡</span></button>
+                                }
+
+                                {
+
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot" && plot.harvest < 100) &&
+                                    <Select
+                                        components={makeAnimated()}
+                                        placeholder={"Interact"}
+                                        options={newInteractOptions}
+                                        onChange={setPlantInteraction}
+                                        autoFocus
+
+                                    />
+                                }
+
+                                {
+
+                                    (plantInteraction['id'] === plot.id &&
+                                        plantInteraction['value'] !== undefined &&
+                                        plot['plotStatus'] !== "_lock" &&
+                                        plot['plotType'] !== "empty_plot" &&
+                                        plot.harvest < 100) ?
+                                        <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
+                                        plot.harvest >= 100 &&
+                                        <span>Harvest Button Here</span>
                                 }
 
                             </div>

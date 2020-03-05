@@ -11,6 +11,8 @@ import {
     SELL_CROP,
     SELL_CROP_INVENTORY,
     PLANT_SAPLING,
+    INTERACT_WATER_ORCHARD,
+    INTERACT_NOURISH_ORCHARD,
 } from '../actions';
 
 const initialState = {
@@ -391,15 +393,68 @@ const rootReducer = (state = initialState, action) => {
                         ...state.user.inventory,
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
                     },
-                    orchard_plot: state.user.main_garden_plot.map((content, i) => {
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
                         return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
                     })
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User planted ${action.payload["value"]} within plot ${action.payload["index"]} at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User planted ${action.payload["value"]} within plot #${action.payload["id"]+1} at ${Date(Date.now()).toString()}.`]
                 }
             };
+
+            case INTERACT_WATER_ORCHARD:
+            console.log("INTERACT water ORCHARD in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy - 5,
+                    water: state.user.water - [100 - action.payload.plot.water],
+                    favor: state.user.favor + parseInt([100-action.payload.plot.water]*0.065),
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
+                        return (i === action.payload.plot.id) ? 
+                        { ...content, 
+                        // plotType: `${action.payload.plot.plotType}`,
+                        // plotStatus: "_watered",
+                        // fileType: "gif", 
+                        water: 100,
+                        quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
+                        health: state.user.orchard_plot[action.payload.plot.id].health + 2,
+                        harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 3
+                    } : content
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User watered plot #${[action.payload.plot.id+1]} in Orchard by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
+                }
+            };
+
+            case INTERACT_NOURISH_ORCHARD:
+                console.log("INTERACT nourish ORCHARD in reducer", action.payload)
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        energy: state.user.energy - 10,
+                        favor: state.user.favor + 10,
+                        orchard_plot: state.user.orchard_plot.map((content, i) => {
+                            return (i === action.payload.plot.id) ? 
+                            { ...content, 
+                            water: state.user.orchard_plot[action.payload.plot.id].water - 35,
+                            quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
+                            health: state.user.orchard_plot[action.payload.plot.id].health + 2,
+                            harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 6
+                        } : content
+                        })
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `User nourished plot #${[action.payload.plot.id+1]} in Orchard at ${Date(Date.now()).toString()}.`]
+                    }
+    
+                };
 
         default:
             return state;

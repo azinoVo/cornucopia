@@ -111,6 +111,22 @@ export const interact = (actionSet) => dispatch => {
 
 }
 
+export const INTERACT_WATER_ORCHARD = "INTERACT_WATER_ORCHARD";
+export const INTERACT_NOURISH_ORCHARD = "INTERACT_NOURISH_ORCHARD";
+
+export const interactOrchard = (actionSet) => dispatch => {
+    console.log("interact in actions ORCHARD", actionSet)
+
+    if(actionSet['value'] === "water") {
+        dispatch({ type: INTERACT_WATER_ORCHARD, payload: actionSet })
+    } else if(actionSet['value'] === "nourish") {
+        dispatch({ type: INTERACT_NOURISH_ORCHARD, payload: actionSet })
+    }
+
+}
+
+
+
 export const STORE_CROP = "STORE_CROP";
 
 export const storeCrop = (crop, index) => {
