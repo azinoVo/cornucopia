@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Progress } from 'react-sweet-progress';
+import "react-sweet-progress/lib/style.css";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
-const Orchard = ({ orchard, user, limits }) => {
+
+const Orchard = ({ orchard, user, limits, interactList, energyReq }) => {
     const [orchardPlot, setOrchard] = useState([])
     const [userInfo, setUserInfo] = useState({})
+    const [availableSeeds, setAvailableSeeds] = useState({})
+
 
 
     useEffect(() => {
@@ -59,11 +65,135 @@ const Orchard = ({ orchard, user, limits }) => {
             <div className='orchard'>
                 {
                     orchardPlot.map((plot, index) => {
+                        let newInteractOptions = [...interactList]
+
+                        // If water conditions not met, Water will not be an option within Interact
+                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && plot.harvest < 100 && userInfo.energy >= energyReq.water) {
+                            newInteractOptions = [...newInteractOptions, { value: "water", label: "Water 5⚡", id: plot.id }]
+                        } else {
+                            newInteractOptions = [...newInteractOptions]
+                        }
+
+                        const seedList = Object.entries(user.inventory).map(entry => {
+                            if (entry[0].includes("sapling") && entry[1] >= 1) {
+                                return { value: entry[0], label: `${entry[0]}: ${entry[1]} in inventory`, id: plot.id }
+                            } else {
+                                return ""
+                            }
+                        }).filter(item => item !== "")
+
                         if (plot) {
                             return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
-                                <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
-                                {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"]}</span>}
-                                {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
+                                <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="orchard plot" />
+                                {plot['plotStatus'] !== "_lock" && <span>Plot: {plot["plotType"]}</span>}
+                                {
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>
+                                }
+
+                                {
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    <Progress
+                                        percent={plot.water >= 100 ? 100 : plot.water}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍💙',
+                                                color: '#009DFF'
+                                            },
+                                            active: {
+                                                symbol: '💧',
+                                                color: '#59BFFF'
+                                            },
+                                            default: {
+                                                symbol: '🐪',
+                                                color: '#BFE6FF'
+                                            }
+                                        }}
+
+                                    />
+                                }
+
+                                {
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    <Progress
+                                        percent={plot.health >= 100 ? 100 : plot.health}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍💚',
+                                                color: '#16C60C'
+                                            },
+                                            active: {
+                                                symbol: '💛',
+                                                color: '#FCE100'
+                                            },
+                                            default: {
+                                                symbol: '💔',
+                                                color: '#E81224'
+                                            }
+                                        }} />
+                                }
+
+                                {
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    <Progress
+                                        percent={plot.quality >= 100 ? 100 : plot.quality}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍👑',
+                                                color: '#F8BA00'
+                                            },
+                                            active: {
+                                                symbol: '💰',
+                                                color: '#F8D670'
+                                            },
+                                            default: {
+                                                symbol: '💩',
+                                                color: '#FFFFFF'
+                                            }
+                                        }}
+                                    />
+                                }
+
+                                {
+
+                                    (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
+                                    <Progress
+                                        percent={plot.harvest >= 100 ? 100 : plot.harvest}
+                                        theme={{
+                                            success: {
+                                                symbol: '‍🌻',
+                                                color: '#0F9200'
+                                            },
+                                            active: {
+                                                symbol: '🌱',
+                                                color: '#30CB00'
+                                            },
+                                            default: {
+                                                symbol: '🌰',
+                                                color: '#4AE54A'
+                                            }
+                                        }}
+                                    />
+
+                                }
+
+                                {
+                                    (userInfo.energy >= energyReq.plant_sapling) ?
+
+                                        (
+                                            plot['plotStatus'] !== "_lock" &&
+                                            plot['plotType'] === "empty_plot") &&
+                                        <Select
+                                            components={makeAnimated()}
+                                            placeholder={"Select Seed"}
+                                            options={seedList}
+                                            onChange={setAvailableSeeds}
+                                            noOptionsMessage={() => "No Seeds Available. Please buy some."}
+                                            autoFocus
+                                        /> : plot['plotType'] === "empty_plot" && <span>Please recover more energy.</span>
+
+                                }
+
                             </div>
                         } else {
                             return <div className='plot'>
@@ -81,6 +211,8 @@ const mapStateToProps = state => ({
     orchard: state.user.orchard_plot,
     user: state.user,
     limits: state.user.limits,
+    interactList: state.game.interact_list,
+    energyReq: state.game.energyReq,
 
 });
 

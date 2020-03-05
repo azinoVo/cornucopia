@@ -182,10 +182,6 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                 }
 
                                 {
-                                    console.log("plot", plot)
-                                }
-
-                                {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <Progress
                                         percent={plot.health >= 100 ? 100 : plot.health}
@@ -275,9 +271,6 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                         plot['plotType'] === "empty_plot") &&
                                     <button onClick={() => plantSeedHandler(availableSeeds, index)}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button>
                                 }
-
-                                {/* <button onClick={() => dispatch(plantSeed(availableSeeds, index))}>Plant uses <span role='img' aria-label='energyReqWater'>5 ⚡</span></button> */}
-
 
                                 {/* Interact with the Seeds */}
 
