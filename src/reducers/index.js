@@ -14,7 +14,9 @@ import {
     INTERACT_WATER_ORCHARD,
     INTERACT_NOURISH_ORCHARD,
     STORE_CROP_ORCHARD,
-    SELL_CROP_ORCHARD
+    SELL_CROP_ORCHARD,
+    INTERACT_CLEAR_ORCHARD,
+    INTERACT_REPLENISH_ORCHARD
 } from '../actions';
 
 const initialState = {
@@ -53,12 +55,12 @@ const initialState = {
             { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
             { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 }],
         orchard_plot: [
-            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3, harvest: 0 },
-            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6, harvest: 0 },
-            { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9, harvest: 0 },
-            { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 10, quality: 11, health: 12, harvest: 0 },
-            { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 13, quality: 14, health: 15, harvest: 0 },
-            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18, harvest: 0 }],
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3, harvest: 0, reHarvest: 5 },
+            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6, harvest: 0, reHarvest: 5 },
+            { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9, harvest: 0, reHarvest: 5 },
+            { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 10, quality: 11, health: 12, harvest: 0, reHarvest: 5 },
+            { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 13, quality: 14, health: 15, harvest: 0, reHarvest: 5 },
+            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18, harvest: 0, reHarvest: 5 }],
         barnyard_plot: [
             { id: 0, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
             { id: 1, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 }],
@@ -78,7 +80,9 @@ const initialState = {
             plant_sapling: 25,
             water: 5,
             fertilize: 10,
-            nourish: 10
+            nourish: 10,
+            clear: 50,
+            replenish: 100,
         },
         shopPrices: {
             spring_seed: 20,
@@ -471,6 +475,55 @@ const rootReducer = (state = initialState, action) => {
 
             };
 
+            case INTERACT_CLEAR_ORCHARD:
+            console.log("INTERACT clear ORCHARD in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy - state.game.energyReq.clear,
+                    favor: state.user.favor + 5,
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
+                        return (i === action.payload.plot.id) ?
+                            {
+                                ...content,
+                                plotType: "empty_plot",
+                                plotStatus: "regular",
+                                fileType: "png",
+                                water: 0,
+                                quality: 0,
+                                health: 0,
+                                harvest: 0
+                            } : content
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User cleared plot #${[action.payload.plot.id + 1]} in Orchard at ${Date(Date.now()).toString()}.`]
+                }
+
+            };
+
+            case INTERACT_REPLENISH_ORCHARD:
+            console.log("STORE REPLENISH ORCHARD in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
+                        return (i === action.payload.index) ?
+                            {
+                                ...content,
+                                reHarvest: state.user.orchard_plot[action.payload.index].reHarvest + 2
+                            } : content
+                    }),
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User replenished plot #${action.payload.index} by 2 at ${Date(Date.now()).toString()}.`]
+                }
+            };
+
         case STORE_CROP_ORCHARD:
             console.log("STORE CROP ORCHARD in reducer", action.payload)
             return {
@@ -527,7 +580,7 @@ const rootReducer = (state = initialState, action) => {
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User stored ${action.payload.crop.name} worth ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User sold ${action.payload.crop.name} worth ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
                 }
             };
 

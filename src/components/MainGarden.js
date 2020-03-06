@@ -153,7 +153,11 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
 
                                 }
 
-                                {(plot['plotStatus'] !== "_lock" && plot.harvest < 100) ? <span>Plot: {plot["plotType"]}</span> : <span>Plot: {plot['product']}</span>}
+                                {
+                                    (plot['plotStatus'] !== "_lock" && plot.harvest < 100) ?
+                                        <span>Plot: {plot["plotType"]}</span> :
+                                        plot['plotStatus'] !== "_lock" && <span>Plot: {plot['product']}</span>
+                                }
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>

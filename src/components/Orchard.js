@@ -117,14 +117,26 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                         let newInteractOptions = [...interactList]
 
                         // If water conditions not met, Water will not be an option within Interact
-                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && plot.harvest < 100 && userInfo.energy >= energyReq.water) {
+                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && plot.harvest < 100 && userInfo.energy >= energyReq.water && userInfo.reHarvest !== 0) {
                             newInteractOptions = [...newInteractOptions, { value: "water", label: "Water 5⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
 
-                        if (userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 35) {
+                        if (userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 35 && userInfo.reHarvest !== 0) {
                             newInteractOptions = [...newInteractOptions, { value: "nourish", label: "Nourish 10⚡", id: plot.id }]
+                        } else {
+                            newInteractOptions = [...newInteractOptions]
+                        }
+
+                        if (userInfo.reHarvest === 0 && userInfo.energy >= energyReq.clear) {
+                            newInteractOptions = [...newInteractOptions, { value: "clear", label: "Clear Plot 50⚡", id: plot.id }]
+                        } else {
+                            newInteractOptions = [...newInteractOptions]
+                        }
+
+                        if (userInfo.reHarvest === 0 && userInfo.energy >= energyReq.replenish) {
+                            newInteractOptions = [...newInteractOptions, { value: "replenish", label: "Replenish Plot 100⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
@@ -140,9 +152,9 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                         let numberHarvested = 0
                         let randomHarvested = Math.floor((Math.random() * 100) + 1);
 
-                        if(randomHarvested > 0 && randomHarvested <= 90) {
+                        if (randomHarvested > 0 && randomHarvested <= 90) {
                             numberHarvested = 1
-                        } else if(randomHarvested > 90 && randomHarvested <= 99) {
+                        } else if (randomHarvested > 90 && randomHarvested <= 99) {
                             numberHarvested = 2
                         } else if (randomHarvested > 99) {
                             numberHarvested = 3
@@ -155,7 +167,12 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                         if (plot) {
                             return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
                                 <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="orchard plot" />
-                                {(plot['plotStatus'] !== "_lock" && plot.harvest < 100) ? <span>Plot: {plot["plotType"]}</span> : <span>Plot: {plot['product']}</span>}
+                                {
+                                    (plot['plotStatus'] !== "_lock" && plot.harvest < 100 && plot.reHarvest === 5) ?
+                                        <span>Plot: {plot["plotType"]}</span> :
+                                        plot['plotStatus'] !== "_lock" && <span>Plot: {plot['product']}</span>
+                                }
+
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>
