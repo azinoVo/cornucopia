@@ -46,10 +46,10 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
         } else if (randomNumber > 6 && randomNumber < 8) {
             sapling = cropList['tree_sapling'][2]
 
-        } else if (randomNumber >= 8 && randomNumber < 9) {
+        } else if (randomNumber >= 8 && randomNumber <= 9) {
             sapling = cropList['tree_sapling'][3]
 
-        } else if (randomNumber >= 9) {
+        } else if (randomNumber > 9) {
             sapling = cropList['tree_sapling'][4]
 
         } else {
