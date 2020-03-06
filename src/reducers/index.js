@@ -13,6 +13,8 @@ import {
     PLANT_SAPLING,
     INTERACT_WATER_ORCHARD,
     INTERACT_NOURISH_ORCHARD,
+    STORE_CROP_ORCHARD,
+    SELL_CROP_ORCHARD
 } from '../actions';
 
 const initialState = {
@@ -44,8 +46,8 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0},
-            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0},
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
+            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
             { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
             { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
             { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
@@ -63,7 +65,7 @@ const initialState = {
         hanging_plot: [
             { id: 0, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
             { id: 1, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 },
-            { id: 2, pen: false,  plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 }]
+            { id: 2, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 }]
     },
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "tree_sapling"],
@@ -91,7 +93,7 @@ const initialState = {
         },
         cropList: {
             spring_seed: ["Carrot", "Radish", "Potato", "Heart_of_Spring"],
-            summer_seed: ["Corn", "Tomato", "Okra", "Heart_of_Summer" ],
+            summer_seed: ["Corn", "Tomato", "Okra", "Heart_of_Summer"],
             fall_seed: ["Broccoli", "Asparagus", "Pumpkin", "Heart_of_Fall"],
             winter_seed: ["Lettuce", "Lettuce", "Lettuce", "Heart_of_Winter"],
             tree_sapling: ["Apple", "Cherry", "Coconut", "Plum", "Essence_of_the_One"]
@@ -101,7 +103,7 @@ const initialState = {
                 Carrot: 100,
                 Radish: 125,
                 Potato: 150,
-                Heart_of_Spring: 500 
+                Heart_of_Spring: 500
             },
             summer_seed: {
                 Corn: 125,
@@ -224,7 +226,7 @@ const rootReducer = (state = initialState, action) => {
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
                     },
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
+                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus: "_regular", fileType: "gif" } : content
                     })
                 },
                 game: {
@@ -233,7 +235,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
 
-            case INTERACT_WATER:
+        case INTERACT_WATER:
             console.log("INTERACT water in reducer", action.payload)
             return {
                 ...state,
@@ -241,53 +243,55 @@ const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     energy: state.user.energy - 5,
                     water: state.user.water - [100 - action.payload.plot.water],
-                    favor: state.user.favor + parseInt([100-action.payload.plot.water]*0.05),
+                    favor: state.user.favor + parseInt([100 - action.payload.plot.water] * 0.05),
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload.plot.id) ? 
-                        { ...content, 
-                        plotType: `${action.payload.plot.plotType}`,
-                        plotStatus: "_watered",
-                        fileType: "gif", 
-                        water: 100,
-                        quality: state.user.main_garden_plot[action.payload.plot.id].quality + 5,
-                        health: state.user.main_garden_plot[action.payload.plot.id].health + 10,
-                        harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 10
-                    } : content
+                        return (i === action.payload.plot.id) ?
+                            {
+                                ...content,
+                                plotType: `${action.payload.plot.plotType}`,
+                                plotStatus: "_watered",
+                                fileType: "gif",
+                                water: 100,
+                                quality: state.user.main_garden_plot[action.payload.plot.id].quality + 5,
+                                health: state.user.main_garden_plot[action.payload.plot.id].health + 10,
+                                harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 10
+                            } : content
                     })
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User watered plot #${[action.payload.plot.id+1]} by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User watered plot #${[action.payload.plot.id + 1]} by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
                 }
 
             };
 
-            case INTERACT_NOURISH:
-                console.log("INTERACT nourish in reducer", action.payload)
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        energy: state.user.energy - 10,
-                        favor: state.user.favor + 5,
-                        main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                            return (i === action.payload.plot.id) ? 
-                            { ...content, 
-                            water: state.user.main_garden_plot[action.payload.plot.id].water - 35,
-                            quality: state.user.main_garden_plot[action.payload.plot.id].quality + 10,
-                            health: state.user.main_garden_plot[action.payload.plot.id].health + 10,
-                            harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 30
-                        } : content
-                        })
-                    },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `User nourished plot #${[action.payload.plot.id+1]} at ${Date(Date.now()).toString()}.`]
-                    }
-    
-                };
+        case INTERACT_NOURISH:
+            console.log("INTERACT nourish in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy - 10,
+                    favor: state.user.favor + 5,
+                    main_garden_plot: state.user.main_garden_plot.map((content, i) => {
+                        return (i === action.payload.plot.id) ?
+                            {
+                                ...content,
+                                water: state.user.main_garden_plot[action.payload.plot.id].water - 35,
+                                quality: state.user.main_garden_plot[action.payload.plot.id].quality + 10,
+                                health: state.user.main_garden_plot[action.payload.plot.id].health + 10,
+                                harvest: state.user.main_garden_plot[action.payload.plot.id].harvest + 30
+                            } : content
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User nourished plot #${[action.payload.plot.id + 1]} at ${Date(Date.now()).toString()}.`]
+                }
 
-            case EXPAND_WATER:
+            };
+
+        case EXPAND_WATER:
             console.log("EXPAND WATER CAPACITY")
             return {
                 ...state,
@@ -297,8 +301,8 @@ const rootReducer = (state = initialState, action) => {
                     favor: state.user.favor + 2,
                     limits: {
                         ...state.user.limits,
-                        water_limit: state.user.limits.water_limit+100,
-                        
+                        water_limit: state.user.limits.water_limit + 100,
+
                     },
                 },
                 game: {
@@ -307,24 +311,25 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case STORE_CROP:
+        case STORE_CROP:
             console.log("STORE CROP in reducer", action.payload)
             return {
                 ...state,
                 user: {
                     ...state.user,
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload.index) ? 
-                        { ...content,
-                        product: "", 
-                        plotType: "empty_plot",
-                        plotStatus: "_regular",
-                        fileType: "png", 
-                        water: 0,
-                        quality: 0,
-                        health: 0,
-                        harvest: 0
-                    } : content
+                        return (i === action.payload.index) ?
+                            {
+                                ...content,
+                                product: "",
+                                plotType: "empty_plot",
+                                plotStatus: "_regular",
+                                fileType: "png",
+                                water: 0,
+                                quality: 0,
+                                health: 0,
+                                harvest: 0
+                            } : content
                     }),
                     crops: [
                         ...state.user.crops,
@@ -343,7 +348,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case SELL_CROP:
+        case SELL_CROP:
             console.log("SELL CROP in reducer", action.payload)
             return {
                 ...state,
@@ -352,17 +357,18 @@ const rootReducer = (state = initialState, action) => {
                     essence: state.user.essence + action.payload.crop.value,
                     favor: state.user.favor + 10,
                     main_garden_plot: state.user.main_garden_plot.map((content, i) => {
-                        return (i === action.payload.index) ? 
-                        { ...content,
-                        product: "", 
-                        plotType: "empty_plot",
-                        plotStatus: "_regular",
-                        fileType: "png", 
-                        water: 0,
-                        quality: 0,
-                        health: 0,
-                        harvest: 0
-                    } : content
+                        return (i === action.payload.index) ?
+                            {
+                                ...content,
+                                product: "",
+                                plotType: "empty_plot",
+                                plotStatus: "_regular",
+                                fileType: "png",
+                                water: 0,
+                                quality: 0,
+                                health: 0,
+                                harvest: 0
+                            } : content
                     }),
                 },
                 game: {
@@ -371,7 +377,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case SELL_CROP_INVENTORY:
+        case SELL_CROP_INVENTORY:
             console.log("SELL CROP from inventory in reducer", action.payload)
             return {
                 ...state,
@@ -389,7 +395,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case PLANT_SAPLING:
+        case PLANT_SAPLING:
             console.log("Plant sapling in reducer", action.payload)
             return {
                 ...state,
@@ -401,16 +407,16 @@ const rootReducer = (state = initialState, action) => {
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
                     },
                     orchard_plot: state.user.orchard_plot.map((content, i) => {
-                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif", reHarvest: 5 } : content
+                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus: "_regular", fileType: "gif", reHarvest: 5 } : content
                     })
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User planted ${action.payload["value"]} within plot #${action.payload["id"]+1} at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User planted ${action.payload["value"]} within plot #${action.payload["id"] + 1} at ${Date(Date.now()).toString()}.`]
                 }
             };
 
-            case INTERACT_WATER_ORCHARD:
+        case INTERACT_WATER_ORCHARD:
             console.log("INTERACT water ORCHARD in reducer", action.payload)
             return {
                 ...state,
@@ -418,50 +424,112 @@ const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     energy: state.user.energy - 5,
                     water: state.user.water - [100 - action.payload.plot.water],
-                    favor: state.user.favor + parseInt([100-action.payload.plot.water]*0.065),
+                    favor: state.user.favor + parseInt([100 - action.payload.plot.water] * 0.065),
                     orchard_plot: state.user.orchard_plot.map((content, i) => {
-                        return (i === action.payload.plot.id) ? 
-                        { ...content, 
-                        // plotType: `${action.payload.plot.plotType}`,
-                        // plotStatus: "_watered",
-                        // fileType: "gif", 
-                        water: 100,
-                        quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
-                        health: state.user.orchard_plot[action.payload.plot.id].health + 2,
-                        harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 3
-                    } : content
+                        return (i === action.payload.plot.id) ?
+                            {
+                                ...content,
+                                // plotType: `${action.payload.plot.plotType}`,
+                                // plotStatus: "_watered",
+                                // fileType: "gif", 
+                                water: 100,
+                                quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
+                                health: state.user.orchard_plot[action.payload.plot.id].health + 2,
+                                harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 3
+                            } : content
                     })
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User watered plot #${[action.payload.plot.id+1]} in Orchard by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User watered plot #${[action.payload.plot.id + 1]} in Orchard by ${[100 - action.payload.plot.water]} at ${Date(Date.now()).toString()}.`]
                 }
             };
 
-            case INTERACT_NOURISH_ORCHARD:
-                console.log("INTERACT nourish ORCHARD in reducer", action.payload)
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        energy: state.user.energy - 10,
-                        favor: state.user.favor + 10,
-                        orchard_plot: state.user.orchard_plot.map((content, i) => {
-                            return (i === action.payload.plot.id) ? 
-                            { ...content, 
-                            water: state.user.orchard_plot[action.payload.plot.id].water - 35,
-                            quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
-                            health: state.user.orchard_plot[action.payload.plot.id].health + 2,
-                            harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 50
-                        } : content
-                        })
-                    },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `User nourished plot #${[action.payload.plot.id+1]} in Orchard at ${Date(Date.now()).toString()}.`]
-                    }
-    
-                };
+        case INTERACT_NOURISH_ORCHARD:
+            console.log("INTERACT nourish ORCHARD in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy - 10,
+                    favor: state.user.favor + 10,
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
+                        return (i === action.payload.plot.id) ?
+                            {
+                                ...content,
+                                water: state.user.orchard_plot[action.payload.plot.id].water - 35,
+                                quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
+                                health: state.user.orchard_plot[action.payload.plot.id].health + 2,
+                                harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 50
+                            } : content
+                    })
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User nourished plot #${[action.payload.plot.id + 1]} in Orchard at ${Date(Date.now()).toString()}.`]
+                }
+
+            };
+
+        case STORE_CROP_ORCHARD:
+            console.log("STORE CROP ORCHARD in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
+                        return (i === action.payload.index) ?
+                            {
+                                ...content,
+                                water: Math.ceil([state.user.orchard_plot[action.payload.index].water] / 2),
+                                quality: Math.ceil([state.user.orchard_plot[action.payload.index].quality] / 2),
+                                health: Math.ceil([state.user.orchard_plot[action.payload.index].health] / 2),
+                                harvest: 25,
+                                reHarvest: state.user.orchard_plot[action.payload.index].reHarvest - 1
+                            } : content
+                    }),
+                    crops: [
+                        ...state.user.crops,
+                        {
+                            name: action.payload.crop.name,
+                            id: Date.now(),
+                            amount: action.payload.crop.amount,
+                            value: action.payload.crop.value
+                        }
+                    ]
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User stored ${action.payload.crop.name} worth ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
+                }
+            };
+
+        case SELL_CROP_ORCHARD:
+            console.log("SELL CROP ORCHARD in reducer", action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence + action.payload.crop.value,
+                    favor: state.user.favor + 10,
+                    orchard_plot: state.user.orchard_plot.map((content, i) => {
+                        return (i === action.payload.index) ?
+                            {
+                                ...content,
+                                water: Math.ceil([state.user.orchard_plot[action.payload.index].water] / 2),
+                                quality: Math.ceil([state.user.orchard_plot[action.payload.index].quality] / 2),
+                                health: Math.ceil([state.user.orchard_plot[action.payload.index].health] / 2),
+                                harvest: 25,
+                                reHarvest: state.user.orchard_plot[action.payload.index].reHarvest - 1
+                            } : content
+                    }),
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User stored ${action.payload.crop.name} worth ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
+                }
+            };
 
         default:
             return state;

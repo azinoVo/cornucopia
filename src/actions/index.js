@@ -137,12 +137,32 @@ export const storeCrop = (crop, index) => {
     }
 }
 
+export const STORE_CROP_ORCHARD = "STORE_CROP_ORCHARD";
+
+export const storeCropOrchard = (crop, index) => {
+    console.log("STORE_CROP_ORCHARD", crop, index)
+    return {
+        type: STORE_CROP_ORCHARD,
+        payload: {crop, index}
+    }
+}
+
 export const SELL_CROP = "SELL_CROP";
 
 export const sellCrop = (crop, index) => {
     console.log("SELL_CROP", crop, index)
     return {
         type: SELL_CROP,
+        payload: {crop, index}
+    }
+}
+
+export const SELL_CROP_ORCHARD = "SELL_CROP_ORCHARD";
+
+export const sellCropOrchard = (crop, index) => {
+    console.log("SELL_CROP_ORCHARD", crop, index)
+    return {
+        type: SELL_CROP_ORCHARD,
         payload: {crop, index}
     }
 }

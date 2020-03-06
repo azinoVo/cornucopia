@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { plantSapling, interactOrchard } from '../actions';
+import { plantSapling, interactOrchard, storeCropOrchard, sellCropOrchard } from '../actions';
 import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import Select from 'react-select';
@@ -56,9 +56,18 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
             return sapling
         }
 
-        console.log(set, randomNumber, sapling)
         dispatch(plantSapling({ ...set, product: sapling }))
         setAvailableSeeds({})
+
+    }
+
+    const storeCropHandler = (crop, index) => {
+        dispatch(storeCropOrchard(crop, index))
+
+    }
+
+    const sellCropHandler = (crop, index) => {
+        dispatch(sellCropOrchard(crop, index))
 
     }
 
@@ -127,6 +136,21 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                 return ""
                             }
                         }).filter(item => item !== "")
+
+                        let numberHarvested = 0
+                        let randomHarvested = Math.floor((Math.random() * 100) + 1);
+
+                        if(randomHarvested > 0 && randomHarvested <= 90) {
+                            numberHarvested = 1
+                        } else if(randomHarvested > 90 && randomHarvested <= 99) {
+                            numberHarvested = 2
+                        } else if (randomHarvested > 99) {
+                            numberHarvested = 3
+                        } else {
+                            return numberHarvested
+                        }
+
+                        console.log("number harvested", numberHarvested)
 
                         if (plot) {
                             return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
@@ -273,7 +297,10 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                         plot.harvest >= 100 &&
                                         <HarvestModal
                                             plotInfo={plot}
-                                            cropPrices={cropPrices} />
+                                            cropPrices={cropPrices}
+                                            storeCropHandler={storeCropHandler}
+                                            sellCropHandler={sellCropHandler}
+                                            amountHarvested={numberHarvested} />
 
                                 }
 

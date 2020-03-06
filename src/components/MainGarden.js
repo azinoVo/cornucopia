@@ -300,7 +300,8 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                             plotInfo={plot}
                                             cropPrices={cropPrices}
                                             storeCropHandler={storeCropHandler}
-                                            sellCropHandler={sellCropHandler} />
+                                            sellCropHandler={sellCropHandler}
+                                            amountHarvested={1} />
                                 }
 
                             </div>
