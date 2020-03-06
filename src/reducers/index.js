@@ -44,12 +44,12 @@ const initialState = {
             barnyard_plot: 2,
         },
         main_garden_plot: [
-            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
-            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0},
-            { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 },
-            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0 }],
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0},
+            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0},
+            { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
+            { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
+            { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
+            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 }],
         orchard_plot: [
             { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3, harvest: 0 },
             { id: 1, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6, harvest: 0 },
@@ -94,7 +94,7 @@ const initialState = {
             summer_seed: ["Corn", "Tomato", "Okra", "Heart_of_Summer" ],
             fall_seed: ["Broccoli", "Asparagus", "Pumpkin", "Heart_of_Fall"],
             winter_seed: ["Lettuce", "Lettuce", "Lettuce", "Heart_of_Winter"],
-            trees: ["Apple", "Cherry", "Coconut", "Plum", "Essence of the One"]
+            tree_sapling: ["Apple", "Cherry", "Coconut", "Plum", "Essence_of_the_One"]
         },
         cropPrices: {
             spring_seed: {
@@ -118,6 +118,13 @@ const initialState = {
             winter_seed: {
                 Lettuce: 200,
                 Heart_of_Winter: 2500
+            },
+            tree_sapling: {
+                Apple: 200,
+                Cherry: 250,
+                Coconut: 275,
+                Plum: 300,
+                Essence_of_the_One: 1000
             }
         },
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
@@ -394,7 +401,7 @@ const rootReducer = (state = initialState, action) => {
                         [action.payload['value']]: state.user.inventory[action.payload['value']] - 1
                     },
                     orchard_plot: state.user.orchard_plot.map((content, i) => {
-                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif" } : content
+                        return (i === action.payload["id"]) ? { ...content, product: action.payload['product'], plotType: `${action.payload["value"]}`, plotStatus:"_regular", fileType: "gif", reHarvest: 5 } : content
                     })
                 },
                 game: {
@@ -445,7 +452,7 @@ const rootReducer = (state = initialState, action) => {
                             water: state.user.orchard_plot[action.payload.plot.id].water - 35,
                             quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
                             health: state.user.orchard_plot[action.payload.plot.id].health + 2,
-                            harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 6
+                            harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 50
                         } : content
                         })
                     },

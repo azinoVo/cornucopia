@@ -6,8 +6,16 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => 
     <Popup trigger={<button className="button">Harvest</button>} modal>
         {close => (
             <div className="harvest-modal">
-                {!plotInfo.product.includes('Heart') ? <img src={require(`../assets/plants/${plotInfo['plotType']}_harvest.gif`)} alt="modal plot" /> :
-                <img src={require(`../assets/plants/${plotInfo['plotType']}_heart.gif`)} alt="modal plot" />
+                {
+                    (!plotInfo.product.includes('Heart') && plotInfo.plotType.includes('seed')) ?
+                        <img src={require(`../assets/plants/${plotInfo['plotType']}_harvest.gif`)} alt="modal plot" /> :
+                        !plotInfo.plotType.includes('sapling') && <img src={require(`../assets/plants/${plotInfo['plotType']}_heart.gif`)} alt="modal plot" />
+                }
+
+                {
+                    (!plotInfo.product.includes('Essence_of_the_One') && plotInfo.plotType.includes('sapling')) ?
+                        <span>Regular harvest img</span> :
+                        plotInfo.product.includes('Essence_of_the_One') && <span>Special Essence of the One Harvest</span>
                 }
 
                 <div className="content">
@@ -65,8 +73,8 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => 
                         onClick={() => {
                             console.log("store in inventory then close");
                             storeCropHandler({
-                                name: plotInfo.product, 
-                                amount: 1, 
+                                name: plotInfo.product,
+                                amount: 1,
                                 value: Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +
@@ -85,7 +93,7 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler }) => 
                             sellCropHandler({
                                 name: plotInfo.product,
                                 id: Date.now(),
-                                amount: 1, 
+                                amount: 1,
                                 value: Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +

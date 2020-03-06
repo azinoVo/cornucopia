@@ -6,6 +6,7 @@ import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import HarvestModal from './HarvestModal';
 
 
 const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cropPrices }) => {
@@ -37,19 +38,19 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
         let sapling = ""
         let randomNumber = Math.floor((Math.random() * 10) + 1);
         if (randomNumber <= 4) {
-            sapling = cropList['trees'][0]
+            sapling = cropList['tree_sapling'][0]
 
         } else if (randomNumber > 4 && randomNumber <= 6) {
-            sapling = cropList['trees'][1]
+            sapling = cropList['tree_sapling'][1]
 
         } else if (randomNumber > 6 && randomNumber < 8) {
-            sapling = cropList['trees'][2]
+            sapling = cropList['tree_sapling'][2]
 
         } else if (randomNumber >= 8 && randomNumber < 9) {
-            sapling = cropList['trees'][3]
+            sapling = cropList['tree_sapling'][3]
 
         } else if (randomNumber >= 9) {
-            sapling = cropList['trees'][4]
+            sapling = cropList['tree_sapling'][4]
 
         } else {
             return sapling
@@ -130,7 +131,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                         if (plot) {
                             return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
                                 <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="orchard plot" />
-                                {plot['plotStatus'] !== "_lock" && <span>Plot: {plot["plotType"]}</span>}
+                                {(plot['plotStatus'] !== "_lock" && plot.harvest < 100) ? <span>Plot: {plot["plotType"]}</span> : <span>Plot: {plot['product']}</span>}
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
                                     <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>
@@ -270,7 +271,10 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                         plot.harvest < 100) ?
                                         <button onClick={() => interactFunction({ ...plantInteraction, plot })}>{plantInteraction['label']}</button> :
                                         plot.harvest >= 100 &&
-                                        <span>Harvest Button Here</span>
+                                        <HarvestModal
+                                            plotInfo={plot}
+                                            cropPrices={cropPrices} />
+
                                 }
 
                             </div>
