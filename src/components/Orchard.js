@@ -117,25 +117,25 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                         let newInteractOptions = [...interactList]
 
                         // If water conditions not met, Water will not be an option within Interact
-                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && plot.harvest < 100 && userInfo.energy >= energyReq.water && userInfo.reHarvest !== 0) {
+                        if ((userInfo.water - [100 - plot.water]) >= 0 && plot.water !== 100 && plot.harvest < 100 && userInfo.energy >= energyReq.water && plot.reHarvest !== 0) {
                             newInteractOptions = [...newInteractOptions, { value: "water", label: "Water 5⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
 
-                        if (userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 35 && userInfo.reHarvest !== 0) {
+                        if (userInfo.energy >= energyReq.nourish && plot.harvest < 100 && plot.water >= 35 && plot.reHarvest !== 0) {
                             newInteractOptions = [...newInteractOptions, { value: "nourish", label: "Nourish 10⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
 
-                        if (userInfo.reHarvest === 0 && userInfo.energy >= energyReq.clear) {
+                        if (plot.reHarvest === 0 && userInfo.energy >= energyReq.clear) {
                             newInteractOptions = [...newInteractOptions, { value: "clear", label: "Clear Plot 50⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]
                         }
 
-                        if (userInfo.reHarvest === 0 && userInfo.energy >= energyReq.replenish) {
+                        if (plot.reHarvest === 0 && userInfo.energy >= energyReq.replenish) {
                             newInteractOptions = [...newInteractOptions, { value: "replenish", label: "Replenish Plot 100⚡", id: plot.id }]
                         } else {
                             newInteractOptions = [...newInteractOptions]

@@ -464,7 +464,7 @@ const rootReducer = (state = initialState, action) => {
                                 water: state.user.orchard_plot[action.payload.plot.id].water - 35,
                                 quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
                                 health: state.user.orchard_plot[action.payload.plot.id].health + 2,
-                                harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 6
+                                harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 100
                             } : content
                     })
                 },
@@ -487,8 +487,9 @@ const rootReducer = (state = initialState, action) => {
                         return (i === action.payload.plot.id) ?
                             {
                                 ...content,
+                                product: "",
                                 plotType: "empty_plot",
-                                plotStatus: "regular",
+                                plotStatus: "_regular",
                                 fileType: "png",
                                 water: 0,
                                 quality: 0,
@@ -511,16 +512,16 @@ const rootReducer = (state = initialState, action) => {
                 user: {
                     ...state.user,
                     orchard_plot: state.user.orchard_plot.map((content, i) => {
-                        return (i === action.payload.index) ?
+                        return (i === action.payload.id) ?
                             {
                                 ...content,
-                                reHarvest: state.user.orchard_plot[action.payload.index].reHarvest + 2
+                                reHarvest: state.user.orchard_plot[action.payload.id].reHarvest + 2
                             } : content
                     }),
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User replenished plot #${action.payload.index} by 2 at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User replenished plot #${action.payload.id} by 2 at ${Date(Date.now()).toString()}.`]
                 }
             };
 
