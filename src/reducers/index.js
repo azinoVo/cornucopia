@@ -464,7 +464,7 @@ const rootReducer = (state = initialState, action) => {
                                 water: state.user.orchard_plot[action.payload.plot.id].water - 35,
                                 quality: state.user.orchard_plot[action.payload.plot.id].quality + 2,
                                 health: state.user.orchard_plot[action.payload.plot.id].health + 2,
-                                harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 50
+                                harvest: state.user.orchard_plot[action.payload.plot.id].harvest + 6
                             } : content
                     })
                 },
