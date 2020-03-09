@@ -175,7 +175,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
 
                                 {
                                     (plot['plotStatus'] !== "_lock" && plot['plotType'] !== "empty_plot") &&
-                                    <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% </span>
+                                    <span>Water: {plot.water}% | Health: {plot.health}% | Quality: +{plot.quality}% | Harvest: {plot.reHarvest}/5</span>
                                 }
 
                                 {
@@ -249,7 +249,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                         theme={{
                                             success: {
                                                 symbol: '‍🌸',
-                                                color: '#0F9200'
+                                                color: '#30CB00'
                                             },
                                             active: {
                                                 symbol: '🌳',
@@ -275,7 +275,7 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                                             placeholder={"Select Seed"}
                                             options={saplingList}
                                             onChange={setAvailableSeeds}
-                                            noOptionsMessage={() => "No Seeds Available. Please buy some."}
+                                            noOptionsMessage={() => "No Saplings Available. Please buy some."}
                                             autoFocus
                                         /> : plot['plotType'] === "empty_plot" && <span>Please recover more energy.</span>
 

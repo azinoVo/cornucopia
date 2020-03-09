@@ -234,7 +234,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                         theme={{
                                             success: {
                                                 symbol: '‍🌻',
-                                                color: '#0F9200'
+                                                color: '#30CB00'
                                             },
                                             active: {
                                                 symbol: '🌱',
