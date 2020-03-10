@@ -223,3 +223,26 @@ thead {
   width: 30%;
   margin: 0 auto;
 }
+
+.deity-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.deity-wrapper img {
+  width: 25%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.deity-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1%;
+}
+
+.deity-actions button {
+  margin: 5px;
+}
