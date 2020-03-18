@@ -6,15 +6,14 @@ import { useDispatch } from 'react-redux';
 import { sellCropInventory } from '../actions';
 import GameLog from './GameLog';
 
-const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops }) => {
+const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops, specials }) => {
     const [userInfo, setUserInfo] = useState({})
     const [userInventory, setInventory] = useState({})
     const [shopPrices, setPrices] = useState({})
     const [mainGarden, setMainGarden] = useState([])
     const [orchardPlots, setOrchardPlots] = useState([])
     const [cropsList, setCrops] = useState([])
-
-    
+    const [specialList, setSpecialList] = useState([])
 
 
     const dispatch = useDispatch()
@@ -30,6 +29,10 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
     useEffect(() => {
         setInventory(user.inventory)
     }, [user])
+
+    useEffect(() => {
+        setSpecialList(specials)
+    }, [specials])
 
     useEffect(() => {
         setPrices(prices)
@@ -88,6 +91,20 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                                     {!crop.name.includes('plot') ? <th><button onClick={() => dispatch(sellCropInventory(crop))}>Sell</button></th> : <th>Cannot Sell</th>}
   
                                 </tr>
+                            })
+                        }
+
+                        {
+                            Object.entries(specialList).map((entry, index) => {
+                                if (entry[1]) {
+                                    return <tr className='special-item' key={`specialItem${index}`}>
+                                        <th>{entry[0]}</th>
+                                        {<th>{entry[1]}</th>}
+                                        <th>Cannot Sell</th>
+                                        <th>Interact</th>
+                                    </tr>
+                                }
+                                return ""
                             })
                         }
                     </tbody>
@@ -168,7 +185,8 @@ const mapStateToProps = state => ({
     limits: state.user.limits,
     crops: state.user.crops,
     user: state.user,
-    orchard_plot: state.user.orchard_plot
+    orchard_plot: state.user.orchard_plot,
+    specials: state.user.specials
 });
 
 export default connect(mapStateToProps, { sellCropInventory })(Inventory);

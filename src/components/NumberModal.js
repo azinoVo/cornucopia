@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import Popup from "reactjs-popup";
+import { numberWin } from '../actions';
+import { useDispatch } from 'react-redux';
+
 
 const NumberGame = () => {
     const [number, setNumber] = useState(0)
     const [gameNumber, setGameNumber] = useState(0.5)
     const [timesPlayed, setTimesPlayed] = useState(0)
     const [playing, setPlaying] = useState(false)
+
+
+    const dispatch = useDispatch()
+
 
     const rollDie = () => {
         let randomNumber = Math.floor((Math.random() * 10) + 1);
@@ -17,6 +24,12 @@ const NumberGame = () => {
         setGameNumber(gameNumber)
         setTimesPlayed(timesPlayed+1)
         setPlaying(true)
+
+        if(number  === gameNumber) {
+            dispatch(numberWin())
+        } else {
+            return
+        }
         
     }
 
@@ -33,7 +46,7 @@ const NumberGame = () => {
                     <div className="content">
                         {
                             (gameNumber === number && playing) ? 
-                            <h1>Seems you've strike it rich. Check your inventory for something special</h1> :
+                            <h1>Seems you've strike it rich. Check your inventory for something special.</h1> :
                             playing && <h1>Try again.</h1>
                         }
                         {

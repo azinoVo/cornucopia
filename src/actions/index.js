@@ -183,6 +183,14 @@ export const sellCropInventory = (crop) => {
     }
 }
 
+export const NUMBER_WIN = "NUMBER_WIN";
+
+export const numberWin = () => {
+    console.log("number game win")
+    return {
+        type: NUMBER_WIN,
+    }
+}
 
 
 

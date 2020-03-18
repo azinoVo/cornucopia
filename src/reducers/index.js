@@ -16,7 +16,8 @@ import {
     STORE_CROP_ORCHARD,
     SELL_CROP_ORCHARD,
     INTERACT_CLEAR_ORCHARD,
-    INTERACT_REPLENISH_ORCHARD
+    INTERACT_REPLENISH_ORCHARD,
+    NUMBER_WIN
 } from '../actions';
 
 const initialState = {
@@ -38,6 +39,9 @@ const initialState = {
             hanging_plot: 0
         },
         crops: [],
+        specials: {
+            cornucopian_sand: 0,
+        },
         limits: {
             water_limit: 100,
             energy_limit: 200,
@@ -584,6 +588,24 @@ const rootReducer = (state = initialState, action) => {
                     log: [...state.game.log, `User sold ${action.payload.crop.name} worth ${action.payload.crop.value} Mana Essences at ${Date(Date.now()).toString()}.`]
                 }
             };
+
+            case NUMBER_WIN:
+                console.log("NUMBER WIN")
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        specials: {
+                            ...state.user.specials,
+                            cornucopian_sand: state.user.specials.cornucopian_sand + 1
+                        }
+                    },
+                    game: {
+                        ...state.game,
+                    log: [...state.game.log, `You felt a special energy encompass you. Your inventory feels much heavier.`]
+                    }
+
+                }
 
         default:
             return state;
