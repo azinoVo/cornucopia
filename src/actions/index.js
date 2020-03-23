@@ -193,5 +193,17 @@ export const numberWin = () => {
 }
 
 
+export const INTERACT_SPECIAL_SAND = "INTERACT_SPECIAL_SAND";
+
+
+
+export const interactSpecial = (actionSet) => dispatch => {
+    console.log("interact in actions specials", actionSet)
+
+    if(actionSet[0] === "cornucopian_sand") {
+        dispatch({ type: INTERACT_SPECIAL_SAND, payload: actionSet })
+    }
+}
+
 
 

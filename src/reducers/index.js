@@ -17,7 +17,8 @@ import {
     SELL_CROP_ORCHARD,
     INTERACT_CLEAR_ORCHARD,
     INTERACT_REPLENISH_ORCHARD,
-    NUMBER_WIN
+    NUMBER_WIN,
+    INTERACT_SPECIAL_SAND,
 } from '../actions';
 
 const initialState = {
@@ -605,6 +606,13 @@ const rootReducer = (state = initialState, action) => {
                     log: [...state.game.log, `You felt a special energy encompass you. Your inventory feels much heavier.`]
                     }
 
+                };
+
+            case INTERACT_SPECIAL_SAND:
+                console.log("special sand in reducer")
+                return {
+                    ...state,
+                    
                 }
 
         default:

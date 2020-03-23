@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { Progress } from 'react-sweet-progress';
 import { useDispatch } from 'react-redux';
-import { sellCropInventory } from '../actions';
+import { sellCropInventory, interactSpecial } from '../actions';
 import GameLog from './GameLog';
 
 const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops, specials }) => {
@@ -78,7 +78,7 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                                         {!entry[0].includes('plot') ? <th>Sell within Shop</th> : <th>Cannot Sell</th>}
                                     </tr>
                                 }
-                                return ""
+                                
                             })
                         }
 
@@ -89,7 +89,6 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                                     <th>{crop.amount}</th>
                                     <th>{crop.value} Mana Essences</th>
                                     {!crop.name.includes('plot') ? <th><button onClick={() => dispatch(sellCropInventory(crop))}>Sell</button></th> : <th>Cannot Sell</th>}
-  
                                 </tr>
                             })
                         }
@@ -101,10 +100,10 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                                         <th>{entry[0]}</th>
                                         {<th>{entry[1]}</th>}
                                         <th>Cannot Sell</th>
-                                        <th>Interact</th>
+                                        <th><button onClick={() => dispatch(interactSpecial(entry))}>Interact</button></th>
                                     </tr>
                                 }
-                                return ""
+                                
                             })
                         }
                     </tbody>
