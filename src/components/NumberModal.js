@@ -25,7 +25,7 @@ const NumberGame = () => {
         setTimesPlayed(timesPlayed+1)
         setPlaying(true)
 
-        if(number  === gameNumber) {
+        if(randomNumber  === gameNumber) {
             dispatch(numberWin())
         } else {
             return

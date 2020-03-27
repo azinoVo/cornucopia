@@ -615,6 +615,10 @@ const rootReducer = (state = initialState, action) => {
                     user: {
                         ...state.user,
                         favor: state.user.favor + 100,
+                        specials: {
+                            ...state.user.specials,
+                            cornucopian_sand: state.user.specials.cornucopian_sand - 1
+                        },
                         main_garden_plot: state.user.main_garden_plot.map((content) => {
                             return (content.plotType !== "empty_plot") ?
                                 {
