@@ -612,8 +612,37 @@ const rootReducer = (state = initialState, action) => {
                 console.log("special sand in reducer")
                 return {
                     ...state,
-                    
-                }
+                    user: {
+                        ...state.user,
+                        favor: state.user.favor + 100,
+                        main_garden_plot: state.user.main_garden_plot.map((content) => {
+                            return (content.plotType !== "empty_plot") ?
+                                {
+                                    ...content,
+                                    water: 100,
+                                    quality: 95,
+                                    health: 95,
+                                    harvest: 95,
+                                } : content
+                        }),
+                        orchard_plot: state.user.orchard_plot.map((content) => {
+                            return (content.plotType !== "empty_plot") ?
+                                {
+                                    ...content,
+                                    water: 100,
+                                    quality: 95,
+                                    health: 95,
+                                    harvest: 95,
+                                    reHarvest: 5
+                                } : content
+                        }),
+
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `The sands of time has granted its blessing to your plots.`]
+                    } 
+                };
 
         default:
             return state;
