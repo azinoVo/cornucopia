@@ -4,13 +4,21 @@ import { useDispatch } from 'react-redux';
 
 
 const GuessTheCardModal = () => {
+    const [shuffled, setShuffled] = useState([])
+
 
     const dispatch = useDispatch()
 
 
-    const pickCard = () => {
-        // Add code here
-        
+    const shuffleCards = () => {
+        // The Fischer-Yates Shuffle
+        let a = [1, 2, 3]
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+
+        setShuffled(a)
     }
 
 
@@ -21,9 +29,14 @@ const GuessTheCardModal = () => {
                 <div className="guess-modal">
                     <h1>Guess The Card</h1>
                     
-
                     <div className="content">
                         {/* Add the content here */}
+                        {
+                            shuffled.map(num => {
+                                <div id={num}>Card #{num}</div>
+                            })
+                        }
+
                     </div>
 
                     <div className="actions">
