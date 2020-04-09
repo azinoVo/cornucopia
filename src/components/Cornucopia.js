@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GameLog from './GameLog';
 import NumberModal from './NumberModal';
+import GuessTheCardModal from './GuessTheCardModal';
 
 
 const Cornucopia = () => {
@@ -14,6 +15,7 @@ const Cornucopia = () => {
 
                     <div className='deity-actions'>
                         <NumberModal />
+                        <GuessTheCardModal />
 
                         {/* Possible feature where user chooses what to offer the tree and get rewards. */}
                         <button>Action II</button>

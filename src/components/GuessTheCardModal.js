@@ -33,9 +33,10 @@ const GuessTheCardModal = () => {
                         {/* Add the content here */}
                         {
                             shuffled.map(num => {
-                                <div id={num}>Card #{num}</div>
+                                return <button id={num}>Card #{num}</button>
                             })
                         }
+                        <button onClick={shuffleCards}>Shuffle Cards</button>
 
                     </div>
 
