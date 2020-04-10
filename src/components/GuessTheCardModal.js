@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 
 const GuessTheCardModal = () => {
     const [shuffled, setShuffled] = useState([])
+    const [win, setWin] = useState(false)
+    const [playing, setPlaying] = useState(false)
+    const [gameNumber, setGameNumber] = useState(1)
 
 
     const dispatch = useDispatch()
@@ -21,22 +24,33 @@ const GuessTheCardModal = () => {
         setShuffled(a)
     }
 
+    const pickCard = (number) => {
+        if(number === 1) {
+            setWin(true)
+        }
+
+        setPlaying(true)
+        setGameNumber(gameNumber+1)
+        shuffleCards()
+    }
+
 
     return (
         <Popup trigger={<button className="button">Guess The Card</button>} modal>
 
             {close => (
                 <div className="guess-modal">
-                    <h1>Guess The Card</h1>
+                    <h1>Find Card #1</h1>
+                    {win ? <p>Congratulations, you've won.</p> : <p>If you find the correct card, you will get a reward.</p>}
                     
                     <div className="content">
                         {/* Add the content here */}
-                        {
+                        {(gameNumber < 5 && !win) &&
                             shuffled.map(num => {
-                                return <button id={num}>Card #{num}</button>
+                                return <button onClick={() => pickCard(num)} id={num}>Card #{num}</button>
                             })
                         }
-                        <button onClick={shuffleCards}>Shuffle Cards</button>
+                        {(!win && (playing === false)) && <button onClick={shuffleCards}>Shuffle Cards</button>}
 
                     </div>
 
