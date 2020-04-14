@@ -28,6 +28,7 @@ const GuessTheCardModal = () => {
     const pickCard = (number) => {
         if(number === 1) {
             setWin(true)
+            dispatch(guessWin())
         }
 
         setPlaying(true)
