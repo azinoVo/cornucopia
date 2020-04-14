@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Popup from "reactjs-popup";
+import { guessWin } from '../actions';
 import { useDispatch } from 'react-redux';
 
 

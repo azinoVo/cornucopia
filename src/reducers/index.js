@@ -18,6 +18,7 @@ import {
     INTERACT_CLEAR_ORCHARD,
     INTERACT_REPLENISH_ORCHARD,
     NUMBER_WIN,
+    GUESS_WIN,
     INTERACT_SPECIAL_SAND,
 } from '../actions';
 
@@ -42,6 +43,7 @@ const initialState = {
         crops: [],
         specials: {
             cornucopian_sand: 0,
+            hourglass: 0,
         },
         limits: {
             water_limit: 100,
@@ -607,6 +609,24 @@ const rootReducer = (state = initialState, action) => {
                     }
 
                 };
+
+                case GUESS_WIN:
+                    console.log("NUMBER WIN")
+                    return {
+                        ...state,
+                        user: {
+                            ...state.user,
+                            specials: {
+                                ...state.user.specials,
+                                hourglass: state.user.specials.hourglass + 1
+                            }
+                        },
+                        game: {
+                            ...state.game,
+                        log: [...state.game.log, `Time is of the essence. What will you do?`]
+                        }
+    
+                    };
 
             case INTERACT_SPECIAL_SAND:
                 console.log("special sand in reducer")

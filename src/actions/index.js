@@ -193,8 +193,16 @@ export const numberWin = () => {
 }
 
 
-export const INTERACT_SPECIAL_SAND = "INTERACT_SPECIAL_SAND";
+export const GUESS_WIN = "GUESS_WIN";
 
+export const guessWin = () => {
+    console.log("GUESS THE CARD win")
+    return {
+        type: GUESS_WIN,
+    }
+}
+
+export const INTERACT_SPECIAL_SAND = "INTERACT_SPECIAL_SAND";
 
 
 export const interactSpecial = (actionSet) => dispatch => {
