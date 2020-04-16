@@ -12,6 +12,7 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
+                    <li>Loader if possible for planting the seeds before the gif animation begins.</li>
                     <li>Add way to move to next day - this will progress all plants by certain amount.</li>
                     <li>Have a property tax that is collected the first or last day of the month as you progress in days. Buy plots sparingly.</li>
                     <li>Seasonal bonuses</li>
@@ -36,7 +37,7 @@ const Home = () => {
 
                 <h2>Known Bugs to Fix</h2>
                 <ul>
-                    <li>Nourish can make plant go above 100% for some stats. Have limits to these stats.</li>
+                    <li>TBA</li>
                 </ul>
 
                 <h2>Design and Quality Assurance Team</h2>

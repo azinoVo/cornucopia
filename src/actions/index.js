@@ -203,6 +203,8 @@ export const guessWin = () => {
 }
 
 export const INTERACT_SPECIAL_SAND = "INTERACT_SPECIAL_SAND";
+export const INTERACT_SPECIAL_GLASS = "INTERACT_SPECIAL_GLASS";
+
 
 
 export const interactSpecial = (actionSet) => dispatch => {
@@ -210,6 +212,8 @@ export const interactSpecial = (actionSet) => dispatch => {
 
     if(actionSet[0] === "cornucopian_sand") {
         dispatch({ type: INTERACT_SPECIAL_SAND, payload: actionSet })
+    } else if(actionSet[0] === "hourglass") {
+        dispatch({ type: INTERACT_SPECIAL_GLASS, payload: actionSet })
     }
 }
 

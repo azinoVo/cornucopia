@@ -20,6 +20,7 @@ import {
     NUMBER_WIN,
     GUESS_WIN,
     INTERACT_SPECIAL_SAND,
+    INTERACT_SPECIAL_GLASS
 } from '../actions';
 
 const initialState = {
@@ -646,7 +647,7 @@ const rootReducer = (state = initialState, action) => {
                                     water: 100,
                                     quality: 95,
                                     health: 95,
-                                    harvest: 95,
+                                    harvest: 50,
                                 } : content
                         }),
                         orchard_plot: state.user.orchard_plot.map((content) => {
@@ -656,7 +657,7 @@ const rootReducer = (state = initialState, action) => {
                                     water: 100,
                                     quality: 95,
                                     health: 95,
-                                    harvest: 95,
+                                    harvest: 50,
                                     reHarvest: 5
                                 } : content
                         }),
@@ -664,7 +665,40 @@ const rootReducer = (state = initialState, action) => {
                     },
                     game: {
                         ...state.game,
-                        log: [...state.game.log, `The sands of time has granted its blessing to your plots.`]
+                        log: [...state.game.log, `The sands have granted its blessing to your plots.`]
+                    } 
+                };
+
+                case INTERACT_SPECIAL_GLASS:
+                console.log("glass in reducer")
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        favor: state.user.favor + 100,
+                        specials: {
+                            ...state.user.specials,
+                            hourglass: state.user.specials.hourglass - 1
+                        },
+                        main_garden_plot: state.user.main_garden_plot.map((content) => {
+                            return (content.plotType !== "empty_plot") ?
+                                {
+                                    ...content,
+                                    harvest: 95,
+                                } : content
+                        }),
+                        orchard_plot: state.user.orchard_plot.map((content) => {
+                            return (content.plotType !== "empty_plot") ?
+                                {
+                                    ...content,
+                                    harvest: 95,
+                                } : content
+                        }),
+
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `The hourglass has sped up time.`]
                     } 
                 };
 
