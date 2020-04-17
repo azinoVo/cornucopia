@@ -25,10 +25,10 @@ import {
 
 const initialState = {
     user: {
-        energy: 2000,
-        essence: 5000,
+        energy: 200,
+        essence: 500,
         favor: 5,
-        water: 2000,
+        water: 95,
         inventory:
         {
             spring_seed: 2,
@@ -635,6 +635,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     user: {
                         ...state.user,
+                        energy: state.user.energy + 100,
                         favor: state.user.favor + 100,
                         specials: {
                             ...state.user.specials,
@@ -675,6 +676,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     user: {
                         ...state.user,
+                        energy: state.user.energy + 100,
                         favor: state.user.favor + 100,
                         specials: {
                             ...state.user.specials,
