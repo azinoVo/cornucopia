@@ -80,6 +80,7 @@ const initialState = {
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "tree_sapling"],
         plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
+        date: 0,
         calendar: [
             {id: 1, date: "Spring Cycle: Day I", benefit: ""},
             {id: 2, date: "Spring Cycle: Day II", benefit: ""},

@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Popup from "reactjs-popup";
-import { guessWin } from '../actions';
+import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 
-const Calendar = () => {
+const Calendar = ({ calendarList, date }) => {
+    const [calendar, setCalendar] = useState([])
+    const [day, setDay] = useState("")
+
+
+    useEffect(() => {
+        setCalendar(calendarList)
+    }, [calendarList])
+
+    useEffect(() => {
+        setDay(date)
+    }, [date])
+
 
     const dispatch = useDispatch()
 
@@ -13,7 +25,7 @@ const Calendar = () => {
 
             {close => (
                 <div className="calendar-modal">
-                    <h1>Today is "set custom date here"</h1>
+                    <h1>Today is {calendar[day].date}</h1>
                     <p>Description of the date and clues to benefits</p>
                     
                     <div className="content">
@@ -39,5 +51,9 @@ const Calendar = () => {
     )
 };
 
+const mapStateToProps = state => ({
+    date: state.game.date,
+    calendarList: state.game.calendar
+});
 
-export default Calendar;
+export default connect(mapStateToProps, {})(Calendar);
