@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import GameLog from './GameLog';
 import NumberModal from './NumberModal';
 import GuessTheCardModal from './GuessTheCardModal';
+import Calendar from './Calendar';
 
 
 const Cornucopia = () => {
@@ -16,12 +17,8 @@ const Cornucopia = () => {
                     <div className='deity-actions'>
                         <NumberModal />
                         <GuessTheCardModal />
-
-                        {/* Possible feature where user chooses what to offer the tree and get rewards. */}
-                        <button>Action II</button>
-
-                        {/* Feature that changes the time of day immediately at the cost of some favor. */}
-                        <button>Action III</button>
+                        <Calendar />
+                        
                     </div>
                 </div>
                 <GameLog />

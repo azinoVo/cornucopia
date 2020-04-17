@@ -9,7 +9,7 @@ const Calendar = () => {
     const dispatch = useDispatch()
 
     return (
-        <Popup trigger={<button className="button">Guess The Card</button>} modal>
+        <Popup trigger={<button className="button">Calendar</button>} modal>
 
             {close => (
                 <div className="calendar-modal">
