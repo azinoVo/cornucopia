@@ -20,7 +20,8 @@ import {
     NUMBER_WIN,
     GUESS_WIN,
     INTERACT_SPECIAL_SAND,
-    INTERACT_SPECIAL_GLASS
+    INTERACT_SPECIAL_GLASS,
+    CHANGE_DATE
 } from '../actions';
 
 const initialState = {
@@ -47,7 +48,7 @@ const initialState = {
             hourglass: 0,
         },
         limits: {
-            water_limit: 100,
+            water_limit: 250,
             energy_limit: 200,
             favor_limit: 100,
             main_garden_plot: 6,
@@ -724,6 +725,37 @@ const rootReducer = (state = initialState, action) => {
                     game: {
                         ...state.game,
                         log: [...state.game.log, `The hourglass has sped up time.`]
+                    } 
+                };
+
+                case CHANGE_DATE:
+                console.log("glass in reducer")
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        energy: 200,
+                        favor: state.user.favor + 5,
+                        main_garden_plot: state.user.main_garden_plot.map((content, index) => {
+                            return (content.plotType !== "empty_plot") ?
+                                {
+                                    ...content,
+                                    harvest: state.user.main_garden_plot[index].harvest + 10,
+                                } : content
+                        }),
+                        orchard_plot: state.user.orchard_plot.map((content, index) => {
+                            return (content.plotType !== "empty_plot") ?
+                                {
+                                    ...content,
+                                    harvest: state.user.orchard_plot[index].harvest + 5,
+                                } : content
+                        }),
+
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `A new day has passed.`],
+                        date: action.payload === 19 ? 0 : state.game.date+1,
                     } 
                 };
 

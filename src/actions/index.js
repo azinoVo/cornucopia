@@ -218,4 +218,16 @@ export const interactSpecial = (actionSet) => dispatch => {
 }
 
 
+export const CHANGE_DATE = "CHANGE_DATE";
+
+export const progressDate = (day) => {
+    console.log("change Date", day)
+    return {
+        type: CHANGE_DATE,
+        payload: day,
+    }
+}
+
+
+
 

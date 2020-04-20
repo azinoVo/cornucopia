@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Popup from "reactjs-popup";
+import { progressDate } from '../actions';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -9,6 +10,8 @@ const Calendar = ({ calendarList, date }) => {
     const [day, setDay] = useState("")
 
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
         setCalendar(calendarList)
     }, [calendarList])
@@ -16,9 +19,6 @@ const Calendar = ({ calendarList, date }) => {
     useEffect(() => {
         setDay(date)
     }, [date])
-
-
-    const dispatch = useDispatch()
 
     return (
         <Popup trigger={<button className="button">Calendar</button>} modal>
@@ -30,7 +30,7 @@ const Calendar = ({ calendarList, date }) => {
                     
                     <div className="content">
                         <h2>Do you want to rest for the day?</h2>
-                        <button>Rest</button>
+                        <button onClick={() => dispatch(progressDate(date))}>Rest</button>
                     </div>
 
                     <div className="actions">
