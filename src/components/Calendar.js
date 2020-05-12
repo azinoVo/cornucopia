@@ -26,7 +26,7 @@ const Calendar = ({ calendarList, date }) => {
             {close => (
                 <div className="calendar-modal">
                     <h1>Today is {calendar[day].date}</h1>
-                    <p>Description of the date and clues to benefits</p>
+                    <p>{calendar[day].benefit}</p>
                     
                     <div className="content">
                         <h2>Do you want to rest for the day?</h2>
