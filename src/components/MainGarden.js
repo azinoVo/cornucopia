@@ -66,7 +66,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
 
     return (
         <section className='main-content'>
-            <h1 className='tab-header'>Main Garden</h1>
+            <h1 className='tab-header'>Main Garden, {calendar[date].date}</h1>
             <div className='reuseGarden-status'>
                 <div>Energy: {Math.floor([userInfo.energy / limits.energy_limit] * 100)}%</div>
                 <Progress
@@ -102,6 +102,7 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                             color: '#BFE6FF'
                         }
                     }} />
+
             </div>
 
             <div className='main'>
