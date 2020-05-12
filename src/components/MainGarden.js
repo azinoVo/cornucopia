@@ -8,7 +8,7 @@ import { Progress } from 'react-sweet-progress';
 import "react-sweet-progress/lib/style.css";
 import HarvestModal from './HarvestModal';
 
-const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices, interactList }) => {
+const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices, interactList, date, calendar }) => {
     const [gardenPlot, setGardenPlot] = useState([])
     const [userInfo, setUserInfo] = useState({})
     const [availableSeeds, setAvailableSeeds] = useState({})
@@ -305,7 +305,8 @@ const MainGarden = ({ mainGarden, user, limits, energyReq, cropList, cropPrices,
                                             cropPrices={cropPrices}
                                             storeCropHandler={storeCropHandler}
                                             sellCropHandler={sellCropHandler}
-                                            amountHarvested={1} />
+                                            amountHarvested={1}
+                                            dateEntry={calendar[date].type} />
                                 }
 
                             </div>
@@ -329,7 +330,9 @@ const mapStateToProps = state => ({
     limits: state.user.limits,
     energyReq: state.game.energyReq,
     cropList: state.game.cropList,
-    cropPrices: state.game.cropPrices
+    cropPrices: state.game.cropPrices,
+    date: state.game.date,
+    calendar: state.game.calendar
 });
 
 export default connect(mapStateToProps, { plantSeed, interact, storeCrop, sellCrop })(MainGarden);

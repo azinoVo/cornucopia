@@ -2,7 +2,7 @@ import React from "react";
 import Popup from "reactjs-popup";
 import { Table } from 'reactstrap';
 
-export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amountHarvested }) => (
+export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amountHarvested, dateEntry }) => (
     <Popup trigger={<button className="button">Harvest</button>} modal>
         {close => (
             <div className="harvest-modal">
@@ -20,6 +20,7 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
 
                 <div className="content">
                     <h2>{plotInfo.product}</h2>
+                    <h2>TESTING - dateEntry: {dateEntry} - plotInfo: {plotInfo.plotType}</h2>
 
                     <Table bordered>
                         <thead>
@@ -33,6 +34,13 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
                                 <td>Base Value</td>
                                 <td>{cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`]}</td>
                             </tr>
+
+                            {plotInfo.plotType.includes('seed') && <tr>
+                                <td>Seasonal Bonus</td>
+                                {dateEntry === plotInfo.plotType && <td>+ {Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 1.5)}</td>}
+                                {dateEntry === `max_${plotInfo.plotType}` && <td>+ {Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 2)}</td>}
+
+                            </tr>}
 
                             <tr>
                                 <td>Water Bonus</td>
@@ -60,7 +68,10 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
                                     Math.ceil((cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
                                         Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
                                         Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +
-                                        Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100]))* amountHarvested)
+                                        Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100])) +
+                                        (dateEntry === plotInfo.plotType && Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 1.5)) +
+                                        (dateEntry === `max_${plotInfo.plotType}` && Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 2))
+                                        * amountHarvested)
                                 } Mana Essences</td>
                             </tr>
                         </tbody>
@@ -78,7 +89,10 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
                                 value: Math.ceil((cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +
-                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100]))*amountHarvested)
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100])) +
+                                    (dateEntry === plotInfo.plotType && Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 1.5)) +
+                                    (dateEntry === `max_${plotInfo.plotType}` && Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 2))
+                                    *amountHarvested)
                             }, plotInfo.id)
                             close();
                         }}
@@ -97,7 +111,10 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
                                 value: Math.ceil((cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.water * 0.0015) +
                                     Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * plotInfo.health * 0.0025) +
-                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100]))*amountHarvested)
+                                    Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * [plotInfo.quality / 100])) +
+                                    (dateEntry === plotInfo.plotType && Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 1.5)) +
+                                    (dateEntry === `max_${plotInfo.plotType}` && Math.ceil(cropPrices[`${plotInfo.plotType}`][`${plotInfo.product}`] * 2))
+                                    *amountHarvested)
                             }, plotInfo.id)
                             close();
                         }}
