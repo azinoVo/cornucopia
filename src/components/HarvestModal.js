@@ -20,7 +20,6 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
 
                 <div className="content">
                     <h2>{plotInfo.product}</h2>
-                    <h2>TESTING - dateEntry: {dateEntry} - plotInfo: {plotInfo.plotType}</h2>
 
                     <Table bordered>
                         <thead>
