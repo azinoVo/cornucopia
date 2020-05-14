@@ -11,7 +11,6 @@ const Home = () => {
                 <ul>
                     <li>Possibly add a quest system with rewards.</li>
                     <li>Loader if possible for planting the seeds before the gif animation begins.</li>
-                    <li>Add way to move to next day - this will progress all plants by certain amount.</li>
                     <li>Have a property tax that is collected the first or last day of the month as you progress in days. Buy plots sparingly.</li>
                     <li>Seasonal bonuses</li>
                     <li>
