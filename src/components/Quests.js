@@ -11,6 +11,10 @@ const Quests = () => {
 
             {/* Harvest a _____ from Orchard. */}
 
+            {/* Harvest _____ crops. This may need a counter within the store. */}
+
+            {/* Harvest _____ fruits from trees. Also require a counter. */}
+
         </section>
     );
 }
