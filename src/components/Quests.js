@@ -13,7 +13,11 @@ const Quests = () => {
 
             {/* Harvest _____ crops. This may need a counter within the store. */}
 
-            {/* Harvest _____ fruits from trees. Also require a counter. */}
+            {/* Harvest _____ fruits from trees. Also require a counter in store. */}
+
+            {/* Have maximum number of garden plots. */}
+
+            {/* Have maximum number of orchard plots. */}
 
         </section>
     );
