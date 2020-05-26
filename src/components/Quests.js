@@ -19,6 +19,8 @@ const Quests = () => {
 
             {/* Have maximum number of orchard plots. */}
 
+            {/* Have all Hearts within your inventory. Reward possibly a massive amount of money and a new feature. */}
+
         </section>
     );
 }
