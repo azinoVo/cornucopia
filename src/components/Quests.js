@@ -21,6 +21,8 @@ const Quests = () => {
 
             {/* Have all Hearts within your inventory. Reward possibly a massive amount of money and a new feature. */}
 
+            {/* Have 10000 water capacity. */}
+
         </section>
     );
 }

@@ -9,6 +9,8 @@ const Home = () => {
                 </p>
                 <h2>To-Do List</h2>
                 <ul>
+                    <li>Add the ability to make a character with specific stats and abilities.</li>
+                    <li>Have a way to increase the amount of energy</li>
                     <li>Possibly add a quest system with rewards.</li>
                     <li>Have a property tax that is collected the first or last day of the month as you progress in days. Buy plots sparingly.</li>
                     <li>Add Animals to Barnyard where animals are raised and animal products are harvested</li>
