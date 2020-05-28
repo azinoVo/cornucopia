@@ -10,6 +10,14 @@ const Character = ({ log }) => {
     return (
     <div>
         <h1>This is the character creation page.</h1>
+        <div className='stats'>
+            <div>Constitution</div>
+            <div>Attack</div>
+            <div>Defense</div>
+            <div>Dexterity</div>
+            <div>Intelligence</div>
+            <div>Speed</div>
+        </div>
     </div>
     );
 }
