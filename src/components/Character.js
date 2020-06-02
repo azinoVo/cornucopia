@@ -26,15 +26,45 @@ const Character = ({ log }) => {
         <h1>This is the character creation page.</h1>
         <div className='stats'>
             <div>
+                <div>BOY</div>
+                <div>GIRL</div>
+            </div>
+
+            <div>
                 <button>REDUCE</button>
                 <span>Constitution</span>
-                <button>Increase</button>
+                <button>INCREASE</button>
             </div>
-            <div>Attack</div>
-            <div>Defense</div>
-            <div>Dexterity</div>
-            <div>Intelligence</div>
-            <div>Speed</div>
+
+            <div>
+                <button>REDUCE</button>
+                <span>Attack</span>
+                <button>INCREASE</button>
+            </div>
+
+            <div>
+                <button>REDUCE</button>
+                <span>Defense</span>
+                <button>INCREASE</button>
+            </div>
+
+            <div>
+                <button>REDUCE</button>
+                <span>Dexterity</span>
+                <button>INCREASE</button>
+            </div>
+
+            <div>
+                <button>REDUCE</button>
+                <span>Intelligence</span>
+                <button>INCREASE</button>
+            </div>
+
+            <div>
+                <button>REDUCE</button>
+                <span>Speed</span>
+                <button>INCREASE</button>
+            </div>
         </div>
     </div>
     );
