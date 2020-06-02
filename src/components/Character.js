@@ -10,10 +10,17 @@ const Character = ({ log }) => {
     const [intelligence, setIntelligence] = useState(0)
     const [speed, setSpeed] = useState(0)
 
-    controlStats = (control, stat) => {
+    controlStatsIncrease = (control, stat) => {
         // control will be either increase or decrease
         // stat is the stat that will be controlled
-        console.log("Within controlStats")
+        console.log("Within controlStats INCREASE")
+
+    }
+
+    controlStatsDecrease = (control, stat) => {
+        // control will be either increase or decrease
+        // stat is the stat that will be controlled
+        console.log("Within controlStats DECREASE")
 
     }
 
