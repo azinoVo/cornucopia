@@ -10,26 +10,35 @@ const Character = ({ log }) => {
     const [intelligence, setIntelligence] = useState(0)
     const [speed, setSpeed] = useState(0)
 
-    controlStatsIncrease = (stat) => {
+    const controlStatsIncrease = (stat) => {
         // stat is the stat that will be controlled
         console.log("Within controlStats INCREASE")
-        if(statPoints > 0) {
+        if(statPoints >= 1) {
             switch (stat) {
+                case 'constitution':
+                    setConstitution(constitution+1)
+                    setStatPoints(statPoints-1)
+                    break;
                 case 'attack':
                     setAttack(attack+1)
                     setStatPoints(statPoints-1)
+                    break;
                 case 'defense':
                     setDefense(defense+1)
                     setStatPoints(statPoints-1)
+                    break;
                 case 'dexterity':
                     setDexterity(dexterity+1)
                     setStatPoints(statPoints-1)
+                    break;
                 case 'intelligence':
                     setIntelligence(intelligence+1)
                     setStatPoints(statPoints-1)
+                    break;
                 case 'speed':
                     setSpeed(speed+1)
                     setStatPoints(statPoints-1)
+                    break;
                 default:
                     console.log('None matches, Check it again.')
             }
@@ -37,27 +46,36 @@ const Character = ({ log }) => {
         
     }
 
-    controlStatsDecrease = (stat) => {
+    const controlStatsDecrease = (stat) => {
         // stat is the stat that will be controlled
         console.log("Within controlStats DECREASE")
 
-        if(statPoints <= 30) {
+        if(statPoints <= 29) {
             switch (stat) {
+                case 'constitution':
+                    setConstitution(constitution-1)
+                    setStatPoints(statPoints+1)
+                    break;
                 case 'attack':
                     setAttack(attack-1)
                     setStatPoints(statPoints+1)
+                    break;
                 case 'defense':
                     setDefense(defense-1)
                     setStatPoints(statPoints+1)
+                    break;
                 case 'dexterity':
                     setDexterity(dexterity-1)
                     setStatPoints(statPoints+1)
+                    break;
                 case 'intelligence':
                     setIntelligence(intelligence-1)
                     setStatPoints(statPoints+1)
+                    break;
                 case 'speed':
                     setSpeed(speed-1)
                     setStatPoints(statPoints+1)
+                    break;
                 default:
                     console.log('None matches, Check it again.')
             }
@@ -78,9 +96,13 @@ const Character = ({ log }) => {
             </div>
 
             <div>
-                <button>REDUCE</button>
-                <span>Constitution</span>
-                <button>INCREASE</button>
+                <p>Remaining Stat Points: {statPoints}</p>
+            </div>
+
+            <div>
+                <button onClick={() => controlStatsDecrease('constitution') }>REDUCE</button>
+                <span>Constitution: {constitution}</span>
+                <button onClick={() => controlStatsIncrease('constitution') }>INCREASE</button>
             </div>
 
             <div>
