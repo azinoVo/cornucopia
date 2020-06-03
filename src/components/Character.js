@@ -10,18 +10,58 @@ const Character = ({ log }) => {
     const [intelligence, setIntelligence] = useState(0)
     const [speed, setSpeed] = useState(0)
 
-    controlStatsIncrease = (control, stat) => {
-        // control will be either increase or decrease
+    controlStatsIncrease = (stat) => {
         // stat is the stat that will be controlled
         console.log("Within controlStats INCREASE")
-
+        if(statPoints > 0) {
+            switch (stat) {
+                case 'attack':
+                    setAttack(attack+1)
+                    setStatPoints(statPoints-1)
+                case 'defense':
+                    setDefense(defense+1)
+                    setStatPoints(statPoints-1)
+                case 'dexterity':
+                    setDexterity(dexterity+1)
+                    setStatPoints(statPoints-1)
+                case 'intelligence':
+                    setIntelligence(intelligence+1)
+                    setStatPoints(statPoints-1)
+                case 'speed':
+                    setSpeed(speed+1)
+                    setStatPoints(statPoints-1)
+                default:
+                    console.log('None matches, Check it again.')
+            }
+        }
+        
     }
 
-    controlStatsDecrease = (control, stat) => {
-        // control will be either increase or decrease
+    controlStatsDecrease = (stat) => {
         // stat is the stat that will be controlled
         console.log("Within controlStats DECREASE")
 
+        if(statPoints <= 30) {
+            switch (stat) {
+                case 'attack':
+                    setAttack(attack-1)
+                    setStatPoints(statPoints+1)
+                case 'defense':
+                    setDefense(defense-1)
+                    setStatPoints(statPoints+1)
+                case 'dexterity':
+                    setDexterity(dexterity-1)
+                    setStatPoints(statPoints+1)
+                case 'intelligence':
+                    setIntelligence(intelligence-1)
+                    setStatPoints(statPoints+1)
+                case 'speed':
+                    setSpeed(speed-1)
+                    setStatPoints(statPoints+1)
+                default:
+                    console.log('None matches, Check it again.')
+            }
+        }
     }
 
     useEffect(() => {
