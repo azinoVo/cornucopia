@@ -13,7 +13,6 @@ const Character = ({ log }) => {
     const controlStatsIncrease = (stat) => {
         // stat is the stat that will be controlled
         console.log("Within controlStats INCREASE")
-        if(statPoints >= 1) {
             switch (stat) {
                 case 'constitution':
                     setConstitution(constitution+1)
@@ -42,7 +41,6 @@ const Character = ({ log }) => {
                 default:
                     console.log('None matches, Check it again.')
             }
-        }
         
     }
 
@@ -50,7 +48,6 @@ const Character = ({ log }) => {
         // stat is the stat that will be controlled
         console.log("Within controlStats DECREASE")
 
-        if(statPoints <= 29) {
             switch (stat) {
                 case 'constitution':
                     setConstitution(constitution-1)
@@ -79,7 +76,6 @@ const Character = ({ log }) => {
                 default:
                     console.log('None matches, Check it again.')
             }
-        }
     }
 
     useEffect(() => {
@@ -100,39 +96,39 @@ const Character = ({ log }) => {
             </div>
 
             <div>
-                <button onClick={() => controlStatsDecrease('constitution') }>REDUCE</button>
                 <span>Constitution: {constitution}</span>
-                <button onClick={() => controlStatsIncrease('constitution') }>INCREASE</button>
+                {constitution > 0 && <button onClick={() => controlStatsDecrease('constitution') }>-</button>}
+                {statPoints > 0 && <button onClick={() => controlStatsIncrease('constitution') }>+</button>}
             </div>
 
             <div>
-                <button>REDUCE</button>
-                <span>Attack</span>
-                <button>INCREASE</button>
+                <span>Attack: {attack}</span>
+                {attack > 0 && <button onClick={() => controlStatsDecrease('attack') }>-</button>}
+                {statPoints > 0 && <button onClick={() => controlStatsIncrease('attack') }>+</button>}
             </div>
 
             <div>
-                <button>REDUCE</button>
-                <span>Defense</span>
-                <button>INCREASE</button>
+                <span>Defense: {defense}</span>
+                {defense > 0 && <button onClick={() => controlStatsDecrease('defense') }>-</button>}
+                {statPoints > 0 && <button onClick={() => controlStatsIncrease('defense') }>+</button>}
             </div>
 
             <div>
-                <button>REDUCE</button>
-                <span>Dexterity</span>
-                <button>INCREASE</button>
+                <span>Dexterity: {dexterity}</span>
+                {dexterity > 0 && <button onClick={() => controlStatsDecrease('dexterity') }>-</button>}
+                {statPoints > 0 && <button onClick={() => controlStatsIncrease('dexterity') }>+</button>}
             </div>
 
             <div>
-                <button>REDUCE</button>
-                <span>Intelligence</span>
-                <button>INCREASE</button>
+                <span>Intelligence: {intelligence}</span>
+                {intelligence > 0 && <button onClick={() => controlStatsDecrease('intelligence') }>-</button>}
+                {statPoints > 0 && <button onClick={() => controlStatsIncrease('intelligence') }>+</button>}
             </div>
 
             <div>
-                <button>REDUCE</button>
-                <span>Speed</span>
-                <button>INCREASE</button>
+                <span>Speed: {speed}</span>
+                {speed > 0 && <button onClick={() => controlStatsDecrease('speed') }>-</button>}
+                {statPoints > 0 && <button onClick={() => controlStatsIncrease('speed') }>+</button>}
             </div>
         </div>
     </div>
