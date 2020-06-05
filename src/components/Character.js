@@ -96,37 +96,37 @@ const Character = ({ log }) => {
             </div>
 
             <div>
-                <span>Constitution: {constitution}</span>
+                <span>Constitution: {constitution} : Determines how much Health you have.</span>
                 {constitution > 0 && <button onClick={() => controlStatsDecrease('constitution') }>-</button>}
                 {statPoints > 0 && <button onClick={() => controlStatsIncrease('constitution') }>+</button>}
             </div>
 
             <div>
-                <span>Attack: {attack}</span>
+                <span>Attack: {attack} : Determines how much damage your physical attacks and abilities do.</span>
                 {attack > 0 && <button onClick={() => controlStatsDecrease('attack') }>-</button>}
                 {statPoints > 0 && <button onClick={() => controlStatsIncrease('attack') }>+</button>}
             </div>
 
             <div>
-                <span>Defense: {defense}</span>
+                <span>Defense: {defense} : Determines how much damage you take.</span>
                 {defense > 0 && <button onClick={() => controlStatsDecrease('defense') }>-</button>}
                 {statPoints > 0 && <button onClick={() => controlStatsIncrease('defense') }>+</button>}
             </div>
 
             <div>
-                <span>Dexterity: {dexterity}</span>
+                <span>Dexterity: {dexterity} : Determines your dodge chance and attack of specific abilities.</span>
                 {dexterity > 0 && <button onClick={() => controlStatsDecrease('dexterity') }>-</button>}
                 {statPoints > 0 && <button onClick={() => controlStatsIncrease('dexterity') }>+</button>}
             </div>
 
             <div>
-                <span>Intelligence: {intelligence}</span>
+                <span>Intelligence: {intelligence} : Determines the damage you deal using magic abilities.</span>
                 {intelligence > 0 && <button onClick={() => controlStatsDecrease('intelligence') }>-</button>}
                 {statPoints > 0 && <button onClick={() => controlStatsIncrease('intelligence') }>+</button>}
             </div>
 
             <div>
-                <span>Speed: {speed}</span>
+                <span>Speed: {speed} : Determines your turn order and amount of times you get a turn.</span>
                 {speed > 0 && <button onClick={() => controlStatsDecrease('speed') }>-</button>}
                 {statPoints > 0 && <button onClick={() => controlStatsIncrease('speed') }>+</button>}
             </div>
