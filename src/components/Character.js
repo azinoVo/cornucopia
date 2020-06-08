@@ -78,6 +78,16 @@ const Character = ({ log }) => {
         }
     }
 
+    const resetPoints = () => {
+        setAttack(0)
+        setConstitution(0)
+        setDefense(0)
+        setDexterity(0)
+        setIntelligence(0)
+        setSpeed(0)
+        setStatPoints(30)
+    }
+
     useEffect(() => {
         console.log("This is the character creation component.")
     }, [log])
@@ -150,8 +160,11 @@ const Character = ({ log }) => {
                     {/* {speed > 0 && <button onClick={() => controlStatsDecrease('speed')}>-</button>}
                     {statPoints > 0 && <button onClick={() => controlStatsIncrease('speed')}>+</button>} */}
                     <span>Speed: {speed} : Determines your turn order and amount of times you get a turn.</span>
-
                 </div>
+
+
+                <button disabled={statPoints < 30 ? false : true} onClick={() => resetPoints()}>RESET</button>
+                <button disabled={statPoints === 0 ? false : true}>CONFIRM</button>
             </div>
         </div>
     );
