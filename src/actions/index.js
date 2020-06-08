@@ -228,6 +228,16 @@ export const progressDate = (day) => {
     }
 }
 
+export const SET_STATS = "SET_STATS";
+
+export const setCharacterStats = (stats) => {
+    console.log('changing character stats, action')
+    return {
+        type: SET_STATS,
+        payload: stats,
+    }
+}
+
 
 
 

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { setCharacterStats } from '../actions';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
 const Character = ({ log }) => {
@@ -9,6 +11,8 @@ const Character = ({ log }) => {
     const [dexterity, setDexterity] = useState(0)
     const [intelligence, setIntelligence] = useState(0)
     const [speed, setSpeed] = useState(0)
+
+    const dispatch = useDispatch()
 
     const controlStatsIncrease = (stat) => {
         // stat is the stat that will be controlled
@@ -97,6 +101,7 @@ const Character = ({ log }) => {
         }
 
         console.log('stats', stats)
+        dispatch(setCharacterStats(stats))
     }
 
     useEffect(() => {
@@ -185,4 +190,4 @@ const mapStateToProps = state => ({
     log: state.game.log,
 });
 
-export default connect(mapStateToProps, {})(Character);
+export default connect(mapStateToProps, { setCharacterStats })(Character);

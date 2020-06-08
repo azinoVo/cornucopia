@@ -21,11 +21,20 @@ import {
     GUESS_WIN,
     INTERACT_SPECIAL_SAND,
     INTERACT_SPECIAL_GLASS,
-    CHANGE_DATE
+    CHANGE_DATE,
+    SET_STATS
 } from '../actions';
 
 const initialState = {
     user: {
+        stats: {
+            'constitution': 0,
+            'attack': 0,
+            'defense': 0,
+            'dexterity': 0,
+            'intelligence': 0,
+            'speed': 0
+        },
         energy: 2000,
         essence: 500,
         favor: 5,
@@ -758,6 +767,30 @@ const rootReducer = (state = initialState, action) => {
                         date: action.payload === 19 ? 0 : state.game.date+1,
                     } 
                 };
+
+                case SET_STATS:
+                console.log('set stats in reducer', action.payload)
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        stats: {
+                            'constitution': action.payload['constitution'],
+                            'attack': action.payload['attack'],
+                            'defense': action.payload['defense'],
+                            'dexterity': action.payload['constitution'],
+                            'intelligence': action.payload['intelligence'],
+                            'speed': action.payload['speed']
+                        }
+
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `Your character stats have been confirmed.`],
+                    } 
+                };
+
+
 
         default:
             return state;
