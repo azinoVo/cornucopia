@@ -5,9 +5,6 @@ import NumberModal from './NumberModal';
 import GuessTheCardModal from './GuessTheCardModal';
 import Calendar from './Calendar';
 
-import Character from './Character';
-
-
 const Cornucopia = () => {
 
     return (
@@ -21,8 +18,6 @@ const Cornucopia = () => {
                         <GuessTheCardModal />
                         <Calendar />
                     </div>
-
-                    <Character />
                 </div>
                 <GameLog />
             </div>
