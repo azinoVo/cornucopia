@@ -12,7 +12,6 @@ const Character = ({ log }) => {
 
     const controlStatsIncrease = (stat) => {
         // stat is the stat that will be controlled
-        console.log("Within controlStats INCREASE")
         switch (stat) {
             case 'constitution':
                 setConstitution(constitution + 1)
@@ -46,7 +45,6 @@ const Character = ({ log }) => {
 
     const controlStatsDecrease = (stat) => {
         // stat is the stat that will be controlled
-        console.log("Within controlStats DECREASE")
 
         switch (stat) {
             case 'constitution':
@@ -86,6 +84,19 @@ const Character = ({ log }) => {
         setIntelligence(0)
         setSpeed(0)
         setStatPoints(30)
+    }
+
+    const confirmStats = () => {
+        let stats = {
+            'constitution': constitution+1,
+            'attack': attack+1,
+            'defense': defense+1,
+            'dexterity': dexterity+1,
+            'intelligence': intelligence+1,
+            'speed': speed+1
+        }
+
+        console.log('stats', stats)
     }
 
     useEffect(() => {
@@ -164,7 +175,7 @@ const Character = ({ log }) => {
 
 
                 <button disabled={statPoints < 30 ? false : true} onClick={() => resetPoints()}>RESET</button>
-                <button disabled={statPoints === 0 ? false : true}>CONFIRM</button>
+                <button disabled={statPoints === 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
             </div>
         </div>
     );
