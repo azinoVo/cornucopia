@@ -92,6 +92,7 @@ const Character = ({ log }) => {
 
     const confirmStats = () => {
         let stats = {
+            'level': 1,
             'constitution': constitution+1,
             'attack': attack+1,
             'defense': defense+1,
