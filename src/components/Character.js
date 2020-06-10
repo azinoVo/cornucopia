@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 const Character = ({ log }) => {
     const [statPoints, setStatPoints] = useState(30)
+    const [gender, setGender] = useState('Male')
     const [constitution, setConstitution] = useState(0)
     const [attack, setAttack] = useState(0)
     const [defense, setDefense] = useState(0)
@@ -80,6 +81,14 @@ const Character = ({ log }) => {
         }
     }
 
+    const changeGender = () => {
+        if(gender === 'Male') {
+            setGender('Female')
+        } else {
+            setGender('Male')
+        }
+    }
+
     const resetPoints = () => {
         setAttack(0)
         setConstitution(0)
@@ -92,6 +101,7 @@ const Character = ({ log }) => {
 
     const confirmStats = () => {
         let stats = {
+            'gender': gender,
             'level': 1,
             'constitution': constitution+1,
             'attack': attack+1,
@@ -114,8 +124,8 @@ const Character = ({ log }) => {
             <h1>This is the character creation page.</h1>
             <div className='stats'>
                 <div>
-                    <div>BOY</div>
-                    <div>GIRL</div>
+                    <p>Gender: {gender}</p>
+                    <button onClick={() => changeGender()}>Change Gender</button>
                 </div>
 
                 <div>

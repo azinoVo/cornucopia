@@ -28,6 +28,7 @@ import {
 const initialState = {
     user: {
         stats: {
+            'gender': 'Male',
             'level': 1,
             'constitution': 0,
             'attack': 0,
@@ -776,6 +777,7 @@ const rootReducer = (state = initialState, action) => {
                     user: {
                         ...state.user,
                         stats: {
+                            'gender': action.payload['gender'],
                             'level': action.payload['level'],
                             'constitution': action.payload['constitution'],
                             'attack': action.payload['attack'],
