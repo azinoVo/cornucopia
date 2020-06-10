@@ -13,7 +13,7 @@ const CharacterDisplay = ({ stats }) => {
     return (
         <div className='character-display'>
             <h1>Character Stats</h1>
-            <p>INSERT IMAGE OF GENDER</p>
+            <p>{charStats['gender']}, INSERT IMAGE OF GENDER</p>
 
             <div className='stats-block'>
                 <p>Character Level: {charStats['level']}</p>
