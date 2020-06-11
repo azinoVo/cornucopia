@@ -37,6 +37,14 @@ const initialState = {
             'intelligence': 0,
             'speed': 0
         },
+        battleStats: {
+            'health': 0,
+            'attackPower': 0,
+            'magicPower': 0,
+            'damageReduction': 0,
+            'dodge': 0,
+            'turnSpeed': 0
+        },
         energy: 2000,
         essence: 500,
         favor: 5,
@@ -785,16 +793,21 @@ const rootReducer = (state = initialState, action) => {
                             'dexterity': action.payload['dexterity'],
                             'intelligence': action.payload['intelligence'],
                             'speed': action.payload['speed']
+                        },
+                        battleStats: {
+                            'health': Math.ceil(action.payload['constitution']*6.25),
+                            'attackPower': Math.ceil(action.payload['attack']*1.35),
+                            'magicPower': Math.ceil(action.payload['intelligence']*1.35),
+                            'damageReduction': Math.ceil(action.payload['defense']*1.65),
+                            'dodge': Math.ceil(action.payload['dexterity']*1.25),
+                            'turnSpeed': Math.ceil(action.payload['speed']*1.15)
                         }
-
                     },
                     game: {
                         ...state.game,
                         log: [...state.game.log, `Your character stats have been confirmed.`],
                     } 
                 };
-
-
 
         default:
             return state;
