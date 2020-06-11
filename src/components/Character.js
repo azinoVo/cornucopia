@@ -135,58 +135,40 @@ const Character = ({ log }) => {
                 <div>
                     <button disabled={constitution > 0 ? false : true} onClick={() => controlStatsDecrease('constitution')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('constitution')}>+</button>
-
-                    {/* {constitution > 0 && <button onClick={() => controlStatsDecrease('constitution')} >-</button>}
-                    {statPoints > 0 && <button onClick={() => controlStatsIncrease('constitution')}>+</button>} */}
-                    <span>Constitution: {constitution} : Determines how much Health you have.</span>
+                    <span>Constitution: {constitution}, Health Points: {Math.ceil([constitution+1]*6.25)} <strong>Amount of points before mortality.</strong></span>
                 </div>
 
                 <div>
                     <button disabled={attack > 0 ? false : true} onClick={() => controlStatsDecrease('attack')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('attack')}>+</button>
-
-                    {/* {attack > 0 && <button onClick={() => controlStatsDecrease('attack')}>-</button>}
-                    {statPoints > 0 && <button onClick={() => controlStatsIncrease('attack')}>+</button>} */}
-                    <span>Attack: {attack} : Determines how much damage your physical attacks and abilities do.</span>
+                    <span>Attack: {attack}, Attack Power: {Math.ceil([attack+1]*1.35)} <strong>Damage of Physical attacks and abilities.</strong></span>
                 </div>
 
                 <div>
                     <button disabled={defense > 0 ? false : true} onClick={() => controlStatsDecrease('defense')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('defense')}>+</button>
-
-                    {/* {defense > 0 && <button onClick={() => controlStatsDecrease('defense')}>-</button>}
-                    {statPoints > 0 && <button onClick={() => controlStatsIncrease('defense')}>+</button>} */}
-                    <span>Defense: {defense} : Determines how much damage you take.</span>
+                    <span>Defense: {defense}, Damage Reduction: {Math.ceil([defense+1]*1.65)}% <strong>Damage Mitigation.</strong></span>
 
                 </div>
 
                 <div>
                     <button disabled={dexterity > 0 ? false : true} onClick={() => controlStatsDecrease('dexterity')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('dexterity')}>+</button>
-
-                    {/* {dexterity > 0 && <button onClick={() => controlStatsDecrease('dexterity')}>-</button>}
-                    {statPoints > 0 && <button onClick={() => controlStatsIncrease('dexterity')}>+</button>} */}
-                    <span>Dexterity: {dexterity} : Determines your dodge chance and attack of specific abilities.</span>
+                    <span>Dexterity: {dexterity}, Dodge Chance: {Math.ceil([dexterity+1]*1.25)}% <strong>Determines your Dodge chance.</strong></span>
 
                 </div>
 
                 <div>
                     <button disabled={intelligence > 0 ? false : true} onClick={() => controlStatsDecrease('intelligence')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('intelligence')}>+</button>
-
-                    {/* {intelligence > 0 && <button onClick={() => controlStatsDecrease('intelligence')}>-</button>}
-                    {statPoints > 0 && <button onClick={() => controlStatsIncrease('intelligence')}>+</button>} */}
-                    <span>Intelligence: {intelligence} : Determines the damage you deal using magic abilities.</span>
+                    <span>Intelligence: {intelligence}, Magic Power: {Math.ceil([intelligence+1]*1.35)} <strong>Damage of Magical abilities.</strong></span>
 
                 </div>
 
                 <div>
                     <button disabled={speed > 0 ? false : true} onClick={() => controlStatsDecrease('speed')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('speed')}>+</button>
-
-                    {/* {speed > 0 && <button onClick={() => controlStatsDecrease('speed')}>-</button>}
-                    {statPoints > 0 && <button onClick={() => controlStatsIncrease('speed')}>+</button>} */}
-                    <span>Speed: {speed} : Determines your turn order and amount of times you get a turn.</span>
+                    <span>Speed: {speed}, Turn Speed: {Math.ceil([speed+1]*1.15)} <strong>Turn Priority.</strong></span>
                 </div>
 
 

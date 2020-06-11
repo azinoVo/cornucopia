@@ -782,7 +782,7 @@ const rootReducer = (state = initialState, action) => {
                             'constitution': action.payload['constitution'],
                             'attack': action.payload['attack'],
                             'defense': action.payload['defense'],
-                            'dexterity': action.payload['constitution'],
+                            'dexterity': action.payload['dexterity'],
                             'intelligence': action.payload['intelligence'],
                             'speed': action.payload['speed']
                         }

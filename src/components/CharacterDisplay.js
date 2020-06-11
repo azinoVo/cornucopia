@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setCharacterStats } from '../actions';
 
 const CharacterDisplay = ({ stats }) => {
     const [charStats, setCharStats] = useState({})
@@ -17,12 +16,12 @@ const CharacterDisplay = ({ stats }) => {
 
             <div className='stats-block'>
                 <p>Character Level: {charStats['level']}</p>
-                <p>Constitution: {charStats['constitution']}</p>
-                <p>Attack: {charStats['attack']}</p>
-                <p>Defense: {charStats['defense']}</p>
-                <p>Dexterity: {charStats['dexterity']}</p>
-                <p>Intelligence: {charStats['intelligence']}</p>
-                <p>Speed: {charStats['speed']}</p>
+                <p>Constitution: {charStats['constitution']}, Health: {Math.ceil(charStats['constitution']*6.25)}</p>
+                <p>Attack: {charStats['attack']}, Attack Power: {Math.ceil(charStats['attack']*1.35)}</p>
+                <p>Defense: {charStats['defense']}, Damage Reduction: {Math.ceil(charStats['defense']*1.65)}%</p>
+                <p>Dexterity: {charStats['dexterity']}, Dodge Chance: {Math.ceil(charStats['dexterity']*1.25)}%</p>
+                <p>Intelligence: {charStats['intelligence']}, Magic Power: {Math.ceil(charStats['intelligence']*1.35)}</p>
+                <p>Speed: {charStats['speed']}, Turn Speed: {Math.ceil(charStats['speed']*1.15)}</p>
             </div>
 
         </div>
