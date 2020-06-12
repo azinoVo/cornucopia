@@ -184,6 +184,37 @@ const initialState = {
                 Essence_of_the_One: 1000
             }
         },
+        encounters: [
+            {
+                id: 0,
+                name: 'wolf',
+                difficulty: 'easy',
+                stats: {
+                    health: 50,
+                    attackPower: 5,
+                    magicPower: 0,
+                    defense: 10,
+                    dodge: 5,
+                    speed: 6,
+                },
+                abilities: ['Ravenous Claws', 'Mark', 'Pack']
+            },
+            {
+                id: 1,
+                name: 'small dragon',
+                difficulty: 'hard',
+                stats: {
+                    health: 100,
+                    attackPower: 15,
+                    magicPower: 10,
+                    defense: 20,
+                    dodge: 15,
+                    speed: 8,
+                },
+                abilities: ['Breath', 'Tail Swipe', 'Bite']
+            }
+        ],
+        currentEncounter: {},
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
     },
     sculpture: ["idol_bird.png"]

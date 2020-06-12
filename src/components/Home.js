@@ -1,6 +1,7 @@
 import React from 'react';
 import Character from './Character';
 import CharacterDisplay from './CharacterDisplay';
+import BattleMenu from './BattleMenu';
 import GameLog from './GameLog'
 
 const Home = () => {
@@ -9,7 +10,9 @@ const Home = () => {
             <h1 className='tab-header'>Welcome to Cornucopia!</h1>
             <div className='home'>
                 <Character />
-                <CharacterDisplay />
+                <BattleMenu />
+
+
 
                 <h2>Design and Quality Assurance Team</h2>
                 <ul>

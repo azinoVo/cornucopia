@@ -154,7 +154,7 @@ const Character = ({ log }) => {
                 <div>
                     <button disabled={dexterity > 0 ? false : true} onClick={() => controlStatsDecrease('dexterity')}>-</button>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('dexterity')}>+</button>
-                    <span>Dexterity: {dexterity}, Dodge Chance: {Math.ceil([dexterity+1]*1.25)}% <strong>Determines your Dodge chance.</strong></span>
+                    <span>Dexterity: {dexterity}, Dodge Chance: {Math.ceil([dexterity+1]*1.25)}% <strong>Determines your Dodge Chance.</strong></span>
 
                 </div>
 
