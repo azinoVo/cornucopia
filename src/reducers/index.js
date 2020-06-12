@@ -22,7 +22,8 @@ import {
     INTERACT_SPECIAL_SAND,
     INTERACT_SPECIAL_GLASS,
     CHANGE_DATE,
-    SET_STATS
+    SET_STATS,
+    SET_CURRENT_ENCOUNTER
 } from '../actions';
 
 const initialState = {
@@ -214,7 +215,9 @@ const initialState = {
                 abilities: ['Breath', 'Tail Swipe', 'Bite']
             }
         ],
-        currentEncounter: {},
+        currentEncounter: {
+            
+        },
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
     },
     sculpture: ["idol_bird.png"]
@@ -839,6 +842,18 @@ const rootReducer = (state = initialState, action) => {
                         log: [...state.game.log, `Your character stats have been confirmed.`],
                     } 
                 };
+
+                case SET_CURRENT_ENCOUNTER:
+                    console.log('set current encounter in reducer')
+                    return {
+                        ...state,
+                        game: {
+                            ...state.game,
+                            currentEncounter: {
+                                ...action.payload
+                            }
+                        }
+                    }
 
         default:
             return state;

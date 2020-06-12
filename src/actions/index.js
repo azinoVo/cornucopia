@@ -238,6 +238,18 @@ export const setCharacterStats = (stats) => {
     }
 }
 
+export const SET_CURRENT_ENCOUNTER = "SET_CURRENT_ENCOUNTER";
+
+export const setEncounterInfo = (encounter) => {
+    console.log('encounter', encounter)
+    return {
+        type: SET_CURRENT_ENCOUNTER,
+        payload: encounter,
+    }
+}
+
+
+
 
 
 
