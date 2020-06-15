@@ -44,8 +44,14 @@ const initialState = {
             'magicPower': 0,
             'damageReduction': 0,
             'dodge': 0,
-            'turnSpeed': 0
+            'turnSpeed': 0,
+            'ultimate': 0
         },
+        abilities: [
+            {name: 'Auto-Attack', description: 'Deal damage equal to your attack power. Gain 1 ultimate orb.'},
+            {name: 'Defend', description: 'Gain 25% more defense for turn and gain 2 ultimate orbs.'},
+            {name: 'Ultimate', description: 'Consume all ultimate points and deal an extra 25% damage per orb consumed.'}
+        ],
         energy: 2000,
         essence: 500,
         favor: 5,
@@ -198,7 +204,7 @@ const initialState = {
                     dodge: 5,
                     speed: 6,
                 },
-                abilities: ['Ravenous Claws', 'Mark', 'Pack']
+                abilities: ['Auto', 'Ravenous Claws', 'Mark', 'Pack']
             },
             {
                 id: 1,
@@ -212,7 +218,7 @@ const initialState = {
                     dodge: 15,
                     speed: 8,
                 },
-                abilities: ['Breath', 'Tail Swipe', 'Bite']
+                abilities: ['Auto', 'Breath', 'Tail Swipe', 'Bite']
             }
         ],
         currentEncounter: {
