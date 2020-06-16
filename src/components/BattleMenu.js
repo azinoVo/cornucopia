@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { setEncounterInfo } from '../actions';
+import { setEncounterInfo, userBattleAction } from '../actions';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import BattleLog from './GameLog';
 
 const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities }) => {
     const [inBattle, setInBattle] = useState(false)
@@ -16,6 +17,22 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
         dispatch(setEncounterInfo(encountersList[randomNumber]))
         setInBattle(!inBattle)
+    }
+
+    const battle = (userStats, encounterStats, ability) => {
+        console.log("Within battle function")
+        let encounterDodgeNumber = Math.floor((Math.random() * 100) + 1)
+        let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
+
+        console.log("calculations", encounterDodgeNumber, encounterStats.stats.dodge*100)
+
+        if(encounterDodgeNumber <= encounterStats.stats.dodge*100) {
+            dispatch(userBattleAction(userStats, encounterStats.stats, 'Dodged'))
+        } else {
+            dispatch(userBattleAction(userStats, encounterStats.stats, ability))
+        }
+        
+
     }
 
     return (
@@ -35,21 +52,23 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     {currentEncounter && <p>Health: {currentEncounter.stats['health']}</p>}
                 </div>
 
-                <div className='battle-log'>
-                    <h2>Battle Log</h2>
-                    <p>This will be the battle log.</p>
-                </div>
-
                 <div className='user'>
                     <h2>User Menu</h2>
                     <p>Health: {userBattleStats.health}</p>
+                    <p>Attack Power: {userBattleStats.attackPower}</p>
                     <p>Ultimate Points: {userBattleStats.ultimate}</p>
                     {
                         userAbilities.map(ability => {
-                            return <button key={ability.name}>{ability.name}: {ability.description}</button>
+                            return <button onClick={() => battle(userBattleStats, currentEncounter, ability.name)} key={ability.name}>{ability.name}: {ability.description}</button>
                         })
                     }
                 </div>
+
+                <div className='battle-log'>
+                    <h2>Battle Log</h2>
+                    <BattleLog />
+                </div>
+
             </div>}
         </div>
     );
@@ -62,4 +81,4 @@ const mapStateToProps = state => ({
     userAbilities: state.user.abilities
 });
 
-export default connect(mapStateToProps, { })(BattleMenu);
+export default connect(mapStateToProps, { userBattleAction, setEncounterInfo})(BattleMenu);

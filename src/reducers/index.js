@@ -23,7 +23,11 @@ import {
     INTERACT_SPECIAL_GLASS,
     CHANGE_DATE,
     SET_STATS,
-    SET_CURRENT_ENCOUNTER
+    SET_CURRENT_ENCOUNTER,
+    USER_AUTO,
+    USER_DEFEND,
+    USER_ULTIMATE_RELEASE,
+    ENCOUNTER_DODGED
 } from '../actions';
 
 const initialState = {
@@ -48,9 +52,9 @@ const initialState = {
             'ultimate': 0
         },
         abilities: [
-            {name: 'Auto-Attack', description: 'Deal damage equal to your attack power. Gain 1 ultimate orb.'},
-            {name: 'Defend', description: 'Gain 25% more defense for turn and gain 2 ultimate orbs.'},
-            {name: 'Ultimate', description: 'Consume all ultimate points and deal an extra 25% damage per orb consumed.'}
+            { name: 'Auto-Attack', description: 'Deal damage equal to your attack power. Gain 1 ultimate orb.' },
+            { name: 'Defend', description: 'Gain 25% damage reduction for turn and gain 2 ultimate orbs.' },
+            { name: 'Ultimate: Release', description: 'Consume all ultimate points and deal an extra 25% damage per orb consumed.' }
         ],
         energy: 2000,
         essence: 500,
@@ -109,26 +113,26 @@ const initialState = {
         plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
         date: 0,
         calendar: [
-            {id: 1, type: "spring_seed", date: "Spring Cycle Day I", benefit: "Spring plants are flourishing."},
-            {id: 2, type: "spring_seed", date: "Spring Cycle Day II", benefit: "Spring plants are flourishing."},
-            {id: 3, type: "spring_seed", date: "Spring Cycle Day III", benefit: "Spring plants are flourishing."},
-            {id: 4, type: "spring_seed", date: "Spring Cycle Day IV", benefit: "Spring plants are flourishing."},
-            {id: 5, type: "max_spring_seed", date: "Spring Cycle Day V", benefit: "Spring plants look stunning today."},
-            {id: 6, type: "summer_seed", date: "Summer Cycle Day I", benefit: "Summer plants are flourishing."},
-            {id: 7, type: "summer_seed", date: "Summer Cycle Day II", benefit: "Summer plants are flourishing."},
-            {id: 8, type: "summer_seed", date: "Summer Cycle Day III", benefit: "Summer plants are flourishing."},
-            {id: 9, type: "summer_seed", date: "Summer Cycle Day IV", benefit: "Summer plants are flourishing."},
-            {id: 10, type: "max_summer_seed", date: "Summer Cycle Day V", benefit: "Summer plants look stunning today."},
-            {id: 11, type: "autumn_seed", date: "Autumn Cycle Day I", benefit: "Autumn plants are flourishing."},
-            {id: 12, type: "autumn_seed", date: "Autumn Cycle Day II", benefit: "Autumn plants are flourishing."},
-            {id: 13, type: "autumn_seed", date: "Autumn Cycle Day III", benefit: "Autumn plants are flourishing."},
-            {id: 14, type: "autumn_seed", date: "Autumn Cycle Day IV", benefit: "Autumn plants are flourishing."},
-            {id: 15, type: "max_autumn_seed", date: "Autumn Cycle Day V", benefit: "Autumn plants look stunning today."},
-            {id: 16, type: "winter_seed", date: "Winter Cycle Day I", benefit: "Winter plants are flourishing."},
-            {id: 17, type: "winter_seed", date: "Winter Cycle Day II", benefit: "Winter plants are flourishing."},
-            {id: 18, type: "winter_seed", date: "Winter Cycle Day III", benefit: "Winter plants are flourishing."},
-            {id: 19, type: "winter_seed", date: "Winter Cycle Day IV", benefit: "Winter plants are flourishing."},
-            {id: 20, type: "max_winter_seed", date: "Winter Cycle Day V", benefit: "Winter plants look stunning today."},
+            { id: 1, type: "spring_seed", date: "Spring Cycle Day I", benefit: "Spring plants are flourishing." },
+            { id: 2, type: "spring_seed", date: "Spring Cycle Day II", benefit: "Spring plants are flourishing." },
+            { id: 3, type: "spring_seed", date: "Spring Cycle Day III", benefit: "Spring plants are flourishing." },
+            { id: 4, type: "spring_seed", date: "Spring Cycle Day IV", benefit: "Spring plants are flourishing." },
+            { id: 5, type: "max_spring_seed", date: "Spring Cycle Day V", benefit: "Spring plants look stunning today." },
+            { id: 6, type: "summer_seed", date: "Summer Cycle Day I", benefit: "Summer plants are flourishing." },
+            { id: 7, type: "summer_seed", date: "Summer Cycle Day II", benefit: "Summer plants are flourishing." },
+            { id: 8, type: "summer_seed", date: "Summer Cycle Day III", benefit: "Summer plants are flourishing." },
+            { id: 9, type: "summer_seed", date: "Summer Cycle Day IV", benefit: "Summer plants are flourishing." },
+            { id: 10, type: "max_summer_seed", date: "Summer Cycle Day V", benefit: "Summer plants look stunning today." },
+            { id: 11, type: "autumn_seed", date: "Autumn Cycle Day I", benefit: "Autumn plants are flourishing." },
+            { id: 12, type: "autumn_seed", date: "Autumn Cycle Day II", benefit: "Autumn plants are flourishing." },
+            { id: 13, type: "autumn_seed", date: "Autumn Cycle Day III", benefit: "Autumn plants are flourishing." },
+            { id: 14, type: "autumn_seed", date: "Autumn Cycle Day IV", benefit: "Autumn plants are flourishing." },
+            { id: 15, type: "max_autumn_seed", date: "Autumn Cycle Day V", benefit: "Autumn plants look stunning today." },
+            { id: 16, type: "winter_seed", date: "Winter Cycle Day I", benefit: "Winter plants are flourishing." },
+            { id: 17, type: "winter_seed", date: "Winter Cycle Day II", benefit: "Winter plants are flourishing." },
+            { id: 18, type: "winter_seed", date: "Winter Cycle Day III", benefit: "Winter plants are flourishing." },
+            { id: 19, type: "winter_seed", date: "Winter Cycle Day IV", benefit: "Winter plants are flourishing." },
+            { id: 20, type: "max_winter_seed", date: "Winter Cycle Day V", benefit: "Winter plants look stunning today." },
         ],
         interact_list: [
             // {value: "", label: ""},
@@ -194,35 +198,35 @@ const initialState = {
         encounters: [
             {
                 id: 0,
-                name: 'wolf',
+                name: 'Wolf',
                 difficulty: 'easy',
                 stats: {
                     health: 50,
                     attackPower: 5,
                     magicPower: 0,
-                    defense: 10,
-                    dodge: 5,
-                    speed: 6,
+                    damageReduction: 0.1,
+                    dodge: 0.05,
+                    turnSpeed: 6,
                 },
                 abilities: ['Auto', 'Ravenous Claws', 'Mark', 'Pack']
             },
             {
                 id: 1,
-                name: 'small dragon',
+                name: 'Small Dragon',
                 difficulty: 'hard',
                 stats: {
                     health: 100,
                     attackPower: 15,
                     magicPower: 10,
-                    defense: 20,
-                    dodge: 15,
-                    speed: 8,
+                    damageReduction: 0.2,
+                    dodge: 0.15,
+                    turnSpeed: 8,
                 },
                 abilities: ['Auto', 'Breath', 'Tail Swipe', 'Bite']
             }
         ],
         currentEncounter: {
-            
+
         },
         log: ["Welcome to Cornucopia, the Land of Excess. I hope you enjoy your time here today. Good luck and have fun!"]
     },
@@ -566,7 +570,7 @@ const rootReducer = (state = initialState, action) => {
 
             };
 
-            case INTERACT_CLEAR_ORCHARD:
+        case INTERACT_CLEAR_ORCHARD:
             console.log("INTERACT clear ORCHARD in reducer", action.payload)
             return {
                 ...state,
@@ -596,7 +600,7 @@ const rootReducer = (state = initialState, action) => {
 
             };
 
-            case INTERACT_REPLENISH_ORCHARD:
+        case INTERACT_REPLENISH_ORCHARD:
             console.log("STORE REPLENISH ORCHARD in reducer", action.payload)
             return {
                 ...state,
@@ -676,190 +680,227 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
 
-            case NUMBER_WIN:
-                console.log("NUMBER WIN")
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        specials: {
-                            ...state.user.specials,
-                            cornucopian_sand: state.user.specials.cornucopian_sand + 1
-                        }
-                    },
-                    game: {
-                        ...state.game,
+        case NUMBER_WIN:
+            console.log("NUMBER WIN")
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    specials: {
+                        ...state.user.specials,
+                        cornucopian_sand: state.user.specials.cornucopian_sand + 1
+                    }
+                },
+                game: {
+                    ...state.game,
                     log: [...state.game.log, `You felt a special energy encompass you. Your inventory feels much heavier.`]
+                }
+
+            };
+
+        case GUESS_WIN:
+            console.log("NUMBER WIN")
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    specials: {
+                        ...state.user.specials,
+                        hourglass: state.user.specials.hourglass + 1
+                    }
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `Time is of the essence. What will you do?`]
+                }
+
+            };
+
+        case INTERACT_SPECIAL_SAND:
+            console.log("special sand in reducer")
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy + 100,
+                    favor: state.user.favor + 100,
+                    specials: {
+                        ...state.user.specials,
+                        cornucopian_sand: state.user.specials.cornucopian_sand - 1
+                    },
+                    main_garden_plot: state.user.main_garden_plot.map((content) => {
+                        return (content.plotType !== "empty_plot") ?
+                            {
+                                ...content,
+                                water: 100,
+                                quality: 95,
+                                health: 95,
+                                harvest: 50,
+                            } : content
+                    }),
+                    orchard_plot: state.user.orchard_plot.map((content) => {
+                        return (content.plotType !== "empty_plot") ?
+                            {
+                                ...content,
+                                water: 100,
+                                quality: 95,
+                                health: 95,
+                                harvest: 50,
+                                reHarvest: 5
+                            } : content
+                    }),
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `The sands have granted its blessing to your plots at ${Date(Date.now()).toString()}. `]
+                }
+            };
+
+        case INTERACT_SPECIAL_GLASS:
+            console.log("glass in reducer")
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: state.user.energy + 100,
+                    favor: state.user.favor + 100,
+                    specials: {
+                        ...state.user.specials,
+                        hourglass: state.user.specials.hourglass - 1
+                    },
+                    main_garden_plot: state.user.main_garden_plot.map((content) => {
+                        return (content.plotType !== "empty_plot") ?
+                            {
+                                ...content,
+                                harvest: 95,
+                            } : content
+                    }),
+                    orchard_plot: state.user.orchard_plot.map((content) => {
+                        return (content.plotType !== "empty_plot") ?
+                            {
+                                ...content,
+                                harvest: 95,
+                            } : content
+                    }),
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `The hourglass has sped up time at at ${Date(Date.now()).toString()}.`]
+                }
+            };
+
+        case CHANGE_DATE:
+            console.log("glass in reducer")
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    energy: 200,
+                    favor: state.user.favor + 5,
+                    main_garden_plot: state.user.main_garden_plot.map((content, index) => {
+                        return (content.plotType !== "empty_plot") ?
+                            {
+                                ...content,
+                                harvest: state.user.main_garden_plot[index].harvest + 10,
+                            } : content
+                    }),
+                    orchard_plot: state.user.orchard_plot.map((content, index) => {
+                        return (content.plotType !== "empty_plot") ?
+                            {
+                                ...content,
+                                harvest: state.user.orchard_plot[index].harvest + 5,
+                            } : content
+                    }),
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `A new day has passed at ${Date(Date.now()).toString()}.`],
+                    date: action.payload === 19 ? 0 : state.game.date + 1,
+                }
+            };
+
+        case SET_STATS:
+            console.log('set stats in reducer', action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    stats: {
+                        'gender': action.payload['gender'],
+                        'level': action.payload['level'],
+                        'constitution': action.payload['constitution'],
+                        'attack': action.payload['attack'],
+                        'defense': action.payload['defense'],
+                        'dexterity': action.payload['dexterity'],
+                        'intelligence': action.payload['intelligence'],
+                        'speed': action.payload['speed']
+                    },
+                    battleStats: {
+                        'health': Math.ceil(action.payload['constitution'] * 6.25),
+                        'attackPower': Math.ceil(action.payload['attack'] * 1.35),
+                        'magicPower': Math.ceil(action.payload['intelligence'] * 1.35),
+                        'damageReduction': Math.ceil(action.payload['defense'] * 1.65),
+                        'dodge': Math.ceil(action.payload['dexterity'] * 1.25),
+                        'turnSpeed': Math.ceil(action.payload['speed'] * 1.15),
+                        'ultimate': 0
+                    }
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `Your character stats have been confirmed at ${Date(Date.now()).toString()}.`],
+                }
+            };
+
+        case SET_CURRENT_ENCOUNTER:
+            console.log('set current encounter in reducer')
+            return {
+                ...state,
+                game: {
+                    ...state.game,
+                    currentEncounter: {
+                        ...action.payload
+                    },
+                    log: [...state.game.log, `A ${action.payload.name} has appeared at ${Date(Date.now()).toString()}.`]
+                }
+            };
+
+        case USER_AUTO:
+            console.log('user-auto payload:', action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        ultimate: state.user.battleStats.ultimate+1 > 10 ? 10 : state.user.battleStats.ultimate+1 
                     }
 
-                };
-
-                case GUESS_WIN:
-                    console.log("NUMBER WIN")
-                    return {
-                        ...state,
-                        user: {
-                            ...state.user,
-                            specials: {
-                                ...state.user.specials,
-                                hourglass: state.user.specials.hourglass + 1
-                            }
-                        },
-                        game: {
-                            ...state.game,
-                        log: [...state.game.log, `Time is of the essence. What will you do?`]
-                        }
-    
-                    };
-
-            case INTERACT_SPECIAL_SAND:
-                console.log("special sand in reducer")
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        energy: state.user.energy + 100,
-                        favor: state.user.favor + 100,
-                        specials: {
-                            ...state.user.specials,
-                            cornucopian_sand: state.user.specials.cornucopian_sand - 1
-                        },
-                        main_garden_plot: state.user.main_garden_plot.map((content) => {
-                            return (content.plotType !== "empty_plot") ?
-                                {
-                                    ...content,
-                                    water: 100,
-                                    quality: 95,
-                                    health: 95,
-                                    harvest: 50,
-                                } : content
-                        }),
-                        orchard_plot: state.user.orchard_plot.map((content) => {
-                            return (content.plotType !== "empty_plot") ?
-                                {
-                                    ...content,
-                                    water: 100,
-                                    quality: 95,
-                                    health: 95,
-                                    harvest: 50,
-                                    reHarvest: 5
-                                } : content
-                        }),
-
-                    },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `The sands have granted its blessing to your plots.`]
-                    } 
-                };
-
-                case INTERACT_SPECIAL_GLASS:
-                console.log("glass in reducer")
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        energy: state.user.energy + 100,
-                        favor: state.user.favor + 100,
-                        specials: {
-                            ...state.user.specials,
-                            hourglass: state.user.specials.hourglass - 1
-                        },
-                        main_garden_plot: state.user.main_garden_plot.map((content) => {
-                            return (content.plotType !== "empty_plot") ?
-                                {
-                                    ...content,
-                                    harvest: 95,
-                                } : content
-                        }),
-                        orchard_plot: state.user.orchard_plot.map((content) => {
-                            return (content.plotType !== "empty_plot") ?
-                                {
-                                    ...content,
-                                    harvest: 95,
-                                } : content
-                        }),
-
-                    },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `The hourglass has sped up time.`]
-                    } 
-                };
-
-                case CHANGE_DATE:
-                console.log("glass in reducer")
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        energy: 200,
-                        favor: state.user.favor + 5,
-                        main_garden_plot: state.user.main_garden_plot.map((content, index) => {
-                            return (content.plotType !== "empty_plot") ?
-                                {
-                                    ...content,
-                                    harvest: state.user.main_garden_plot[index].harvest + 10,
-                                } : content
-                        }),
-                        orchard_plot: state.user.orchard_plot.map((content, index) => {
-                            return (content.plotType !== "empty_plot") ?
-                                {
-                                    ...content,
-                                    harvest: state.user.orchard_plot[index].harvest + 5,
-                                } : content
-                        }),
-
-                    },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `A new day has passed.`],
-                        date: action.payload === 19 ? 0 : state.game.date+1,
-                    } 
-                };
-
-                case SET_STATS:
-                console.log('set stats in reducer', action.payload)
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
+                },
+                game: {
+                    ...state.game,
+                    currentEncounter: {
+                        ...state.game.currentEncounter,
                         stats: {
-                            'gender': action.payload['gender'],
-                            'level': action.payload['level'],
-                            'constitution': action.payload['constitution'],
-                            'attack': action.payload['attack'],
-                            'defense': action.payload['defense'],
-                            'dexterity': action.payload['dexterity'],
-                            'intelligence': action.payload['intelligence'],
-                            'speed': action.payload['speed']
-                        },
-                        battleStats: {
-                            'health': Math.ceil(action.payload['constitution']*6.25),
-                            'attackPower': Math.ceil(action.payload['attack']*1.35),
-                            'magicPower': Math.ceil(action.payload['intelligence']*1.35),
-                            'damageReduction': Math.ceil(action.payload['defense']*1.65),
-                            'dodge': Math.ceil(action.payload['dexterity']*1.25),
-                            'turnSpeed': Math.ceil(action.payload['speed']*1.15)
+                            ...state.game.currentEncounter.stats,
+                            health: state.game.currentEncounter.stats.health-action.payload.damage > 0 ? state.game.currentEncounter.stats.health-action.payload.damage : 0
                         }
                     },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `Your character stats have been confirmed.`],
-                    } 
-                };
+                    log: [...state.game.log, `User dealt ${action.payload.damage} to ${state.game.currentEncounter.name} at ${Date(Date.now()).toString()}.`]
 
-                case SET_CURRENT_ENCOUNTER:
-                    console.log('set current encounter in reducer')
-                    return {
-                        ...state,
-                        game: {
-                            ...state.game,
-                            currentEncounter: {
-                                ...action.payload
-                            }
-                        }
-                    }
+                }
+            };
+
+        case ENCOUNTER_DODGED:
+            return {
+                ...state,
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `The enemy dodged the attack at ${Date(Date.now()).toString()}.`]
+                }
+            }
 
         default:
             return state;

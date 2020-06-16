@@ -248,7 +248,44 @@ export const setEncounterInfo = (encounter) => {
     }
 }
 
+export const USER_AUTO = "USER_AUTO";
+export const USER_DEFEND = "USER_DEFEND";
+export const USER_ULTIMATE_RELEASE = "USER_ULTIMATE_RELEASE";
+export const ENCOUNTER_DODGED = "ENCOUNTER_DODGED";
 
+
+
+export const userBattleAction = (userStats, encounterStats, ability) => dispatch => {
+    console.log('Inside battle userAction', ability, 'user', userStats, 'encounter', encounterStats)
+    console.log('damage', Math.floor(userStats.attackPower-[userStats.attackPower*encounterStats.damageReduction]))
+
+    switch (ability) {
+        case 'Dodged':
+            dispatch({
+                type: ENCOUNTER_DODGED
+            })
+            break;
+        case 'Auto-Attack':
+            dispatch({
+                type: USER_AUTO,
+                payload: {
+                    damage: Math.floor([userStats.attackPower]-[userStats.attackPower*encounterStats.damageReduction]) > 0 ? 
+                    Math.floor(userStats.attackPower-[userStats.attackPower*encounterStats.damageReduction]) : 0,
+                    name: encounterStats.name
+                }})
+            break;
+        case 'Defend':
+            
+            break;
+        case 'Ultimate: Release':
+
+            break;
+        default:
+            console.log('Default for actions')
+    }
+
+
+}
 
 
 

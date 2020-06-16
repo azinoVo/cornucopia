@@ -21,7 +21,6 @@ const Home = () => {
                     <li>Will Berlin</li>
                 </ul>
             </div>
-            <GameLog />
         </section>
     );
 }
