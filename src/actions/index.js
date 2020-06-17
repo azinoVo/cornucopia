@@ -253,11 +253,8 @@ export const USER_DEFEND = "USER_DEFEND";
 export const USER_ULTIMATE_RELEASE = "USER_ULTIMATE_RELEASE";
 export const ENCOUNTER_DODGED = "ENCOUNTER_DODGED";
 
-
-
 export const userBattleAction = (userStats, encounterStats, ability) => dispatch => {
     console.log('Inside battle userAction', ability, 'user', userStats, 'encounter', encounterStats)
-    console.log('damage', Math.floor(userStats.attackPower-[userStats.attackPower*encounterStats.damageReduction]))
 
     switch (ability) {
         case 'Dodged':
@@ -275,7 +272,12 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
                 }})
             break;
         case 'Defend':
-            
+            dispatch({
+                type: USER_DEFEND,
+                payload: {
+                    
+                }
+            })
             break;
         case 'Ultimate: Release':
 
@@ -283,8 +285,6 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
         default:
             console.log('Default for actions')
     }
-
-
 }
 
 
