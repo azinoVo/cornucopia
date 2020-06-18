@@ -255,6 +255,7 @@ export const ENCOUNTER_DODGED = "ENCOUNTER_DODGED";
 
 export const userBattleAction = (userStats, encounterStats, ability) => dispatch => {
     console.log('Inside battle userAction', ability, 'user', userStats, 'encounter', encounterStats)
+    console.log('ult damage', Math.floor([[1+userStats.ultimate*0.25]*userStats.attackPower]+userStats.attackPower))
 
     switch (ability) {
         case 'Dodged':
@@ -266,8 +267,8 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             dispatch({
                 type: USER_AUTO,
                 payload: {
-                    damage: Math.floor([userStats.attackPower]-[userStats.attackPower*encounterStats.damageReduction]) > 0 ? 
-                    Math.floor(userStats.attackPower-[userStats.attackPower*encounterStats.damageReduction]) : 0,
+                    damage: Math.floor([userStats.attackPower]-[userStats.attackPower*encounterStats.stats.damageReduction]) > 0 ? 
+                    Math.floor(userStats.attackPower-[userStats.attackPower*encounterStats.stats.damageReduction]) : 0,
                     name: encounterStats.name
                 }})
             break;
@@ -275,12 +276,17 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             dispatch({
                 type: USER_DEFEND,
                 payload: {
-                    
+                    damage: Math.floor(encounterStats.stats.attackPower-[encounterStats.stats.attackPower*[userStats.damageReduction+0.25]])
                 }
             })
             break;
         case 'Ultimate: Release':
-
+            dispatch({
+                type: USER_ULTIMATE_RELEASE,
+                payload: {
+                    damage: Math.floor([[1+userStats.ultimate*0.25]*userStats.attackPower]+userStats.attackPower)
+                }
+            })
             break;
         default:
             console.log('Default for actions')

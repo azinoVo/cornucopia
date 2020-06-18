@@ -13,23 +13,20 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
     const randomEncounter = () => {
         let randomNumber = Math.floor((Math.random() * encountersList.length));
-        console.log('randomNumber', randomNumber)
 
         dispatch(setEncounterInfo(encountersList[randomNumber]))
         setInBattle(!inBattle)
     }
 
     const battle = (userStats, encounterStats, ability) => {
-        console.log("Within battle function")
         let encounterDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
 
-        console.log("calculations", encounterDodgeNumber, encounterStats.stats.dodge*100)
 
-        if(encounterDodgeNumber <= encounterStats.stats.dodge*100) {
-            dispatch(userBattleAction(userStats, encounterStats.stats, 'Dodged'))
+        if(encounterDodgeNumber <= encounterStats.stats.dodge*100 && ability === 'Auto-Attack') {
+            dispatch(userBattleAction(userStats, encounterStats, 'Dodged'))
         } else {
-            dispatch(userBattleAction(userStats, encounterStats.stats, ability))
+            dispatch(userBattleAction(userStats, encounterStats, ability))
         }
         
 
