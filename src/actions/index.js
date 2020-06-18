@@ -255,7 +255,7 @@ export const ENCOUNTER_DODGED = "ENCOUNTER_DODGED";
 
 export const userBattleAction = (userStats, encounterStats, ability) => dispatch => {
     console.log('Inside battle userAction', ability, 'user', userStats, 'encounter', encounterStats)
-    console.log('ult damage', Math.floor([[1+userStats.ultimate*0.25]*userStats.attackPower]+userStats.attackPower))
+    console.log(typeof(userStats.ultimate), typeof(userStats.attackPower))
 
     switch (ability) {
         case 'Dodged':
@@ -284,7 +284,7 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             dispatch({
                 type: USER_ULTIMATE_RELEASE,
                 payload: {
-                    damage: Math.floor([[1+userStats.ultimate*0.25]*userStats.attackPower]+userStats.attackPower)
+                    damage: Math.floor([[25/100]*userStats.ultimate+1]*userStats.attackPower)
                 }
             })
             break;

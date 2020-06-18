@@ -56,7 +56,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     <p>Ultimate Points: {userBattleStats.ultimate}</p>
                     {
                         userAbilities.map(ability => {
-                            return <button disabled={(ability.name.includes('Ultimate') && userBattleStats.ultimate === 0) ? true : false} onClick={() => battle(userBattleStats, currentEncounter, ability.name)} key={ability.name}>{ability.name}: {ability.description}</button>
+                            return <button disabled={((ability.name.includes('Ultimate') && userBattleStats.ultimate === 0) || userBattleStats.health === 0) ? true : false} onClick={() => battle(userBattleStats, currentEncounter, ability.name)} key={ability.name}>{ability.name}: {ability.description}</button>
                         })
                     }
                 </div>

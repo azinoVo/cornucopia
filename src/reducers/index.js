@@ -33,28 +33,28 @@ import {
 const initialState = {
     user: {
         stats: {
-            'gender': 'Male',
-            'level': 1,
-            'constitution': 0,
-            'attack': 0,
-            'defense': 0,
-            'dexterity': 0,
-            'intelligence': 0,
-            'speed': 0
+            gender: 'Male',
+            level: 1,
+            constitution: 0,
+            attack: 0,
+            defense: 0,
+            dexterity: 0,
+            intelligence: 0,
+            speed: 0
         },
         battleStats: {
-            'health': 25,
-            'attackPower': 10,
-            'magicPower': 10,
-            'damageReduction': 0.25,
-            'dodge': 0.1,
-            'turnSpeed': 5,
-            'ultimate': 1
+            health: 25,
+            attackPower: 10,
+            magicPower: 10,
+            damageReduction: 0.25,
+            dodge: 0.1,
+            turnSpeed: 5,
+            ultimate: 1
         },
         abilities: [
-            { name: 'Auto-Attack', description: 'Deal damage equal to your attack power. Gain 1 ultimate orb.' },
-            { name: 'Defend', description: 'Gain 25% damage reduction for turn and gain 2 ultimate orbs.' },
-            { name: 'Ultimate: Release', description: 'Consume all ultimate points and deal an extra 25% damage per orb consumed.' }
+            { name: 'Auto-Attack', description: '100% AP, +1 ULT-P' },
+            { name: 'Defend', description: '+25% DR, +2 ULT-P' },
+            { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
         energy: 2000,
         essence: 500,
@@ -842,7 +842,7 @@ const rootReducer = (state = initialState, action) => {
                         'health': Math.ceil(action.payload['constitution'] * 6.25),
                         'attackPower': Math.ceil(action.payload['attack'] * 1.35),
                         'magicPower': Math.ceil(action.payload['intelligence'] * 1.35),
-                        'damageReduction': Math.ceil(action.payload['defense']*1.65)/100,
+                        'damageReduction': Math.ceil(action.payload['defense'] * 1.65) / 100,
                         'dodge': Math.ceil(action.payload['dexterity'] * 1.25),
                         'turnSpeed': Math.ceil(action.payload['speed'] * 1.15),
                         'ultimate': 0
@@ -875,7 +875,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state.user,
                     battleStats: {
                         ...state.user.battleStats,
-                        ultimate: state.user.battleStats.ultimate+1 > 10 ? 10 : state.user.battleStats.ultimate+1 
+                        ultimate: state.user.battleStats.ultimate + 1 > 10 ? 10 : state.user.battleStats.ultimate + 1
                     }
 
                 },
@@ -885,7 +885,7 @@ const rootReducer = (state = initialState, action) => {
                         ...state.game.currentEncounter,
                         stats: {
                             ...state.game.currentEncounter.stats,
-                            health: state.game.currentEncounter.stats.health-action.payload.damage > 0 ? state.game.currentEncounter.stats.health-action.payload.damage : 0
+                            health: state.game.currentEncounter.stats.health - action.payload.damage > 0 ? state.game.currentEncounter.stats.health - action.payload.damage : 0
                         }
                     },
                     log: [...state.game.log, `User dealt ${action.payload.damage} to ${state.game.currentEncounter.name} at ${Date(Date.now()).toString()}.`]
@@ -902,53 +902,53 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case USER_DEFEND:
-                console.log('defend in reducer:', action.payload)
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        battleStats: {
-                            ...state.user.battleStats,
-                            health: state.user.battleStats.health - action.payload.damage,
-                            ultimate: state.user.battleStats.ultimate+2 > 10 ? 10 : state.user.battleStats.ultimate+2 
-                        }
-    
-                    },
-                    game: {
-                        ...state.game,
-                        log: [...state.game.log, `User defended and took only ${action.payload.damage} at ${Date(Date.now()).toString()}.`]
-    
+        case USER_DEFEND:
+            console.log('defend in reducer:', action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0,
+                        ultimate: state.user.battleStats.ultimate + 2 > 10 ? 10 : state.user.battleStats.ultimate + 2
                     }
-                };
 
-                case USER_ULTIMATE_RELEASE:
-                    console.log('ultimate release reducer', action.payload)
-                    return {
-                        ...state,
-                        user: {
-                            ...state.user,
-                            battleStats: {
-                                ...state.user.battleStats,
-                                ultimate: 0 
-                            }
-        
-                        },
-                        game: {
-                            ...state.game,
-                            currentEncounter: {
-                                ...state.game.currentEncounter,
-                                stats: {
-                                    ...state.game.currentEncounter.stats,
-                                    health: state.game.currentEncounter.stats.health-action.payload.damage > 0 ? state.game.currentEncounter.stats.health-action.payload.damage : 0
-                                }
-                            },
-                            log: [...state.game.log, `User defended and took only ${action.payload.damage} at ${Date(Date.now()).toString()}.`]
-        
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User defended and took only ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+
+                }
+            };
+
+        case USER_ULTIMATE_RELEASE:
+            console.log('ultimate release reducer', action.payload)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        ultimate: 0
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    currentEncounter: {
+                        ...state.game.currentEncounter,
+                        stats: {
+                            ...state.game.currentEncounter.stats,
+                            health: state.game.currentEncounter.stats.health - action.payload.damage > 0 ? state.game.currentEncounter.stats.health - action.payload.damage : 0
                         }
-                    };
+                    },
+                    log: [...state.game.log, `User unleashed ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
 
-        
+                }
+            };
+
+
 
         default:
             return state;
