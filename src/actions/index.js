@@ -280,7 +280,7 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             dispatch({
                 type: USER_ULTIMATE_RELEASE,
                 payload: {
-                    damage: Math.floor([[25 / 100] * userStats.ultimate + 1] * userStats.attackPower)
+                    damage: Math.floor([[[25 / 100] * userStats.ultimate + 1] * userStats.attackPower]-[[[[25 / 100] * userStats.ultimate + 1] * userStats.attackPower]*encounterStats.stats.damageReduction])
                 }
             })
             break;
