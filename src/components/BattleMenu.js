@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { setEncounterInfo, userBattleAction } from '../actions';
+import React, { useState } from 'react';
+import { setEncounterInfo, userBattleAction, encounterBattleAction } from '../actions';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import BattleLog from './GameLog';
@@ -7,7 +7,7 @@ import BattleLog from './GameLog';
 const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities }) => {
     const [inBattle, setInBattle] = useState(false)
 
-    
+
 
     const dispatch = useDispatch()
 
@@ -21,14 +21,23 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
     const battle = (userStats, encounterStats, ability) => {
         let encounterDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
+        let encounterSkillNumber = Math.floor((Math.random() * encounterStats.abilities.length))
 
 
-        if(encounterDodgeNumber <= encounterStats.stats.dodge*100 && ability === 'Auto-Attack') {
-            dispatch(userBattleAction(userStats, encounterStats, 'Dodged'))
+        if (encounterDodgeNumber <= encounterStats.stats.dodge * 100 && ability === 'Auto-Attack') {
+            dispatch(userBattleAction(userStats, encounterStats, 'Encounter-Dodged'))
         } else {
             dispatch(userBattleAction(userStats, encounterStats, ability))
         }
-        
+
+        if (userDodgeNumber <= userStats.dodge * 100
+            && encounterStats.abilities[encounterSkillNumber] === 'Auto-Attack'
+            && currentEncounter.stats.health > 0
+        ) {
+            dispatch(encounterBattleAction(userStats, encounterStats, 'User-Dodged'))
+        } else {
+            dispatch(encounterBattleAction(userStats, encounterStats, encounterStats.abilities[encounterSkillNumber]))
+        }
 
     }
 
@@ -56,7 +65,10 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     <p>Ultimate Points: {userBattleStats.ultimate}</p>
                     {
                         userAbilities.map(ability => {
-                            return <button disabled={((ability.name.includes('Ultimate') && userBattleStats.ultimate === 0) || userBattleStats.health === 0) ? true : false} onClick={() => battle(userBattleStats, currentEncounter, ability.name)} key={ability.name}>{ability.name}: {ability.description}</button>
+                            return <button
+                                className='ability-button'
+                                disabled={((ability.name.includes('Ultimate') && userBattleStats.ultimate === 0) || userBattleStats.health === 0) ? true : false} onClick={() =>
+                                    battle(userBattleStats, currentEncounter, ability.name)} key={ability.name}>{ability.name}: {ability.description}</button>
                         })
                     }
                 </div>
@@ -78,4 +90,4 @@ const mapStateToProps = state => ({
     userAbilities: state.user.abilities
 });
 
-export default connect(mapStateToProps, { userBattleAction, setEncounterInfo})(BattleMenu);
+export default connect(mapStateToProps, { userBattleAction, setEncounterInfo })(BattleMenu);

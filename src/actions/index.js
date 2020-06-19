@@ -73,7 +73,7 @@ export const plantSeed = (seedSet) => {
     console.log("planting seed", seedSet)
     return {
         type: PLANT_SEED,
-        payload: {...seedSet}
+        payload: { ...seedSet }
     }
 }
 
@@ -83,7 +83,7 @@ export const plantSapling = (seedSet) => {
     console.log("planting sapling", seedSet)
     return {
         type: PLANT_SAPLING,
-        payload: {...seedSet}
+        payload: { ...seedSet }
     }
 }
 
@@ -103,9 +103,9 @@ export const INTERACT_NOURISH = "INTERACT_NOURISH";
 export const interact = (actionSet) => dispatch => {
     console.log("interact in actions", actionSet)
 
-    if(actionSet['value'] === "water") {
+    if (actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER, payload: actionSet })
-    } else if(actionSet['value'] === "nourish") {
+    } else if (actionSet['value'] === "nourish") {
         dispatch({ type: INTERACT_NOURISH, payload: actionSet })
     }
 
@@ -121,13 +121,13 @@ export const INTERACT_REPLENISH_ORCHARD = "INTERACT_REPLENISH_ORCHARD";
 export const interactOrchard = (actionSet) => dispatch => {
     console.log("interact in actions ORCHARD", actionSet)
 
-    if(actionSet['value'] === "water") {
+    if (actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER_ORCHARD, payload: actionSet })
-    } else if(actionSet['value'] === "nourish") {
+    } else if (actionSet['value'] === "nourish") {
         dispatch({ type: INTERACT_NOURISH_ORCHARD, payload: actionSet })
-    } else if(actionSet['value'] === "clear") {
+    } else if (actionSet['value'] === "clear") {
         dispatch({ type: INTERACT_CLEAR_ORCHARD, payload: actionSet })
-    } else if(actionSet['value'] === "replenish") {
+    } else if (actionSet['value'] === "replenish") {
         dispatch({ type: INTERACT_REPLENISH_ORCHARD, payload: actionSet })
     }
 }
@@ -139,7 +139,7 @@ export const storeCrop = (crop, index) => {
     console.log("STORE_CROP", crop, index)
     return {
         type: STORE_CROP,
-        payload: {crop, index}
+        payload: { crop, index }
     }
 }
 
@@ -149,7 +149,7 @@ export const storeCropOrchard = (crop, index) => {
     console.log("STORE_CROP_ORCHARD", crop, index)
     return {
         type: STORE_CROP_ORCHARD,
-        payload: {crop, index}
+        payload: { crop, index }
     }
 }
 
@@ -159,7 +159,7 @@ export const sellCrop = (crop, index) => {
     console.log("SELL_CROP", crop, index)
     return {
         type: SELL_CROP,
-        payload: {crop, index}
+        payload: { crop, index }
     }
 }
 
@@ -169,7 +169,7 @@ export const sellCropOrchard = (crop, index) => {
     console.log("SELL_CROP_ORCHARD", crop, index)
     return {
         type: SELL_CROP_ORCHARD,
-        payload: {crop, index}
+        payload: { crop, index }
     }
 }
 
@@ -210,9 +210,9 @@ export const INTERACT_SPECIAL_GLASS = "INTERACT_SPECIAL_GLASS";
 export const interactSpecial = (actionSet) => dispatch => {
     console.log("interact in actions specials", actionSet)
 
-    if(actionSet[0] === "cornucopian_sand") {
+    if (actionSet[0] === "cornucopian_sand") {
         dispatch({ type: INTERACT_SPECIAL_SAND, payload: actionSet })
-    } else if(actionSet[0] === "hourglass") {
+    } else if (actionSet[0] === "hourglass") {
         dispatch({ type: INTERACT_SPECIAL_GLASS, payload: actionSet })
     }
 }
@@ -249,16 +249,14 @@ export const setEncounterInfo = (encounter) => {
 }
 
 export const USER_AUTO = "USER_AUTO";
-export const USER_DEFEND = "USER_DEFEND";
+export const USER_CHARGE = "USER_CHARGE";
 export const USER_ULTIMATE_RELEASE = "USER_ULTIMATE_RELEASE";
 export const ENCOUNTER_DODGED = "ENCOUNTER_DODGED";
 
 export const userBattleAction = (userStats, encounterStats, ability) => dispatch => {
-    console.log('Inside battle userAction', ability, 'user', userStats, 'encounter', encounterStats)
-    console.log(typeof(userStats.ultimate), typeof(userStats.attackPower))
 
     switch (ability) {
-        case 'Dodged':
+        case 'Encounter-Dodged':
             dispatch({
                 type: ENCOUNTER_DODGED
             })
@@ -267,24 +265,22 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             dispatch({
                 type: USER_AUTO,
                 payload: {
-                    damage: Math.floor([userStats.attackPower]-[userStats.attackPower*encounterStats.stats.damageReduction]) > 0 ? 
-                    Math.floor(userStats.attackPower-[userStats.attackPower*encounterStats.stats.damageReduction]) : 0,
+                    damage: Math.floor([userStats.attackPower] - [userStats.attackPower * encounterStats.stats.damageReduction]) > 0 ?
+                        Math.floor(userStats.attackPower - [userStats.attackPower * encounterStats.stats.damageReduction]) : 0,
                     name: encounterStats.name
-                }})
-            break;
-        case 'Defend':
-            dispatch({
-                type: USER_DEFEND,
-                payload: {
-                    damage: Math.floor(encounterStats.stats.attackPower-[encounterStats.stats.attackPower*[userStats.damageReduction+0.25]])
                 }
+            })
+            break;
+        case 'Charge':
+            dispatch({
+                type: USER_CHARGE
             })
             break;
         case 'Ultimate: Release':
             dispatch({
                 type: USER_ULTIMATE_RELEASE,
                 payload: {
-                    damage: Math.floor([[25/100]*userStats.ultimate+1]*userStats.attackPower)
+                    damage: Math.floor([[25 / 100] * userStats.ultimate + 1] * userStats.attackPower)
                 }
             })
             break;
@@ -292,6 +288,58 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             console.log('Default for actions')
     }
 }
+
+export const ENCOUNTER_AUTO = "ENCOUNTER_AUTO";
+export const ENCOUNTER_RAVENOUS_CLAWS = "ENCOUNTER_RAVENOUS_CLAWS";
+export const ENCOUNTER_DRAGON_BREATH = "ENCOUNTER_DRAGON_BREATH";
+export const USER_DODGED = "ENCOUNTER_DODGED";
+
+export const encounterBattleAction = (userStats, encounterStats, ability) => dispatch => {
+
+    switch (ability) {
+        case 'User-Dodged':
+            dispatch({
+                type: USER_DODGED
+            })
+            break;
+        case 'Auto-Attack':
+            dispatch({
+                type: ENCOUNTER_AUTO,
+                payload: {
+                    damage: Math.floor([encounterStats.stats.attackPower] - [encounterStats.stats.attackPower * userStats.damageReduction]),
+                    name: encounterStats.name,
+                    skill: ability
+                }
+            })
+            break;
+        case 'Ravenous Claws':
+            dispatch({
+                type: ENCOUNTER_RAVENOUS_CLAWS,
+                payload: {
+                    damage: Math.floor([encounterStats.stats.attackPower*1.25] - [[encounterStats.stats.attackPower*1.25] * userStats.damageReduction]),
+                    healing: Math.floor([encounterStats.stats.attackPower*1.25]*0.35),
+                    name: encounterStats.name,
+                    skill: ability
+                }
+            })
+
+            break;
+        case 'Dragon Breath':
+            dispatch({
+                type: ENCOUNTER_DRAGON_BREATH,
+                payload: {
+                    damage: Math.floor([encounterStats.stats.attackPower*1.35] - [[encounterStats.stats.attackPower*1.35] * userStats.damageReduction]),
+                    name: encounterStats.name,
+                    skill: ability
+                }
+            })
+
+            break;
+        default:
+            console.log('Default for encounter actions')
+    }
+}
+
 
 
 

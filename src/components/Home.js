@@ -2,7 +2,7 @@ import React from 'react';
 import Character from './Character';
 // import CharacterDisplay from './CharacterDisplay';
 import BattleMenu from './BattleMenu';
-import GameLog from './GameLog'
+// import GameLog from './GameLog'
 
 const Home = () => {
     return (

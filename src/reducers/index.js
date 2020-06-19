@@ -25,9 +25,13 @@ import {
     SET_STATS,
     SET_CURRENT_ENCOUNTER,
     USER_AUTO,
-    USER_DEFEND,
+    USER_CHARGE,
     USER_ULTIMATE_RELEASE,
-    ENCOUNTER_DODGED
+    ENCOUNTER_DODGED,
+    ENCOUNTER_AUTO,
+    ENCOUNTER_RAVENOUS_CLAWS,
+    ENCOUNTER_DRAGON_BREATH,
+    USER_DODGED
 } from '../actions';
 
 const initialState = {
@@ -53,7 +57,7 @@ const initialState = {
         },
         abilities: [
             { name: 'Auto-Attack', description: '100% AP, +1 ULT-P' },
-            { name: 'Defend', description: '+25% DR, +2 ULT-P' },
+            { name: 'Charge', description: '+3 ULT-P' },
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
         energy: 2000,
@@ -208,7 +212,7 @@ const initialState = {
                     dodge: 0.05,
                     turnSpeed: 6,
                 },
-                abilities: ['Auto', 'Ravenous Claws', 'Mark', 'Pack']
+                abilities: ['Auto-Attack', 'Ravenous Claws']
             },
             {
                 id: 1,
@@ -222,7 +226,7 @@ const initialState = {
                     dodge: 0.15,
                     turnSpeed: 8,
                 },
-                abilities: ['Auto', 'Breath', 'Tail Swipe', 'Bite']
+                abilities: ['Auto-Attack', 'Dragon Breath']
             }
         ],
         currentEncounter: {
@@ -902,22 +906,21 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-        case USER_DEFEND:
-            console.log('defend in reducer:', action.payload)
+        case USER_CHARGE:
+            console.log('charge in reducer:', action.payload)
             return {
                 ...state,
                 user: {
                     ...state.user,
                     battleStats: {
                         ...state.user.battleStats,
-                        health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0,
-                        ultimate: state.user.battleStats.ultimate + 2 > 10 ? 10 : state.user.battleStats.ultimate + 2
+                        ultimate: state.user.battleStats.ultimate + 3 > 10 ? 10 : state.user.battleStats.ultimate + 3
                     }
 
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User defended and took only ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User charged Ultimate Gauge by 3 at ${Date(Date.now()).toString()}.`]
 
                 }
             };
@@ -947,6 +950,83 @@ const rootReducer = (state = initialState, action) => {
 
                 }
             };
+
+            case USER_DODGED:
+            return {
+                ...state,
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `The user dodged the attack at ${Date(Date.now()).toString()}.`]
+                }
+            }
+
+            case ENCOUNTER_AUTO:
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        battleStats: {
+                            ...state.user.battleStats,
+                            health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0
+                        }
+    
+                    },
+                    game: {
+                        ...state.game,
+                        log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+    
+                    }
+                };
+
+                case ENCOUNTER_RAVENOUS_CLAWS:
+
+                    return {
+                        ...state,
+                        user: {
+                            ...state.user,
+                            battleStats: {
+                                ...state.user.battleStats,
+                                health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0
+                            }
+        
+                        },
+                        game: {
+                            ...state.game,
+                            currentEncounter: {
+                                ...state.game.currentEncounter,
+                                stats: {
+                                    ...state.game.currentEncounter.stats,
+                                    health: state.game.currentEncounter.stats.health + action.payload.healing > 0 ? state.game.currentEncounter.stats.health + action.payload.healing : 0
+                                }
+                            },
+                            log: [...state.game.log, `${action.payload.name} dealt ${action.payload.damage} damage and healed for ${action.payload.healing} at ${Date(Date.now()).toString()}.`]
+        
+                        }
+                    };
+
+                    case ENCOUNTER_DRAGON_BREATH:
+
+                        return {
+                            ...state,
+                            user: {
+                                ...state.user,
+                                battleStats: {
+                                    ...state.user.battleStats,
+                                    health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0,
+                                    damageReduction: state.user.battleStats.damageReduction-0.05 > 0 ? state.user.battleStats.damageReduction-0.05 : 0
+                                }
+            
+                            },
+                            game: {
+                                ...state.game,
+                                log: [...state.game.log, `${action.payload.name} dealt ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+            
+                            }
+                        };
+
+
+
+
 
 
 

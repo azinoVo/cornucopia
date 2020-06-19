@@ -247,3 +247,12 @@ thead {
 .deity-actions button {
   margin: 5px;
 }
+
+.ability-button {
+  padding: 0.5%;
+  margin: 0.5%;
+}
+
+.ability-button:hover {
+  background-color: lightblue;
+}
