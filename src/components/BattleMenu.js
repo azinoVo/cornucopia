@@ -24,7 +24,9 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         let encounterSkillNumber = Math.floor((Math.random() * encounterStats.abilities.length))
 
 
-        if (encounterDodgeNumber <= encounterStats.stats.dodge * 100 && ability === 'Auto-Attack') {
+        if (encounterDodgeNumber <= encounterStats.stats.dodge * 100
+            && ability === 'Auto-Attack'
+            ) {
             dispatch(userBattleAction(userStats, encounterStats, 'Encounter-Dodged'))
         } else {
             dispatch(userBattleAction(userStats, encounterStats, ability))
@@ -32,6 +34,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
         if (userDodgeNumber <= userStats.dodge * 100
             && encounterStats.abilities[encounterSkillNumber] === 'Auto-Attack'
+            && ability !== 'Charge'
             && currentEncounter.stats.health > 0
         ) {
             dispatch(encounterBattleAction(userStats, encounterStats, 'User-Dodged'))
@@ -58,7 +61,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     {currentEncounter && <p>Health: {currentEncounter.stats['health']}</p>}
                 </div>
 
-                <div className='user'>
+                {currentEncounter.stats.health > 0 && <div className='user'>
                     <h2>User Menu</h2>
                     <p>Health: {userBattleStats.health}</p>
                     <p>Attack Power: {userBattleStats.attackPower}</p>
@@ -71,7 +74,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                                     battle(userBattleStats, currentEncounter, ability.name)} key={ability.name}>{ability.name}: {ability.description}</button>
                         })
                     }
-                </div>
+                </div>}
 
                 <div className='battle-log'>
                     <h2>Battle Log</h2>

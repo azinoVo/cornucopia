@@ -292,7 +292,7 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
 export const ENCOUNTER_AUTO = "ENCOUNTER_AUTO";
 export const ENCOUNTER_RAVENOUS_CLAWS = "ENCOUNTER_RAVENOUS_CLAWS";
 export const ENCOUNTER_DRAGON_BREATH = "ENCOUNTER_DRAGON_BREATH";
-export const USER_DODGED = "ENCOUNTER_DODGED";
+export const USER_DODGED = "USER_DODGED";
 
 export const encounterBattleAction = (userStats, encounterStats, ability) => dispatch => {
 

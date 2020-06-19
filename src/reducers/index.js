@@ -956,7 +956,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `The user dodged the attack at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User dodged the counterattack at ${Date(Date.now()).toString()}.`]
                 }
             }
 
@@ -1019,7 +1019,7 @@ const rootReducer = (state = initialState, action) => {
                             },
                             game: {
                                 ...state.game,
-                                log: [...state.game.log, `${action.payload.name} dealt ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+                                log: [...state.game.log, `${action.payload.name} dealt ${action.payload.damage} damage and decreased your damage reduction by 5% at ${Date(Date.now()).toString()}.`]
             
                             }
                         };
