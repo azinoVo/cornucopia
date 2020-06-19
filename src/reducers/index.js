@@ -47,12 +47,12 @@ const initialState = {
             speed: 0
         },
         battleStats: {
-            health: 25,
-            attackPower: 10,
-            magicPower: 10,
-            damageReduction: 0.25,
-            dodge: 0.1,
-            turnSpeed: 5,
+            health: 0,
+            attackPower: 0,
+            magicPower: 0,
+            damageReduction: 0,
+            dodge: 0.,
+            turnSpeed: 0,
             ultimate: 1
         },
         abilities: [
@@ -843,11 +843,11 @@ const rootReducer = (state = initialState, action) => {
                         'speed': action.payload['speed']
                     },
                     battleStats: {
-                        'health': Math.ceil(action.payload['constitution'] * 6.25),
+                        'health': Math.ceil(action.payload['constitution'] * 4.25),
                         'attackPower': Math.ceil(action.payload['attack'] * 1.35),
                         'magicPower': Math.ceil(action.payload['intelligence'] * 1.35),
-                        'damageReduction': Math.ceil(action.payload['defense'] * 1.65) / 100,
-                        'dodge': Math.ceil(action.payload['dexterity'] * 1.25),
+                        'damageReduction': Math.ceil(action.payload['defense'] * 1.75) / 100,
+                        'dodge': Math.ceil(action.payload['dexterity'] * 1.25) / 100,
                         'turnSpeed': Math.ceil(action.payload['speed'] * 1.15),
                         'ultimate': 0
                     }
@@ -867,7 +867,7 @@ const rootReducer = (state = initialState, action) => {
                     currentEncounter: {
                         ...action.payload
                     },
-                    log: [...state.game.log, `A ${action.payload.name} has appeared at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `A ${action.payload.name} has appeared.`]
                 }
             };
 
@@ -892,7 +892,7 @@ const rootReducer = (state = initialState, action) => {
                             health: state.game.currentEncounter.stats.health - action.payload.damage > 0 ? state.game.currentEncounter.stats.health - action.payload.damage : 0
                         }
                     },
-                    log: [...state.game.log, `User dealt ${action.payload.damage} to ${state.game.currentEncounter.name} at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User dealt ${action.payload.damage} to ${state.game.currentEncounter.name}.`]
 
                 }
             };
@@ -902,7 +902,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `The enemy dodged the attack at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `The enemy dodged the attack.`]
                 }
             }
 
@@ -920,7 +920,7 @@ const rootReducer = (state = initialState, action) => {
                 },
                 game: {
                     ...state.game,
-                    log: [...state.game.log, `User charged Ultimate Gauge by 3 at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User charged Ultimate Gauge by 3.`]
 
                 }
             };
@@ -946,7 +946,7 @@ const rootReducer = (state = initialState, action) => {
                             health: state.game.currentEncounter.stats.health - action.payload.damage > 0 ? state.game.currentEncounter.stats.health - action.payload.damage : 0
                         }
                     },
-                    log: [...state.game.log, `User unleashed ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+                    log: [...state.game.log, `User unleashed ${action.payload.damage} damage.`]
 
                 }
             };
@@ -973,7 +973,7 @@ const rootReducer = (state = initialState, action) => {
                     },
                     game: {
                         ...state.game,
-                        log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage at ${Date(Date.now()).toString()}.`]
+                        log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage.`]
     
                     }
                 };
@@ -999,7 +999,7 @@ const rootReducer = (state = initialState, action) => {
                                     health: state.game.currentEncounter.stats.health + action.payload.healing > 0 ? state.game.currentEncounter.stats.health + action.payload.healing : 0
                                 }
                             },
-                            log: [...state.game.log, `${action.payload.name} dealt ${action.payload.damage} damage and healed for ${action.payload.healing} at ${Date(Date.now()).toString()}.`]
+                            log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage and healed for ${action.payload.healing}.`]
         
                         }
                     };
@@ -1019,7 +1019,7 @@ const rootReducer = (state = initialState, action) => {
                             },
                             game: {
                                 ...state.game,
-                                log: [...state.game.log, `${action.payload.name} dealt ${action.payload.damage} damage and decreased your damage reduction by 5% at ${Date(Date.now()).toString()}.`]
+                                log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage and decreased your damage reduction by 5%.`]
             
                             }
                         };

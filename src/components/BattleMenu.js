@@ -23,6 +23,8 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let encounterSkillNumber = Math.floor((Math.random() * encounterStats.abilities.length))
 
+        console.log('userDodge', userDodgeNumber, '<=', userStats.dodge*100, 'encounterDodge', encounterStats.stats.dodge, '<=', encounterDodgeNumber)
+
 
         if (encounterDodgeNumber <= encounterStats.stats.dodge * 100
             && ability === 'Auto-Attack'
@@ -32,7 +34,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
             dispatch(userBattleAction(userStats, encounterStats, ability))
         }
 
-        if (userDodgeNumber <= userStats.dodge * 100
+        if (userDodgeNumber <= userStats.dodge*100
             && encounterStats.abilities[encounterSkillNumber] === 'Auto-Attack'
             && ability !== 'Charge'
             && currentEncounter.stats.health > 0
@@ -76,10 +78,10 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     }
                 </div>}
 
-                <div className='battle-log'>
+                {currentEncounter.stats.health > 0 && <div className='battle-log'>
                     <h2>Battle Log</h2>
                     <BattleLog />
-                </div>
+                </div>}
 
             </div>}
         </div>
