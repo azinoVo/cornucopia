@@ -70,14 +70,14 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
                     <tbody>
                         {
                             Object.entries(userInventory).map((entry, index) => {
-                                if (entry[1]) {
+
                                     return <tr className='shop-item' key={`inventoryItem${index}`}>
                                         <th>{entry[0]}</th>
                                         {<th>{entry[1]}</th>}
                                         <th>{shopPrices[entry[0]]} Mana Essences</th>
                                         {!entry[0].includes('plot') ? <th>Sell within Shop</th> : <th>Cannot Sell</th>}
                                     </tr>
-                                }
+                                
                                 
                             })
                         }
@@ -95,14 +95,14 @@ const Inventory = ({ user, prices, limits, main_garden_plot, orchard_plot, crops
 
                         {
                             Object.entries(specialList).map((entry, index) => {
-                                if (entry[1]) {
+                                
                                     return <tr className='special-item' key={`specialItem${index}`}>
                                         <th>{entry[0]}</th>
                                         {<th>{entry[1]}</th>}
                                         <th>Cannot Sell</th>
                                         <th><button onClick={() => dispatch(interactSpecial(entry))}>Interact</button></th>
                                     </tr>
-                                }
+                                
                                 
                             })
                         }
