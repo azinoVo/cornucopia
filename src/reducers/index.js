@@ -51,7 +51,7 @@ const initialState = {
             attackPower: 0,
             magicPower: 0,
             damageReduction: 0,
-            dodge: 0.,
+            dodge: 0,
             turnSpeed: 0,
             ultimate: 1
         },
@@ -206,7 +206,7 @@ const initialState = {
                 difficulty: 'easy',
                 stats: {
                     health: 50,
-                    attackPower: 5,
+                    attackPower: 7,
                     magicPower: 0,
                     damageReduction: 0.1,
                     dodge: 0.05,
@@ -219,8 +219,8 @@ const initialState = {
                 name: 'Small Dragon',
                 difficulty: 'hard',
                 stats: {
-                    health: 100,
-                    attackPower: 15,
+                    health: 75,
+                    attackPower: 10,
                     magicPower: 10,
                     damageReduction: 0.2,
                     dodge: 0.15,

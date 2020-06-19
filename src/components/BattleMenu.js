@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { setEncounterInfo, userBattleAction, encounterBattleAction } from '../actions';
 import { useDispatch } from 'react-redux';
+import { Progress } from 'react-sweet-progress';
 import { connect } from 'react-redux';
 import BattleLog from './GameLog';
 
-const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities }) => {
+const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities, userBase }) => {
     const [inBattle, setInBattle] = useState(false)
-
-
 
     const dispatch = useDispatch()
 
@@ -18,23 +17,27 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         setInBattle(!inBattle)
     }
 
+    const collectReward = () => {
+
+    }
+
     const battle = (userStats, encounterStats, ability) => {
         let encounterDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let encounterSkillNumber = Math.floor((Math.random() * encounterStats.abilities.length))
 
-        console.log('userDodge', userDodgeNumber, '<=', userStats.dodge*100, 'encounterDodge', encounterStats.stats.dodge, '<=', encounterDodgeNumber)
+        console.log('userDodge', userDodgeNumber, '<=', userStats.dodge * 100, 'encounterDodge', encounterStats.stats.dodge, '<=', encounterDodgeNumber)
 
 
         if (encounterDodgeNumber <= encounterStats.stats.dodge * 100
             && ability === 'Auto-Attack'
-            ) {
+        ) {
             dispatch(userBattleAction(userStats, encounterStats, 'Encounter-Dodged'))
         } else {
             dispatch(userBattleAction(userStats, encounterStats, ability))
         }
 
-        if (userDodgeNumber <= userStats.dodge*100
+        if (userDodgeNumber <= userStats.dodge * 100
             && encounterStats.abilities[encounterSkillNumber] === 'Auto-Attack'
             && ability !== 'Charge'
             && currentEncounter.stats.health > 0
@@ -53,21 +56,31 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
             creature from within the encounter array to send to currentEncounter within reducer. */}
             <button onClick={() => randomEncounter()}>Spawn a Random Enemy</button>
 
-
             {inBattle && <div className='battle-container'>
-                <div className='enemy'>
+                {currentEncounter.stats.health === 0 && <button onClick={() => collectReward()}>Loot Encounter</button>}
+
+                {currentEncounter.stats.health > 0 && <div className='enemy'>
                     {/* This information will be displayed from currentEncounters within reducer */}
                     <h2>Enemy Menu</h2>
                     {currentEncounter ? <p>{currentEncounter.name}</p> : 'No Encounters'}
                     <p>Picture Here or Animation</p>
+                    <Progress
+                        percent={[currentEncounter.stats.health/encountersList[currentEncounter.id].stats.health]*100}
+                    />
                     {currentEncounter && <p>Health: {currentEncounter.stats['health']}</p>}
-                </div>
+                </div>}
 
                 {currentEncounter.stats.health > 0 && <div className='user'>
                     <h2>User Menu</h2>
                     <p>Health: {userBattleStats.health}</p>
+                    <Progress
+                        percent={Math.ceil([userBattleStats.health/[Math.ceil(userBase.constitution*4.25)]*100])}
+                    />
                     <p>Attack Power: {userBattleStats.attackPower}</p>
                     <p>Ultimate Points: {userBattleStats.ultimate}</p>
+                    <Progress
+                        percent={[userBattleStats.ultimate/10]*100}
+                    />
                     {
                         userAbilities.map(ability => {
                             return <button
@@ -92,7 +105,8 @@ const mapStateToProps = state => ({
     encountersList: state.game.encounters,
     currentEncounter: state.game.currentEncounter,
     userBattleStats: state.user.battleStats,
-    userAbilities: state.user.abilities
+    userAbilities: state.user.abilities,
+    userBase: state.user.stats
 });
 
 export default connect(mapStateToProps, { userBattleAction, setEncounterInfo })(BattleMenu);
