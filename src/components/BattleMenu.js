@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Progress } from 'react-sweet-progress';
 import { connect } from 'react-redux';
 import BattleLog from './GameLog';
+import Character from './Character';
 
 const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities, userBase }) => {
     const [inBattle, setInBattle] = useState(false)
@@ -51,6 +52,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
     return (
         <div>
+            {inBattle && <Character />}
             <h1>This is the battle menu.</h1>
             {/* This button will randomize a number and pick a 
             creature from within the encounter array to send to currentEncounter within reducer. */}
