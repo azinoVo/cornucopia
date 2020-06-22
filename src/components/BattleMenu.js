@@ -65,7 +65,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     {currentEncounter ? <p>{currentEncounter.name}</p> : 'No Encounters'}
                     <p>Picture Here or Animation</p>
                     <Progress
-                        percent={[currentEncounter.stats.health/encountersList[currentEncounter.id].stats.health]*100}
+                        percent={Math.ceil([currentEncounter.stats.health/encountersList[currentEncounter.id].stats.health]*100)}
                     />
                     {currentEncounter && <p>Health: {currentEncounter.stats['health']}</p>}
                 </div>}
