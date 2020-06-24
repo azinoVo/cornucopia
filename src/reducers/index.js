@@ -47,11 +47,11 @@ const initialState = {
             speed: 0
         },
         battleStats: {
-            health: 0,
-            attackPower: 0,
-            magicPower: 0,
-            damageReduction: 0,
-            dodge: 0,
+            health: 100,
+            attackPower: 10,
+            magicPower: 10,
+            damageReduction: 0.1,
+            dodge: 0.1,
             turnSpeed: 0,
             ultimate: 1
         },
