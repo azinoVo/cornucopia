@@ -96,7 +96,7 @@ const Character = ({ log, skillPoint }) => {
         setDexterity(0)
         setIntelligence(0)
         setSpeed(0)
-        setStatPoints(30)
+        setStatPoints(skillPoint)
     }
 
     const confirmStats = () => {
@@ -172,7 +172,7 @@ const Character = ({ log, skillPoint }) => {
                 </div>
 
 
-                <button disabled={statPoints < 30 ? false : true} onClick={() => resetPoints()}>RESET</button>
+                <button disabled={statPoints < skillPoint ? false : true} onClick={() => resetPoints()}>RESET</button>
                 <button disabled={statPoints === 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
             </div>
         </div>

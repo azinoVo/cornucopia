@@ -47,11 +47,11 @@ const initialState = {
             speed: 0
         },
         battleStats: {
-            health: 100,
-            attackPower: 10,
-            magicPower: 10,
-            damageReduction: 0.1,
-            dodge: 0.1,
+            health: 0,
+            attackPower: 0,
+            magicPower: 0,
+            damageReduction: 0,
+            dodge: 0,
             turnSpeed: 0,
             ultimate: 1
         },
@@ -60,7 +60,7 @@ const initialState = {
             { name: 'Charge', description: '+3 ULT-P' },
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
-        skillPoint: 30,
+        skillPoint: 5,
         energy: 2000,
         essence: 500,
         favor: 5,

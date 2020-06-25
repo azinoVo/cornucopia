@@ -11,6 +11,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
     const dispatch = useDispatch()
 
+
     const randomEncounter = () => {
         let randomNumber = Math.floor((Math.random() * encountersList.length));
 
@@ -26,9 +27,6 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         let encounterDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let encounterSkillNumber = Math.floor((Math.random() * encounterStats.abilities.length))
-
-        console.log('userDodge', userDodgeNumber, '<=', userStats.dodge * 100, 'encounterDodge', encounterStats.stats.dodge, '<=', encounterDodgeNumber)
-
 
         if (encounterDodgeNumber <= encounterStats.stats.dodge * 100
             && ability === 'Auto-Attack'
@@ -76,7 +74,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     <h2>User Menu</h2>
                     <p>Health: {userBattleStats.health}</p>
                     <Progress
-                        percent={Math.ceil([userBattleStats.health/[Math.ceil(userBase.constitution*4.25)]*100])}
+                        percent={Math.ceil(userBattleStats.health/[Math.ceil(userBase.constitution*4.25)]*100)}
                     />
                     <p>Attack Power: {userBattleStats.attackPower}</p>
                     <p>Ultimate Points: {userBattleStats.ultimate}</p>
@@ -108,7 +106,7 @@ const mapStateToProps = state => ({
     currentEncounter: state.game.currentEncounter,
     userBattleStats: state.user.battleStats,
     userAbilities: state.user.abilities,
-    userBase: state.user
+    userBase: state.user.stats
 });
 
 export default connect(mapStateToProps, { userBattleAction, setEncounterInfo })(BattleMenu);
