@@ -60,6 +60,7 @@ const initialState = {
             { name: 'Charge', description: '+3 ULT-P' },
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
+        skillPoint: 30,
         energy: 2000,
         essence: 500,
         favor: 5,
@@ -228,7 +229,7 @@ const initialState = {
                     turnSpeed: 8,
                 },
                 abilities: ['Auto-Attack', 'Dragon Breath'],
-                rewards: ['Mana Essence', 'Skill Point']
+                rewards: ['Mana Essence', '2 Skill Point']
             }
         ],
         currentEncounter: {

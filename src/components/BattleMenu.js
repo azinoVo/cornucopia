@@ -108,7 +108,7 @@ const mapStateToProps = state => ({
     currentEncounter: state.game.currentEncounter,
     userBattleStats: state.user.battleStats,
     userAbilities: state.user.abilities,
-    userBase: state.user.stats
+    userBase: state.user
 });
 
 export default connect(mapStateToProps, { userBattleAction, setEncounterInfo })(BattleMenu);

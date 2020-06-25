@@ -3,7 +3,7 @@ import { setCharacterStats } from '../actions';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
-const Character = ({ log }) => {
+const Character = ({ log, skillPoint }) => {
     const [statPoints, setStatPoints] = useState(30)
     const [gender, setGender] = useState('Male')
     const [constitution, setConstitution] = useState(0)
@@ -116,8 +116,8 @@ const Character = ({ log }) => {
     }
 
     useEffect(() => {
-        console.log("This is the character creation component.")
-    }, [log])
+        setStatPoints(skillPoint)
+    }, [skillPoint])
 
     return (
         <div>
@@ -181,6 +181,8 @@ const Character = ({ log }) => {
 
 const mapStateToProps = state => ({
     log: state.game.log,
+    skillPoint: state.user.skillPoint
+
 });
 
 export default connect(mapStateToProps, { setCharacterStats })(Character);
