@@ -60,7 +60,7 @@ const initialState = {
             { name: 'Charge', description: '+3 ULT-P' },
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
-        skillPoint: 5,
+        skillPoint: 30,
         energy: 2000,
         essence: 500,
         favor: 5,
