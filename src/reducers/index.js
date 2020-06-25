@@ -212,7 +212,8 @@ const initialState = {
                     dodge: 0.05,
                     turnSpeed: 6,
                 },
-                abilities: ['Auto-Attack', 'Ravenous Claws']
+                abilities: ['Auto-Attack', 'Ravenous Claws'],
+                rewards: ['Mana Essence', 'Skill Point']
             },
             {
                 id: 1,
@@ -226,7 +227,8 @@ const initialState = {
                     dodge: 0.15,
                     turnSpeed: 8,
                 },
-                abilities: ['Auto-Attack', 'Dragon Breath']
+                abilities: ['Auto-Attack', 'Dragon Breath'],
+                rewards: ['Mana Essence', 'Skill Point']
             }
         ],
         currentEncounter: {
