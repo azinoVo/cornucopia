@@ -81,7 +81,7 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
                     <button
                         className="button"
                         onClick={() => {
-                            console.log("store in inventory then close");
+                        
                             storeCropHandler({
                                 name: plotInfo.product,
                                 amount: amountHarvested,
@@ -102,7 +102,7 @@ export default ({ plotInfo, cropPrices, storeCropHandler, sellCropHandler, amoun
                     <button
                         className="button"
                         onClick={() => {
-                            console.log("sell then close");
+                
                             sellCropHandler({
                                 name: plotInfo.product,
                                 id: Date.now(),

@@ -246,7 +246,7 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case BUY_ITEM:
-            console.log("BUY ITEM in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -265,7 +265,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case BUY_PLOT:
-            console.log("BUY PLOT in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -287,7 +287,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case SELL_ITEM:
-            console.log("SELL ITEM in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -306,7 +306,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case REFILL_WATER:
-            console.log("REFILL WATER")
+            
             return {
                 ...state,
                 user: {
@@ -321,7 +321,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case PLANT_SEED:
-            console.log("Plant Seed in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -342,7 +342,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_WATER:
-            console.log("INTERACT water in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -372,7 +372,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_NOURISH:
-            console.log("INTERACT nourish in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -398,7 +398,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case EXPAND_WATER:
-            console.log("EXPAND WATER CAPACITY")
+            
             return {
                 ...state,
                 user: {
@@ -418,7 +418,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case STORE_CROP:
-            console.log("STORE CROP in reducer", action.payload)
+        
             return {
                 ...state,
                 user: {
@@ -455,7 +455,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case SELL_CROP:
-            console.log("SELL CROP in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -484,7 +484,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case SELL_CROP_INVENTORY:
-            console.log("SELL CROP from inventory in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -502,7 +502,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case PLANT_SAPLING:
-            console.log("Plant sapling in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -523,7 +523,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_WATER_ORCHARD:
-            console.log("INTERACT water ORCHARD in reducer", action.payload)
+            
             return {
                 ...state,
                 user: {
@@ -552,7 +552,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_NOURISH_ORCHARD:
-            console.log("INTERACT nourish ORCHARD in reducer", action.payload)
+
             return {
                 ...state,
                 user: {
@@ -578,7 +578,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_CLEAR_ORCHARD:
-            console.log("INTERACT clear ORCHARD in reducer", action.payload)
             return {
                 ...state,
                 user: {
@@ -608,7 +607,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_REPLENISH_ORCHARD:
-            console.log("STORE REPLENISH ORCHARD in reducer", action.payload)
             return {
                 ...state,
                 user: {
@@ -628,7 +626,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case STORE_CROP_ORCHARD:
-            console.log("STORE CROP ORCHARD in reducer", action.payload)
             return {
                 ...state,
                 user: {
@@ -662,7 +659,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case SELL_CROP_ORCHARD:
-            console.log("SELL CROP ORCHARD in reducer", action.payload)
             return {
                 ...state,
                 user: {
@@ -688,7 +684,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case NUMBER_WIN:
-            console.log("NUMBER WIN")
             return {
                 ...state,
                 user: {
@@ -706,7 +701,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case GUESS_WIN:
-            console.log("NUMBER WIN")
             return {
                 ...state,
                 user: {
@@ -724,7 +718,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_SPECIAL_SAND:
-            console.log("special sand in reducer")
             return {
                 ...state,
                 user: {
@@ -765,7 +758,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_SPECIAL_GLASS:
-            console.log("glass in reducer")
             return {
                 ...state,
                 user: {
@@ -799,7 +791,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case CHANGE_DATE:
-            console.log("glass in reducer")
             return {
                 ...state,
                 user: {
@@ -830,7 +821,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case SET_STATS:
-            console.log('set stats in reducer', action.payload)
             return {
                 ...state,
                 user: {
@@ -862,7 +852,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case SET_CURRENT_ENCOUNTER:
-            console.log('set current encounter in reducer')
             return {
                 ...state,
                 game: {
@@ -875,7 +864,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case USER_AUTO:
-            console.log('user-auto payload:', action.payload)
             return {
                 ...state,
                 user: {
@@ -910,7 +898,6 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case USER_CHARGE:
-            console.log('charge in reducer:', action.payload)
             return {
                 ...state,
                 user: {
@@ -929,7 +916,6 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case USER_ULTIMATE_RELEASE:
-            console.log('ultimate release reducer', action.payload)
             return {
                 ...state,
                 user: {
@@ -1026,11 +1012,6 @@ const rootReducer = (state = initialState, action) => {
             
                             }
                         };
-
-
-
-
-
 
 
         default:

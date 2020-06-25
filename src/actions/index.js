@@ -27,7 +27,7 @@ export const BUY_ITEM = "BUY_ITEM";
 
 // The set will be the item and the price
 export const buyItem = set => {
-    console.log("set in actions", set)
+
     return {
         type: BUY_ITEM,
         payload: set
@@ -38,7 +38,6 @@ export const BUY_PLOT = "BUY_PLOT";
 
 // The set will be the item and the price
 export const buyPlot = plotSet => {
-    console.log("plotSet in actions", plotSet)
     return {
         type: BUY_PLOT,
         payload: plotSet
@@ -49,7 +48,6 @@ export const SELL_ITEM = "SELL_ITEM";
 
 // The set will be the item and the price
 export const sellItem = set => {
-    console.log("set in actions", set)
     return {
         type: SELL_ITEM,
         payload: set
@@ -59,7 +57,6 @@ export const sellItem = set => {
 export const REFILL_WATER = "REFILL_WATER";
 
 export const fillWater = (water_limit) => {
-    console.log("refilling water")
     return {
         type: REFILL_WATER,
         payload: water_limit
@@ -70,7 +67,7 @@ export const fillWater = (water_limit) => {
 export const PLANT_SEED = "PLANT_SEED";
 
 export const plantSeed = (seedSet) => {
-    console.log("planting seed", seedSet)
+    
     return {
         type: PLANT_SEED,
         payload: { ...seedSet }
@@ -80,7 +77,7 @@ export const plantSeed = (seedSet) => {
 export const PLANT_SAPLING = "PLANT_SAPLING";
 
 export const plantSapling = (seedSet) => {
-    console.log("planting sapling", seedSet)
+    
     return {
         type: PLANT_SAPLING,
         payload: { ...seedSet }
@@ -90,7 +87,7 @@ export const plantSapling = (seedSet) => {
 export const EXPAND_WATER = "EXPAND_WATER";
 
 export const expandWater = () => {
-    console.log("expand water")
+    
     return {
         type: EXPAND_WATER
     }
@@ -101,7 +98,7 @@ export const INTERACT_NOURISH = "INTERACT_NOURISH";
 
 
 export const interact = (actionSet) => dispatch => {
-    console.log("interact in actions", actionSet)
+    
 
     if (actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER, payload: actionSet })
@@ -119,7 +116,7 @@ export const INTERACT_REPLENISH_ORCHARD = "INTERACT_REPLENISH_ORCHARD";
 
 
 export const interactOrchard = (actionSet) => dispatch => {
-    console.log("interact in actions ORCHARD", actionSet)
+    
 
     if (actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER_ORCHARD, payload: actionSet })
@@ -136,7 +133,7 @@ export const interactOrchard = (actionSet) => dispatch => {
 export const STORE_CROP = "STORE_CROP";
 
 export const storeCrop = (crop, index) => {
-    console.log("STORE_CROP", crop, index)
+    
     return {
         type: STORE_CROP,
         payload: { crop, index }
@@ -146,7 +143,7 @@ export const storeCrop = (crop, index) => {
 export const STORE_CROP_ORCHARD = "STORE_CROP_ORCHARD";
 
 export const storeCropOrchard = (crop, index) => {
-    console.log("STORE_CROP_ORCHARD", crop, index)
+    
     return {
         type: STORE_CROP_ORCHARD,
         payload: { crop, index }
@@ -156,7 +153,7 @@ export const storeCropOrchard = (crop, index) => {
 export const SELL_CROP = "SELL_CROP";
 
 export const sellCrop = (crop, index) => {
-    console.log("SELL_CROP", crop, index)
+
     return {
         type: SELL_CROP,
         payload: { crop, index }
@@ -166,7 +163,7 @@ export const sellCrop = (crop, index) => {
 export const SELL_CROP_ORCHARD = "SELL_CROP_ORCHARD";
 
 export const sellCropOrchard = (crop, index) => {
-    console.log("SELL_CROP_ORCHARD", crop, index)
+    
     return {
         type: SELL_CROP_ORCHARD,
         payload: { crop, index }
@@ -176,7 +173,7 @@ export const sellCropOrchard = (crop, index) => {
 export const SELL_CROP_INVENTORY = "SELL_CROP_INVENT";
 
 export const sellCropInventory = (crop) => {
-    console.log("SELL_CROP_INVENTORY", crop)
+    
     return {
         type: SELL_CROP_INVENTORY,
         payload: crop
@@ -186,7 +183,7 @@ export const sellCropInventory = (crop) => {
 export const NUMBER_WIN = "NUMBER_WIN";
 
 export const numberWin = () => {
-    console.log("number game win")
+    
     return {
         type: NUMBER_WIN,
     }
@@ -196,7 +193,7 @@ export const numberWin = () => {
 export const GUESS_WIN = "GUESS_WIN";
 
 export const guessWin = () => {
-    console.log("GUESS THE CARD win")
+    
     return {
         type: GUESS_WIN,
     }
@@ -208,7 +205,7 @@ export const INTERACT_SPECIAL_GLASS = "INTERACT_SPECIAL_GLASS";
 
 
 export const interactSpecial = (actionSet) => dispatch => {
-    console.log("interact in actions specials", actionSet)
+    c
 
     if (actionSet[0] === "cornucopian_sand") {
         dispatch({ type: INTERACT_SPECIAL_SAND, payload: actionSet })
@@ -221,7 +218,7 @@ export const interactSpecial = (actionSet) => dispatch => {
 export const CHANGE_DATE = "CHANGE_DATE";
 
 export const progressDate = (day) => {
-    console.log("change Date", day)
+    
     return {
         type: CHANGE_DATE,
         payload: day,
@@ -231,7 +228,7 @@ export const progressDate = (day) => {
 export const SET_STATS = "SET_STATS";
 
 export const setCharacterStats = (stats) => {
-    console.log('changing character stats, action')
+    
     return {
         type: SET_STATS,
         payload: stats,
@@ -241,7 +238,7 @@ export const setCharacterStats = (stats) => {
 export const SET_CURRENT_ENCOUNTER = "SET_CURRENT_ENCOUNTER";
 
 export const setEncounterInfo = (encounter) => {
-    console.log('encounter', encounter)
+    
     return {
         type: SET_CURRENT_ENCOUNTER,
         payload: encounter,

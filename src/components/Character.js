@@ -111,7 +111,7 @@ const Character = ({ log, skillPoint }) => {
             'speed': speed+1
         }
 
-        console.log('stats', stats)
+
         dispatch(setCharacterStats(stats))
     }
 

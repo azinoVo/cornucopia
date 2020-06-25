@@ -162,7 +162,6 @@ const Orchard = ({ orchard, user, limits, interactList, energyReq, cropList, cro
                             return numberHarvested
                         }
 
-                        console.log("number harvested", numberHarvested)
 
                         if (plot) {
                             return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
