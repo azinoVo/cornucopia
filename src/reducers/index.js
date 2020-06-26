@@ -26,6 +26,7 @@ import {
     SET_CURRENT_ENCOUNTER,
     USER_AUTO,
     USER_CHARGE,
+    USER_FIREBALL,
     USER_ULTIMATE_RELEASE,
     ENCOUNTER_DODGED,
     ENCOUNTER_AUTO,
@@ -58,6 +59,7 @@ const initialState = {
         abilities: [
             { name: 'Auto-Attack', description: '100% AP, +1 ULT-P' },
             { name: 'Charge', description: '+3 ULT-P' },
+            { name: 'Fireball', description: '150% MP, +1 ULT-P'},
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
         skillPoint: 30,
@@ -911,6 +913,31 @@ const rootReducer = (state = initialState, action) => {
                 game: {
                     ...state.game,
                     log: [...state.game.log, `User charged Ultimate Gauge by 3.`]
+
+                }
+            };
+
+            case USER_FIREBALL:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        ultimate: state.user.battleStats.ultimate+1
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    currentEncounter: {
+                        ...state.game.currentEncounter,
+                        stats: {
+                            ...state.game.currentEncounter.stats,
+                            health: state.game.currentEncounter.stats.health - action.payload.damage > 0 ? state.game.currentEncounter.stats.health - action.payload.damage : 0
+                        }
+                    },
+                    log: [...state.game.log, `User's Fireball dealt ${action.payload.damage} damage to ${action.payload.name}.`]
 
                 }
             };

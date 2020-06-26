@@ -205,7 +205,6 @@ export const INTERACT_SPECIAL_GLASS = "INTERACT_SPECIAL_GLASS";
 
 
 export const interactSpecial = (actionSet) => dispatch => {
-    c
 
     if (actionSet[0] === "cornucopian_sand") {
         dispatch({ type: INTERACT_SPECIAL_SAND, payload: actionSet })
@@ -247,6 +246,7 @@ export const setEncounterInfo = (encounter) => {
 
 export const USER_AUTO = "USER_AUTO";
 export const USER_CHARGE = "USER_CHARGE";
+export const USER_FIREBALL = "USER_FIREBALL";
 export const USER_ULTIMATE_RELEASE = "USER_ULTIMATE_RELEASE";
 export const ENCOUNTER_DODGED = "ENCOUNTER_DODGED";
 
@@ -268,6 +268,16 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
                 }
             })
             break;
+            case 'Fireball':
+                dispatch({
+                    type: USER_FIREBALL,
+                    payload: {
+                        damage: Math.floor([Math.floor(userStats.magicPower*1.5)] - [Math.floor(userStats.magicPower*1.5) * encounterStats.stats.damageReduction]) > 0 ?
+                        Math.floor([Math.floor(userStats.magicPower*1.5)] - [Math.floor(userStats.magicPower*1.5) * encounterStats.stats.damageReduction]) : 0,
+                        name: encounterStats.name
+                    }
+                })
+                break;
         case 'Charge':
             dispatch({
                 type: USER_CHARGE

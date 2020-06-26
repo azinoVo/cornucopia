@@ -77,6 +77,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                         percent={Math.ceil(userBattleStats.health/[Math.ceil(userBase.constitution*4.25)]*100)}
                     />
                     <p>Attack Power: {userBattleStats.attackPower}</p>
+                    <p>Magic Power: {userBattleStats.magicPower}</p>
                     <p>Ultimate Points: {userBattleStats.ultimate}</p>
                     <Progress
                         percent={[userBattleStats.ultimate/10]*100}
