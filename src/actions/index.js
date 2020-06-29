@@ -347,6 +347,10 @@ export const encounterBattleAction = (userStats, encounterStats, ability) => dis
     }
 }
 
+export const REWARD_EASY = "REWARD_EASY";
+export const REWARD_HARD = "REWARD_HARD";
+
+
 
 
 

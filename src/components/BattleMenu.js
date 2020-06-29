@@ -20,6 +20,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
     }
 
     const collectReward = () => {
+        
 
     }
 
