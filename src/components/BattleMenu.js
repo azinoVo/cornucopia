@@ -51,7 +51,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
     return (
         <div>
-            {inBattle && <Character />}
+            <Character />
             <h1>This is the battle menu.</h1>
             {/* This button will randomize a number and pick a 
             creature from within the encounter array to send to currentEncounter within reducer. */}
