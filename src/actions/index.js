@@ -351,6 +351,23 @@ export const REWARD_EASY = "REWARD_EASY";
 export const REWARD_HARD = "REWARD_HARD";
 
 
+export const reward = difficulty  => dispatch => {
+
+    switch (difficulty) {
+        case 'easy':
+            dispatch({
+                type: REWARD_EASY
+            })
+            break;
+        case 'hard':
+            dispatch({
+                type: REWARD_HARD
+            })
+            break;
+        default:
+            console.log('Default for rewards')
+    }
+}
 
 
 

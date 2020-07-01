@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { setEncounterInfo, userBattleAction, encounterBattleAction } from '../actions';
+import { setEncounterInfo, userBattleAction, encounterBattleAction, reward } from '../actions';
 import { useDispatch } from 'react-redux';
 import { Progress } from 'react-sweet-progress';
 import { connect } from 'react-redux';
@@ -19,9 +19,10 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         setInBattle(!inBattle)
     }
 
-    const collectReward = () => {
-        
+    const collectReward = (difficulty) => {
 
+        dispatch(reward(difficulty))
+        setInBattle(!inBattle)
     }
 
     const battle = (userStats, encounterStats, ability) => {
@@ -58,7 +59,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
             <button onClick={() => randomEncounter()}>Spawn a Random Enemy</button>
 
             {inBattle && <div className='battle-container'>
-                {currentEncounter.stats.health === 0 && <button onClick={() => collectReward()}>Loot Encounter</button>}
+                {currentEncounter.stats.health === 0 && <button onClick={() => collectReward(currentEncounter.difficulty)}>Collect Reward</button>}
 
                 {currentEncounter.stats.health > 0 && <div className='enemy'>
                     {/* This information will be displayed from currentEncounters within reducer */}

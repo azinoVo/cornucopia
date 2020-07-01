@@ -32,7 +32,9 @@ import {
     ENCOUNTER_AUTO,
     ENCOUNTER_RAVENOUS_CLAWS,
     ENCOUNTER_DRAGON_BREATH,
-    USER_DODGED
+    USER_DODGED,
+    REWARD_EASY,
+    REWARD_HARD
 } from '../actions';
 
 const initialState = {
@@ -1039,6 +1041,82 @@ const rootReducer = (state = initialState, action) => {
             
                             }
                         };
+
+                    case REWARD_EASY:
+
+                        return {
+                            ...state,
+                            user: {
+                                ...state.user,
+                                skillPoint: state.user.skillPoint+1,
+                                essence: state.user.essence+500,
+                                stats: {
+                                    ...state.user.stats,
+                                    gender: state.user.stats.gender,
+                                    level: 1,
+                                    constitution: 0,
+                                    attack: 0,
+                                    defense: 0,
+                                    dexterity: 0,
+                                    intelligence: 0,
+                                    speed: 0
+                                },
+                                battleStats: {
+                                    ...state.user.battleStats,
+                                    health: 0,
+                                    attackPower: 0,
+                                    magicPower: 0,
+                                    damageReduction: 0,
+                                    dodge: 0,
+                                    turnSpeed: 0,
+                                    ultimate: 1
+                                },
+                            },
+                            game: {
+                                ...state.game,
+                                currentEncounter: [],
+                                log: [...state.game.log, `Rewards: 500 Mana Essence and 1 SKill Point obtained.`]
+            
+                            }
+                        }
+
+                        case REWARD_HARD:
+
+                            return {
+                                ...state,
+                                user: {
+                                    ...state.user,
+                                    skillPoint: state.user.skillPoint+2,
+                                    essence: state.user.essence+1000,
+                                    stats: {
+                                        ...state.user.stats,
+                                        gender: state.user.stats.gender,
+                                        level: 1,
+                                        constitution: 0,
+                                        attack: 0,
+                                        defense: 0,
+                                        dexterity: 0,
+                                        intelligence: 0,
+                                        speed: 0
+                                    },
+                                    battleStats: {
+                                        ...state.user.battleStats,
+                                        health: 0,
+                                        attackPower: 0,
+                                        magicPower: 0,
+                                        damageReduction: 0,
+                                        dodge: 0,
+                                        turnSpeed: 0,
+                                        ultimate: 1
+                                    },
+                                },
+                                game: {
+                                    ...state.game,
+                                    currentEncounter: [],
+                                    log: [...state.game.log, `Rewards: 1000 Mana Essence and 2 SKill Points obtained.`]
+                
+                                }
+                            }
 
 
         default:
