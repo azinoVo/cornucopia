@@ -42,12 +42,12 @@ const initialState = {
         stats: {
             gender: 'Male',
             level: 1,
-            constitution: 0,
-            attack: 0,
-            defense: 0,
-            dexterity: 0,
-            intelligence: 0,
-            speed: 0
+            constitution: 1,
+            attack: 1,
+            defense: 1,
+            dexterity: 1,
+            intelligence: 1,
+            speed: 1
         },
         battleStats: {
             health: 0,
@@ -832,22 +832,23 @@ const rootReducer = (state = initialState, action) => {
                     stats: {
                         'gender': action.payload['gender'],
                         'level': action.payload['level'],
-                        'constitution': action.payload['constitution'],
-                        'attack': action.payload['attack'],
-                        'defense': action.payload['defense'],
-                        'dexterity': action.payload['dexterity'],
-                        'intelligence': action.payload['intelligence'],
-                        'speed': action.payload['speed']
+                        'constitution': state.user.stats.constitution+action.payload['constitution'],
+                        'attack': state.user.stats.attack+action.payload['attack'],
+                        'defense': state.user.stats.defense+action.payload['defense'],
+                        'dexterity': state.user.stats.dexterity+action.payload['dexterity'],
+                        'intelligence': state.user.stats.intelligence+action.payload['intelligence'],
+                        'speed': state.user.stats.speed+action.payload['speed']
                     },
                     battleStats: {
-                        'health': Math.ceil(action.payload['constitution'] * 4.25),
-                        'attackPower': Math.ceil(action.payload['attack'] * 1.35),
-                        'magicPower': Math.ceil(action.payload['intelligence'] * 1.35),
-                        'damageReduction': Math.ceil(action.payload['defense'] * 1.75) / 100,
-                        'dodge': Math.ceil(action.payload['dexterity'] * 1.25) / 100,
-                        'turnSpeed': Math.ceil(action.payload['speed'] * 1.15),
+                        'health': Math.ceil([state.user.stats.constitution+action.payload['constitution']] * 5),
+                        'attackPower': Math.ceil([state.user.stats.attack+action.payload['attack']] * 1.35),
+                        'magicPower': Math.ceil([state.user.stats.intelligence+action.payload['intelligence']] * 1.35),
+                        'damageReduction': Math.ceil([state.user.stats.defense+action.payload['defense']] * 1.75) / 100,
+                        'dodge': Math.ceil([state.user.stats.dexterity+action.payload['dexterity']] * 1.25) / 100,
+                        'turnSpeed': Math.ceil([state.user.stats.speed+action.payload['speed']] * 1.15),
                         'ultimate': 0
-                    }
+                    },
+                    skillPoint: 0,
                 },
                 game: {
                     ...state.game,
@@ -1050,27 +1051,6 @@ const rootReducer = (state = initialState, action) => {
                                 ...state.user,
                                 skillPoint: state.user.skillPoint+1,
                                 essence: state.user.essence+500,
-                                stats: {
-                                    ...state.user.stats,
-                                    gender: state.user.stats.gender,
-                                    level: 1,
-                                    constitution: 0,
-                                    attack: 0,
-                                    defense: 0,
-                                    dexterity: 0,
-                                    intelligence: 0,
-                                    speed: 0
-                                },
-                                battleStats: {
-                                    ...state.user.battleStats,
-                                    health: 0,
-                                    attackPower: 0,
-                                    magicPower: 0,
-                                    damageReduction: 0,
-                                    dodge: 0,
-                                    turnSpeed: 0,
-                                    ultimate: 1
-                                },
                             },
                             game: {
                                 ...state.game,
@@ -1088,27 +1068,6 @@ const rootReducer = (state = initialState, action) => {
                                     ...state.user,
                                     skillPoint: state.user.skillPoint+2,
                                     essence: state.user.essence+1000,
-                                    stats: {
-                                        ...state.user.stats,
-                                        gender: state.user.stats.gender,
-                                        level: 1,
-                                        constitution: 0,
-                                        attack: 0,
-                                        defense: 0,
-                                        dexterity: 0,
-                                        intelligence: 0,
-                                        speed: 0
-                                    },
-                                    battleStats: {
-                                        ...state.user.battleStats,
-                                        health: 0,
-                                        attackPower: 0,
-                                        magicPower: 0,
-                                        damageReduction: 0,
-                                        dodge: 0,
-                                        turnSpeed: 0,
-                                        ultimate: 1
-                                    },
                                 },
                                 game: {
                                     ...state.game,

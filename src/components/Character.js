@@ -3,7 +3,7 @@ import { setCharacterStats } from '../actions';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
-const Character = ({ skillPoint, userBase }) => {
+const Character = ({ skillPoint, userBase, userBattleStats }) => {
     const [statPoints, setStatPoints] = useState(30)
     const [gender, setGender] = useState('Male')
     const [constitution, setConstitution] = useState(0)
@@ -103,12 +103,12 @@ const Character = ({ skillPoint, userBase }) => {
         let stats = {
             'gender': gender,
             'level': 1,
-            'constitution': constitution+1,
-            'attack': attack+1,
-            'defense': defense+1,
-            'dexterity': dexterity+1,
-            'intelligence': intelligence+1,
-            'speed': speed+1
+            'constitution': constitution,
+            'attack': attack,
+            'defense': defense,
+            'dexterity': dexterity,
+            'intelligence': intelligence,
+            'speed': speed
         }
 
         dispatch(setCharacterStats(stats))
@@ -136,21 +136,21 @@ const Character = ({ skillPoint, userBase }) => {
                     <button disabled={constitution > 0 ? false : true} onClick={() => controlStatsDecrease('constitution')}>-</button>
                     <span> + {constitution} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('constitution')}>+</button>
-                    <span> Constitution: {userBase.constitution}, Health Points: {Math.ceil([userBase.constitution+1]*6.25)} <strong>Amount of points before mortality.</strong></span>
+                    <span> Constitution: {userBase.constitution}, Health Points: {userBattleStats.health} <strong>Amount of points before mortality.</strong></span>
                 </div>
 
                 <div>
                     <button disabled={attack > 0 ? false : true} onClick={() => controlStatsDecrease('attack')}>-</button>
                     <span> + {attack} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('attack')}>+</button>
-                    <span> Attack: {userBase.attack}, Attack Power: {Math.ceil([userBase.attack+1]*1.35)} <strong>Damage of Physical attacks and abilities.</strong></span>
+                    <span> Attack: {userBase.attack}, Attack Power: {userBattleStats.attackPower} <strong>Damage of Physical attacks and abilities.</strong></span>
                 </div>
 
                 <div>
                     <button disabled={defense > 0 ? false : true} onClick={() => controlStatsDecrease('defense')}>-</button>
                     <span> + {defense} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('defense')}>+</button>
-                    <span> Defense: {userBase.defense}, Damage Reduction: {Math.ceil([userBase.defense+1]*1.65)}% <strong>Damage Mitigation.</strong></span>
+                    <span> Defense: {userBase.defense}, Damage Reduction: {Math.ceil(userBattleStats.damageReduction*100)}% <strong>Damage Mitigation.</strong></span>
 
                 </div>
 
@@ -158,7 +158,7 @@ const Character = ({ skillPoint, userBase }) => {
                     <button disabled={dexterity > 0 ? false : true} onClick={() => controlStatsDecrease('dexterity')}>-</button>
                     <span> + {dexterity} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('dexterity')}>+</button>
-                    <span> Dexterity: {userBase.dexterity}, Dodge Chance: {Math.ceil([userBase.dexterity+1]*1.25)}% <strong>Determines your Dodge Chance.</strong></span>
+                    <span> Dexterity: {userBase.dexterity}, Dodge Chance: {Math.ceil(userBattleStats.dodge*100)}% <strong>Determines your Dodge Chance.</strong></span>
 
                 </div>
 
@@ -166,7 +166,7 @@ const Character = ({ skillPoint, userBase }) => {
                     <button disabled={intelligence > 0 ? false : true} onClick={() => controlStatsDecrease('intelligence')}>-</button>
                     <span> + {intelligence} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('intelligence')}>+</button>
-                    <span> Intelligence: {userBase.intelligence}, Magic Power: {Math.ceil([userBase.intelligence+1]*1.35)} <strong>Damage of Magical abilities.</strong></span>
+                    <span> Intelligence: {userBase.intelligence}, Magic Power: {userBattleStats.magicPower} <strong>Damage of Magical abilities.</strong></span>
 
                 </div>
 
@@ -174,7 +174,7 @@ const Character = ({ skillPoint, userBase }) => {
                     <button disabled={speed > 0 ? false : true} onClick={() => controlStatsDecrease('speed')}>-</button>
                     <span> + {speed} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('speed')}>+</button>
-                    <span> Speed: {userBase.speed}, Turn Speed: {Math.ceil([userBase.speed+1]*1.15)} <strong>Turn Priority.</strong></span>
+                    <span> Speed: {userBase.speed}, Turn Speed: {userBattleStats.turnSpeed} <strong>Turn Priority.</strong></span>
                 </div>
 
 
@@ -187,6 +187,7 @@ const Character = ({ skillPoint, userBase }) => {
 
 const mapStateToProps = state => ({
     userBase: state.user.stats,
+    userBattleStats: state.user.battleStats,
     skillPoint: state.user.skillPoint
 
 });
