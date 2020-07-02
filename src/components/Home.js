@@ -7,6 +7,7 @@ const Home = () => {
             <h1 className='tab-header'>Welcome to Cornucopia!</h1>
             <div className='home'>
                 <h2>In Progress</h2>
+                
                 <BattleMenu />
 
                 <h2>Quality Assurance Team</h2>
