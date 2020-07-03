@@ -369,6 +369,13 @@ export const reward = difficulty  => dispatch => {
     }
 }
 
+export const OFFER_ESSENCE = "OFFER_ESSENCE";
+
+export const offerEssence = (value, tier) => {
+    // Tier depends on the amount and probability
+}
+
+
 
 
 
