@@ -1,13 +1,15 @@
 import React from 'react';
 import BattleMenu from './BattleMenu';
+import Healing from './Healing';
 
 const Home = () => {
     return (
         <section className='main-content'>
             <h1 className='tab-header'>Welcome to Cornucopia!</h1>
             <div className='home'>
-                <h2>In Progress</h2>
+                <h1>In Progress</h1>
                 
+                <Healing />
                 <BattleMenu />
 
                 <h2>Quality Assurance Team</h2>

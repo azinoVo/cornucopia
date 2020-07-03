@@ -90,7 +90,6 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
     }
 
     const resetPoints = () => {
-        // Will need a max skill point number in the store
         setAttack(0)
         setConstitution(0)
         setDefense(0)
