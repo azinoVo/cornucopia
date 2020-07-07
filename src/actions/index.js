@@ -67,7 +67,7 @@ export const fillWater = (water_limit) => {
 export const PLANT_SEED = "PLANT_SEED";
 
 export const plantSeed = (seedSet) => {
-    
+
     return {
         type: PLANT_SEED,
         payload: { ...seedSet }
@@ -77,7 +77,7 @@ export const plantSeed = (seedSet) => {
 export const PLANT_SAPLING = "PLANT_SAPLING";
 
 export const plantSapling = (seedSet) => {
-    
+
     return {
         type: PLANT_SAPLING,
         payload: { ...seedSet }
@@ -87,7 +87,7 @@ export const plantSapling = (seedSet) => {
 export const EXPAND_WATER = "EXPAND_WATER";
 
 export const expandWater = () => {
-    
+
     return {
         type: EXPAND_WATER
     }
@@ -98,7 +98,7 @@ export const INTERACT_NOURISH = "INTERACT_NOURISH";
 
 
 export const interact = (actionSet) => dispatch => {
-    
+
 
     if (actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER, payload: actionSet })
@@ -116,7 +116,7 @@ export const INTERACT_REPLENISH_ORCHARD = "INTERACT_REPLENISH_ORCHARD";
 
 
 export const interactOrchard = (actionSet) => dispatch => {
-    
+
 
     if (actionSet['value'] === "water") {
         dispatch({ type: INTERACT_WATER_ORCHARD, payload: actionSet })
@@ -133,7 +133,7 @@ export const interactOrchard = (actionSet) => dispatch => {
 export const STORE_CROP = "STORE_CROP";
 
 export const storeCrop = (crop, index) => {
-    
+
     return {
         type: STORE_CROP,
         payload: { crop, index }
@@ -143,7 +143,7 @@ export const storeCrop = (crop, index) => {
 export const STORE_CROP_ORCHARD = "STORE_CROP_ORCHARD";
 
 export const storeCropOrchard = (crop, index) => {
-    
+
     return {
         type: STORE_CROP_ORCHARD,
         payload: { crop, index }
@@ -163,7 +163,7 @@ export const sellCrop = (crop, index) => {
 export const SELL_CROP_ORCHARD = "SELL_CROP_ORCHARD";
 
 export const sellCropOrchard = (crop, index) => {
-    
+
     return {
         type: SELL_CROP_ORCHARD,
         payload: { crop, index }
@@ -173,7 +173,7 @@ export const sellCropOrchard = (crop, index) => {
 export const SELL_CROP_INVENTORY = "SELL_CROP_INVENT";
 
 export const sellCropInventory = (crop) => {
-    
+
     return {
         type: SELL_CROP_INVENTORY,
         payload: crop
@@ -183,7 +183,7 @@ export const sellCropInventory = (crop) => {
 export const NUMBER_WIN = "NUMBER_WIN";
 
 export const numberWin = () => {
-    
+
     return {
         type: NUMBER_WIN,
     }
@@ -193,7 +193,7 @@ export const numberWin = () => {
 export const GUESS_WIN = "GUESS_WIN";
 
 export const guessWin = () => {
-    
+
     return {
         type: GUESS_WIN,
     }
@@ -217,7 +217,7 @@ export const interactSpecial = (actionSet) => dispatch => {
 export const CHANGE_DATE = "CHANGE_DATE";
 
 export const progressDate = (day) => {
-    
+
     return {
         type: CHANGE_DATE,
         payload: day,
@@ -227,7 +227,7 @@ export const progressDate = (day) => {
 export const SET_STATS = "SET_STATS";
 
 export const setCharacterStats = (stats) => {
-    
+
     return {
         type: SET_STATS,
         payload: stats,
@@ -237,7 +237,7 @@ export const setCharacterStats = (stats) => {
 export const SET_CURRENT_ENCOUNTER = "SET_CURRENT_ENCOUNTER";
 
 export const setEncounterInfo = (encounter) => {
-    
+
     return {
         type: SET_CURRENT_ENCOUNTER,
         payload: encounter,
@@ -268,16 +268,16 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
                 }
             })
             break;
-            case 'Fireball':
-                dispatch({
-                    type: USER_FIREBALL,
-                    payload: {
-                        damage: Math.floor([Math.floor(userStats.magicPower*1.5)] - [Math.floor(userStats.magicPower*1.5) * encounterStats.stats.damageReduction]) > 0 ?
-                        Math.floor([Math.floor(userStats.magicPower*1.5)] - [Math.floor(userStats.magicPower*1.5) * encounterStats.stats.damageReduction]) : 0,
-                        name: encounterStats.name
-                    }
-                })
-                break;
+        case 'Fireball':
+            dispatch({
+                type: USER_FIREBALL,
+                payload: {
+                    damage: Math.floor([Math.floor(userStats.magicPower * 1.5)] - [Math.floor(userStats.magicPower * 1.5) * encounterStats.stats.damageReduction]) > 0 ?
+                        Math.floor([Math.floor(userStats.magicPower * 1.5)] - [Math.floor(userStats.magicPower * 1.5) * encounterStats.stats.damageReduction]) : 0,
+                    name: encounterStats.name
+                }
+            })
+            break;
         case 'Charge':
             dispatch({
                 type: USER_CHARGE
@@ -287,7 +287,7 @@ export const userBattleAction = (userStats, encounterStats, ability) => dispatch
             dispatch({
                 type: USER_ULTIMATE_RELEASE,
                 payload: {
-                    damage: Math.floor([[[25 / 100] * userStats.ultimate + 1] * userStats.attackPower]-[[[[25 / 100] * userStats.ultimate + 1] * userStats.attackPower]*encounterStats.stats.damageReduction])
+                    damage: Math.floor([[[25 / 100] * userStats.ultimate + 1] * userStats.attackPower] - [[[[25 / 100] * userStats.ultimate + 1] * userStats.attackPower] * encounterStats.stats.damageReduction])
                 }
             })
             break;
@@ -323,8 +323,8 @@ export const encounterBattleAction = (userStats, encounterStats, ability) => dis
             dispatch({
                 type: ENCOUNTER_RAVENOUS_CLAWS,
                 payload: {
-                    damage: Math.floor([encounterStats.stats.attackPower*1.25] - [[encounterStats.stats.attackPower*1.25] * userStats.damageReduction]),
-                    healing: Math.floor([encounterStats.stats.attackPower*1.25]*0.35),
+                    damage: Math.floor([encounterStats.stats.attackPower * 1.25] - [[encounterStats.stats.attackPower * 1.25] * userStats.damageReduction]),
+                    healing: Math.floor([encounterStats.stats.attackPower * 1.25] * 0.35),
                     name: encounterStats.name,
                     skill: ability
                 }
@@ -335,7 +335,7 @@ export const encounterBattleAction = (userStats, encounterStats, ability) => dis
             dispatch({
                 type: ENCOUNTER_DRAGON_BREATH,
                 payload: {
-                    damage: Math.floor([encounterStats.stats.attackPower*1.35] - [[encounterStats.stats.attackPower*1.35] * userStats.damageReduction]),
+                    damage: Math.floor([encounterStats.stats.attackPower * 1.35] - [[encounterStats.stats.attackPower * 1.35] * userStats.damageReduction]),
                     name: encounterStats.name,
                     skill: ability
                 }
@@ -351,7 +351,7 @@ export const REWARD_EASY = "REWARD_EASY";
 export const REWARD_HARD = "REWARD_HARD";
 
 
-export const reward = difficulty  => dispatch => {
+export const reward = difficulty => dispatch => {
 
     switch (difficulty) {
         case 'easy':
@@ -369,10 +369,45 @@ export const reward = difficulty  => dispatch => {
     }
 }
 
-export const OFFER_ESSENCE = "OFFER_ESSENCE";
+export const OFFER_LOW = "OFFER_LOW";
+export const OFFER_MED = "OFFER_MED";
+export const OFFER_HIGH = "OFFER_HIGH";
+export const OFFER_MAX = "OFFER_MAX";
 
 export const offerEssence = (value, tier) => {
     // Tier depends on the amount and probability
+    switch (tier) {
+        case 'low':
+            dispatch({
+                type: OFFER_LOW,
+                payload: value
+            })
+            break;
+        case 'med':
+            dispatch({
+                type: OFFER_MED,
+                payload: value
+
+            })
+            break;
+        case 'high':
+            dispatch({
+                type: OFFER_HIGH,
+                payload: value
+
+            })
+            break;
+        case 'max':
+            dispatch({
+                type: OFFER_MAX,
+                payload: value
+
+            })
+            break;
+        default:
+            console.log('Default for offering')
+    }
+
 }
 
 

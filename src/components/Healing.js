@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { offerEssence } from '../actions';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 
 const Healing = ({ essence }) => {
     const [totalEssence, setTotalEssence] = useState(0)
     const [offering, setOffering] = useState(0)
+
+    const dispatch = useDispatch()
+
 
     const increaseOffering = (value) => {
         setOffering(offering+value)
@@ -20,15 +25,19 @@ const Healing = ({ essence }) => {
         
         if(amount < 100) {
             // low tier reward
-            break
+            dispatch(offerEssence(amount, 'low'))
+    
         } else if (amount >= 100 && amount <= 550) {
             // medium tier reward
-            break
+            dispatch(offerEssence(amount, 'med'))
+
         } else if (amount > 550 && amount < 1500) {
             // high tier reward
-            break
+            dispatch(offerEssence(amount, 'high'))
+
         } else {
             // Greatest reward above 1500 mana essences
+            dispatch(offerEssence(amount, 'max'))
         }
 
     }
