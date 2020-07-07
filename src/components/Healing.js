@@ -16,6 +16,23 @@ const Healing = ({ essence }) => {
 
     }
 
+    const sendOffering = (amount) => {
+        
+        if(amount < 100) {
+            // low tier reward
+            break
+        } else if (amount >= 100 && amount <= 550) {
+            // medium tier reward
+            break
+        } else if (amount > 550 && amount < 1500) {
+            // high tier reward
+            break
+        } else {
+            // Greatest reward above 1500 mana essences
+        }
+
+    }
+
     useEffect(() => {
         setTotalEssence(essence)
     }, [essence])
