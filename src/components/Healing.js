@@ -65,6 +65,7 @@ const Healing = ({ essence }) => {
             <p>Available Essences: {totalEssence}</p>
             {/* Idea: SKill points or even skills can be obtained here depending on the amount of essences and probability. */}
             <div className='modulate-offering'>
+                <button disabled={offering >= 1000 ? false : true} onClick={() => decreaseOffering(1000)}> -1000 </button>
                 <button disabled={offering >= 100 ? false : true} onClick={() => decreaseOffering(100)}> -100 </button>
                 <button disabled={offering >= 10 ? false : true} onClick={() => decreaseOffering(10)}> -10 </button>
                 <button disabled={offering >= 1 ? false : true} onClick={() => decreaseOffering(1)}> -1 </button>
@@ -72,6 +73,8 @@ const Healing = ({ essence }) => {
                 <button disabled={totalEssence >= 1 ? false : true} onClick={() => increaseOffering(1)}> +1 </button>
                 <button disabled={totalEssence >= 10 ? false : true} onClick={() => increaseOffering(10)}> +10 </button>
                 <button disabled={totalEssence >= 100 ? false : true} onClick={() => increaseOffering(100)}> +100 </button>
+                <button disabled={totalEssence >= 1000 ? false : true} onClick={() => increaseOffering(1000)}> +1000 </button>
+
             </div>
 
             <button disabled={offering > 0 ? false : true} onClick={() => sendOffering(offering)}>Offer {offering} Mana Essence(s)</button>
