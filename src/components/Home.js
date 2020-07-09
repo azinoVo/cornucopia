@@ -1,6 +1,7 @@
 import React from 'react';
 import BattleMenu from './BattleMenu';
 import Healing from './Healing';
+import Log from './GameLog';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
                 
                 <Healing />
                 <BattleMenu />
+                <Log />
 
                 <h2>Quality Assurance Team</h2>
                 <ul>

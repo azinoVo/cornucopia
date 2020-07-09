@@ -3,7 +3,7 @@ import { setEncounterInfo, userBattleAction, encounterBattleAction, reward } fro
 import { useDispatch } from 'react-redux';
 import { Progress } from 'react-sweet-progress';
 import { connect } from 'react-redux';
-import BattleLog from './GameLog';
+// import BattleLog from './GameLog';
 import Character from './Character';
 
 const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities, userBase }) => {
@@ -94,10 +94,10 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     }
                 </div>}
 
-                {currentEncounter.stats.health > 0 && <div className='battle-log'>
+                {/* {currentEncounter.stats.health > 0 && <div className='battle-log'>
                     <h2>Battle Log</h2>
                     <BattleLog />
-                </div>}
+                </div>} */}
 
             </div>}
         </div>

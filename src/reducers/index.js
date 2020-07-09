@@ -34,7 +34,11 @@ import {
     ENCOUNTER_DRAGON_BREATH,
     USER_DODGED,
     REWARD_EASY,
-    REWARD_HARD
+    REWARD_HARD,
+    OFFER_LOW,
+    OFFER_MED,
+    OFFER_HIGH,
+    OFFER_MAX
 } from '../actions';
 
 const initialState = {
@@ -61,12 +65,12 @@ const initialState = {
         abilities: [
             { name: 'Auto-Attack', description: '100% AP, +1 ULT-P' },
             { name: 'Charge', description: '+3 ULT-P' },
-            { name: 'Fireball', description: '150% MP, +1 ULT-P'},
+            { name: 'Fireball', description: '150% MP, +1 ULT-P' },
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
         skillPoint: 30,
         energy: 2000,
-        essence: 500,
+        essence: 5000,
         favor: 5,
         water: 2000,
         inventory:
@@ -250,7 +254,7 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case BUY_ITEM:
-            
+
             return {
                 ...state,
                 user: {
@@ -269,7 +273,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case BUY_PLOT:
-            
+
             return {
                 ...state,
                 user: {
@@ -291,7 +295,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case SELL_ITEM:
-            
+
             return {
                 ...state,
                 user: {
@@ -310,7 +314,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case REFILL_WATER:
-            
+
             return {
                 ...state,
                 user: {
@@ -325,7 +329,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case PLANT_SEED:
-            
+
             return {
                 ...state,
                 user: {
@@ -346,7 +350,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_WATER:
-            
+
             return {
                 ...state,
                 user: {
@@ -376,7 +380,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_NOURISH:
-            
+
             return {
                 ...state,
                 user: {
@@ -402,7 +406,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case EXPAND_WATER:
-            
+
             return {
                 ...state,
                 user: {
@@ -422,7 +426,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case STORE_CROP:
-        
+
             return {
                 ...state,
                 user: {
@@ -459,7 +463,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case SELL_CROP:
-            
+
             return {
                 ...state,
                 user: {
@@ -488,7 +492,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case SELL_CROP_INVENTORY:
-            
+
             return {
                 ...state,
                 user: {
@@ -506,7 +510,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case PLANT_SAPLING:
-            
+
             return {
                 ...state,
                 user: {
@@ -527,7 +531,7 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case INTERACT_WATER_ORCHARD:
-            
+
             return {
                 ...state,
                 user: {
@@ -832,20 +836,20 @@ const rootReducer = (state = initialState, action) => {
                     stats: {
                         'gender': action.payload['gender'],
                         'level': action.payload['level'],
-                        'constitution': state.user.stats.constitution+action.payload['constitution'],
-                        'attack': state.user.stats.attack+action.payload['attack'],
-                        'defense': state.user.stats.defense+action.payload['defense'],
-                        'dexterity': state.user.stats.dexterity+action.payload['dexterity'],
-                        'intelligence': state.user.stats.intelligence+action.payload['intelligence'],
-                        'speed': state.user.stats.speed+action.payload['speed']
+                        'constitution': state.user.stats.constitution + action.payload['constitution'],
+                        'attack': state.user.stats.attack + action.payload['attack'],
+                        'defense': state.user.stats.defense + action.payload['defense'],
+                        'dexterity': state.user.stats.dexterity + action.payload['dexterity'],
+                        'intelligence': state.user.stats.intelligence + action.payload['intelligence'],
+                        'speed': state.user.stats.speed + action.payload['speed']
                     },
                     battleStats: {
-                        'health': Math.ceil([state.user.stats.constitution+action.payload['constitution']] * 5),
-                        'attackPower': Math.ceil([state.user.stats.attack+action.payload['attack']] * 1.35),
-                        'magicPower': Math.ceil([state.user.stats.intelligence+action.payload['intelligence']] * 1.35),
-                        'damageReduction': Math.ceil([state.user.stats.defense+action.payload['defense']] * 1.75) / 100,
-                        'dodge': Math.ceil([state.user.stats.dexterity+action.payload['dexterity']] * 1.25) / 100,
-                        'turnSpeed': Math.ceil([state.user.stats.speed+action.payload['speed']] * 1.15),
+                        'health': Math.ceil([state.user.stats.constitution + action.payload['constitution']] * 5),
+                        'attackPower': Math.ceil([state.user.stats.attack + action.payload['attack']] * 1.35),
+                        'magicPower': Math.ceil([state.user.stats.intelligence + action.payload['intelligence']] * 1.35),
+                        'damageReduction': Math.ceil([state.user.stats.defense + action.payload['defense']] * 1.75) / 100,
+                        'dodge': Math.ceil([state.user.stats.dexterity + action.payload['dexterity']] * 1.25) / 100,
+                        'turnSpeed': Math.ceil([state.user.stats.speed + action.payload['speed']] * 1.15),
                         'ultimate': 0
                     },
                     skillPoint: 0,
@@ -920,14 +924,14 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
 
-            case USER_FIREBALL:
+        case USER_FIREBALL:
             return {
                 ...state,
                 user: {
                     ...state.user,
                     battleStats: {
                         ...state.user.battleStats,
-                        ultimate: state.user.battleStats.ultimate+1
+                        ultimate: state.user.battleStats.ultimate + 1
                     }
 
                 },
@@ -970,7 +974,7 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
 
-            case USER_DODGED:
+        case USER_DODGED:
             return {
                 ...state,
                 game: {
@@ -979,103 +983,184 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case ENCOUNTER_AUTO:
+        case ENCOUNTER_AUTO:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage.`]
+
+                }
+            };
+
+        case ENCOUNTER_RAVENOUS_CLAWS:
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    currentEncounter: {
+                        ...state.game.currentEncounter,
+                        stats: {
+                            ...state.game.currentEncounter.stats,
+                            health: state.game.currentEncounter.stats.health + action.payload.healing > 0 ? state.game.currentEncounter.stats.health + action.payload.healing : 0
+                        }
+                    },
+                    log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage and healed for ${action.payload.healing}.`]
+
+                }
+            };
+
+        case ENCOUNTER_DRAGON_BREATH:
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0,
+                        damageReduction: state.user.battleStats.damageReduction - 0.05 > 0 ? state.user.battleStats.damageReduction - 0.05 : 0
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage and decreased your damage reduction by 5%.`]
+
+                }
+            };
+
+        case REWARD_EASY:
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    skillPoint: state.user.skillPoint + 1,
+                    essence: state.user.essence + 500,
+                },
+                game: {
+                    ...state.game,
+                    currentEncounter: [],
+                    log: [...state.game.log, `Rewards: 500 Mana Essence and 1 SKill Point obtained.`]
+
+                }
+            }
+
+        case REWARD_HARD:
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    skillPoint: state.user.skillPoint + 2,
+                    essence: state.user.essence + 1000,
+                },
+                game: {
+                    ...state.game,
+                    currentEncounter: [],
+                    log: [...state.game.log, `Rewards: 1000 Mana Essence and 2 SKill Points obtained.`]
+
+                }
+            }
+
+            case OFFER_LOW:
                 return {
                     ...state,
                     user: {
                         ...state.user,
                         battleStats: {
                             ...state.user.battleStats,
-                            health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0
+                            health: state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/4) >= state.user.stats.constitution*5 ?
+                            state.user.stats.constitution*5 : state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/4)
+
                         }
     
                     },
                     game: {
                         ...state.game,
-                        log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage.`]
+                        log: [...state.game.log, `User offered ${action.payload} Essences and was healed for 25% max health.`]
     
                     }
                 };
 
-                case ENCOUNTER_RAVENOUS_CLAWS:
-
+                case OFFER_MED:
                     return {
                         ...state,
                         user: {
                             ...state.user,
                             battleStats: {
                                 ...state.user.battleStats,
-                                health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0
+                                health: state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/2) >= state.user.stats.constitution*5 ?
+                                state.user.stats.constitution*5 : state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/2)
+    
                             }
         
                         },
                         game: {
                             ...state.game,
-                            currentEncounter: {
-                                ...state.game.currentEncounter,
-                                stats: {
-                                    ...state.game.currentEncounter.stats,
-                                    health: state.game.currentEncounter.stats.health + action.payload.healing > 0 ? state.game.currentEncounter.stats.health + action.payload.healing : 0
-                                }
-                            },
-                            log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage and healed for ${action.payload.healing}.`]
+                            log: [...state.game.log, `User offered ${action.payload} Essences and was healed for 50% max health.`]
         
                         }
                     };
 
-                    case ENCOUNTER_DRAGON_BREATH:
-
+                    case OFFER_HIGH:
                         return {
                             ...state,
                             user: {
                                 ...state.user,
                                 battleStats: {
                                     ...state.user.battleStats,
-                                    health: state.user.battleStats.health - action.payload.damage > 0 ? state.user.battleStats.health - action.payload.damage : 0,
-                                    damageReduction: state.user.battleStats.damageReduction-0.05 > 0 ? state.user.battleStats.damageReduction-0.05 : 0
+                                    health: Math.ceil(state.user.stats.constitution*5)
+        
                                 }
             
                             },
                             game: {
                                 ...state.game,
-                                log: [...state.game.log, `${action.payload.name}'s ${action.payload.skill} dealt ${action.payload.damage} damage and decreased your damage reduction by 5%.`]
+                                log: [...state.game.log, `User offered ${action.payload} Essences and was healed to max.`]
             
                             }
                         };
 
-                    case REWARD_EASY:
-
-                        return {
-                            ...state,
-                            user: {
-                                ...state.user,
-                                skillPoint: state.user.skillPoint+1,
-                                essence: state.user.essence+500,
-                            },
-                            game: {
-                                ...state.game,
-                                currentEncounter: [],
-                                log: [...state.game.log, `Rewards: 500 Mana Essence and 1 SKill Point obtained.`]
-            
-                            }
-                        }
-
-                        case REWARD_HARD:
-
+                        case OFFER_MAX:
                             return {
                                 ...state,
                                 user: {
                                     ...state.user,
-                                    skillPoint: state.user.skillPoint+2,
-                                    essence: state.user.essence+1000,
+                                    skillPoint: state.user.skillPoint+action.payload.skill,
+                                    battleStats: {
+                                        ...state.user.battleStats,
+                                        health: Math.ceil(state.user.stats.constitution*5)
+            
+                                    }
+                
                                 },
                                 game: {
                                     ...state.game,
-                                    currentEncounter: [],
-                                    log: [...state.game.log, `Rewards: 1000 Mana Essence and 2 SKill Points obtained.`]
+                                    log: [...state.game.log, `User offered ${action.payload.amount} Essences, was healed to max, and gained ${action.payload.skill} SP.`]
                 
                                 }
-                            }
+                            };
+
+        
 
 
         default:

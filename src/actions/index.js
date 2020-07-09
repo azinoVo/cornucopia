@@ -374,7 +374,7 @@ export const OFFER_MED = "OFFER_MED";
 export const OFFER_HIGH = "OFFER_HIGH";
 export const OFFER_MAX = "OFFER_MAX";
 
-export const offerEssence = (value, tier) => {
+export const offerEssence = (value, tier, skillPoint) => dispatch => {
     // Tier depends on the amount and probability
     switch (tier) {
         case 'low':
@@ -400,7 +400,10 @@ export const offerEssence = (value, tier) => {
         case 'max':
             dispatch({
                 type: OFFER_MAX,
-                payload: value
+                payload: {
+                    amount: value,
+                    skill: skillPoint
+                }
 
             })
             break;

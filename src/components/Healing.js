@@ -25,19 +25,31 @@ const Healing = ({ essence }) => {
         
         if(amount < 100) {
             // low tier reward
-            dispatch(offerEssence(amount, 'low'))
+            // heals 25% max health
+            dispatch(offerEssence(amount, 'low', 0))
+            setOffering(0)
     
         } else if (amount >= 100 && amount <= 550) {
             // medium tier reward
-            dispatch(offerEssence(amount, 'med'))
+            // Heals 50% Max health
+            dispatch(offerEssence(amount, 'med', 0))
+            setOffering(0)
+
 
         } else if (amount > 550 && amount < 1500) {
             // high tier reward
-            dispatch(offerEssence(amount, 'high'))
+            // Full Heal
+            dispatch(offerEssence(amount, 'high', 0))
+            setOffering(0)
+
 
         } else {
             // Greatest reward above 1500 mana essences
-            dispatch(offerEssence(amount, 'max'))
+            // Full Heal with skill point per 1000 above 1500
+            let skillPoint = Math.floor([amount-1500]/1000)
+            dispatch(offerEssence(amount, 'max', skillPoint))
+            setOffering(0)
+
         }
 
     }
@@ -62,7 +74,7 @@ const Healing = ({ essence }) => {
                 <button disabled={totalEssence >= 100 ? false : true} onClick={() => increaseOffering(100)}> +100 </button>
             </div>
 
-            <button>Offer {offering} Mana Essence(s)</button>
+            <button onClick={() => sendOffering(offering)}>Offer {offering} Mana Essence(s)</button>
 
 
 
