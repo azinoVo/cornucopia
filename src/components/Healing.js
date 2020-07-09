@@ -74,7 +74,7 @@ const Healing = ({ essence }) => {
                 <button disabled={totalEssence >= 100 ? false : true} onClick={() => increaseOffering(100)}> +100 </button>
             </div>
 
-            <button onClick={() => sendOffering(offering)}>Offer {offering} Mana Essence(s)</button>
+            <button disabled={offering > 0 ? false : true} onClick={() => sendOffering(offering)}>Offer {offering} Mana Essence(s)</button>
 
 
 
