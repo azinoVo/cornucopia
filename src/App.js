@@ -39,7 +39,7 @@ function App() {
       <Route path="/cornucopia" component={Cornucopia} />
 
 
-      <footer>Nguyen Vo 2020</footer>
+      {/* <footer>Nguyen Vo 2020</footer> */}
     </div>
   );
 }
