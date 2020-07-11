@@ -111,7 +111,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
             'speed': speed
         }
 
-        dispatch(setCharacterStats(stats))
+        dispatch(setCharacterStats(stats, statPoints))
         resetPoints()
     }
 
@@ -179,7 +179,8 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
 
 
                 <button disabled={statPoints < skillPoint ? false : true} onClick={() => resetPoints()}>RESET</button>
-                <button disabled={statPoints === 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
+                {/* add a way so that user can allocate any number of skill points: need counter and subtract counter within reducer */}
+                <button disabled={statPoints >= 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
             </div>
         </div>
     );

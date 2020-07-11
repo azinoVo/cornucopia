@@ -836,23 +836,23 @@ const rootReducer = (state = initialState, action) => {
                     stats: {
                         'gender': action.payload['gender'],
                         'level': action.payload['level'],
-                        'constitution': state.user.stats.constitution + action.payload['constitution'],
-                        'attack': state.user.stats.attack + action.payload['attack'],
-                        'defense': state.user.stats.defense + action.payload['defense'],
-                        'dexterity': state.user.stats.dexterity + action.payload['dexterity'],
-                        'intelligence': state.user.stats.intelligence + action.payload['intelligence'],
-                        'speed': state.user.stats.speed + action.payload['speed']
+                        'constitution': state.user.stats.constitution + action.payload.stats['constitution'],
+                        'attack': state.user.stats.attack + action.payload.stats['attack'],
+                        'defense': state.user.stats.defense + action.payload.stats['defense'],
+                        'dexterity': state.user.stats.dexterity + action.payload.stats['dexterity'],
+                        'intelligence': state.user.stats.intelligence + action.payload.stats['intelligence'],
+                        'speed': state.user.stats.speed + action.payload.stats['speed']
                     },
                     battleStats: {
-                        'health': Math.ceil([state.user.stats.constitution + action.payload['constitution']] * 5),
-                        'attackPower': Math.ceil([state.user.stats.attack + action.payload['attack']] * 1.35),
-                        'magicPower': Math.ceil([state.user.stats.intelligence + action.payload['intelligence']] * 1.35),
-                        'damageReduction': Math.ceil([state.user.stats.defense + action.payload['defense']] * 1.75) / 100,
-                        'dodge': Math.ceil([state.user.stats.dexterity + action.payload['dexterity']] * 1.25) / 100,
-                        'turnSpeed': Math.ceil([state.user.stats.speed + action.payload['speed']] * 1.15),
+                        'health': Math.ceil([state.user.stats.constitution + action.payload.stats['constitution']] * 5),
+                        'attackPower': Math.ceil([state.user.stats.attack + action.payload.stats['attack']] * 1.35),
+                        'magicPower': Math.ceil([state.user.stats.intelligence + action.payload.stats['intelligence']] * 1.35),
+                        'damageReduction': Math.ceil([state.user.stats.defense + action.payload.stats['defense']] * 1.75) / 100,
+                        'dodge': Math.ceil([state.user.stats.dexterity + action.payload.stats['dexterity']] * 1.25) / 100,
+                        'turnSpeed': Math.ceil([state.user.stats.speed + action.payload.stats['speed']] * 1.15),
                         'ultimate': 0
                     },
-                    skillPoint: 0,
+                    skillPoint: action.payload.statPoints,
                 },
                 game: {
                     ...state.game,
