@@ -416,6 +416,29 @@ export const offerEssence = (value, tier, skillPoint) => dispatch => {
 
 }
 
+export const INSPECT_REWARD = "INSPECT_REWARD";
+export const INSPECT_ENCOUNTER = "INSPECT_ENCOUNTER";
+
+export const inspectForest = (index, type) => dispatch => {
+
+    switch (type) {
+        case 'reward':
+            dispatch({
+                type: INSPECT_REWARD,
+                payload: index
+            })
+            break;
+        case 'encounter':
+            dispatch({
+                type: INSPECT_ENCOUNTER,
+                payload: index
+            })
+            break;
+        default:
+            console.log('Default for forest inspection')
+    }
+}
+
 
 
 

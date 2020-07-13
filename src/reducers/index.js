@@ -38,7 +38,9 @@ import {
     OFFER_LOW,
     OFFER_MED,
     OFFER_HIGH,
-    OFFER_MAX
+    OFFER_MAX,
+    INSPECT_ENCOUNTER,
+    INSPECT_REWARD
 } from '../actions';
 
 const initialState = {
@@ -82,8 +84,7 @@ const initialState = {
             tree_sapling: 1,
             main_garden_plot: 2,
             orchard_plot: 1,
-            barnyard_plot: 0,
-            hanging_plot: 0
+            forest_plot: 0,
         },
         crops: [],
         specials: {
@@ -96,8 +97,7 @@ const initialState = {
             favor_limit: 100,
             main_garden_plot: 6,
             orchard_plot: 6,
-            hanging_plot: 3,
-            barnyard_plot: 2,
+            forest_plot: 2,
         },
         main_garden_plot: [
             { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
@@ -105,25 +105,29 @@ const initialState = {
             { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
             { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
             { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 },
-            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 }],
+            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 0, quality: 0, health: 0, harvest: 0, reHarvest: 0 }
+        ],
         orchard_plot: [
             { id: 0, product: "", plotType: "empty_plot", plotStatus: "_regular", fileType: "png", water: 1, quality: 2, health: 3, harvest: 0, reHarvest: 5 },
             { id: 1, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6, harvest: 0, reHarvest: 5 },
             { id: 2, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9, harvest: 0, reHarvest: 5 },
             { id: 3, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 10, quality: 11, health: 12, harvest: 0, reHarvest: 5 },
             { id: 4, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 13, quality: 14, health: 15, harvest: 0, reHarvest: 5 },
-            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18, harvest: 0, reHarvest: 5 }],
-        barnyard_plot: [
-            { id: 0, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
-            { id: 1, trellis: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 }],
+            { id: 5, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 16, quality: 17, health: 18, harvest: 0, reHarvest: 5 }
+        ],
+        forest_plot: [
+            { id: 0, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", progress: 25, encounter: false, reward: false},
+            { id: 1, product: "", plotType: "empty_plot", plotStatus: "_lock", fileType: "png", progress: 25, encounter: false, reward: false}
+        ],
         hanging_plot: [
             { id: 0, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 1, quality: 2, health: 3 },
             { id: 1, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 4, quality: 5, health: 6 },
-            { id: 2, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 }]
+            { id: 2, pen: false, plotType: "empty_plot", plotStatus: "_lock", fileType: "png", water: 7, quality: 8, health: 9 }
+        ]
     },
     game: {
         shop: ["spring_seed", "summer_seed", "fall_seed", "winter_seed", "tree_sapling"],
-        plot_shop: ["main_garden_plot", "orchard_plot", "barnyard_plot", "hanging_plot"],
+        plot_shop: ["main_garden_plot", "orchard_plot", "forest_plot"],
         date: 0,
         calendar: [
             { id: 1, type: "spring_seed", date: "Spring Cycle Day I", benefit: "Spring plants are flourishing." },
@@ -167,8 +171,7 @@ const initialState = {
             tree_sapling: 200,
             main_garden_plot: 100,
             orchard_plot: 200,
-            barnyard_plot: 350,
-            hanging_plot: 500,
+            forest_plot: 350,
         },
         cropList: {
             spring_seed: ["Carrot", "Radish", "Potato", "Heart_of_Spring"],
@@ -819,14 +822,21 @@ const rootReducer = (state = initialState, action) => {
                                 harvest: state.user.orchard_plot[index].harvest + 5,
                             } : content
                     }),
-
+                    forest_plot: state.user.forest_plot.map((content, index) => {
+                        return (content.plotStatus !== "_lock") ?
+                            {
+                                ...content,
+                                progress: state.user.forest_plot[index].progress + 20 > 100 ? 100 : state.user.forest_plot[index].progress + 20
+                            } : content
+                    })
                 },
                 game: {
                     ...state.game,
                     log: [...state.game.log, `A new day has passed at ${Date(Date.now()).toString()}.`],
                     date: action.payload === 19 ? 0 : state.game.date + 1,
                 }
-            };
+            }
+
 
         case SET_STATS:
             return {
@@ -1081,90 +1091,128 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
-            case OFFER_LOW:
+        case OFFER_LOW:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence - action.payload,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: state.user.battleStats.health + Math.floor([state.user.stats.constitution * 5] / 4) >= state.user.stats.constitution * 5 ?
+                            state.user.stats.constitution * 5 : state.user.battleStats.health + Math.floor([state.user.stats.constitution * 5] / 4)
+
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User offered ${action.payload} Essences and was healed for 25% max health.`]
+
+                }
+            };
+
+        case OFFER_MED:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence - action.payload,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: state.user.battleStats.health + Math.floor([state.user.stats.constitution * 5] / 2) >= state.user.stats.constitution * 5 ?
+                            state.user.stats.constitution * 5 : state.user.battleStats.health + Math.floor([state.user.stats.constitution * 5] / 2)
+
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User offered ${action.payload} Essences and was healed for 50% max health.`]
+
+                }
+            };
+
+        case OFFER_HIGH:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence - action.payload,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: Math.ceil(state.user.stats.constitution * 5)
+
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User offered ${action.payload} Essences and was healed to max.`]
+
+                }
+            };
+
+        case OFFER_MAX:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    essence: state.user.essence - action.payload.amount,
+                    skillPoint: state.user.skillPoint + action.payload.skill,
+                    battleStats: {
+                        ...state.user.battleStats,
+                        health: Math.ceil(state.user.stats.constitution * 5)
+
+                    }
+
+                },
+                game: {
+                    ...state.game,
+                    log: [...state.game.log, `User offered ${action.payload.amount} Essences, was healed to max, and gained ${action.payload.skill} SP.`]
+
+                }
+            };
+
+            case INSPECT_ENCOUNTER:
                 return {
                     ...state,
                     user: {
                         ...state.user,
-                        essence: state.user.essence - action.payload,
-                        battleStats: {
-                            ...state.user.battleStats,
-                            health: state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/4) >= state.user.stats.constitution*5 ?
-                            state.user.stats.constitution*5 : state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/4)
-
-                        }
-    
+                        forest_plot: state.user.forest_plot.map((content, index) => {
+                            return (content.plotStatus !== "_lock" && index === action.payload) ?
+                                {
+                                    ...content,
+                                    encounter: true
+                                } : content
+                        })
                     },
                     game: {
                         ...state.game,
-                        log: [...state.game.log, `User offered ${action.payload} Essences and was healed for 25% max health.`]
-    
+                        log: [...state.game.log, `A strange presence lurks in the shadows of the Forest. What will you do?`],
                     }
-                };
+                }
 
-                case OFFER_MED:
+                case INSPECT_REWARD:
                     return {
                         ...state,
                         user: {
                             ...state.user,
-                            essence: state.user.essence - action.payload,
-                            battleStats: {
-                                ...state.user.battleStats,
-                                health: state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/2) >= state.user.stats.constitution*5 ?
-                                state.user.stats.constitution*5 : state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/2)
-    
-                            }
-        
+                            forest_plot: state.user.forest_plot.map((content, index) => {
+                                return (content.plotStatus !== "_lock" && index === action.payload) ?
+                                    {
+                                        ...content,
+                                        reward: true
+                                    } : content
+                            })
                         },
                         game: {
                             ...state.game,
-                            log: [...state.game.log, `User offered ${action.payload} Essences and was healed for 50% max health.`]
-        
+                            log: [...state.game.log, `The Forest of Dreams shares its bounty with you. Do you accept?`],
                         }
-                    };
+                    }
 
-                    case OFFER_HIGH:
-                        return {
-                            ...state,
-                            user: {
-                                ...state.user,
-                                essence: state.user.essence - action.payload,
-                                battleStats: {
-                                    ...state.user.battleStats,
-                                    health: Math.ceil(state.user.stats.constitution*5)
-        
-                                }
-            
-                            },
-                            game: {
-                                ...state.game,
-                                log: [...state.game.log, `User offered ${action.payload} Essences and was healed to max.`]
-            
-                            }
-                        };
 
-                        case OFFER_MAX:
-                            return {
-                                ...state,
-                                user: {
-                                    ...state.user,
-                                    essence: state.user.essence - action.payload.amount,
-                                    skillPoint: state.user.skillPoint+action.payload.skill,
-                                    battleStats: {
-                                        ...state.user.battleStats,
-                                        health: Math.ceil(state.user.stats.constitution*5)
-            
-                                    }
-                
-                                },
-                                game: {
-                                    ...state.game,
-                                    log: [...state.game.log, `User offered ${action.payload.amount} Essences, was healed to max, and gained ${action.payload.skill} SP.`]
-                
-                                }
-                            };
-
-        
 
 
         default:

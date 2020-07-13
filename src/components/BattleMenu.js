@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { setEncounterInfo, userBattleAction, encounterBattleAction, reward } from '../actions';
+import Popup from "reactjs-popup";
 import { useDispatch } from 'react-redux';
 import { Progress } from 'react-sweet-progress';
 import { connect } from 'react-redux';
@@ -50,7 +51,9 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
     }
 
     return (
-        <div>
+        <Popup trigger={<button className="button">Inspect the Shadow</button>} modal>
+
+        { close => <div>
             <h1>This is the battle menu.</h1>
             {/* This button will randomize a number and pick a 
             creature from within the encounter array to send to currentEncounter within reducer. */}
@@ -97,8 +100,13 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                     <BattleLog />
                 </div>}
 
+                <div className="actions">
+                        <button className="button" onClick={() => { close(); }}>Run </button>
+                    </div>
+
             </div>}
-        </div>
+        </div>}
+        </Popup>
     );
 }
 

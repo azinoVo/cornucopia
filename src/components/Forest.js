@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { inspectForest } from '../actions';
+import { Progress } from 'react-sweet-progress';
 import { fillWater } from '../actions';
+import BattleMenu from './BattleMenu';
 
-const Barnyard = ({ barnyard_plot, user }) => {
+const Forest = ({ forest_plot, user }) => {
     const [userInfo, setUserInfo] = useState({})
     const [limits, setLimits] = useState({})
-    const [barnPlot, setBarnPlot] = useState([])
+    const [forestPlot, setForestPlot] = useState([])
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        setBarnPlot(barnyard_plot)
-    }, [barnyard_plot])
+        setForestPlot(forest_plot)
+    }, [forest_plot])
 
     useEffect(() => {
         setUserInfo(user)
@@ -22,17 +25,43 @@ const Barnyard = ({ barnyard_plot, user }) => {
         setLimits(user.limits)
     }, [user])
 
+    const inspectPlot = (index) => {
+        let rollValue = Math.floor((Math.random() * 100) + 1)
+        if(rollValue <= 30) {
+            dispatch(inspectForest(index, 'encounter'))
+        } else {
+            dispatch(inspectForest(index, 'reward'))
+        }
+    }
 
     return (
         <section className='main-content'>
-            <h1 className='tab-header'>Barnyard</h1>
+            <h1 className='tab-header'>Forest of Dreams</h1>
 
-            <div className='barnyard'>
+            <div className='forest'>
             {
-                        barnPlot.map((plot, index) => {
+                forestPlot.map((plot, index) => {
                             if (plot) {
                                 return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
                                     <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
+                                    
+                                    {plot.plotStatus === '_regular' &&
+                                        <Progress
+                                            percent={plot.progress}
+                                    />
+                                    }
+
+                                    {
+                                        plot.progress === 100 && plot.reward === false && plot.encounter === false && <button onClick={() => inspectPlot(index)}>Inspect</button>
+                                    }
+
+                                    {
+                                        plot.progress === 100 && plot.reward && <button>Collect Bounty</button>
+                                    }
+
+                                    {
+                                        plot.progress === 100 && plot.encounter && <BattleMenu />
+                                    }
                                 </div>
                             } else {
                                 return <div className='plot'>
@@ -64,8 +93,8 @@ const Barnyard = ({ barnyard_plot, user }) => {
 }
 
 const mapStateToProps = state => ({
-    barnyard_plot: state.user.barnyard_plot,
+    forest_plot: state.user.forest_plot,
     user: state.user
 });
 
-export default connect(mapStateToProps, { fillWater })(Barnyard);
+export default connect(mapStateToProps, { fillWater })(Forest);

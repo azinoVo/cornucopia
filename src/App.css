@@ -66,7 +66,7 @@ button {
   padding: 2%;
 }
 
-.barnyard {
+.forest {
   padding-top: 1.5%;
 }
 
@@ -140,7 +140,7 @@ thead {
 
 /* Barnyard CSS */
 
-.barnyard .water {
+.forest .water {
   position: absolute;
   right: 30%;
   bottom: 30%;

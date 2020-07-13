@@ -3,7 +3,7 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import Character from './components/Character';
 import GameTabs from './components/GameTabs';
-import Barnyard from './components/Barnyard';
+import Forest from './components/Forest';
 import GeneralShop from './components/GeneralShop';
 import GoSculptures from './components/GoSculptures';
 import Greenhouse from './components/Greenhouse';
@@ -29,7 +29,7 @@ function App() {
 
       <Route exact path="/" component={Home} />
       <Route path="/character" component={Character} />
-      <Route path="/barnyard" component={Barnyard} />
+      <Route path="/forest" component={Forest} />
       <Route path="/shop" component={GeneralShop} />
       <Route path="/sculpture" component={GoSculptures} />
       <Route path="/greenhouse" component={Greenhouse} />
