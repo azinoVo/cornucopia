@@ -36,15 +36,7 @@ const Calendar = ({ calendarList, date }) => {
                     </div>
 
                     <div className="actions">
-                        <button
-                            className="button"
-                            onClick={() => {
-                                close();
-                            }}
-                        >
-                            Return
-            </button>
-
+                        <button className="button" onClick={() => { close(); }}>Return </button>
                     </div>
                 </div>
             )}

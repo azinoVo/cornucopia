@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Popup from "reactjs-popup";
 import { offerEssence } from '../actions';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
@@ -11,24 +12,24 @@ const Healing = ({ essence }) => {
 
 
     const increaseOffering = (value) => {
-        setOffering(offering+value)
-        setTotalEssence(totalEssence-value)
+        setOffering(offering + value)
+        setTotalEssence(totalEssence - value)
     }
 
     const decreaseOffering = (value) => {
-        setOffering(offering-value)
-        setTotalEssence(totalEssence+value)
+        setOffering(offering - value)
+        setTotalEssence(totalEssence + value)
 
     }
 
     const sendOffering = (amount) => {
-        
-        if(amount < 100) {
+
+        if (amount < 100) {
             // low tier reward
             // heals 25% max health
             dispatch(offerEssence(amount, 'low', 0))
             setOffering(0)
-    
+
         } else if (amount >= 100 && amount <= 550) {
             // medium tier reward
             // Heals 50% Max health
@@ -46,7 +47,7 @@ const Healing = ({ essence }) => {
         } else {
             // Greatest reward above 1500 mana essences
             // Full Heal with skill point per 1000 above 1500
-            let skillPoint = Math.floor([amount-1500]/1000)
+            let skillPoint = Math.floor([amount - 1500] / 1000)
             dispatch(offerEssence(amount, 'max', skillPoint))
             setOffering(0)
 
@@ -59,29 +60,35 @@ const Healing = ({ essence }) => {
     }, [essence])
 
     return (
-        <div className='healing'>
-            <h2>Statue of the Goddess</h2>
-            <p>Offer Mana Essences to ask for a blessing.</p>
-            <p>Available Essences: {totalEssence}</p>
-            {/* Idea: SKill points or even skills can be obtained here depending on the amount of essences and probability. */}
-            <div className='modulate-offering'>
-                <button disabled={offering >= 1000 ? false : true} onClick={() => decreaseOffering(1000)}> -1000 </button>
-                <button disabled={offering >= 100 ? false : true} onClick={() => decreaseOffering(100)}> -100 </button>
-                <button disabled={offering >= 10 ? false : true} onClick={() => decreaseOffering(10)}> -10 </button>
-                <button disabled={offering >= 1 ? false : true} onClick={() => decreaseOffering(1)}> -1 </button>
-                <span> {offering} </span>
-                <button disabled={totalEssence >= 1 ? false : true} onClick={() => increaseOffering(1)}> +1 </button>
-                <button disabled={totalEssence >= 10 ? false : true} onClick={() => increaseOffering(10)}> +10 </button>
-                <button disabled={totalEssence >= 100 ? false : true} onClick={() => increaseOffering(100)}> +100 </button>
-                <button disabled={totalEssence >= 1000 ? false : true} onClick={() => increaseOffering(1000)}> +1000 </button>
+        <Popup trigger={<button className="button">Offering to Goddess</button>} modal>
 
-            </div>
+            {close => (
+                <div className='healing'>
+                    <h2>Statue of the Goddess</h2>
+                    <p>Offer Mana Essences to ask for a blessing.</p>
+                    <p>Available Essences: {totalEssence}</p>
+                    {/* Idea: SKill points or even skills can be obtained here depending on the amount of essences and probability. */}
+                    <div className='modulate-offering'>
+                        <button disabled={offering >= 1000 ? false : true} onClick={() => decreaseOffering(1000)}> -1000 </button>
+                        <button disabled={offering >= 100 ? false : true} onClick={() => decreaseOffering(100)}> -100 </button>
+                        <button disabled={offering >= 10 ? false : true} onClick={() => decreaseOffering(10)}> -10 </button>
+                        <button disabled={offering >= 1 ? false : true} onClick={() => decreaseOffering(1)}> -1 </button>
+                        <span> {offering} </span>
+                        <button disabled={totalEssence >= 1 ? false : true} onClick={() => increaseOffering(1)}> +1 </button>
+                        <button disabled={totalEssence >= 10 ? false : true} onClick={() => increaseOffering(10)}> +10 </button>
+                        <button disabled={totalEssence >= 100 ? false : true} onClick={() => increaseOffering(100)}> +100 </button>
+                        <button disabled={totalEssence >= 1000 ? false : true} onClick={() => increaseOffering(1000)}> +1000 </button>
 
-            <button disabled={offering > 0 ? false : true} onClick={() => sendOffering(offering)}>Offer {offering} Mana Essence(s)</button>
+                    </div>
+                    <button disabled={offering > 0 ? false : true} onClick={() => sendOffering(offering)}>Offer {offering} Mana Essence(s)</button>
 
+                    <div className="actions">
+                        <button className="button" onClick={() => { close(); }}>Return </button>
+                    </div>
 
+                </div>)}
 
-        </div>
+        </Popup>
     );
 }
 

@@ -26,13 +26,13 @@ const GuessTheCardModal = () => {
     }
 
     const pickCard = (number) => {
-        if(number === 1) {
+        if (number === 1) {
             setWin(true)
             dispatch(guessWin())
         }
 
         setPlaying(true)
-        setGameNumber(gameNumber+1)
+        setGameNumber(gameNumber + 1)
         shuffleCards()
     }
 
@@ -44,12 +44,12 @@ const GuessTheCardModal = () => {
                 <div className="guess-modal">
                     <h1>Find Card #1</h1>
                     {win ? <p>Congratulations, you've won.</p> : <p>If you find the correct card, you will get a reward.</p>}
-                    
+
                     <div className="content">
                         {/* Add the content here */}
                         {(gameNumber < 5 && !win) &&
                             shuffled.map(num => {
-                                return <button onClick={() => pickCard(num)} id={num}>Card #{num}</button>
+                                return <button onClick={() => pickCard(num)} id={num}>Guess Card</button>
                             })
                         }
                         {(!win && (playing === false)) && <button onClick={shuffleCards}>Shuffle Cards</button>}
@@ -57,15 +57,7 @@ const GuessTheCardModal = () => {
                     </div>
 
                     <div className="actions">
-                        <button
-                            className="button"
-                            onClick={() => {
-                                close();
-                            }}
-                        >
-                            Leave
-            </button>
-
+                        <button className="button" onClick={() => { close(); }}> Leave</button>
                     </div>
                 </div>
             )}

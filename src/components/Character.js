@@ -120,8 +120,9 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
     }, [skillPoint])
 
     return (
-        <div>
-            <h1>This is the character creation page.</h1>
+        <section className='main-content'>
+            <h1 className='tab-header'>Character Information</h1>
+
             <div className='stats'>
                 <div>
                     <p>Gender: {gender}</p>
@@ -182,7 +183,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
                 {/* add a way so that user can allocate any number of skill points: need counter and subtract counter within reducer */}
                 <button disabled={statPoints >= 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
             </div>
-        </div>
+        </section>
     );
 }
 

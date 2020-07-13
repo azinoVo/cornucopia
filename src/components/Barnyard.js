@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fillWater } from '../actions';
-import GameLog from './GameLog';
 
 const Barnyard = ({ barnyard_plot, user }) => {
     const [userInfo, setUserInfo] = useState({})
@@ -34,8 +33,6 @@ const Barnyard = ({ barnyard_plot, user }) => {
                             if (plot) {
                                 return <div key={`orchard${plot['plotType']}${index}`} className='plot'>
                                     <img src={require(`../assets/plants/${plot['plotType']}${plot['plotStatus']}.${plot['fileType']}`)} alt="plot" />
-                                    {plot['plotType'] !== "empty_plot_lock.png" && <span>Plot: {plot["plotType"]}</span>}
-                                    {(plot['plotType'] !== "empty_plot_lock.png" && plot['plotType'] !== "empty_plot.png") && <span>Water: {plot.water} | Quality: {plot.quality} | Health: {plot.health} </span>}
                                 </div>
                             } else {
                                 return <div className='plot'>
@@ -60,7 +57,6 @@ const Barnyard = ({ barnyard_plot, user }) => {
                         <div>Water Capacity: {userInfo.water}</div>
                     </div>
 
-                    <GameLog />
                 </div>
             </div>
         </section>

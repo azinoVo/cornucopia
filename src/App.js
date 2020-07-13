@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
+import Character from './components/Character';
 import GameTabs from './components/GameTabs';
 import Barnyard from './components/Barnyard';
 import GeneralShop from './components/GeneralShop';
@@ -27,6 +28,7 @@ function App() {
       <GameTabs />
 
       <Route exact path="/" component={Home} />
+      <Route path="/character" component={Character} />
       <Route path="/barnyard" component={Barnyard} />
       <Route path="/shop" component={GeneralShop} />
       <Route path="/sculpture" component={GoSculptures} />
@@ -38,8 +40,7 @@ function App() {
       <Route path="/orchard" component={Orchard} />
       <Route path="/cornucopia" component={Cornucopia} />
 
-
-      {/* <footer>Nguyen Vo 2020</footer> */}
+      <footer>Nguyen Vo 2020</footer>
     </div>
   );
 }

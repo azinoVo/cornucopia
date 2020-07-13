@@ -1086,6 +1086,7 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     user: {
                         ...state.user,
+                        essence: state.user.essence - action.payload,
                         battleStats: {
                             ...state.user.battleStats,
                             health: state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/4) >= state.user.stats.constitution*5 ?
@@ -1106,6 +1107,7 @@ const rootReducer = (state = initialState, action) => {
                         ...state,
                         user: {
                             ...state.user,
+                            essence: state.user.essence - action.payload,
                             battleStats: {
                                 ...state.user.battleStats,
                                 health: state.user.battleStats.health+Math.floor([state.user.stats.constitution*5]/2) >= state.user.stats.constitution*5 ?
@@ -1126,6 +1128,7 @@ const rootReducer = (state = initialState, action) => {
                             ...state,
                             user: {
                                 ...state.user,
+                                essence: state.user.essence - action.payload,
                                 battleStats: {
                                     ...state.user.battleStats,
                                     health: Math.ceil(state.user.stats.constitution*5)
@@ -1145,6 +1148,7 @@ const rootReducer = (state = initialState, action) => {
                                 ...state,
                                 user: {
                                     ...state.user,
+                                    essence: state.user.essence - action.payload.amount,
                                     skillPoint: state.user.skillPoint+action.payload.skill,
                                     battleStats: {
                                         ...state.user.battleStats,

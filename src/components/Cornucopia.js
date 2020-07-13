@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import GameLog from './GameLog';
 import NumberModal from './NumberModal';
 import GuessTheCardModal from './GuessTheCardModal';
-import Calendar from './Calendar';
+import Healing from './Healing';
 
 const Cornucopia = () => {
 
     return (
         <section className='main-content'>
+            <h1 className='tab-header'>The Tree of Life</h1>
             <div className='cornucopia'>
                 <div className='deity-wrapper'>
                 <img src={require(`../assets/plants/adult_tree.png`)} alt="modal plot" />
@@ -16,7 +17,7 @@ const Cornucopia = () => {
                     <div className='deity-actions'>
                         <NumberModal />
                         <GuessTheCardModal />
-                        <Calendar />
+                        <Healing />
                     </div>
                 </div>
                 <GameLog />
