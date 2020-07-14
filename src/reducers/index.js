@@ -58,13 +58,13 @@ const initialState = {
             speed: 1
         },
         battleStats: {
-            health: 0,
-            attackPower: 0,
-            magicPower: 0,
-            damageReduction: 0,
-            dodge: 0,
-            turnSpeed: 0,
-            ultimate: 1
+            health: 5,
+            attackPower: 2,
+            magicPower: 2,
+            damageReduction: 0.02,
+            dodge: 0.02,
+            turnSpeed: 2,
+            ultimate: 0
         },
         abilities: [
             { name: 'Auto-Attack', description: '100% AP, +1 ULT-P' },
@@ -73,10 +73,10 @@ const initialState = {
             { name: 'Ultimate: Release', description: '100% AP + 25% per ULT-P' }
         ],
         skillPoint: 30,
-        energy: 2000,
-        essence: 5000,
+        energy: 195,
+        essence: 750,
         favor: 5,
-        water: 2000,
+        water: 245,
         inventory:
         {
             spring_seed: 2,
@@ -1088,7 +1088,7 @@ const rootReducer = (state = initialState, action) => {
                 game: {
                     ...state.game,
                     currentEncounter: [],
-                    log: [...state.game.log, `Rewards: 1000 Mana Essence and 2 SKill Points obtained.`]
+                    log: [...state.game.log, `Rewards: 1000 Mana Essence and 2 Skill Points obtained.`]
 
                 }
             }

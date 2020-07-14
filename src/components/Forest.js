@@ -41,7 +41,7 @@ const Forest = ({ forest_plot, user }) => {
     const collectBounty = (index) => {
         let rollValue = Math.floor((Math.random() * 100) + 1)
         let lowRoll = Math.floor((Math.random() * 1000) + 1)
-        let highRoll = Math.floor((Math.random() * 2000) + 1)
+        let highRoll = Math.floor((Math.random() * 2500) + 1)
 
         if (rollValue <= 10) {
             dispatch(collectForestBounty(highRoll))
