@@ -256,3 +256,7 @@ thead {
 .ability-button:hover {
   background-color: lightblue;
 }
+
+.battle-content .popup-content {
+  width: 100% !important; 
+}

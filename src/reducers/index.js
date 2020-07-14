@@ -40,7 +40,9 @@ import {
     OFFER_HIGH,
     OFFER_MAX,
     INSPECT_ENCOUNTER,
-    INSPECT_REWARD
+    INSPECT_REWARD,
+    INSPECT_RESET,
+    COLLECT_BOUNTY
 } from '../actions';
 
 const initialState = {
@@ -826,7 +828,7 @@ const rootReducer = (state = initialState, action) => {
                         return (content.plotStatus !== "_lock") ?
                             {
                                 ...content,
-                                progress: state.user.forest_plot[index].progress + 20 > 100 ? 100 : state.user.forest_plot[index].progress + 20
+                                progress: state.user.forest_plot[index].progress + 30 > 100 ? 100 : state.user.forest_plot[index].progress + 30
                             } : content
                     })
                 },
@@ -1212,8 +1214,39 @@ const rootReducer = (state = initialState, action) => {
                         }
                     }
 
+                    case INSPECT_RESET:
+                        return {
+                            ...state,
+                            user: {
+                                ...state.user,
+                                forest_plot: state.user.forest_plot.map((content, index) => {
+                                    return (content.plotStatus !== "_lock" && index === action.payload) ?
+                                        {
+                                            ...content,
+                                            reward: false,
+                                            encounter: false,
+                                            progress: 0
+                                        } : content
+                                })
+                            },
+                            game: {
+                                ...state.game,
+                                log: [...state.game.log, `The Forest of Dreams sends her regards.`],
+                            }
+                        }
 
-
+                        case COLLECT_BOUNTY:
+                            return {
+                                ...state,
+                                user: {
+                                    ...state.user,
+                                    essence: state.user.essence+action.payload
+                                },
+                                game: {
+                                    ...state.game,
+                                    log: [...state.game.log, `The Forest of Dreams grants you ${action.payload} mana essences.`],
+                                }
+                            }
 
         default:
             return state;

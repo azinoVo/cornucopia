@@ -6,7 +6,7 @@ import { Progress } from 'react-sweet-progress';
 import { connect } from 'react-redux';
 import BattleLog from './GameLog';
 
-const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities, userBase }) => {
+const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbilities, userBase, resetPlot, index }) => {
     const [inBattle, setInBattle] = useState(false)
 
     const dispatch = useDispatch()
@@ -23,6 +23,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
         dispatch(reward(difficulty))
         setInBattle(!inBattle)
+        resetPlot(index)
     }
 
     const battle = (userStats, encounterStats, ability) => {
@@ -53,7 +54,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
     return (
         <Popup trigger={<button className="button">Inspect the Shadow</button>} modal>
 
-        { close => <div>
+        { close => <div className='battle-popup'>
             <h1>This is the battle menu.</h1>
             {/* This button will randomize a number and pick a 
             creature from within the encounter array to send to currentEncounter within reducer. */}
@@ -101,7 +102,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
                 </div>}
 
                 <div className="actions">
-                        <button className="button" onClick={() => { close(); }}>Run </button>
+                        <button className="button" onClick={() => { close(); resetPlot(index); }}>Run </button>
                     </div>
 
             </div>}

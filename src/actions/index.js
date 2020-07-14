@@ -418,6 +418,8 @@ export const offerEssence = (value, tier, skillPoint) => dispatch => {
 
 export const INSPECT_REWARD = "INSPECT_REWARD";
 export const INSPECT_ENCOUNTER = "INSPECT_ENCOUNTER";
+export const INSPECT_RESET = "INSPECT_RESET";
+
 
 export const inspectForest = (index, type) => dispatch => {
 
@@ -434,8 +436,24 @@ export const inspectForest = (index, type) => dispatch => {
                 payload: index
             })
             break;
+        case 'reset':
+            dispatch({
+                type: INSPECT_RESET,
+                payload: index
+            })
+            break;
         default:
             console.log('Default for forest inspection')
+    }
+}
+
+export const COLLECT_BOUNTY = "COLLECT_BOUNTY";
+
+export const collectForestBounty = (amount) => {
+
+    return {
+        type: COLLECT_BOUNTY,
+        payload: amount,
     }
 }
 

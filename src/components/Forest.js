@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { inspectForest } from '../actions';
+import { inspectForest, collectForestBounty } from '../actions';
 import { Progress } from 'react-sweet-progress';
 import { fillWater } from '../actions';
 import BattleMenu from './BattleMenu';
@@ -27,10 +27,29 @@ const Forest = ({ forest_plot, user }) => {
 
     const inspectPlot = (index) => {
         let rollValue = Math.floor((Math.random() * 100) + 1)
-        if(rollValue <= 30) {
+        if(rollValue <= 45) {
             dispatch(inspectForest(index, 'encounter'))
         } else {
             dispatch(inspectForest(index, 'reward'))
+        }
+    }
+
+    const resetPlot = (index) => {
+        dispatch(inspectForest(index, 'reset'))
+    }
+
+    const collectBounty = (index) => {
+        let rollValue = Math.floor((Math.random() * 100) + 1)
+        let lowRoll = Math.floor((Math.random() * 1000) + 1)
+        let highRoll = Math.floor((Math.random() * 2000) + 1)
+
+        if (rollValue <= 10) {
+            dispatch(collectForestBounty(highRoll))
+            resetPlot(index)
+
+        } else {
+            dispatch(collectForestBounty(lowRoll))
+            resetPlot(index)
         }
     }
 
@@ -56,11 +75,11 @@ const Forest = ({ forest_plot, user }) => {
                                     }
 
                                     {
-                                        plot.progress === 100 && plot.reward && <button>Collect Bounty</button>
+                                        plot.progress === 100 && plot.reward && <div className='forest-options'><button onClick={() => collectBounty(index)}>Collect Bounty</button><button onClick={() => resetPlot(index)}>Refuse Bounty</button></div>
                                     }
 
                                     {
-                                        plot.progress === 100 && plot.encounter && <BattleMenu />
+                                        plot.progress === 100 && plot.encounter && <div className='forest-options'><BattleMenu resetPlot={resetPlot} index={index} /><button onClick={() => resetPlot(index)}>Avoid Encounter</button></div>
                                     }
                                 </div>
                             } else {
