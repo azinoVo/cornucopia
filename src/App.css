@@ -260,3 +260,7 @@ thead {
 .battle-content .popup-content {
   width: 100% !important; 
 }
+
+.stats {
+  padding: 1.5%;
+}

@@ -32,10 +32,6 @@ const Calendar = ({ calendarList, date }) => {
                         <h2>Do you want to rest for the day?</h2>
                         <p>Changing the date will progress one day of the current season up to Day V.</p>
                         <button onClick={() => dispatch(progressDate(date))}>Rest</button>
-                        {/* Possibly add a feature here that will display a calendar? */}
-                    </div>
-
-                    <div className="actions">
                         <button className="button" onClick={() => { close(); }}>Return </button>
                     </div>
                 </div>
