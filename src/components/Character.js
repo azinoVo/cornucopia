@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { setCharacterStats } from '../actions';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
+import Quests from './Quests';
 
 const Character = ({ skillPoint, userBase, userBattleStats }) => {
     const [statPoints, setStatPoints] = useState(30)
@@ -183,6 +184,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
                 {/* add a way so that user can allocate any number of skill points: need counter and subtract counter within reducer */}
                 <button disabled={statPoints >= 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
             </div>
+            <Quests />
         </section>
     );
 }
