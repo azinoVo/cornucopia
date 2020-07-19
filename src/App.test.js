@@ -9,7 +9,6 @@ describe('App shallow testing', () => {
     wrapper = shallow(<App />)
   })
 
-
   test('Cornucopia title exists within document header', () => {
     expect(wrapper.find('header').text()).toContain('Cornucopia, Land of Excess')
   });

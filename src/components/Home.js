@@ -21,7 +21,7 @@ const Home = () => {
 
                 <h2>Quality Assurance Team</h2>
                 <p>Special thanks to the following for playing my game and giving me feedback.</p>
-                <ul>
+                <ul className='qa-members'>
                     <li>D'Michael Watson</li>
                     <li>Alec Castillo</li>
                     <li>Will Berlin</li>
