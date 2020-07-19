@@ -1,9 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import App from './App';
+import { shallow } from 'enzyme';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('App shallow testing', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<App />)
+  })
+
+
+  test('Cornucopia title exists within document header', () => {
+    expect(wrapper.find('header').text()).toContain('Cornucopia, Land of Excess')
+  });
+
+  test('Name exists within document footer', () => {
+    expect(wrapper.find('footer').text()).toContain('Nguyen Vo 2020')
+  });
+
+
+})
+
