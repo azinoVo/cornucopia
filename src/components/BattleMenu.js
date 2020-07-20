@@ -13,6 +13,7 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
 
 
     const randomEncounter = () => {
+        //  Random number used to set the currentEncounter in store to be the index of the encounter array
         let randomNumber = Math.floor((Math.random() * encountersList.length));
 
         dispatch(setEncounterInfo(encountersList[randomNumber]))
@@ -20,8 +21,11 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
     }
 
     const collectReward = (difficulty) => {
+        // Takes in a difficulty from the encounter info and sends that difficulty to actions
 
         dispatch(reward(difficulty))
+
+        // Reset battle status and reset the Forest space at particular index
         setInBattle(!inBattle)
         resetPlot(index)
     }
@@ -31,6 +35,9 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         let userDodgeNumber = Math.floor((Math.random() * 100) + 1)
         let encounterSkillNumber = Math.floor((Math.random() * encounterStats.abilities.length))
 
+        // If the dodge number is equal or less than the dodge rate of encounter, it means encounter dodged user the auto attack
+        // If not dodged, then dispatch the ability of user
+
         if (encounterDodgeNumber <= encounterStats.stats.dodge * 100
             && ability === 'Auto-Attack'
         ) {
@@ -38,6 +45,9 @@ const BattleMenu = ({ encountersList, userBattleStats, currentEncounter, userAbi
         } else {
             dispatch(userBattleAction(userStats, encounterStats, ability))
         }
+
+        // If the dodge number is equal or less than the dodge rate of user, it means user dodged encounter auto attack
+        // If not dodged, then dispatch the ability of encounter using the encounterSkillNumber
 
         if (userDodgeNumber <= userStats.dodge * 100
             && encounterStats.abilities[encounterSkillNumber] === 'Auto-Attack'

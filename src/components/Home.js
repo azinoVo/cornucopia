@@ -5,9 +5,12 @@ import { NavLink } from 'react-router-dom';
 const Home = () => {
     return (
         <section className='main-content'>
+            {/* tab header className have a set style and used throughout the main components*/}
             <h1 className='tab-header'>Welcome to Cornucopia!</h1>
             <div className='home'>
                 <h1>Welcome to Cornucopia! Below are the basic commands.</h1>
+
+                {/* This is a mini tutorial navigation */}
                 <ol>
                     <li><Calendar /> Changing the date will affect growth of plots, trigger seasonal bonuses, and reset maximum energy.</li>
                     <li><NavLink to="/character"><button>Character</button></NavLink> Displays character stats. Stats Allocation is required for combat.</li>
