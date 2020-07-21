@@ -46,4 +46,4 @@ const mapStateToProps = state => ({
     calendarList: state.game.calendar
 });
 
-export default connect(mapStateToProps, {})(Calendar);
+export default connect(mapStateToProps, { progressDate })(Calendar);
