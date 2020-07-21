@@ -1,13 +1,12 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import Character from '../Character';
 
 const mockStore = configureMockStore([])
 
-describe('Character shallow testing', () => {
+describe('Character component testing', () => {
     let wrapper;
     const store = mockStore({
         user: {
@@ -40,8 +39,32 @@ describe('Character shallow testing', () => {
     })
 
     test('Character Header text', () => {
-        expect(wrapper.find('.tab-header').text()).toContain('Character Information')
+        expect(wrapper.find('.tab-header').text()).toBe('Character Information')
     });
 
-})
+    test('Skill Point should be 30', () => {
+        expect(wrapper.find('.skill-point').text()).toContain('30')
+    });
+
+    test('Simulate a plus Button on CON', () => {
+        wrapper.find('.plus-con').simulate('click')
+        expect(wrapper.find('.count-con').text()).toContain("1")
+        expect(wrapper.find('.skill-point').text()).toContain('29')
+        wrapper.find('.plus-con').simulate('click')
+        expect(wrapper.find('.count-con').text()).toContain("2")
+        expect(wrapper.find('.skill-point').text()).toContain('28')
+
+    });
+
+    test('Simulate a minus Button on CON', () => {
+        wrapper.find('.plus-con').simulate('click')
+        expect(wrapper.find('.count-con').text()).toContain("1")
+        expect(wrapper.find('.skill-point').text()).toContain('29')
+        wrapper.find('.minus-con').simulate('click')
+        expect(wrapper.find('.count-con').text()).toContain("0")
+        expect(wrapper.find('.skill-point').text()).toContain('30')
+
+    });
+
+}) 
 

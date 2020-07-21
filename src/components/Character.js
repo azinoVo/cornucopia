@@ -125,30 +125,30 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
             <h1 className='tab-header'>Character Information</h1>
 
             <div className='stats'>
-                <div>
+                <div className='gender'>
                     <p>Gender: {gender}</p>
                     <button onClick={() => changeGender()}>Change Gender</button>
                 </div>
 
-                <div>
+                <div className='skill-point'>
                     <p>Remaining Stat Points: {statPoints}</p>
                 </div>
 
-                <div>
-                    <button disabled={constitution > 0 ? false : true} onClick={() => controlStatsDecrease('constitution')}>-</button>
-                    <span> + {constitution} </span>
-                    <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('constitution')}>+</button>
+                <div className='con-wrap'>
+                    <button className='minus-con' disabled={constitution > 0 ? false : true} onClick={() => controlStatsDecrease('constitution')}>-</button>
+                    <span className='count-con'> + {constitution} </span>
+                    <button className='plus-con' disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('constitution')}>+</button>
                     <span> Constitution: {userBase.constitution}, Health Points: {userBattleStats.health} <strong>Amount of points before mortality.</strong></span>
                 </div>
 
-                <div>
+                <div className='atk-wrap'>
                     <button disabled={attack > 0 ? false : true} onClick={() => controlStatsDecrease('attack')}>-</button>
                     <span> + {attack} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('attack')}>+</button>
                     <span> Attack: {userBase.attack}, Attack Power: {userBattleStats.attackPower} <strong>Damage of Physical attacks and abilities.</strong></span>
                 </div>
 
-                <div>
+                <div className='def-wrap'>
                     <button disabled={defense > 0 ? false : true} onClick={() => controlStatsDecrease('defense')}>-</button>
                     <span> + {defense} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('defense')}>+</button>
@@ -156,7 +156,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
 
                 </div>
 
-                <div>
+                <div className='dex-wrap'>
                     <button disabled={dexterity > 0 ? false : true} onClick={() => controlStatsDecrease('dexterity')}>-</button>
                     <span> + {dexterity} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('dexterity')}>+</button>
@@ -164,7 +164,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
 
                 </div>
 
-                <div>
+                <div className='int-wrap'>
                     <button disabled={intelligence > 0 ? false : true} onClick={() => controlStatsDecrease('intelligence')}>-</button>
                     <span> + {intelligence} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('intelligence')}>+</button>
@@ -172,7 +172,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
 
                 </div>
 
-                <div>
+                <div className='spd-wrap'>
                     <button disabled={speed > 0 ? false : true} onClick={() => controlStatsDecrease('speed')}>-</button>
                     <span> + {speed} </span>
                     <button disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('speed')}>+</button>
@@ -180,9 +180,9 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
                 </div>
 
 
-                <button disabled={statPoints < skillPoint ? false : true} onClick={() => resetPoints()}>RESET</button>
+                <button className='reset-btn' disabled={statPoints < skillPoint ? false : true} onClick={() => resetPoints()}>RESET</button>
                 {/* add a way so that user can allocate any number of skill points: need counter and subtract counter within reducer */}
-                <button disabled={statPoints >= 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
+                <button className='stat-confirm-btn' disabled={statPoints >= 0 ? false : true} onClick={() => confirmStats()}>CONFIRM</button>
             </div>
             <Quests />
         </section>
