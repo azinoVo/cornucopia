@@ -39,32 +39,49 @@ describe('Character component testing', () => {
     })
 
     test('Character Header text', () => {
-        expect(wrapper.find('.tab-header').text()).toBe('Character Information')
+        expect(wrapper.find('.tab-header').text()).toBe('Character Information');
     });
 
-    test('Skill Point should be 30', () => {
-        expect(wrapper.find('.skill-point').text()).toContain('30')
+    test('Initial Skill Point should be 30', () => {
+        expect(wrapper.find('.skill-point').text()).toContain('30');
     });
 
-    test('Simulate a plus Button on CON', () => {
-        wrapper.find('.plus-con').simulate('click')
-        expect(wrapper.find('.count-con').text()).toContain("1")
-        expect(wrapper.find('.skill-point').text()).toContain('29')
-        wrapper.find('.plus-con').simulate('click')
-        expect(wrapper.find('.count-con').text()).toContain("2")
-        expect(wrapper.find('.skill-point').text()).toContain('28')
+    test('Simulate a Plus button on CON', () => {
+        wrapper.find('.plus-con').simulate('click');
+        expect(wrapper.find('.count-con').text()).toContain("1");
+        expect(wrapper.find('.skill-point').text()).toContain('29');
+        wrapper.find('.plus-con').simulate('click');
+        expect(wrapper.find('.count-con').text()).toContain("2");
+        expect(wrapper.find('.skill-point').text()).toContain('28');
 
     });
 
-    test('Simulate a minus Button on CON', () => {
-        wrapper.find('.plus-con').simulate('click')
-        expect(wrapper.find('.count-con').text()).toContain("1")
-        expect(wrapper.find('.skill-point').text()).toContain('29')
-        wrapper.find('.minus-con').simulate('click')
-        expect(wrapper.find('.count-con').text()).toContain("0")
-        expect(wrapper.find('.skill-point').text()).toContain('30')
+    test('Simulate a Minus button on CON', () => {
+        wrapper.find('.plus-con').simulate('click');
+        expect(wrapper.find('.count-con').text()).toContain("1");
+        expect(wrapper.find('.skill-point').text()).toContain('29');
+        wrapper.find('.minus-con').simulate('click');
+        expect(wrapper.find('.count-con').text()).toContain("0");
+        expect(wrapper.find('.skill-point').text()).toContain('30');
 
     });
+
+    test('Simulate the Reset button', () => {
+        wrapper.find('.plus-con').simulate('click');
+        expect(wrapper.find('.skill-point').text()).toContain('29');
+        wrapper.find('.reset-btn').simulate('click');
+        expect(wrapper.find('.skill-point').text()).toContain('30');
+
+    });
+
+    test('Simulate the Confirm button', () => {
+        wrapper.find('.plus-con').simulate('click');
+        expect(wrapper.find('.skill-point').text()).toContain('29');
+        wrapper.find('.stat-confirm-btn').simulate('click');
+        expect(wrapper.find('.skill-point').text()).toContain('30');
+
+    });
+    
 
 }) 
 

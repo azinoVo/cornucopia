@@ -138,7 +138,7 @@ const Character = ({ skillPoint, userBase, userBattleStats }) => {
                     <button className='minus-con' disabled={constitution > 0 ? false : true} onClick={() => controlStatsDecrease('constitution')}>-</button>
                     <span className='count-con'> + {constitution} </span>
                     <button className='plus-con' disabled={statPoints > 0 ? false : true} onClick={() => controlStatsIncrease('constitution')}>+</button>
-                    <span> Constitution: {userBase.constitution}, Health Points: {userBattleStats.health} <strong>Amount of points before mortality.</strong></span>
+                    <span className='health-con'> Constitution: {userBase.constitution}, Health Points: {userBattleStats.health} <strong>Amount of points before mortality.</strong></span>
                 </div>
 
                 <div className='atk-wrap'>
