@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import GameLog from './GameLog';
 // import NumberModal from './NumberModal';
 // import GuessTheCardModal from './GuessTheCardModal';
@@ -27,8 +26,5 @@ const Cornucopia = () => {
     );
 }
 
-const mapStateToProps = state => ({
 
-});
-
-export default connect(mapStateToProps, {})(Cornucopia);
+export default Cornucopia;

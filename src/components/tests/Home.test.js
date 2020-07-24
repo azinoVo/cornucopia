@@ -24,6 +24,5 @@ describe('Home shallow testing', () => {
 
     });
 
-
 })
 
