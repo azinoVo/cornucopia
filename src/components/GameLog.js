@@ -5,8 +5,8 @@ const GameLog = ({ log }) => {
     const [gameLog, setLog] = useState([])
 
     useEffect(() => {
-        if (log.length > 5) {
-            const sliced = log.slice(Math.max(log.length - 5, 0))
+        if (log.length > 3) {
+            const sliced = log.slice(Math.max(log.length - 3, 0))
             setLog(sliced)
         } else {
             setLog(log)
