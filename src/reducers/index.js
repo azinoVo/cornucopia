@@ -42,7 +42,8 @@ import {
     INSPECT_ENCOUNTER,
     INSPECT_REWARD,
     INSPECT_RESET,
-    COLLECT_BOUNTY
+    COLLECT_BOUNTY,
+    SET_LOG
 } from '../actions';
 
 const initialState = {
@@ -1247,6 +1248,18 @@ const rootReducer = (state = initialState, action) => {
                                     log: [...state.game.log, `The Forest of Dreams grants you ${action.payload} mana essences.`],
                                 }
                             }
+
+                        case SET_LOG:
+                            return {
+                                ...state,
+                                game: {
+                                    ...state.game,
+                                    log: [...action.payload],
+                                }
+                            }
+
+
+                        
 
         default:
             return state;

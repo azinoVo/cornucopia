@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { setLogEntry } from '../actions';
 import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
 
 const GameLog = ({ log }) => {
     const [gameLog, setLog] = useState([])
+
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         if (log.length > 3) {
             const sliced = log.slice(Math.max(log.length - 3, 0))
             setLog(sliced)
+            dispatch(setLogEntry(sliced))
         } else {
             setLog(log)
         }
-    }, [log])
+    }, [log, dispatch])
 
     return (
         <div className='game-log'>

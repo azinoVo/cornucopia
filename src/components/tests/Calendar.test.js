@@ -48,6 +48,7 @@ describe('Calendar component testing', () => {
 
     test('Change the Date', () => {
         // Should click the rest button and h1 should change
+        // CHanging date requires a change into the reducer
     });
 
 

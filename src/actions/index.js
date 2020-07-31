@@ -457,6 +457,19 @@ export const collectForestBounty = (amount) => {
     }
 }
 
+export const SET_LOG = "SET_LOG";
+
+// This will set the game log to store only the last three entries
+
+export const setLogEntry = (log) => {
+
+    return {
+        type: SET_LOG,
+        payload: log
+    }
+}
+
+
 
 
 
