@@ -858,10 +858,10 @@ const rootReducer = (state = initialState, action) => {
                     },
                     battleStats: {
                         'health': Math.ceil([state.user.stats.constitution + action.payload.stats['constitution']] * 5),
-                        'attackPower': Math.ceil([state.user.stats.attack + action.payload.stats['attack']] * 1.35),
-                        'magicPower': Math.ceil([state.user.stats.intelligence + action.payload.stats['intelligence']] * 1.35),
+                        'attackPower': Math.ceil([state.user.stats.attack + action.payload.stats['attack']] * 1.5),
+                        'magicPower': Math.ceil([state.user.stats.intelligence + action.payload.stats['intelligence']] * 1.45),
                         'damageReduction': Math.ceil([state.user.stats.defense + action.payload.stats['defense']] * 1.75) / 100,
-                        'dodge': Math.ceil([state.user.stats.dexterity + action.payload.stats['dexterity']] * 1.25) / 100,
+                        'dodge': Math.ceil([state.user.stats.dexterity + action.payload.stats['dexterity']] * 1.45) / 100,
                         'turnSpeed': Math.ceil([state.user.stats.speed + action.payload.stats['speed']] * 1.15),
                         'ultimate': 0
                     },
